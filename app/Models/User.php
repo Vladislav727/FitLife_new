@@ -24,6 +24,7 @@ class User extends Authenticatable
         'goal_type',
         'role',
         'bio',
+        'language',
     ];
 
     protected $hidden = [

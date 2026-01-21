@@ -3,7 +3,7 @@
         <strong>{{ $comment->user->name }}</strong>
         <div class="username fs-sm text-muted">{{ '@' . $comment->user->username }}</div>
         @if($comment->parent_id && $comment->parent && $comment->parent->user)
-            <div class="in-reply-to fs-sm text-muted">In reply to <a href="{{ route('profile.show', $comment->parent->user->id) }}" class="text-accent">{{ '@' . $comment->parent->user->username }}</a></div>
+            <div class="in-reply-to fs-sm text-muted">{{ __('posts.in_reply_to') }} <a href="{{ route('profile.show', $comment->parent->user->id) }}" class="text-accent">{{ '@' . $comment->parent->user->username }}</a></div>
         @endif
         <span class="time fs-sm text-muted">{{ $comment->created_at->diffForHumans() }}</span>
     </div>
@@ -14,8 +14,8 @@
         @csrf
         @method('PUT')
         <textarea name="content" rows="2" maxlength="500">{{ $comment->content }}</textarea>
-        <button type="submit" class="btn">Save</button>
-        <button type="button" class="btn cancel-edit-comment" data-comment-id="{{ $comment->id }}">Cancel</button>
+        <button type="submit" class="btn">{{ __('posts.save') }}</button>
+        <button type="button" class="btn cancel-edit-comment" data-comment-id="{{ $comment->id }}">{{ __('posts.cancel') }}</button>
     </form>
     <div class="comment-actions">
         <button class="action-btn like-btn {{ Auth::check() && $comment->likes()->where('user_id', Auth::id())->where('type', 'like')->exists() ? 'active' : '' }}" data-comment-id="{{ $comment->id }}">
@@ -38,7 +38,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000fa">
                 <path d="M760-200v-160q0-50-35-85t-85-35H273l144 144-57 56-240-240 240-240 57 56-144 144h367q83 0 141.5 58.5T840-360v160h-80Z"/>
             </svg>
-            <span>Reply</span>
+            <span>{{ __('posts.reply') }}</span>
         </button>
 
         @if (Auth::check() && Auth::id() === $comment->user_id)
@@ -46,7 +46,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#75FB4C">
                     <path d="M200-200h57l391-391-57-57-391 391v57Zm-80 80v-170l528-527q12-11 26.5-17t30.5-6q16 0 31 6t26 18l55 56q12 11 17.5 26t5.5 30q0 16-5.5 30.5T817-647L290-120H120Zm640-584-56-56 56 56Zm-141 85-28-29 57 57-29-28Z"/>
                 </svg>
-                <span>Edit</span>
+                <span>{{ __('posts.edit') }}</span>
             </button>
             <form action="{{ route('comments.destroy', $comment) }}" method="POST" class="inline-form delete-comment-form">
                 @csrf @method('DELETE')
@@ -54,7 +54,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20" fill="var(--svg-fill)">
                         <path d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm80-160h80v-360h-80v360Zm160 0h80v-360h-80v360Z"/>
                     </svg>
-                    <span>Delete</span>
+                    <span>{{ __('posts.delete') }}</span>
                 </button>
             </form>
         @endif
@@ -63,7 +63,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" fill="#3b82f6">
                     <path d="M480-200q-33 0-56.5-23.5T400-280v-400l-160 160-56-56 240-240 240 240-56 56-160-160v400q0 33-23.5 56.5T480-200Z"/>
                 </svg>
-                <span>Show {{ $comment->replies->count() }} {{ $comment->replies->count() === 1 ? 'Reply' : 'Replies' }}</span>
+                <span>{{ __('posts.show') }} {{ $comment->replies->count() }} {{ $comment->replies->count() === 1 ? __('posts.reply_singular') : __('posts.replies') }}</span>
             </button>
         @endif
     </div>
@@ -71,9 +71,9 @@
     <form action="{{ route('posts.comment', $post) }}" method="POST" class="comment-form reply-form" data-post-id="{{ $post->id }}" data-parent-id="{{ $comment->id }}" style="display: none; margin-top: 10px;">
         @csrf
         <input type="hidden" name="parent_id" value="{{ $comment->id }}">
-        <textarea name="content" placeholder="Write a reply..." rows="1" maxlength="500"></textarea>
-        <button type="submit" class="btn">Reply</button>
-        <button type="button" class="btn cancel-reply" data-comment-id="{{ $comment->id }}">Cancel</button>
+        <textarea name="content" placeholder="{{ __('posts.write_reply') }}" rows="1" maxlength="500"></textarea>
+        <button type="submit" class="btn">{{ __('posts.reply') }}</button>
+        <button type="button" class="btn cancel-reply" data-comment-id="{{ $comment->id }}">{{ __('posts.cancel') }}</button>
     </form>
 
     <div class="replies-container" id="replies-{{ $comment->id }}" style="display: none;">

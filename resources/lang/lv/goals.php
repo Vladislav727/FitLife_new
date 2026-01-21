@@ -1,0 +1,67 @@
+<?php
+
+return [
+    'title' => 'Mērķi',
+    'my_goals' => 'Mani mērķi',
+    'create' => 'Izveidot mērķi',
+    'edit' => 'Rediģēt mērķi',
+    'delete' => 'Dzēst mērķi',
+    'name' => 'Mērķa nosaukums',
+    'target_value' => 'Mērķa vērtība',
+    'current_value' => 'Pašreizējā vērtība',
+    'start_date' => 'Sākuma datums',
+    'end_date' => 'Beigu datums',
+    'description' => 'Apraksts',
+    'progress' => 'Progress',
+    'completed' => 'Pabeigts',
+    'in_progress' => 'Procesā',
+    'not_started' => 'Nav sākts',
+    'log_progress' => 'Reģistrēt progresu',
+    'add_progress' => 'Pievienot progresu',
+    'value' => 'Vērtība',
+    'no_goals' => 'Mērķu vēl nav',
+    'create_first' => 'Izveidojiet savu pirmo mērķi',
+    'goal_created' => 'Mērķis veiksmīgi izveidots',
+    'goal_updated' => 'Mērķis veiksmīgi atjaunināts',
+    'goal_deleted' => 'Mērķis veiksmīgi dzēsts',
+    'progress_logged' => 'Progress veiksmīgi reģistrēts',
+    
+    // Index page
+    'fitlife_goals' => 'FitLife Mērķi',
+    'track_progress_subtitle' => 'Izseko savu ikdienas progresu un paliec motivēts!',
+    'your_goals' => 'Jūsu mērķi',
+    'new_goal' => 'Jauns mērķis',
+    'goal_suffix' => 'Mērķis',
+    'target' => 'Mērķis',
+    'current' => 'Pašreizējais',
+    'no_goals_start_creating' => 'Mērķu vēl nav. Sāciet veidot savus mērķus!',
+    
+    // Create page
+    'fitlife_create_goal' => 'FitLife Izveidot mērķi',
+    'create_new_goal' => 'Izveidot jaunu mērķi',
+    'set_new_goal_subtitle' => 'Uzstādiet jaunu mērķi, lai paliktu motivēti!',
+    'goal_type' => 'Mērķa veids',
+    'select_goal' => 'Izvēlieties mērķi',
+    'type_steps' => 'Soļi',
+    'type_calories' => 'Kalorijas',
+    'type_sleep' => 'Miegs (stundas)',
+    'type_weight' => 'Svars (kg)',
+    'enter_target_value' => 'Ievadiet mērķa vērtību',
+    'description_optional' => 'Apraksts (neobligāts)',
+    'add_description' => 'Pievienot aprakstu',
+    
+    // Edit page
+    'fitlife_edit_goal' => 'FitLife Rediģēt mērķi',
+    'update_goal_subtitle' => 'Atjauniniet sava mērķa informāciju',
+    'update_goal' => 'Atjaunināt mērķi',
+    'cancel' => 'Atcelt',
+    'delete_confirm' => 'Vai tiešām vēlaties dzēst šo mērķi?',
+    
+    // Log page
+    'fitlife_log_progress' => 'FitLife Reģistrēt progresu',
+    'update_progress_for' => 'Atjauniniet savu progresu :type mērķim',
+    'log_progress_for' => 'Reģistrēt progresu :type',
+    'todays_value' => 'Šodienas vērtība',
+    'enter_todays_value' => 'Ievadiet šodienas vērtību',
+    'submit' => 'Iesniegt',
+];

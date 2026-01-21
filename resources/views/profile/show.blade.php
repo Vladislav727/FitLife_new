@@ -10,7 +10,7 @@
 
         <!-- ================= User Profile Header ================= -->
         <header class="header">
-            <h1 class="header__title">{{ $user->name }}'s Profile</h1>
+            <h1 class="header__title">{{ __('profile.user_profile', ['name' => $user->name]) }}</h1>
             <p class="header__username">{{ '@'.$user->username }}</p>
         </header>
 
@@ -21,47 +21,47 @@
                 <div class="banner-section">
                     @if($user->banner)
                         <img src="{{ asset('storage/' . $user->banner) . '?t=' . time() }}"
-                             alt="{{ $user->name }}'s Banner"
+                             alt="{{ __('profile.banner') }}"
                              class="banner-section__image">
                     @endif
                     <div class="avatar-section">
                         <img src="{{ $user->avatar ? asset('storage/' . $user->avatar) . '?t=' . time() : asset('storage/logo/defaultPhoto.jpg') }}"
-                             alt="{{ $user->name }}'s Profile Photo"
+                             alt="{{ __('profile.avatar') }}"
                              class="avatar-section__image">
                     </div>
                 </div>
 
                 <!-- Profile Info -->
-                <h3 id="user-profile-heading">Profile Details</h3>
+                <h3 id="user-profile-heading">{{ __('profile.profile_details') }}</h3>
                 <div class="bio-details">
-                    <p><strong>Full Name:</strong> {{ $user->biography->full_name ?? 'Not set' }}</p>
-                    <p><strong>Age:</strong> {{ $user->biography->age ?? 'Not set' }}</p>
-                    <p><strong>Height:</strong> {{ $user->biography->height ?? 'Not set' }} cm</p>
-                    <p><strong>Weight:</strong> {{ $user->biography->weight ?? 'Not set' }} kg</p>
-                    <p><strong>Gender:</strong> {{ $user->biography->gender ?? 'Not set' }}</p>
+                    <p><strong>{{ __('profile.full_name') }}:</strong> {{ $user->biography->full_name ?? __('profile.not_set') }}</p>
+                    <p><strong>{{ __('profile.age') }}:</strong> {{ $user->biography->age ?? __('profile.not_set') }}</p>
+                    <p><strong>{{ __('profile.height') }}:</strong> {{ $user->biography->height ?? __('profile.not_set') }} {{ __('profile.cm') }}</p>
+                    <p><strong>{{ __('profile.weight') }}:</strong> {{ $user->biography->weight ?? __('profile.not_set') }} {{ __('profile.kg') }}</p>
+                    <p><strong>{{ __('profile.gender') }}:</strong> {{ $user->biography->gender ?? __('profile.not_set') }}</p>
                 </div>
 
                 <!-- Friend Actions -->
                 @if (Auth::user() && Auth::id() != $user->id)
                     <div class="friend-actions" data-user-id="{{ $user->id }}">
                         @if (Auth::user()->friends->contains($user->id))
-                            <span class="friend-status">You are friends</span>
+                            <span class="friend-status">{{ __('profile.you_are_friends') }}</span>
                             <form action="{{ route('friends.remove', $user->id) }}" method="POST" class="friend-form" data-action="remove">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="friend-btn friend-btn-danger">Remove from friends</button>
+                                <button type="submit" class="friend-btn friend-btn-danger">{{ __('profile.remove_from_friends') }}</button>
                             </form>
                         @elseif (\App\Models\Friend::where('user_id', $user->id)->where('friend_id', Auth::id())->where('status', 'pending')->exists())
-                            <span class="friend-status">Friend request received</span>
+                            <span class="friend-status">{{ __('profile.friend_request_received') }}</span>
                             <form action="{{ route('friends.accept', $user->id) }}" method="POST" class="friend-form" data-action="accept">
                                 @csrf
-                                <button type="submit" class="friend-btn friend-btn-accept">Accept request</button>
+                                <button type="submit" class="friend-btn friend-btn-accept">{{ __('profile.accept_request') }}</button>
                             </form>
                         @else
                             <form action="{{ route('friends.store', $user->id) }}" method="POST" class="friend-form" data-action="add">
                                 @csrf
                                 <input type="hidden" name="friend_id" value="{{ $user->id }}">
-                                <button type="submit" class="friend-btn friend-btn-primary">Add friend</button>
+                                <button type="submit" class="friend-btn friend-btn-primary">{{ __('profile.add_friend') }}</button>
                             </form>
                         @endif
                     </div>
@@ -69,9 +69,9 @@
             </div>
         </section>
 
-        <!-- ================= User Posts (Просмотры только) ================= -->
+        <!-- ================= User Posts ================= -->
         <section class="posts-feed" aria-labelledby="user-posts-heading">
-            <h3 id="user-posts-heading">{{ $user->name }}'s Posts</h3>
+            <h3 id="user-posts-heading">{{ __('profile.user_posts', ['name' => $user->name]) }}</h3>
 
             @forelse($user->posts as $post)
                 <article class="post-card" id="post-{{ $post->id }}" data-post-id="{{ $post->id }}">
@@ -104,13 +104,13 @@
                             <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#696969">
                                 <path d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z"/>
                             </svg>
-                            <span class="post-actions__count count-view">{{ $post->views }}</span> Views
+                            <span class="post-actions__count count-view">{{ $post->views }}</span> {{ __('profile.views') }}
                         </span>
                     </div>
 
                 </article>
             @empty
-                <p>No posts yet.</p>
+                <p>{{ __('profile.no_posts_yet') }}</p>
             @endforelse
         </section>
 

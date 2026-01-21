@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<div id="fitlife-container" role="application" aria-label="FitLife Create Goal">
+<div id="fitlife-container" role="application" aria-label="{{ __('goals.fitlife_create_goal') }}">
   <!-- Main Content -->
   <main>
     <!-- Mobile Menu Toggle -->
@@ -18,44 +18,44 @@
     <!-- Page Header -->
     <header>
       <div class="header-left">
-        <h1><span>FitLife</span> Create Goal</h1>
-        <p class="muted">Set a new goal to stay motivated!</p>
+        <h1><span>FitLife</span> {{ __('goals.create') }}</h1>
+        <p class="muted">{{ __('goals.set_new_goal_subtitle') }}</p>
       </div>
     </header>
 
     <!-- Goal Form Section -->
     <section aria-labelledby="goal-form-heading">
-      <h3 id="goal-form-heading">Create New Goal</h3>
+      <h3 id="goal-form-heading">{{ __('goals.create_new_goal') }}</h3>
       <div class="goal-card">
         <form action="{{ route('goals.store') }}" method="POST" class="goal-form">
           @csrf
           <div class="form-group">
-            <label for="type">Goal Type</label>
+            <label for="type">{{ __('goals.goal_type') }}</label>
             <select id="type" name="type" required>
-              <option value="">Select goal</option>
-              <option value="steps">Steps</option>
-              <option value="calories">Calories</option>
-              <option value="sleep">Sleep (hours)</option>
-              <option value="weight">Weight (kg)</option>
+              <option value="">{{ __('goals.select_goal') }}</option>
+              <option value="steps">{{ __('goals.type_steps') }}</option>
+              <option value="calories">{{ __('goals.type_calories') }}</option>
+              <option value="sleep">{{ __('goals.type_sleep') }}</option>
+              <option value="weight">{{ __('goals.type_weight') }}</option>
             </select>
           </div>
 
           <div class="form-group">
-            <label for="target_value">Target Value</label>
-            <input type="number" id="target_value" name="target_value" step="0.01" placeholder="Enter target value" required>
+            <label for="target_value">{{ __('goals.target_value') }}</label>
+            <input type="number" id="target_value" name="target_value" step="0.01" placeholder="{{ __('goals.enter_target_value') }}" required>
           </div>
 
           <div class="form-group">
-            <label for="end_date">End Date</label>
+            <label for="end_date">{{ __('goals.end_date') }}</label>
             <input type="date" id="end_date" name="end_date" required>
           </div>
 
           <div class="form-group">
-            <label for="description">Description (optional)</label>
-            <textarea id="description" name="description" rows="3" placeholder="Add a description">{{ old('description') }}</textarea>
+            <label for="description">{{ __('goals.description_optional') }}</label>
+            <textarea id="description" name="description" rows="3" placeholder="{{ __('goals.add_description') }}">{{ old('description') }}</textarea>
           </div>
 
-          <button type="submit" class="calculate-btn">Create Goal</button>
+          <button type="submit" class="calculate-btn">{{ __('goals.create') }}</button>
         </form>
       </div>
     </section>

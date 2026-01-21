@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<div id="fitlife-container" role="application" aria-label="FitLife Goals">
+<div id="fitlife-container" role="application" aria-label="{{ __('goals.fitlife_goals') }}">
   <!-- Main Content -->
   <main>
     <!-- Mobile Menu Toggle -->
@@ -18,19 +18,19 @@
     <!-- Page Header -->
     <header>
       <div class="header-left">
-        <h1><span>FitLife</span> Goals</h1>
-        <p class="muted">Track your daily progress and stay motivated!</p>
+        <h1><span>FitLife</span> {{ __('goals.title') }}</h1>
+        <p class="muted">{{ __('goals.track_progress_subtitle') }}</p>
       </div>
     </header>
 
     <!-- Create Goal Button -->
     <section aria-labelledby="create-goal-heading">
-      <h3 id="create-goal-heading">Your Goals</h3>
+      <h3 id="create-goal-heading">{{ __('goals.your_goals') }}</h3>
       <a href="{{ route('goals.create') }}" class="create-btn">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
           <path d="M12 5v14M5 12h14" />
         </svg>
-        New Goal
+        {{ __('goals.new_goal') }}
       </a>
     </section>
 
@@ -39,20 +39,20 @@
       <div class="goals-grid">
         @forelse($goals as $goal)
         <div class="goal-card">
-          <h4>{{ ucfirst($goal->type) }} Goal</h4>
-          <p><strong>Target:</strong> {{ $goal->target_value }}</p>
-          <p><strong>Current:</strong> {{ $goal->current_value }}</p>
-          <p><strong>End Date:</strong> {{ $goal->end_date }}</p>
+          <h4>{{ ucfirst($goal->type) }} {{ __('goals.goal_suffix') }}</h4>
+          <p><strong>{{ __('goals.target') }}:</strong> {{ $goal->target_value }}</p>
+          <p><strong>{{ __('goals.current') }}:</strong> {{ $goal->current_value }}</p>
+          <p><strong>{{ __('goals.end_date') }}:</strong> {{ $goal->end_date }}</p>
           @if($goal->description)
           <p><em>{{ $goal->description }}</em></p>
           @endif
           <div class="progress-bar">
             <div class="progress" style="width: {{ min($goal->current_value / $goal->target_value * 100, 100) }}%;"></div>
           </div>
-          <a href="{{ route('goals.log', $goal) }}" class="log-btn">Log Progress</a>
+          <a href="{{ route('goals.log', $goal) }}" class="log-btn">{{ __('goals.log_progress') }}</a>
         </div>
         @empty
-        <p class="no-data">No goals set yet. Start creating your goals!</p>
+        <p class="no-data">{{ __('goals.no_goals_start_creating') }}</p>
         @endforelse
       </div>
     </section>

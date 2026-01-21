@@ -7,44 +7,44 @@
 @section('content')
     <div class="users-content">
         <header class="users-header">
-            <h1 class="users-title">User: {{ $user->name }}</h1>
-            <a href="{{ route('admin.users') }}" class="users-back-btn">← Back to Users</a>
+            <h1 class="users-title">{{ __('admin.user') }}: {{ $user->name }}</h1>
+            <a href="{{ route('admin.users') }}" class="users-back-btn">{{ __('admin.back_to_users') }}</a>
         </header>
 
         <div class="users-section">
-            <h2 class="users-section-title">User Details</h2>
+            <h2 class="users-section-title">{{ __('admin.user_details') }}</h2>
             <div class="users-details">
-                <p><strong>ID:</strong> {{ $user->id }}</p>
-                <p><strong>Name:</strong> {{ $user->name }}</p>
-                <p><strong>Email:</strong> {{ $user->email }}</p>
-                <p><strong>Role:</strong> <span class="role-badge role-{{ $user->role }}">{{ ucfirst($user->role) }}</span></p>
-                <p><strong>Username:</strong> {{ $user->username ?? 'Not set' }}</p>
-                <p><strong>Created:</strong> {{ $user->created_at->format('M d, Y') }}</p>
-                <p><strong>Last Login:</strong> {{ $user->last_login ? $user->last_login->format('M d, Y H:i') : 'Never' }}</p>
+                <p><strong>{{ __('admin.id') }}:</strong> {{ $user->id }}</p>
+                <p><strong>{{ __('admin.name') }}:</strong> {{ $user->name }}</p>
+                <p><strong>{{ __('admin.email') }}:</strong> {{ $user->email }}</p>
+                <p><strong>{{ __('admin.role') }}:</strong> <span class="role-badge role-{{ $user->role }}">{{ ucfirst($user->role) }}</span></p>
+                <p><strong>{{ __('admin.username') }}:</strong> {{ $user->username ?? __('admin.not_set') }}</p>
+                <p><strong>{{ __('admin.created') }}:</strong> {{ $user->created_at->format('M d, Y') }}</p>
+                <p><strong>{{ __('admin.last_login') }}:</strong> {{ $user->last_login ? $user->last_login->format('M d, Y H:i') : __('admin.never') }}</p>
             </div>
         </div>
 
         <div class="users-section">
-            <h2 class="users-section-title">Biography</h2>
+            <h2 class="users-section-title">{{ __('admin.biography') }}</h2>
             <div class="users-details">
-                <p><strong>Full Name:</strong> {{ $user->biography->full_name ?? 'Not set' }}</p>
-                <p><strong>Age:</strong> {{ $user->biography->age ?? 'Not set' }}</p>
-                <p><strong>Height:</strong> {{ $user->biography->height ?? 'Not set' }} cm</p>
-                <p><strong>Weight:</strong> {{ $user->biography->weight ?? 'Not set' }} kg</p>
-                <p><strong>Gender:</strong> {{ $user->biography->gender ?? 'Not set' }}</p>
+                <p><strong>{{ __('admin.full_name') }}:</strong> {{ $user->biography->full_name ?? __('admin.not_set') }}</p>
+                <p><strong>{{ __('admin.age') }}:</strong> {{ $user->biography->age ?? __('admin.not_set') }}</p>
+                <p><strong>{{ __('admin.height') }}:</strong> {{ $user->biography->height ?? __('admin.not_set') }} cm</p>
+                <p><strong>{{ __('admin.weight') }}:</strong> {{ $user->biography->weight ?? __('admin.not_set') }} kg</p>
+                <p><strong>{{ __('admin.gender') }}:</strong> {{ $user->biography->gender ?? __('admin.not_set') }}</p>
             </div>
         </div>
 
         <div class="users-section">
-            <h2 class="users-section-title">Posts ({{ $user->posts->count() }})</h2>
+            <h2 class="users-section-title">{{ __('admin.posts') }} ({{ $user->posts->count() }})</h2>
             <div class="users-table">
                 <table>
                     <thead>
                         <tr>
-                            <th>Content</th>
-                            <th>Views</th>
-                            <th>Created</th>
-                            <th>Actions</th>
+                            <th>{{ __('admin.content') }}</th>
+                            <th>{{ __('admin.views') }}</th>
+                            <th>{{ __('admin.created') }}</th>
+                            <th>{{ __('admin.actions') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -57,13 +57,13 @@
                                     <form action="{{ route('admin.posts.delete', $post) }}" method="POST" style="display:inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="users-btn users-btn-danger" onclick="return confirm('Are you sure you want to delete this post?')">Delete</button>
+                                        <button type="submit" class="users-btn users-btn-danger" onclick="return confirm('{{ __('admin.confirm_delete_post') }}')">{{ __('admin.delete') }}</button>
                                     </form>
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="4">No posts.</td>
+                                <td colspan="4">{{ __('admin.no_posts') }}</td>
                             </tr>
                         @endforelse
                     </tbody>
@@ -72,13 +72,13 @@
         </div>
 
         <div class="users-section">
-            <h2 class="users-section-title">Friends ({{ $user->friends->count() }})</h2>
+            <h2 class="users-section-title">{{ __('admin.friends') }} ({{ $user->friends->count() }})</h2>
             <div class="users-table">
                 <table>
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Email</th>
+                            <th>{{ __('admin.name') }}</th>
+                            <th>{{ __('admin.email') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -89,7 +89,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="2">No friends.</td>
+                                <td colspan="2">{{ __('admin.no_friends') }}</td>
                             </tr>
                         @endforelse
                     </tbody>

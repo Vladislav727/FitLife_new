@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<div id="fitlife-container" role="application" aria-label="Sleep Tracker">
+<div id="fitlife-container" role="application" aria-label="{{ __('sleep.title') }}">
     <main>
         <button id="mobile-toggle" aria-controls="sidebar" aria-expanded="false">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -15,14 +15,14 @@
 
         <header>
             <div class="header-left">
-                <h1>Sleep Tracker</h1>
-                <p class="muted">Log and track your sleep patterns</p>
+                <h1>{{ __('sleep.title') }}</h1>
+                <p class="muted">{{ __('sleep.track_patterns') }}</p>
             </div>
         </header>
 
         @if(session('success'))
             <section aria-labelledby="success-heading">
-                <h3 id="success-heading">Status</h3>
+                <h3 id="success-heading">{{ __('sleep.status') }}</h3>
                 <div class="result-card">
                     <div class="result-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -30,7 +30,7 @@
                         </svg>
                     </div>
                     <div class="result-body">
-                        <h4>Success</h4>
+                        <h4>{{ __('sleep.success') }}</h4>
                         <div class="value">{{ session('success') }}</div>
                     </div>
                 </div>
@@ -38,40 +38,40 @@
         @endif
 
         <section aria-labelledby="sleep-form-heading">
-            <h3 id="sleep-form-heading">Log Your Sleep</h3>
+            <h3 id="sleep-form-heading">{{ __('sleep.log_your_sleep') }}</h3>
             <div class="sleep-card">
-                <h4>Add Sleep Record</h4>
+                <h4>{{ __('sleep.add_sleep_record') }}</h4>
                 <form action="{{ route('sleep.store') }}" method="POST" class="sleep-form">
                     @csrf
                     <div class="form-group">
-                        <label for="date">Date</label>
+                        <label for="date">{{ __('sleep.date') }}</label>
                         <input type="date" id="date" name="date" required>
                     </div>
                     <div class="form-group">
-                        <label for="start_time">Start Time</label>
+                        <label for="start_time">{{ __('sleep.start_time') }}</label>
                         <input type="time" id="start_time" name="start_time" required>
                     </div>
                     <div class="form-group">
-                        <label for="end_time">End Time</label>
+                        <label for="end_time">{{ __('sleep.end_time') }}</label>
                         <input type="time" id="end_time" name="end_time" required>
                     </div>
                     <div class="form-group form-group-btn">
                         <label>&nbsp;</label>
-                        <button type="submit" class="calculate-btn">Add Sleep Record</button>
+                        <button type="submit" class="calculate-btn">{{ __('sleep.add_sleep_record') }}</button>
                     </div>
                 </form>
             </div>
         </section>
 
         <section id="history-section" aria-labelledby="history-heading">
-            <h3 id="history-heading">Sleep History</h3>
+            <h3 id="history-heading">{{ __('sleep.history') }}</h3>
             <table class="history-table">
                 <thead>
                     <tr>
-                        <th>Date</th>
-                        <th>Start</th>
-                        <th>End</th>
-                        <th>Duration (hrs)</th>
+                        <th>{{ __('sleep.date') }}</th>
+                        <th>{{ __('sleep.start') }}</th>
+                        <th>{{ __('sleep.end') }}</th>
+                        <th>{{ __('sleep.duration_hrs') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -84,7 +84,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="4" class="no-data">No sleep records yet. Start logging your sleep!</td>
+                            <td colspan="4" class="no-data">{{ __('sleep.no_records') }}</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -93,7 +93,7 @@
 
         @if($average)
             <section aria-labelledby="average-heading">
-                <h3 id="average-heading">Sleep Summary</h3>
+                <h3 id="average-heading">{{ __('sleep.summary') }}</h3>
                 <div class="result-card">
                     <div class="result-icon">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -101,9 +101,9 @@
                         </svg>
                     </div>
                     <div class="result-body">
-                        <h4>Average Sleep</h4>
+                        <h4>{{ __('sleep.average') }}</h4>
                         <div class="value count-up" data-target="{{ round($average, 1) }}">0</div>
-                        <div class="muted">hours per night</div>
+                        <div class="muted">{{ __('sleep.hours_per_night') }}</div>
                     </div>
                 </div>
             </section>

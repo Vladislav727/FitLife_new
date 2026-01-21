@@ -1,17 +1,17 @@
 <table class="history-table">
   <thead>
     <tr>
-      <th>Date</th>
-      <th>Meal</th>
-      <th>Food</th>
-      <th>Quantity</th>
-      <th>Calories</th>
+      <th>{{ __('profile.date') }}</th>
+      <th>{{ __('profile.meal') }}</th>
+      <th>{{ __('profile.food') }}</th>
+      <th>{{ __('profile.quantity') }}</th>
+      <th>{{ __('profile.calories') }}</th>
     </tr>
   </thead>
   <tbody>
     @if($mealLogs->isEmpty())
       <tr>
-        <td colspan="5" class="no-data">No meal history yet. Start logging your meals!</td>
+        <td colspan="5" class="no-data">{{ __('profile.no_meal_history') }}</td>
       </tr>
     @else
       @foreach($mealLogs as $log)
@@ -28,10 +28,10 @@
 </table>
 @if(!$mealLogs->isEmpty())
   <div class="pagination" data-current-page="{{ $mealLogs->currentPage() }}" data-last-page="{{ $mealLogs->lastPage() }}">
-    <a href="{{ route('foods.index', ['page' => max(1, $mealLogs->currentPage() - 1)]) }}" class="{{ $mealLogs->onFirstPage() ? 'disabled' : '' }}">Previous</a>
+    <a href="{{ route('foods.index', ['page' => max(1, $mealLogs->currentPage() - 1)]) }}" class="{{ $mealLogs->onFirstPage() ? 'disabled' : '' }}">{{ __('profile.previous') }}</a>
     @for($i = 1; $i <= $mealLogs->lastPage(); $i++)
       <a href="{{ route('foods.index', ['page' => $i]) }}" class="{{ $mealLogs->currentPage() == $i ? 'current' : '' }}">{{ $i }}</a>
     @endfor
-    <a href="{{ route('foods.index', ['page' => min($mealLogs->lastPage(), $mealLogs->currentPage() + 1)]) }}" class="{{ $mealLogs->onLastPage() ? 'disabled' : '' }}">Next</a>
+    <a href="{{ route('foods.index', ['page' => min($mealLogs->lastPage(), $mealLogs->currentPage() + 1)]) }}" class="{{ $mealLogs->onLastPage() ? 'disabled' : '' }}">{{ __('profile.next') }}</a>
   </div>
 @endif

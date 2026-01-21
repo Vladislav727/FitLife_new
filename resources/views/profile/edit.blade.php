@@ -17,7 +17,7 @@
         </button>
 
         <!-- Page header -->
-        <header><h1>Profile Settings</h1></header>
+        <header><h1>{{ __('profile.settings') }}</h1></header>
 
         <!-- Display success message if session has status -->
         @if (session('status'))
@@ -28,7 +28,7 @@
 
             <!-- ================= Update Profile ================= -->
             <div class="profile-card">
-                <h3 id="profile-settings-heading">Update Profile</h3>
+                <h3 id="profile-settings-heading">{{ __('profile.update') }}</h3>
 
                 <!-- Banner and avatar section -->
                 <div class="profile-banner">
@@ -36,13 +36,13 @@
                         <div class="avatar-wrapper">
                             <img
                                 src="{{ $user->avatar ? asset("storage/{$user->avatar}") : asset('storage/logo/defaultPhoto.jpg') }}"
-                                alt="Profile Photo"
+                                alt="{{ __('profile.avatar') }}"
                                 class="banner-avatar"
                                 id="bannerAvatar"
                             >
-                            <label for="avatar" class="change-avatar-label">Change Avatar</label>
+                            <label for="avatar" class="change-avatar-label">{{ __('profile.change_avatar') }}</label>
                         </div>
-                        <label for="banner" class="change-banner-label">Change Banner</label>
+                        <label for="banner" class="change-banner-label">{{ __('profile.change_banner') }}</label>
                     </div>
                 </div>
 
@@ -71,7 +71,7 @@
 
                         <!-- Name input -->
                         <div class="form-group">
-                            <label for="name">Name *</label>
+                            <label for="name">{{ __('profile.name') }} *</label>
                             <input type="text" id="name" name="name" value="{{ old('name', $user->name) }}" required aria-required="true" aria-describedby="name-error">
                             @error('name')
                                 <p id="name-error" class="error-text">{{ $message }}</p>
@@ -80,7 +80,7 @@
 
                         <!-- Username input -->
                         <div class="form-group">
-                            <label for="username">Username *</label>
+                            <label for="username">{{ __('profile.username') }} *</label>
                             <input type="text" id="username" name="username" value="{{ old('username', $user->username) }}" required aria-required="true" aria-describedby="username-error">
                             @error('username')
                                 <p id="username-error" class="error-text">{{ $message }}</p>
@@ -89,7 +89,7 @@
 
                         <!-- Email input -->
                         <div class="form-group">
-                            <label for="email">Email *</label>
+                            <label for="email">{{ __('profile.email') }} *</label>
                             <input type="email" id="email" name="email" value="{{ old('email', $user->email) }}" required aria-required="true" aria-describedby="email-error">
                             @error('email')
                                 <p id="email-error" class="error-text">{{ $message }}</p>
@@ -104,33 +104,33 @@
                             <path d="M17 21v-8H7v8"/>
                             <path d="M7 3v5h8"/>
                         </svg>
-                        Save Profile
+                        {{ __('profile.save_profile') }}
                     </button>
                 </form>
             </div>
 
             <!-- ================= Update Password ================= -->
             <div class="profile-card">
-                <h3>Update Password</h3>
+                <h3>{{ __('profile.update_password') }}</h3>
                 <form action="{{ route('password.update') }}" method="POST" class="profile-form">
                     @csrf
                     @method('PUT')
 
                     <!-- Current password input -->
                     <div class="form-group">
-                        <label for="current_password">Current Password</label>
+                        <label for="current_password">{{ __('profile.current_password') }}</label>
                         <input type="password" id="current_password" name="current_password" required>
                     </div>
 
                     <!-- New password input -->
                     <div class="form-group">
-                        <label for="password">New Password</label>
+                        <label for="password">{{ __('profile.new_password') }}</label>
                         <input type="password" id="password" name="password" required>
                     </div>
 
                     <!-- Confirm new password input -->
                     <div class="form-group">
-                        <label for="password_confirmation">Confirm Password</label>
+                        <label for="password_confirmation">{{ __('profile.confirm_password') }}</label>
                         <input type="password" id="password_confirmation" name="password_confirmation" required>
                     </div>
 
@@ -141,25 +141,25 @@
                             <path d="M17 21v-8H7v8"/>
                             <path d="M7 3v5h8"/>
                         </svg>
-                        Update Password
+                        {{ __('profile.update_password') }}
                     </button>
                 </form>
             </div>
 
             <!-- ================= Delete Account ================= -->
             <div class="profile-card">
-                <h3>Delete Account</h3>
+                <h3>{{ __('profile.delete_account') }}</h3>
                 <form action="{{ route('profile.destroy') }}" method="POST" class="profile-form">
                     @csrf
                     @method('DELETE')
-                    <p class="muted">This action cannot be undone. Permanently delete your account?</p>
+                    <p class="muted">{{ __('profile.delete_warning_permanent') }}</p>
 
                     <!-- Delete account button -->
                     <button type="submit" class="delete-btn">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                             <path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2M6 6v15a2 2 0 002 2h8a2 2 0 002-2V6M10 11v6M14 11v6"/>
                         </svg>
-                        Delete Account
+                        {{ __('profile.delete_account') }}
                     </button>
                 </form>
             </div>

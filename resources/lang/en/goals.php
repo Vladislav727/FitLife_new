@@ -1,0 +1,67 @@
+<?php
+
+return [
+    'title' => 'Goals',
+    'my_goals' => 'My Goals',
+    'create' => 'Create Goal',
+    'edit' => 'Edit Goal',
+    'delete' => 'Delete Goal',
+    'name' => 'Goal Name',
+    'target_value' => 'Target Value',
+    'current_value' => 'Current Value',
+    'start_date' => 'Start Date',
+    'end_date' => 'End Date',
+    'description' => 'Description',
+    'progress' => 'Progress',
+    'completed' => 'Completed',
+    'in_progress' => 'In Progress',
+    'not_started' => 'Not Started',
+    'log_progress' => 'Log Progress',
+    'add_progress' => 'Add Progress',
+    'value' => 'Value',
+    'no_goals' => 'No goals yet',
+    'create_first' => 'Create your first goal',
+    'goal_created' => 'Goal created successfully',
+    'goal_updated' => 'Goal updated successfully',
+    'goal_deleted' => 'Goal deleted successfully',
+    'progress_logged' => 'Progress logged successfully',
+    
+    // Index page
+    'fitlife_goals' => 'FitLife Goals',
+    'track_progress_subtitle' => 'Track your daily progress and stay motivated!',
+    'your_goals' => 'Your Goals',
+    'new_goal' => 'New Goal',
+    'goal_suffix' => 'Goal',
+    'target' => 'Target',
+    'current' => 'Current',
+    'no_goals_start_creating' => 'No goals set yet. Start creating your goals!',
+    
+    // Create page
+    'fitlife_create_goal' => 'FitLife Create Goal',
+    'create_new_goal' => 'Create New Goal',
+    'set_new_goal_subtitle' => 'Set a new goal to stay motivated!',
+    'goal_type' => 'Goal Type',
+    'select_goal' => 'Select goal',
+    'type_steps' => 'Steps',
+    'type_calories' => 'Calories',
+    'type_sleep' => 'Sleep (hours)',
+    'type_weight' => 'Weight (kg)',
+    'enter_target_value' => 'Enter target value',
+    'description_optional' => 'Description (optional)',
+    'add_description' => 'Add a description',
+    
+    // Edit page
+    'fitlife_edit_goal' => 'FitLife Edit Goal',
+    'update_goal_subtitle' => 'Update your goal details',
+    'update_goal' => 'Update Goal',
+    'cancel' => 'Cancel',
+    'delete_confirm' => 'Are you sure you want to delete this goal?',
+    
+    // Log page
+    'fitlife_log_progress' => 'FitLife Log Progress',
+    'update_progress_for' => 'Update your progress for :type goal',
+    'log_progress_for' => 'Log Progress for :type',
+    'todays_value' => "Today's Value",
+    'enter_todays_value' => "Enter today's value",
+    'submit' => 'Submit',
+];

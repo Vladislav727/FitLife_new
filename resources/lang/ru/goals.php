@@ -1,0 +1,67 @@
+<?php
+
+return [
+    'title' => 'Цели',
+    'my_goals' => 'Мои цели',
+    'create' => 'Создать цель',
+    'edit' => 'Редактировать цель',
+    'delete' => 'Удалить цель',
+    'name' => 'Название цели',
+    'target_value' => 'Целевое значение',
+    'current_value' => 'Текущее значение',
+    'start_date' => 'Дата начала',
+    'end_date' => 'Дата окончания',
+    'description' => 'Описание',
+    'progress' => 'Прогресс',
+    'completed' => 'Завершено',
+    'in_progress' => 'В процессе',
+    'not_started' => 'Не начато',
+    'log_progress' => 'Записать прогресс',
+    'add_progress' => 'Добавить прогресс',
+    'value' => 'Значение',
+    'no_goals' => 'Целей пока нет',
+    'create_first' => 'Создайте свою первую цель',
+    'goal_created' => 'Цель успешно создана',
+    'goal_updated' => 'Цель успешно обновлена',
+    'goal_deleted' => 'Цель успешно удалена',
+    'progress_logged' => 'Прогресс успешно записан',
+    
+    // Index page
+    'fitlife_goals' => 'FitLife Цели',
+    'track_progress_subtitle' => 'Отслеживайте свой прогресс и оставайтесь мотивированными!',
+    'your_goals' => 'Ваши цели',
+    'new_goal' => 'Новая цель',
+    'goal_suffix' => 'Цель',
+    'target' => 'Цель',
+    'current' => 'Текущее',
+    'no_goals_start_creating' => 'Целей пока нет. Начните создавать свои цели!',
+    
+    // Create page
+    'fitlife_create_goal' => 'FitLife Создать цель',
+    'create_new_goal' => 'Создать новую цель',
+    'set_new_goal_subtitle' => 'Поставьте новую цель, чтобы оставаться мотивированными!',
+    'goal_type' => 'Тип цели',
+    'select_goal' => 'Выберите цель',
+    'type_steps' => 'Шаги',
+    'type_calories' => 'Калории',
+    'type_sleep' => 'Сон (часы)',
+    'type_weight' => 'Вес (кг)',
+    'enter_target_value' => 'Введите целевое значение',
+    'description_optional' => 'Описание (необязательно)',
+    'add_description' => 'Добавить описание',
+    
+    // Edit page
+    'fitlife_edit_goal' => 'FitLife Редактировать цель',
+    'update_goal_subtitle' => 'Обновите данные вашей цели',
+    'update_goal' => 'Обновить цель',
+    'cancel' => 'Отмена',
+    'delete_confirm' => 'Вы уверены, что хотите удалить эту цель?',
+    
+    // Log page
+    'fitlife_log_progress' => 'FitLife Записать прогресс',
+    'update_progress_for' => 'Обновите ваш прогресс для цели :type',
+    'log_progress_for' => 'Записать прогресс для :type',
+    'todays_value' => 'Сегодняшнее значение',
+    'enter_todays_value' => 'Введите сегодняшнее значение',
+    'submit' => 'Отправить',
+];

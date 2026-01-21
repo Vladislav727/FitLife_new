@@ -13,6 +13,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FriendController;
 use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\SettingsController;
 use Illuminate\Support\Facades\Route;
 
 // Главная страница
@@ -35,6 +36,10 @@ require __DIR__ . '/admin.php';
 // Все маршруты для авторизованных пользователей
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    // Настройки
+    Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
+    Route::patch('/settings/language', [SettingsController::class, 'updateLanguage'])->name('settings.language');
 
     // Профиль
     Route::prefix('profile')->group(function () {

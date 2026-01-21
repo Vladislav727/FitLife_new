@@ -7,41 +7,41 @@
 @section('content')
     <div class="admindashboard-content">
         <header class="admindashboard-header">
-            <h1 class="admindashboard-title">Admin Dashboard</h1>
-            <p class="admindashboard-subtitle">Manage users, posts, and events</p>
+            <h1 class="admindashboard-title">{{ __('admin.dashboard') }}</h1>
+            <p class="admindashboard-subtitle">{{ __('admin.dashboard_subtitle') }}</p>
         </header>
 
         <div class="admindashboard-stats-grid">
             <div class="admindashboard-stat-card">
                 <div class="admindashboard-stat-icon">👥</div>
                 <h3 class="admindashboard-stat-number">{{ $totalUsers }}</h3>
-                <p class="admindashboard-stat-label">Total Users</p>
-                <a href="{{ route('admin.users') }}" class="admindashboard-btn admindashboard-btn-primary">Manage Users</a>
+                <p class="admindashboard-stat-label">{{ __('admin.total_users') }}</p>
+                <a href="{{ route('admin.users') }}" class="admindashboard-btn admindashboard-btn-primary">{{ __('admin.manage_users') }}</a>
             </div>
             <div class="admindashboard-stat-card">
                 <div class="admindashboard-stat-icon">📝</div>
                 <h3 class="admindashboard-stat-number">{{ $totalPosts }}</h3>
-                <p class="admindashboard-stat-label">Total Posts</p>
-                <a href="{{ route('admin.posts') }}" class="admindashboard-btn admindashboard-btn-primary">Manage Posts</a>
+                <p class="admindashboard-stat-label">{{ __('admin.total_posts') }}</p>
+                <a href="{{ route('admin.posts') }}" class="admindashboard-btn admindashboard-btn-primary">{{ __('admin.manage_posts') }}</a>
             </div>
             <div class="admindashboard-stat-card">
                 <div class="admindashboard-stat-icon">🟢</div>
                 <h3 class="admindashboard-stat-number">{{ $activeUsers }}</h3>
-                <p class="admindashboard-stat-label">Active Users (30 days)</p>
+                <p class="admindashboard-stat-label">{{ __('admin.active_users') }}</p>
             </div>
         </div>
 
         <div class="admindashboard-sections">
             <div class="admindashboard-section">
-                <h2 class="admindashboard-section-title">Recent Posts</h2>
+                <h2 class="admindashboard-section-title">{{ __('admin.recent_posts') }}</h2>
                 <div class="admindashboard-table">
                     <table>
                         <thead>
                             <tr>
-                                <th>User</th>
-                                <th>Content</th>
-                                <th>Date</th>
-                                <th>Actions</th>
+                                <th>{{ __('admin.user') }}</th>
+                                <th>{{ __('admin.content') }}</th>
+                                <th>{{ __('admin.date') }}</th>
+                                <th>{{ __('admin.actions') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -51,17 +51,17 @@
                                     <td>{{ Str::limit($post->content, 50) }}</td>
                                     <td>{{ $post->created_at->format('M d, Y') }}</td>
                                     <td>
-                                        <a href="{{ route('profile.show', $post->user) }}" class="admindashboard-btn admindashboard-btn-primary">View Profile</a>
+                                        <a href="{{ route('profile.show', $post->user) }}" class="admindashboard-btn admindashboard-btn-primary">{{ __('admin.view_profile') }}</a>
                                         <form action="{{ route('admin.posts.delete', $post) }}" method="POST" style="display:inline;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="admindashboard-btn admindashboard-btn-danger" onclick="return confirm('Are you sure you want to delete this post?')">Delete</button>
+                                            <button type="submit" class="admindashboard-btn admindashboard-btn-danger" onclick="return confirm('{{ __('admin.confirm_delete_post') }}')">{{ __('admin.delete') }}</button>
                                         </form>
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="4">No recent posts.</td>
+                                    <td colspan="4">{{ __('admin.no_recent_posts') }}</td>
                                 </tr>
                             @endforelse
                         </tbody>

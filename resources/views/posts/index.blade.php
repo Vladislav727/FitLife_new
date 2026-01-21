@@ -23,16 +23,16 @@
             @error('content') <div class="error">{{ $message }}</div> @enderror
             @error('photo') <div class="error">{{ $message }}</div> @enderror
             @error('video') <div class="error">{{ $message }}</div> @enderror
-            <textarea name="content" placeholder="What's on your mind?" rows="3" maxlength="1000"></textarea>
+            <textarea name="content" placeholder="{{ __('posts.whats_on_your_mind') }}" rows="3" maxlength="1000"></textarea>
             <div class="create-footer">
                 <div class="left-controls">
-                    <label class="file-label" title="Attach photo">
+                    <label class="file-label" title="{{ __('posts.attach_photo') }}">
                         <input type="file" name="photo" accept="image/*" id="post-photo">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" fill="#3b82f6">
                             <path d="M160-160q-33 0-56.5-23.5T80-240v-400q0-33 23.5-56.5T160-720h240l80-80h320q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm73-280h207v-207L233-440Zm-73-40 160-160H160v160Zm0 120v120h640v-480H520v280q0 33-23.5 56.5T440-360H160Zm280-160Z"/>
                         </svg>
                     </label>
-                    <label class="file-label" title="Attach video">
+                    <label class="file-label" title="{{ __('posts.attach_video') }}">
                         <input type="file" name="video" accept="video/mp4,video/mpeg,video/ogg,video/webm" id="post-video">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" fill="#3b82f6">
                             <path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm0-80h640v-480H160v480Zm160-80 240-160-240-160v320Zm-160 80v-480 480Z"/>
@@ -40,12 +40,12 @@
                     </label>
                     <div class="char-count" id="post-char-count">0/1000</div>
                 </div>
-                <button type="submit" class="btn">Post</button>
+                <button type="submit" class="btn">{{ __('posts.post_button') }}</button>
             </div>
             <div class="preview-container" style="position: relative; display: none;">
-                <img id="image-preview" alt="Image preview" style="display: none;" />
+                <img id="image-preview" alt="{{ __('posts.image_preview') }}" style="display: none;" />
                 <video id="video-preview" controls style="display: none; max-height: 200px; border-radius: var(--radius);"></video>
-                <button id="remove-media" type="button" style="display: none;" aria-label="Remove media">×</button>
+                <button id="remove-media" type="button" style="display: none;" aria-label="{{ __('posts.remove_media') }}">×</button>
             </div>
         </form>
     </section>
@@ -82,31 +82,31 @@
                 <textarea name="content" rows="3" maxlength="1000">{{ $post->content }}</textarea>
                 <div class="preview-container" style="position: relative;">
                     @if($post->media_path && $post->media_type === 'image')
-                        <img id="edit-image-preview-{{ $post->id }}" src="{{ asset('storage/' . $post->media_path) }}" alt="Image preview" />
+                        <img id="edit-image-preview-{{ $post->id }}" src="{{ asset('storage/' . $post->media_path) }}" alt="{{ __('posts.image_preview') }}" />
                     @else
-                        <img id="edit-image-preview-{{ $post->id }}" alt="Image preview" style="display: none;" />
+                        <img id="edit-image-preview-{{ $post->id }}" alt="{{ __('posts.image_preview') }}" style="display: none;" />
                     @endif
                     @if($post->media_path && $post->media_type === 'video')
                         <video id="edit-video-preview-{{ $post->id }}" src="{{ asset('storage/' . $post->media_path) }}" controls style="max-height: 200px; border-radius: var(--radius);"></video>
                     @else
-                        <video id="edit-video-preview-{{ $post->id }}" controls style="display: none; max-height: 200px; border-radius: var(--radius);" alt="Video preview"></video>
+                        <video id="edit-video-preview-{{ $post->id }}" controls style="display: none; max-height: 200px; border-radius: var(--radius);" alt="{{ __('posts.video_preview') }}"></video>
                     @endif
                     <button type="button" class="remove-media" data-post-id="{{ $post->id }}" style="display: {{ $post->media_path ? 'block' : 'none' }};">×</button>
                 </div>
-                <label class="file-label" title="Attach photo">
+                <label class="file-label" title="{{ __('posts.attach_photo') }}">
                     <input type="file" name="photo" accept="image/*" class="edit-post-photo">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" fill="#3b82f6">
                         <path d="M160-160q-33 0-56.5-23.5T80-240v-400q0-33 23.5-56.5T160-720h240l80-80h320q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm73-280h207v-207L233-440Zm-73-40 160-160H160v160Zm0 120v120h640v-480H520v280q0 33-23.5 56.5T440-360H160Zm280-160Z"/>
                     </svg>
                 </label>
-                <label class="file-label" title="Attach video">
+                <label class="file-label" title="{{ __('posts.attach_video') }}">
                     <input type="file" name="video" accept="video/mp4,video/mpeg,video/ogg,video/webm" class="edit-post-video">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" fill="#3b82f6">
                         <path d="M160-160q-33 0-56.5-23.5T80-240v-480q0-33 23.5-56.5T160-800h640q33 0 56.5 23.5T880-720v480q0 33-23.5 56.5T800-160H160Zm0-80h640v-480H160v480Zm160-80 240-160-240-160v320Zm-160 80v-480 480Z"/>
                     </svg>
                 </label>
-                <button type="submit" class="btn">Save</button>
-                <button type="button" class="btn cancel-edit" data-post-id="{{ $post->id }}">Cancel</button>
+                <button type="submit" class="btn">{{ __('posts.save') }}</button>
+                <button type="button" class="btn cancel-edit" data-post-id="{{ $post->id }}">{{ __('posts.cancel') }}</button>
             </form>
 
             <!-- Post actions -->
@@ -129,7 +129,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" fill="#3b82f6">
                         <path d="M240-400h480v-80H240v80Zm0-120h480v-80H240v80Zm0-120h480v-80H240v80ZM880-80 720-240H160q-33 0-56.5-23.5T80-320v-480q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v720ZM160-320h594l46 45v-525H160v480Zm0 0v-480 480Z"/>
                     </svg>
-                    <span class="comment-count">{{ $post->allComments()->count() }}</span> Comments
+                    <span class="comment-count">{{ $post->allComments()->count() }}</span> {{ __('posts.comments') }}
                 </button>
                 <span class="view-count">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" fill="#6b7280">
@@ -138,13 +138,13 @@
                     <span class="count-view">{{ $post->postViews()->count() }}</span>
                 </span>
                 @can('update', $post)
-                    <button type="button" class="action-btn edit-post-btn" data-post-id="{{ $post->id }}">Edit</button>
+                    <button type="button" class="action-btn edit-post-btn" data-post-id="{{ $post->id }}">{{ __('posts.edit') }}</button>
                 @endcan
                 @can('delete', $post)
                     <form action="{{ route('posts.destroy', $post) }}" method="POST" class="inline-form delete-post-form">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="action-btn delete-btn">Delete</button>
+                        <button type="submit" class="action-btn delete-btn">{{ __('posts.delete') }}</button>
                     </form>
                 @endcan
             </div>
@@ -153,7 +153,7 @@
             <div class="comments" id="comments-{{ $post->id }}" style="display: none;">
                 <form action="{{ route('posts.comment', $post) }}" method="POST" class="comment-form" data-post-id="{{ $post->id }}">
                     @csrf
-                    <textarea name="content" placeholder="Write a comment..." rows="1" maxlength="500"></textarea>
+                    <textarea name="content" placeholder="{{ __('posts.write_comment') }}" rows="1" maxlength="500"></textarea>
                     <button type="submit" class="btn">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#006400">
                             <path d="M120-160v-640l760 320-760 320Zm80-120 474-200-474-200v140l240 60-240 60v140Zm0 0v-400 400Z"/>
@@ -166,7 +166,7 @@
             </div>
         </article>
         @empty
-            <p>No posts available.</p>
+            <p>{{ __('posts.no_posts_available') }}</p>
         @endempty
     </section>
 

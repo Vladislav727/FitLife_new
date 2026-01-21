@@ -2,8 +2,8 @@
     <table>
         <thead>
             <tr>
-                <th>Date</th>
-                <th>Amount (ml)</th>
+                <th>{{ __('profile.date') }}</th>
+                <th>{{ __('profile.amount_ml') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -14,7 +14,7 @@
             </tr>
             @empty
             <tr>
-                <td colspan="2">No water logs yet.</td>
+                <td colspan="2">{{ __('profile.no_water_logs') }}</td>
             </tr>
             @endforelse
         </tbody>

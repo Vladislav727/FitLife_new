@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<div id="fitlife-container" role="application" aria-label="Water Tracker">
+<div id="fitlife-container" role="application" aria-label="{{ __('water.title') }}">
     <main>
         <button id="mobile-toggle" aria-controls="sidebar" aria-expanded="false">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -15,13 +15,13 @@
 
         <header>
             <div class="header-left">
-                <h1>Water Tracker</h1>
-                <p class="muted">Log and track your daily hydration</p>
+                <h1>{{ __('water.title') }}</h1>
+                <p class="muted">{{ __('water.subtitle') }}</p>
             </div>
         </header>
 
         <section aria-labelledby="kpi-heading">
-            <h3 id="kpi-heading">Today's Hydration</h3>
+            <h3 id="kpi-heading">{{ __('water.todays_hydration') }}</h3>
             <div class="result-card">
                 <div class="result-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#0000FF">
@@ -29,43 +29,43 @@
                     </svg>
                 </div>
                 <div class="result-body">
-                    <h4>Total Water Today</h4>
+                    <h4>{{ __('water.total_water_today') }}</h4>
                     <div class="value count-up" data-target="{{ $logs->sum('amount') ?? 0 }}">0</div>
-                    <div class="muted">ml</div>
+                    <div class="muted">{{ __('water.ml') }}</div>
                 </div>
             </div>
         </section>
 
         <section aria-labelledby="water-form-heading">
-            <h3 id="water-form-heading">Log Your Hydration</h3>
+            <h3 id="water-form-heading">{{ __('water.log_hydration') }}</h3>
             <div class="water-card">
-                <h4>Add Water Intake</h4>
+                <h4>{{ __('water.add_water_intake') }}</h4>
                 <form action="{{ route('water.store') }}" method="POST" class="water-form">
                     @csrf
                     <div class="form-group">
-                        <label for="amount">Amount (ml)</label>
-                        <input type="number" id="amount" name="amount" placeholder="Enter amount in ml" required>
+                        <label for="amount">{{ __('water.amount_ml') }}</label>
+                        <input type="number" id="amount" name="amount" placeholder="{{ __('water.enter_amount') }}" required>
                     </div>
                     <div class="form-group form-group-btn">
                         <label>&nbsp;</label>
-                        <button type="submit" class="calculate-btn">Add Amount</button>
+                        <button type="submit" class="calculate-btn">{{ __('water.add_amount') }}</button>
                     </div>
                 </form>
             </div>
         </section>
 
         <section id="history-section" aria-labelledby="history-heading">
-            <h3 id="history-heading">Hydration History</h3>
+            <h3 id="history-heading">{{ __('water.hydration_history') }}</h3>
             @if($logs->isEmpty())
                 <div class="history-table">
-                    <div class="no-data">No water logs yet. Start logging your hydration!</div>
+                    <div class="no-data">{{ __('water.no_logs_start') }}</div>
                 </div>
             @else
                 <table class="history-table">
                     <thead>
                         <tr>
-                            <th>Date & Time</th>
-                            <th>Amount (ml)</th>
+                            <th>{{ __('water.date_time') }}</th>
+                            <th>{{ __('water.amount_ml') }}</th>
                         </tr>
                     </thead>
                     <tbody>

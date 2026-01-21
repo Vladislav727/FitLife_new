@@ -7,12 +7,12 @@
 @section('content')
     <div class="posts-content">
         <header class="posts-header">
-            <h1 class="posts-title">Posts Management</h1>
-            <a href="{{ route('admin.dashboard') }}" class="posts-back-btn">← Back to Dashboard</a>
+            <h1 class="posts-title">{{ __('admin.posts_management') }}</h1>
+            <a href="{{ route('admin.dashboard') }}" class="posts-back-btn">{{ __('admin.back_to_dashboard') }}</a>
         </header>
 
         <div class="posts-search">
-            <input type="text" id="post-search" placeholder="Search posts..." class="posts-search-input">
+            <input type="text" id="post-search" placeholder="{{ __('admin.search_posts') }}" class="posts-search-input">
         </div>
 
         <div class="posts-section">
@@ -20,12 +20,12 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>User</th>
-                            <th>Content</th>
-                            <th>Views</th>
-                            <th>Created</th>
-                            <th>Actions</th>
+                            <th>{{ __('admin.id') }}</th>
+                            <th>{{ __('admin.user') }}</th>
+                            <th>{{ __('admin.content') }}</th>
+                            <th>{{ __('admin.views') }}</th>
+                            <th>{{ __('admin.created') }}</th>
+                            <th>{{ __('admin.actions') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,13 +40,13 @@
                                     <form action="{{ route('admin.posts.delete', $post) }}" method="POST" style="display:inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="posts-btn posts-btn-danger" onclick="return confirm('Are you sure you want to delete this post?')">Delete</button>
+                                        <button type="submit" class="posts-btn posts-btn-danger" onclick="return confirm('{{ __('admin.confirm_delete_post') }}')">{{ __('admin.delete') }}</button>
                                     </form>
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="6">No posts found.</td>
+                                <td colspan="6">{{ __('admin.no_posts_found') }}</td>
                             </tr>
                         @endforelse
                     </tbody>

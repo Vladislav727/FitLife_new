@@ -15,8 +15,8 @@
 
         <header>
             <div class="header-left">
-                <h1><span>FitLife</span> Biography</h1>
-                <p class="muted">Update your personal information</p>
+                <h1><span>{{ __('profile.fitlife_biography') }}</span></h1>
+                <p class="muted">{{ __('profile.update_personal_info') }}</p>
             </div>
         </header>
 
@@ -26,35 +26,35 @@
             @endif
 
             <div class="biography-card">
-                <h3 id="biography-settings-heading">Update Biography</h3>
+                <h3 id="biography-settings-heading">{{ __('profile.update_biography') }}</h3>
                 @php $bio = Auth::user()->biography ?? new \App\Models\Biography(); @endphp
                 <form action="{{ route('biography.update') }}" method="POST" class="biography-form">
                     @csrf
                     @method('PATCH')
                     <div class="form-group">
-                        <label for="full_name">Full Name</label>
+                        <label for="full_name">{{ __('profile.full_name') }}</label>
                         <input type="text" id="full_name" name="full_name"
                             value="{{ old('full_name', $bio->full_name ?? Auth::user()->name) }}">
                     </div>
                     <div class="form-group">
-                        <label for="age">Age</label>
+                        <label for="age">{{ __('profile.age') }}</label>
                         <input type="number" id="age" name="age" value="{{ old('age', $bio->age ?? '') }}">
                     </div>
                     <div class="form-group">
-                        <label for="height">Height (cm)</label>
+                        <label for="height">{{ __('profile.height_cm') }}</label>
                         <input type="number" step="0.01" id="height" name="height" value="{{ old('height', $bio->height ?? '') }}">
                     </div>
                     <div class="form-group">
-                        <label for="weight">Weight (kg)</label>
+                        <label for="weight">{{ __('profile.weight_kg') }}</label>
                         <input type="number" step="0.01" id="weight" name="weight" value="{{ old('weight', $bio->weight ?? '') }}">
                     </div>
                     <div class="form-group">
-                        <label for="gender">Gender</label>
+                        <label for="gender">{{ __('profile.gender') }}</label>
                         <select id="gender" name="gender">
-                            <option value="" {{ old('gender', $bio->gender ?? '') == '' ? 'selected' : '' }}>Select Gender</option>
-                            <option value="male" {{ old('gender', $bio->gender ?? '') == 'male' ? 'selected' : '' }}>Male</option>
-                            <option value="female" {{ old('gender', $bio->gender ?? '') == 'female' ? 'selected' : '' }}>Female</option>
-                            <option value="other" {{ old('gender', $bio->gender ?? '') == 'other' ? 'selected' : '' }}>Other</option>
+                            <option value="" {{ old('gender', $bio->gender ?? '') == '' ? 'selected' : '' }}>{{ __('profile.select_gender') }}</option>
+                            <option value="male" {{ old('gender', $bio->gender ?? '') == 'male' ? 'selected' : '' }}>{{ __('profile.male') }}</option>
+                            <option value="female" {{ old('gender', $bio->gender ?? '') == 'female' ? 'selected' : '' }}>{{ __('profile.female') }}</option>
+                            <option value="other" {{ old('gender', $bio->gender ?? '') == 'other' ? 'selected' : '' }}>{{ __('profile.other') }}</option>
                         </select>
                     </div>
                     <button type="submit" class="save-btn">
@@ -63,7 +63,7 @@
                             <path d="M17 21v-8H7v8" />
                             <path d="M7 3v5h8" />
                         </svg>
-                        Save Biography
+                        {{ __('profile.save_biography') }}
                     </button>
                 </form>
             </div>

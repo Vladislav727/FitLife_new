@@ -1,14 +1,14 @@
 <div class="table-wrapper">
     @if($sleepLogs->isEmpty())
-        <p style="text-align:center; padding:1rem; color:#475569;">No sleep records yet.</p>
+        <p style="text-align:center; padding:1rem; color:#475569;">{{ __('profile.no_sleep_records') }}</p>
     @else
     <table>
         <thead>
             <tr>
-                <th>Date</th>
-                <th>Start Time</th>
-                <th>End Time</th>
-                <th>Duration (h)</th>
+                <th>{{ __('profile.date') }}</th>
+                <th>{{ __('profile.start_time') }}</th>
+                <th>{{ __('profile.end_time') }}</th>
+                <th>{{ __('profile.duration_hours') }}</th>
             </tr>
         </thead>
         <tbody>

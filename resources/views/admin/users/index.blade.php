@@ -7,16 +7,16 @@
 @section('content')
     <div class="users-content">
         <header class="users-header">
-            <h1 class="users-title">Users Management</h1>
-            <a href="{{ route('admin.dashboard') }}" class="users-back-btn">← Back to Dashboard</a>
+            <h1 class="users-title">{{ __('admin.users_management') }}</h1>
+            <a href="{{ route('admin.dashboard') }}" class="users-back-btn">{{ __('admin.back_to_dashboard') }}</a>
         </header>
 
         <div class="users-search">
-            <input type="text" id="user-search" placeholder="Search users..." class="users-search-input">
+            <input type="text" id="user-search" placeholder="{{ __('admin.search_users') }}" class="users-search-input">
             <select id="role-filter" class="users-search-select">
-                <option value="">All Roles</option>
-                <option value="user">Users</option>
-                <option value="admin">Admins</option>
+                <option value="">{{ __('admin.all_roles') }}</option>
+                <option value="user">{{ __('admin.users') }}</option>
+                <option value="admin">{{ __('admin.admins') }}</option>
             </select>
         </div>
 
@@ -25,13 +25,13 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Role</th>
-                            <th>Posts</th>
-                            <th>Created</th>
-                            <th>Actions</th>
+                            <th>{{ __('admin.id') }}</th>
+                            <th>{{ __('admin.name') }}</th>
+                            <th>{{ __('admin.email') }}</th>
+                            <th>{{ __('admin.role') }}</th>
+                            <th>{{ __('admin.posts') }}</th>
+                            <th>{{ __('admin.created') }}</th>
+                            <th>{{ __('admin.actions') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -46,18 +46,18 @@
                                 <td>{{ $user->posts->count() }}</td>
                                 <td>{{ $user->created_at->format('M d, Y') }}</td>
                                 <td>
-                                    <a href="{{ route('admin.users.show', $user) }}" class="users-btn users-btn-primary">View</a>
-                                    <a href="{{ route('admin.users.edit', $user) }}" class="users-btn users-btn-secondary">Edit</a>
+                                    <a href="{{ route('admin.users.show', $user) }}" class="users-btn users-btn-primary">{{ __('admin.view') }}</a>
+                                    <a href="{{ route('admin.users.edit', $user) }}" class="users-btn users-btn-secondary">{{ __('admin.edit') }}</a>
                                     <form action="{{ route('admin.users.delete', $user) }}" method="POST" style="display:inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="users-btn users-btn-danger" onclick="return confirm('Are you sure you want to delete this user?')">Delete</button>
+                                        <button type="submit" class="users-btn users-btn-danger" onclick="return confirm('{{ __('admin.confirm_delete_user') }}')">{{ __('admin.delete') }}</button>
                                     </form>
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7">No users found.</td>
+                                <td colspan="7">{{ __('admin.no_users_found') }}</td>
                             </tr>
                         @endforelse
                     </tbody>

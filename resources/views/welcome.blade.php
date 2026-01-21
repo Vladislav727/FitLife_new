@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>FitLife - Your Path to Wellness</title>
+    <title>{{ __('welcome.page_title') }}</title>
     <link rel="icon" href="{{ asset('favicon.PNG') }}" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -731,23 +731,23 @@
         </div>
         <button class="menu-toggle"><i class="fas fa-bars"></i></button>
         <div class="nav-links">
-            <a href="#features">Features</a>
-            <a href="#testimonials">Testimonials</a>
-            <a href="#about">About</a>
+            <a href="#features">{{ __('welcome.nav_features') }}</a>
+            <a href="#testimonials">{{ __('welcome.nav_testimonials') }}</a>
+            <a href="#about">{{ __('welcome.nav_about') }}</a>
         </div>
         <div class="auth-buttons">
             @if(Route::has('login'))
                 @auth
                     <a href="{{ route('dashboard') }}" class="button login">
-                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                        <i class="fas fa-tachometer-alt"></i> {{ __('welcome.dashboard') }}
                     </a>
                 @else
                     <a href="{{ route('login') }}" class="button login">
-                        <i class="fas fa-sign-in-alt"></i> Log In
+                        <i class="fas fa-sign-in-alt"></i> {{ __('welcome.log_in') }}
                     </a>
                     @if(Route::has('register'))
                         <a href="{{ route('register') }}" class="button signup">
-                            <i class="fas fa-user-plus"></i> Sign Up
+                            <i class="fas fa-user-plus"></i> {{ __('welcome.sign_up') }}
                         </a>
                     @endif
                 @endauth
@@ -756,86 +756,86 @@
     </header>
 
     <main>
-        <h1 style="position:absolute; left:-9999px;">Welcome</h1>
+        <h1 style="position:absolute; left:-9999px;">{{ __('welcome.hero_hidden_title') }}</h1>
         <section class="hero">
-            <h1>Transform Your Life with FitLife</h1>
-            <p>Discover a smarter way to achieve your fitness goals with our all-in-one platform.</p>
+            <h1>{{ __('welcome.hero_title') }}</h1>
+            <p>{{ __('welcome.hero_subtitle') }}</p>
         </section>
 
         <section class="section" id="features">
-            <h2>Why FitLife?</h2>
-            <p>Tools designed for real results.</p>
+            <h2>{{ __('welcome.features_title') }}</h2>
+            <p>{{ __('welcome.features_subtitle') }}</p>
             <div class="feature-grid">
                 <div class="feature-card">
-                    <img src="{{ asset('storage/WelcomePhoto/training.jpg') }}" alt="Person lifting weights" tabindex="0">
+                    <img src="{{ asset('storage/WelcomePhoto/training.jpg') }}" alt="{{ __('welcome.feature_workouts_alt') }}" tabindex="0">
                     <div class="content">
-                        <h3>Personalized Workouts</h3>
-                        <p>Create custom workout plans tailored to your goals. Access tutorials and sync with wearables.</p>
+                        <h3>{{ __('welcome.feature_workouts_title') }}</h3>
+                        <p>{{ __('welcome.feature_workouts_desc') }}</p>
                     </div>
                 </div>
                 <div class="feature-card">
-                    <img src="{{ asset('storage/WelcomePhoto/nutrition.jpg') }}" alt="Healthy meal" tabindex="0">
+                    <img src="{{ asset('storage/WelcomePhoto/nutrition.jpg') }}" alt="{{ __('welcome.feature_nutrition_alt') }}" tabindex="0">
                     <div class="content">
-                        <h3>Smart Nutrition</h3>
-                        <p>Log meals, calculate macros, and get personalized diet plans with recipes.</p>
+                        <h3>{{ __('welcome.feature_nutrition_title') }}</h3>
+                        <p>{{ __('welcome.feature_nutrition_desc') }}</p>
                     </div>
                 </div>
                 <div class="feature-card">
-                    <img src="{{ asset('storage/WelcomePhoto/sleep.jpg') }}" alt="Peaceful bedroom" tabindex="0">
+                    <img src="{{ asset('storage/WelcomePhoto/sleep.jpg') }}" alt="{{ __('welcome.feature_sleep_alt') }}" tabindex="0">
                     <div class="content">
-                        <h3>Restful Sleep</h3>
-                        <p>Monitor sleep patterns and get insights to optimize recovery.</p>
+                        <h3>{{ __('welcome.feature_sleep_title') }}</h3>
+                        <p>{{ __('welcome.feature_sleep_desc') }}</p>
                     </div>
                 </div>
                 <div class="feature-card">
-                    <img src="{{ asset('storage/WelcomePhoto/community.jpg') }}" alt="Group exercise" tabindex="0">
+                    <img src="{{ asset('storage/WelcomePhoto/community.jpg') }}" alt="{{ __('welcome.feature_community_alt') }}" tabindex="0">
                     <div class="content">
-                        <h3>Vibrant Community</h3>
-                        <p>Join a supportive network to share goals and participate in challenges.</p>
+                        <h3>{{ __('welcome.feature_community_title') }}</h3>
+                        <p>{{ __('welcome.feature_community_desc') }}</p>
                     </div>
                 </div>
                 <div class="feature-card">
-                    <img src="{{ asset('storage/WelcomePhoto/progress.jpg') }}" alt="Progress tracking dashboard" tabindex="0">
+                    <img src="{{ asset('storage/WelcomePhoto/progress.jpg') }}" alt="{{ __('welcome.feature_progress_alt') }}" tabindex="0">
                     <div class="content">
-                        <h3>Progress Tracking</h3>
-                        <p>Visualize your journey with progress charts and analytics.</p>
+                        <h3>{{ __('welcome.feature_progress_title') }}</h3>
+                        <p>{{ __('welcome.feature_progress_desc') }}</p>
                     </div>
                 </div>
                 <div class="feature-card">
-                    <img src="{{ asset('storage/WelcomePhoto/goalsetting.jpg') }}" alt="Mindfulness meditation" tabindex="0">
+                    <img src="{{ asset('storage/WelcomePhoto/goalsetting.jpg') }}" alt="{{ __('welcome.feature_goals_alt') }}" tabindex="0">
                     <div class="content">
-                        <h3>Goal Setting</h3>
-                        <p>Set and track fitness goals with personalized updates.</p>
+                        <h3>{{ __('welcome.feature_goals_title') }}</h3>
+                        <p>{{ __('welcome.feature_goals_desc') }}</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <section class="testimonials section" id="testimonials">
-            <h2>What Our Users Say</h2>
-            <p>Real stories from FitLife users.</p>
+            <h2>{{ __('welcome.testimonials_title') }}</h2>
+            <p>{{ __('welcome.testimonials_subtitle') }}</p>
             <div class="testimonial-grid">
                 <div class="testimonial-card">
                     <i class="fas fa-quote-left"></i>
-                    <p>"FitLife made fitness fun. I lost 15 pounds!"</p>
-                    <div class="author">- Anna K.</div>
+                    <p>{{ __('welcome.testimonial_1_text') }}</p>
+                    <div class="author">{{ __('welcome.testimonial_1_author') }}</div>
                 </div>
                 <div class="testimonial-card">
                     <i class="fas fa-quote-left"></i>
-                    <p>"The nutrition tracker is a game-changer."</p>
-                    <div class="author">- Mark S.</div>
+                    <p>{{ __('welcome.testimonial_2_text') }}</p>
+                    <div class="author">{{ __('welcome.testimonial_2_author') }}</div>
                 </div>
                 <div class="testimonial-card">
                     <i class="fas fa-quote-left"></i>
-                    <p>"Better sleep improved my workouts."</p>
-                    <div class="author">- Lisa M.</div>
+                    <p>{{ __('welcome.testimonial_3_text') }}</p>
+                    <div class="author">{{ __('welcome.testimonial_3_author') }}</div>
                 </div>
             </div>
         </section>
 
         <section class="section" id="about">
-            <h2>About FitLife</h2>
-            <p>Since 2020, FitLife has empowered millions to live healthier lives.</p>
+            <h2>{{ __('welcome.about_title') }}</h2>
+            <p>{{ __('welcome.about_text') }}</p>
         </section>
     </main>
 
@@ -849,11 +849,11 @@
     </div>
 
     <footer>
-        <p>© {{ date('Y') }} FitLife. All rights reserved.</p>
+        <p>{{ __('welcome.footer_copyright', ['year' => date('Y')]) }}</p>
         <div class="links">
-            <a href="{{ route('privacy-policy') }}">Privacy Policy</a>
-            <a href="{{ route('terms-of-service') }}">Terms of Service</a>
-            <a href="mailto:support@fitlife.com">Contact Us</a>
+            <a href="{{ route('privacy-policy') }}">{{ __('welcome.footer_privacy') }}</a>
+            <a href="{{ route('terms-of-service') }}">{{ __('welcome.footer_terms') }}</a>
+            <a href="mailto:support@fitlife.com">{{ __('welcome.footer_contact') }}</a>
         </div>
     </footer>
 </body>

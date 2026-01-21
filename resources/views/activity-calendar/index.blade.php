@@ -1,21 +1,21 @@
-@extends('layouts.app', ['title' => 'FitLife — Activity Calendar'])
+@extends('layouts.app', ['title' => __('calendar.page_title')])
 
 @section('content')
     <div id="fitlife-container" class="particle-bg">
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <header class="header fade-in">
-            <h1 class="header__title fs-2xl fw-bold">Activity Calendar</h1>
-            <span class="header__username fs-sm text-muted">Plan your workouts and track your progress</span>
+            <h1 class="header__title fs-2xl fw-bold">{{ __('calendar.activity_calendar') }}</h1>
+            <span class="header__username fs-sm text-muted">{{ __('calendar.subtitle') }}</span>
         </header>
 
         <section aria-labelledby="calendar-heading" class="fade-in">
 
             <div class="calendar-controls p-3 bg-card br-12 shadow-md">
-                <button class="calendar-nav-btn prev-month" aria-label="Previous month">
+                <button class="calendar-nav-btn prev-month" aria-label="{{ __('calendar.previous_month') }}">
                     <i class="fas fa-chevron-left"></i>
                 </button>
                 <h4 class="calendar-month fs-lg fw-medium text-center"></h4>
-                <button class="calendar-nav-btn next-month" aria-label="Next month">
+                <button class="calendar-nav-btn next-month" aria-label="{{ __('calendar.next_month') }}">
                     <i class="fas fa-chevron-right"></i>
                 </button>
             </div>
@@ -25,11 +25,11 @@
             </div>
 
             <div class="calendar-event-form bg-card p-4 mt-4 br-12 shadow-md">
-                <h4 class="fs-md fw-medium mb-3">Add Event</h4>
+                <h4 class="fs-md fw-medium mb-3">{{ __('calendar.add_event') }}</h4>
                 <form id="event-form" action="{{ route('calendar.store') }}" method="POST">
                     @csrf
                     <div class="form-group">
-                        <label for="event-date" class="fs-sm fw-medium">Date</label>
+                        <label for="event-date" class="fs-sm fw-medium">{{ __('calendar.event_date') }}</label>
                         <div class="input-group">
                             <i class="fas fa-calendar-alt input-icon"></i>
                             <input type="date" id="event-date" name="date" class="fs-sm" required aria-describedby="event-date-error">
@@ -39,25 +39,25 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="event-type" class="fs-sm fw-medium">Event Type</label>
+                        <label for="event-type" class="fs-sm fw-medium">{{ __('calendar.event_type') }}</label>
                         <div class="input-group">
                             <i class="fas fa-dumbbell input-icon"></i>
                             <select id="event-type" name="type" class="fs-sm" required aria-describedby="event-type-error">
-                                <option value="" disabled selected>Select an event type</option>
-                                <option value="workout">Workout</option>
-                                <option value="rest">Rest</option>
-                                <option value="goal">Goal</option>
-                                <option value="running">Running</option>
-                                <option value="yoga">Yoga</option>
-                                <option value="cycling">Cycling</option>
-                                <option value="swimming">Swimming</option>
-                                <option value="weightlifting">Weightlifting</option>
-                                <option value="hiking">Hiking</option>
-                                <option value="boxing">Boxing</option>
-                                <option value="dance">Dance</option>
-                                <option value="crossfit">CrossFit</option>
-                                <option value="walking">Walking</option>
-                                <option value="meditation">Meditation</option>
+                                <option value="" disabled selected>{{ __('calendar.select_event_type') }}</option>
+                                <option value="workout">{{ __('calendar.type_workout') }}</option>
+                                <option value="rest">{{ __('calendar.type_rest') }}</option>
+                                <option value="goal">{{ __('calendar.type_goal') }}</option>
+                                <option value="running">{{ __('calendar.type_running') }}</option>
+                                <option value="yoga">{{ __('calendar.type_yoga') }}</option>
+                                <option value="cycling">{{ __('calendar.type_cycling') }}</option>
+                                <option value="swimming">{{ __('calendar.type_swimming') }}</option>
+                                <option value="weightlifting">{{ __('calendar.type_weightlifting') }}</option>
+                                <option value="hiking">{{ __('calendar.type_hiking') }}</option>
+                                <option value="boxing">{{ __('calendar.type_boxing') }}</option>
+                                <option value="dance">{{ __('calendar.type_dance') }}</option>
+                                <option value="crossfit">{{ __('calendar.type_crossfit') }}</option>
+                                <option value="walking">{{ __('calendar.type_walking') }}</option>
+                                <option value="meditation">{{ __('calendar.type_meditation') }}</option>
                             </select>
                         </div>
                         @error('type')
@@ -65,42 +65,42 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="event-description" class="fs-sm fw-medium">Description</label>
+                        <label for="event-description" class="fs-sm fw-medium">{{ __('calendar.event_description') }}</label>
                         <div class="input-group">
                             <i class="fas fa-comment input-icon"></i>
-                            <input type="text" id="event-description" name="description" class="fs-sm" placeholder="E.g., Strength Training or Run 5km" aria-describedby="event-description-error">
+                            <input type="text" id="event-description" name="description" class="fs-sm" placeholder="{{ __('calendar.description_placeholder') }}" aria-describedby="event-description-error">
                         </div>
                         @error('description')
                             <div class="error-message" id="event-description-error">{{ $message }}</div>
                         @enderror
                     </div>
                     <button type="submit" class="save-btn fs-sm fw-medium">
-                        <i class="fas fa-save"></i> Save Event
+                        <i class="fas fa-save"></i> {{ __('calendar.save_event') }}
                     </button>
                 </form>
                 <div id="form-message" class="mt-3 fs-sm"></div>
             </div>
 
             <div class="calendar-events mt-4">
-                <h4 class="fs-md fw-medium mb-3">Your Events</h4>
+                <h4 class="fs-md fw-medium mb-3">{{ __('calendar.your_events') }}</h4>
                 <div class="event-filter">
-                    <label for="event-filter" class="fs-sm fw-medium">Filter by Type:</label>
+                    <label for="event-filter" class="fs-sm fw-medium">{{ __('calendar.filter_by_type') }}</label>
                     <select id="event-filter" class="fs-sm">
-                        <option value="all">All Events</option>
-                        <option value="workout">Workout</option>
-                        <option value="rest">Rest</option>
-                        <option value="goal">Goal</option>
-                        <option value="running">Running</option>
-                        <option value="yoga">Yoga</option>
-                        <option value="cycling">Cycling</option>
-                        <option value="swimming">Swimming</option>
-                        <option value="weightlifting">Weightlifting</option>
-                        <option value="hiking">Hiking</option>
-                        <option value="boxing">Boxing</option>
-                        <option value="dance">Dance</option>
-                        <option value="crossfit">CrossFit</option>
-                        <option value="walking">Walking</option>
-                        <option value="meditation">Meditation</option>
+                        <option value="all">{{ __('calendar.all_events') }}</option>
+                        <option value="workout">{{ __('calendar.type_workout') }}</option>
+                        <option value="rest">{{ __('calendar.type_rest') }}</option>
+                        <option value="goal">{{ __('calendar.type_goal') }}</option>
+                        <option value="running">{{ __('calendar.type_running') }}</option>
+                        <option value="yoga">{{ __('calendar.type_yoga') }}</option>
+                        <option value="cycling">{{ __('calendar.type_cycling') }}</option>
+                        <option value="swimming">{{ __('calendar.type_swimming') }}</option>
+                        <option value="weightlifting">{{ __('calendar.type_weightlifting') }}</option>
+                        <option value="hiking">{{ __('calendar.type_hiking') }}</option>
+                        <option value="boxing">{{ __('calendar.type_boxing') }}</option>
+                        <option value="dance">{{ __('calendar.type_dance') }}</option>
+                        <option value="crossfit">{{ __('calendar.type_crossfit') }}</option>
+                        <option value="walking">{{ __('calendar.type_walking') }}</option>
+                        <option value="meditation">{{ __('calendar.type_meditation') }}</option>
                     </select>
                 </div>
                 <ul class="event-list"></ul>

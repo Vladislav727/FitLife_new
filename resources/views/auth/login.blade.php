@@ -513,24 +513,24 @@
         </div>
         <button class="menu-toggle"><i class="fas fa-bars"></i></button>
         <div class="nav-links">
-            <a href="{{ route('welcome') }}">Home</a>
-            <a href="#features">Features</a>
-            <a href="#testimonials">Testimonials</a>
-            <a href="#about">About</a>
+            <a href="{{ route('welcome') }}">{{ __('auth.home') }}</a>
+            <a href="#features">{{ __('auth.features') }}</a>
+            <a href="#testimonials">{{ __('auth.testimonials') }}</a>
+            <a href="#about">{{ __('auth.about') }}</a>
         </div>
         <div class="auth-buttons">
             @if(Route::has('login'))
                 @auth
                     <a href="{{ route('dashboard') }}" class="button login">
-                        <i class="fas fa-tachometer-alt"></i> Dashboard
+                        <i class="fas fa-tachometer-alt"></i> {{ __('auth.dashboard') }}
                     </a>
                 @else
                     <a href="{{ route('login') }}" class="button login">
-                        <i class="fas fa-sign-in-alt"></i> Log In
+                        <i class="fas fa-sign-in-alt"></i> {{ __('auth.log_in') }}
                     </a>
                     @if(Route::has('register'))
                         <a href="{{ route('register') }}" class="button signup">
-                            <i class="fas fa-user-plus"></i> Sign Up
+                            <i class="fas fa-user-plus"></i> {{ __('auth.sign_up') }}
                         </a>
                     @endif
                 @endauth
@@ -543,8 +543,8 @@
             <div class="login-card">
                 <!-- Логотип теперь по центру -->
                 <img src="{{ asset('favicon.PNG') }}" alt="FitLife Logo" class="logo">
-                <h2>Welcome Back</h2>
-                <p class="subtitle">Log in to your <span>FitLife account</span></p>
+                <h2>{{ __('auth.welcome_back') }}</h2>
+                <p class="subtitle">{{ __('auth.login_subtitle') }} <span>{{ __('auth.fitlife_account') }}</span></p>
 
                 @if (session('status'))
                     <div class="status">{{ session('status') }}</div>
@@ -553,25 +553,25 @@
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
 
-                    <label for="email">Email</label>
+                    <label for="email">{{ __('auth.email') }}</label>
                     <input id="email" type="email" name="email" placeholder="you@example.com" value="{{ old('email') }}" required autofocus>
 
-                    <label for="password">Password</label>
+                    <label for="password">{{ __('auth.password') }}</label>
                     <input id="password" type="password" name="password" placeholder="••••••••" required>
 
                     <div class="remember">
                         <input type="checkbox" id="remember_me" name="remember">
-                        <label for="remember_me">Remember me</label>
+                        <label for="remember_me">{{ __('auth.remember_me') }}</label>
                     </div>
 
                     <div class="footer">
                         @if (Route::has('password.request'))
-                            <a href="{{ route('password.request') }}">Forgot your password?</a>
+                            <a href="{{ route('password.request') }}">{{ __('auth.forgot_your_password') }}</a>
                         @else
                             <span></span>
                         @endif
                         <button type="submit" class="btn">
-                            <i class="fas fa-sign-in-alt"></i> Log in
+                            <i class="fas fa-sign-in-alt"></i> {{ __('auth.login') }}
                         </button>
                     </div>
                 </form>
@@ -580,11 +580,11 @@
     </main>
 
     <footer>
-        <p>© {{ date('Y') }} FitLife. All rights reserved.</p>
+        <p>© {{ date('Y') }} FitLife. {{ __('auth.all_rights_reserved') }}</p>
         <div class="links">
-            <a href="{{ route('privacy-policy') }}">Privacy Policy</a>
-            <a href="{{ route('terms-of-service') }}">Terms of Service</a>
-            <a href="mailto:support@fitlife.com">Contact Us</a>
+            <a href="{{ route('privacy-policy') }}">{{ __('auth.privacy_policy') }}</a>
+            <a href="{{ route('terms-of-service') }}">{{ __('auth.terms_of_service') }}</a>
+            <a href="mailto:support@fitlife.com">{{ __('auth.contact_us') }}</a>
         </div>
     </footer>
 </body>

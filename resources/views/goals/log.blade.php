@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<div id="fitlife-container" role="application" aria-label="FitLife Log Progress">
+<div id="fitlife-container" role="application" aria-label="{{ __('goals.fitlife_log_progress') }}">
   <!-- Main Content -->
   <main>
     <!-- Mobile Menu Toggle -->
@@ -18,22 +18,22 @@
     <!-- Page Header -->
     <header>
       <div class="header-left">
-        <h1><span>FitLife</span> Log Progress</h1>
-        <p class="muted">Update your progress for {{ ucfirst($goal->type) }} goal</p>
+        <h1><span>FitLife</span> {{ __('goals.log_progress') }}</h1>
+        <p class="muted">{{ __('goals.update_progress_for', ['type' => ucfirst($goal->type)]) }}</p>
       </div>
     </header>
 
     <!-- Log Form -->
     <section aria-labelledby="log-form-heading">
-      <h3 id="log-form-heading">Log Progress for {{ ucfirst($goal->type) }}</h3>
+      <h3 id="log-form-heading">{{ __('goals.log_progress_for', ['type' => ucfirst($goal->type)]) }}</h3>
       <div class="log-card">
         <form action="{{ route('goals.storeLog', $goal) }}" method="POST" class="log-form">
           @csrf
           <div class="form-group">
-            <label for="value">Today's Value</label>
-            <input type="number" id="value" name="value" step="0.01" placeholder="Enter today's value" required>
+            <label for="value">{{ __('goals.todays_value') }}</label>
+            <input type="number" id="value" name="value" step="0.01" placeholder="{{ __('goals.enter_todays_value') }}" required>
           </div>
-          <button type="submit" class="calculate-btn">Submit</button>
+          <button type="submit" class="calculate-btn">{{ __('goals.submit') }}</button>
         </form>
       </div>
     </section>

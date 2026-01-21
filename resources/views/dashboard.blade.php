@@ -1,4 +1,4 @@
-@extends('layouts.app', ['title' => 'FitLife — Dashboard'])
+@extends('layouts.app', ['title' => 'FitLife — ' . __('dashboard.title')])
 
 @section('styles')
     <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
@@ -12,8 +12,8 @@
 
     {{-- Page Header --}}
     <header class="page-header animate-slide-down">
-        <h1 class="page-title">Welcome back, {{ Auth::user()->name }}! 👋</h1>
-        <p class="page-subtitle">Here's your fitness overview for today</p>
+        <h1 class="page-title">{{ __('dashboard.welcome', ['name' => Auth::user()->name]) }} 👋</h1>
+        <p class="page-subtitle">{{ __('dashboard.subtitle') }}</p>
     </header>
 
     {{-- Quick Stats Grid --}}
@@ -24,11 +24,11 @@
                 <svg viewBox="0 0 24 24"><path d="M11 21c0-5.5-6-9-6-13.5C5 4 8.6 2 12 2s7 2 7 5.5C19 12 13 15.5 13 21h-2zm1-2a9 9 0 004.5-5.5c.5-2.5-1.5-5-5.5-5S6 11 6.5 13.5A9 9 0 0011 19h1z"/></svg>
             </div>
             <div class="stat-value">{{ number_format($totalCalories ?? 0) }}</div>
-            <div class="stat-label">Calories Today</div>
+            <div class="stat-label">{{ __('dashboard.calories_today') }}</div>
             <div class="progress-bar mt-4">
                 <div class="progress-fill warning" style="width: {{ min(100, (($totalCalories ?? 0) / 2000) * 100) }}%"></div>
             </div>
-            <div class="text-xs text-muted mt-2">{{ number_format($totalCalories ?? 0) }} / 2000 kcal</div>
+            <div class="text-xs text-muted mt-2">{{ number_format($totalCalories ?? 0) }} / 2000 {{ __('dashboard.kcal') }}</div>
         </div>
 
         {{-- Water Card --}}
@@ -37,11 +37,11 @@
                 <svg viewBox="0 0 24 24"><path d="M12 2c-5 6-9 10-9 14a9 9 0 0018 0c0-4-4-8-9-14zm0 18a6 6 0 01-6-6c0-2.5 2.5-5.5 6-10 3.5 4.5 6 7.5 6 10a6 6 0 01-6 6z"/></svg>
             </div>
             <div class="stat-value">{{ number_format($totalWater ?? 0) }}</div>
-            <div class="stat-label">Water (ml)</div>
+            <div class="stat-label">{{ __('dashboard.water_ml') }}</div>
             <div class="progress-bar mt-4">
                 <div class="progress-fill" style="width: {{ min(100, (($totalWater ?? 0) / 2000) * 100) }}%"></div>
             </div>
-            <div class="text-xs text-muted mt-2">{{ number_format($totalWater ?? 0) }} / 2000 ml</div>
+            <div class="text-xs text-muted mt-2">{{ number_format($totalWater ?? 0) }} / 2000 {{ __('dashboard.ml') }}</div>
         </div>
 
         {{-- Sleep Card --}}
@@ -49,12 +49,12 @@
             <div class="stat-icon secondary">
                 <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 109 9c0-.5 0-1-.1-1.5a5.5 5.5 0 01-7.4-7.4A9 9 0 0012 3z"/></svg>
             </div>
-            <div class="stat-value">{{ number_format($totalSleep ?? 0, 1) }}h</div>
-            <div class="stat-label">Sleep Duration</div>
+            <div class="stat-value">{{ number_format($totalSleep ?? 0, 1) }}{{ __('dashboard.h') }}</div>
+            <div class="stat-label">{{ __('dashboard.sleep_duration') }}</div>
             <div class="progress-bar mt-4">
                 <div class="progress-fill" style="width: {{ min(100, (($totalSleep ?? 0) / 8) * 100) }}%"></div>
             </div>
-            <div class="text-xs text-muted mt-2">{{ number_format($totalSleep ?? 0, 1) }} / 8 hours</div>
+            <div class="text-xs text-muted mt-2">{{ number_format($totalSleep ?? 0, 1) }} / 8 {{ __('dashboard.hours') }}</div>
         </div>
 
         {{-- Goals Card --}}
@@ -63,11 +63,11 @@
                 <svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-1 15l-5-5 1.4-1.4 3.6 3.6 7.6-7.6L20 8l-9 9z"/></svg>
             </div>
             <div class="stat-value">{{ $goals->count() }}</div>
-            <div class="stat-label">Active Goals</div>
+            <div class="stat-label">{{ __('dashboard.active_goals') }}</div>
             @php
                 $completedGoals = $goals->filter(fn($g) => $g->progressPercent() >= 100)->count();
             @endphp
-            <div class="badge badge-success mt-4">{{ $completedGoals }} completed</div>
+            <div class="badge badge-success mt-4">{{ $completedGoals }} {{ __('dashboard.completed') }}</div>
         </div>
     </div>
 
@@ -82,9 +82,9 @@
                         <svg class="text-primary" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M19 3h-1V1h-2v2H8V1H6v2H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm-8 4H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/>
                         </svg>
-                        Upcoming Events
+                        {{ __('dashboard.upcoming_events') }}
                     </h2>
-                    <a href="{{ route('activity-calendar') }}" class="btn btn-ghost btn-sm">View All</a>
+                    <a href="{{ route('activity-calendar') }}" class="btn btn-ghost btn-sm">{{ __('dashboard.view_all') }}</a>
                 </div>
                 <div class="card-body">
                     @if($upcomingEvents->isEmpty())
@@ -92,8 +92,8 @@
                             <svg width="48" height="48" viewBox="0 0 24 24" fill="var(--text-muted)">
                                 <path d="M19 3h-1V1h-2v2H8V1H6v2H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2zm0 16H5V8h14v11z"/>
                             </svg>
-                            <p class="text-muted mt-4">No upcoming events</p>
-                            <a href="{{ route('activity-calendar') }}" class="btn btn-primary btn-sm mt-4">Add Event</a>
+                            <p class="text-muted mt-4">{{ __('dashboard.no_upcoming_events') }}</p>
+                            <a href="{{ route('activity-calendar') }}" class="btn btn-primary btn-sm mt-4">{{ __('dashboard.add_event') }}</a>
                         </div>
                     @else
                         <div class="events-list">
@@ -105,11 +105,11 @@
                                     </div>
                                     <div class="event-details">
                                         <span class="event-type-badge">{{ ucfirst($event->type) }}</span>
-                                        <p class="event-description">{{ $event->description ?? 'No description' }}</p>
+                                        <p class="event-description">{{ $event->description ?? __('dashboard.no_description') }}</p>
                                         @if(\Carbon\Carbon::parse($event->date)->isToday())
-                                            <span class="badge badge-primary">Today</span>
+                                            <span class="badge badge-primary">{{ __('dashboard.today') }}</span>
                                         @elseif(\Carbon\Carbon::parse($event->date)->isTomorrow())
-                                            <span class="badge badge-warning">Tomorrow</span>
+                                            <span class="badge badge-warning">{{ __('dashboard.tomorrow') }}</span>
                                         @endif
                                     </div>
                                     @if($event->completed)
@@ -133,9 +133,9 @@
                         <svg class="text-success" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
                         </svg>
-                        Active Goals
+                        {{ __('dashboard.active_goals') }}
                     </h2>
-                    <a href="{{ route('goals.index') }}" class="btn btn-ghost btn-sm">Manage</a>
+                    <a href="{{ route('goals.index') }}" class="btn btn-ghost btn-sm">{{ __('dashboard.manage') }}</a>
                 </div>
                 <div class="card-body">
                     @if($goals->isEmpty())
@@ -143,8 +143,8 @@
                             <svg width="48" height="48" viewBox="0 0 24 24" fill="var(--text-muted)">
                                 <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/>
                             </svg>
-                            <p class="text-muted mt-4">No goals set yet</p>
-                            <a href="{{ route('goals.create') }}" class="btn btn-primary btn-sm mt-4">Create Goal</a>
+                            <p class="text-muted mt-4">{{ __('dashboard.no_goals_set') }}</p>
+                            <a href="{{ route('goals.create') }}" class="btn btn-primary btn-sm mt-4">{{ __('dashboard.create_goal') }}</a>
                         </div>
                     @else
                         <div class="goals-list">
@@ -178,9 +178,9 @@
                         <svg class="text-secondary" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
                         </svg>
-                        Progress Gallery
+                        {{ __('dashboard.progress_gallery') }}
                     </h2>
-                    <a href="{{ route('progress.index') }}" class="btn btn-ghost btn-sm">View All</a>
+                    <a href="{{ route('progress.index') }}" class="btn btn-ghost btn-sm">{{ __('dashboard.view_all') }}</a>
                 </div>
                 <div class="card-body">
                     @if($photos->isEmpty())
@@ -188,8 +188,8 @@
                             <svg width="48" height="48" viewBox="0 0 24 24" fill="var(--text-muted)">
                                 <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
                             </svg>
-                            <p class="text-muted mt-4">No progress photos yet</p>
-                            <a href="{{ route('progress.index') }}" class="btn btn-primary btn-sm mt-4">Add Photo</a>
+                            <p class="text-muted mt-4">{{ __('dashboard.no_progress_photos') }}</p>
+                            <a href="{{ route('progress.index') }}" class="btn btn-primary btn-sm mt-4">{{ __('dashboard.add_photo') }}</a>
                         </div>
                     @else
                         <div class="photos-grid">
@@ -219,33 +219,33 @@
             {{-- Profile Stats Card --}}
             <div class="card animate-slide-up mb-6">
                 <div class="card-header">
-                    <h2 class="card-title">Your Profile</h2>
+                    <h2 class="card-title">{{ __('dashboard.your_profile') }}</h2>
                 </div>
                 <div class="card-body">
                     @php $bio = Auth::user()->biography; @endphp
                     <div class="profile-stats">
                         <div class="profile-stat">
-                            <span class="profile-stat-label">Full Name</span>
+                            <span class="profile-stat-label">{{ __('dashboard.full_name') }}</span>
                             <span class="profile-stat-value">{{ $bio?->full_name ?? Auth::user()->name }}</span>
                         </div>
                         <div class="profile-stat">
-                            <span class="profile-stat-label">Age</span>
+                            <span class="profile-stat-label">{{ __('dashboard.age') }}</span>
                             <span class="profile-stat-value">{{ $bio?->age ?? '—' }}</span>
                         </div>
                         <div class="profile-stat">
-                            <span class="profile-stat-label">Height</span>
-                            <span class="profile-stat-value">{{ $bio?->height ? $bio->height . ' cm' : '—' }}</span>
+                            <span class="profile-stat-label">{{ __('dashboard.height') }}</span>
+                            <span class="profile-stat-value">{{ $bio?->height ? $bio->height . ' ' . __('dashboard.cm') : '—' }}</span>
                         </div>
                         <div class="profile-stat">
-                            <span class="profile-stat-label">Weight</span>
-                            <span class="profile-stat-value">{{ $bio?->weight ? $bio->weight . ' kg' : '—' }}</span>
+                            <span class="profile-stat-label">{{ __('dashboard.weight') }}</span>
+                            <span class="profile-stat-value">{{ $bio?->weight ? $bio->weight . ' ' . __('dashboard.kg') : '—' }}</span>
                         </div>
                         <div class="profile-stat">
-                            <span class="profile-stat-label">Gender</span>
+                            <span class="profile-stat-label">{{ __('dashboard.gender') }}</span>
                             <span class="profile-stat-value">{{ $bio?->gender ? ucfirst($bio->gender) : '—' }}</span>
                         </div>
                     </div>
-                    <a href="{{ route('profile.edit') }}" class="btn btn-secondary w-full mt-4">Edit Profile</a>
+                    <a href="{{ route('profile.edit') }}" class="btn btn-secondary w-full mt-4">{{ __('dashboard.edit_profile') }}</a>
                 </div>
             </div>
 
@@ -256,9 +256,9 @@
                         <svg class="text-accent" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
                         </svg>
-                        Friends
+                        {{ __('dashboard.friends') }}
                     </h2>
-                    <a href="{{ route('posts.index') }}" class="btn btn-ghost btn-sm">Find</a>
+                    <a href="{{ route('posts.index') }}" class="btn btn-ghost btn-sm">{{ __('dashboard.find') }}</a>
                 </div>
                 <div class="card-body">
                     @if(Auth::user()->friends->isEmpty())
@@ -266,8 +266,8 @@
                             <svg width="32" height="32" viewBox="0 0 24 24" fill="var(--text-muted)">
                                 <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3z"/>
                             </svg>
-                            <p class="text-muted mt-3">No friends yet</p>
-                            <a href="{{ route('posts.index') }}" class="btn btn-secondary btn-sm mt-3">Find Friends</a>
+                            <p class="text-muted mt-3">{{ __('dashboard.no_friends') }}</p>
+                            <a href="{{ route('posts.index') }}" class="btn btn-secondary btn-sm mt-3">{{ __('dashboard.find_friends') }}</a>
                         </div>
                     @else
                         <div class="friends-list">
@@ -285,7 +285,7 @@
                         </div>
                         @if(Auth::user()->friends->count() > 5)
                             <a href="{{ route('profile.friends') }}" class="btn btn-ghost btn-sm w-full mt-4">
-                                View all {{ Auth::user()->friends->count() }} friends
+                                {{ __('dashboard.view_all_friends', ['count' => Auth::user()->friends->count()]) }}
                             </a>
                         @endif
                     @endif
