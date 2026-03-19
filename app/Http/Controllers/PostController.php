@@ -527,7 +527,9 @@ class PostController extends Controller
         return [
             'id' => $comment->id,
             'content' => $comment->content,
+            'user_id' => $comment->user_id,
             'user_name' => $comment->user->name,
+            'user_avatar' => $comment->user->avatar,
             'user' => [
                 'username' => $comment->user->username,
                 'profile_url' => route('profile.show', $comment->user->id),

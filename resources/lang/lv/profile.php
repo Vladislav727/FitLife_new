@@ -71,7 +71,7 @@ return [
     'profile_picture' => 'Avatars un baneris',
     'basic_information' => 'Pamatinformācija',
     'password_security' => 'Parole un drošība',
-    'danger_zone' => 'Bīstamā zona',
+    'danger_zone' => 'Dzēst kontu',
     'save_changes' => 'Saglabāt izmaiņas',
     'cancel' => 'Atcelt',
     'enter_name' => 'Pilns vārds',
@@ -96,4 +96,10 @@ return [
     // Additional
     'personal_info' => 'Personīgā informācija',
     'physical_data' => 'Fizikālie dati',
+
+    // User Profile Show
+    'back_to_community' => 'Atpakaļ uz kopienu',
+    'stats' => 'Statistika',
+    'posts_count' => 'Ieraksti',
+    'friends_count' => 'Draugi',
 ];

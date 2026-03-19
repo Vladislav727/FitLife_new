@@ -71,7 +71,7 @@ return [
     'profile_picture' => 'Аватар и баннер',
     'basic_information' => 'Основная информация',
     'password_security' => 'Пароль и безопасность',
-    'danger_zone' => 'Опасная зона',
+    'danger_zone' => 'Удалить аккаунт',
     'save_changes' => 'Сохранить изменения',
     'cancel' => 'Отмена',
     'enter_name' => 'Полное имя',
@@ -96,4 +96,10 @@ return [
     // Additional
     'personal_info' => 'Личная информация',
     'physical_data' => 'Физические данные',
+
+    // User Profile Show
+    'back_to_community' => 'Назад к сообществу',
+    'stats' => 'Статистика',
+    'posts_count' => 'Публикации',
+    'friends_count' => 'Друзья',
 ];

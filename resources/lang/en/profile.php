@@ -71,7 +71,7 @@ return [
     'profile_picture' => 'Avatar & Banner',
     'basic_information' => 'Basic Information',
     'password_security' => 'Password & Security',
-    'danger_zone' => 'Danger Zone',
+    'danger_zone' => 'Delete account',
     'save_changes' => 'Save Changes',
     'cancel' => 'Cancel',
     'enter_name' => 'Full name',
@@ -96,4 +96,10 @@ return [
     // Additional
     'personal_info' => 'Personal Information',
     'physical_data' => 'Physical Data',
+
+    // User Profile Show
+    'back_to_community' => 'Back to Community',
+    'stats' => 'Stats',
+    'posts_count' => 'Posts',
+    'friends_count' => 'Friends',
 ];

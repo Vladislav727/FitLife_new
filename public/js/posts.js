@@ -543,63 +543,78 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const createCommentElement = (comment, postId, csrfToken) => {
         const commentElement = document.createElement('div');
-        commentElement.className = `comment ${comment.parent_id ? 'reply' : ''}`;
+        commentElement.className = `comment-item ${comment.parent_id ? 'is-reply' : ''}`;
         commentElement.id = `comment-${comment.id}`;
         commentElement.dataset.commentId = comment.id;
+        const avatarUrl = comment.user_avatar
+            ? `/storage/${comment.user_avatar}`
+            : '/storage/logo/defaultPhoto.jpg';
+        const escapedContent = comment.content.replace(/</g, '&lt;').replace(/>/g, '&gt;');
         commentElement.innerHTML = `
-            <div class="comment-head">
-                <strong>${comment.user_name}</strong>
-                <div class="username fs-sm text-muted">@${comment.user?.username || ''}</div>
-                ${comment.parent_id ? `<div class="in-reply-to fs-sm text-muted">In reply to @${comment.parent_username || ''}</div>` : ''}
-                <span class="time fs-sm text-muted">${comment.created_at_diff || 'just now'}</span>
+            <img src="${avatarUrl}" alt="${comment.user_name}" class="comment-avatar">
+            <div class="comment-content">
+                <div class="comment-header">
+                    <a href="/profile/${comment.user_id}" class="comment-author">${comment.user_name}</a>
+                    <span class="comment-username">@${comment.user?.username || ''}</span>
+                    ${comment.parent_id ? `<span class="comment-reply-to">→ @${comment.parent_username || ''}</span>` : ''}
+                    <span class="comment-time">${comment.created_at_diff || 'just now'}</span>
+                </div>
+                <div class="comment-text" id="comment-text-${comment.id}">
+                    <p>${escapedContent}</p>
+                </div>
+                <form id="edit-comment-form-${comment.id}" class="comment-edit-form" action="/comments/${comment.id}" method="POST" style="display: none;">
+                    <input type="hidden" name="_token" value="${csrfToken}">
+                    <input type="hidden" name="_method" value="PUT">
+                    <textarea name="content" maxlength="500">${escapedContent}</textarea>
+                    <div class="comment-edit-btns">
+                        <button type="submit" class="btn-save">Save</button>
+                        <button type="button" class="btn-cancel cancel-edit-comment" data-comment-id="${comment.id}">Cancel</button>
+                    </div>
+                </form>
+                <div class="comment-actions">
+                    <button class="comment-btn like ${comment.user_liked ? 'active' : ''}" data-comment-id="${comment.id}">
+                        <svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                        <span>${comment.like_count || 0}</span>
+                    </button>
+                    <button class="comment-btn dislike ${comment.user_disliked ? 'active' : ''}" data-comment-id="${comment.id}">
+                        <svg viewBox="0 0 24 24"><path d="M15 3H6c-.83 0-1.54.5-1.84 1.22l-3.02 7.05c-.09.23-.14.47-.14.73v2c0 1.1.9 2 2 2h6.31l-.95 4.57-.03.32c0 .41.17.79.44 1.06L9.83 23l6.59-6.59c.36-.36.58-.86.58-1.41V5c0-1.1-.9-2-2-2zm4 0v12h4V3h-4z"/></svg>
+                        <span>${comment.dislike_count || 0}</span>
+                    </button>
+                    <button class="comment-btn reply reply-btn" data-comment-id="${comment.id}" data-post-id="${postId}">
+                        <svg viewBox="0 0 24 24"><path d="M10 9V5l-7 7 7 7v-4.1c5 0 8.5 1.6 11 5.1-1-5-4-10-11-11z"/></svg>
+                        <span>Reply</span>
+                    </button>
+                    ${comment.can_update ? `
+                    <button class="comment-btn edit edit-comment-btn" data-comment-id="${comment.id}">
+                        <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34a.9959.9959 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+                        <span>Edit</span>
+                    </button>` : ''}
+                    ${comment.can_delete ? `
+                    <form action="/comments/${comment.id}" method="POST" class="inline-delete">
+                        <input type="hidden" name="_token" value="${csrfToken}">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit" class="comment-btn delete">
+                            <svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+                            <span>Delete</span>
+                        </button>
+                    </form>` : ''}
+                    ${comment.reply_count > 0 ? `
+                    <button class="comment-btn show-replies show-replies-btn" data-comment-id="${comment.id}">
+                        <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                        <span>Show ${comment.reply_count} ${comment.reply_count === 1 ? 'Reply' : 'Replies'}</span>
+                    </button>` : ''}
+                </div>
+                <form action="/posts/${postId}/comment" method="POST" class="comment-reply-form" data-post-id="${postId}" data-parent-id="${comment.id}" style="display: none;">
+                    <input type="hidden" name="_token" value="${csrfToken}">
+                    <input type="hidden" name="parent_id" value="${comment.id}">
+                    <textarea name="content" placeholder="Write a reply..." maxlength="500"></textarea>
+                    <div class="comment-reply-btns">
+                        <button type="submit" class="btn-reply">Reply</button>
+                        <button type="button" class="btn-cancel cancel-reply" data-comment-id="${comment.id}">Cancel</button>
+                    </div>
+                </form>
+                <div class="comment-replies" id="replies-${comment.id}" style="display: none;"></div>
             </div>
-            <div class="comment-body">
-                <p>${comment.content}</p>
-            </div>
-            <form id="edit-comment-form-${comment.id}" action="/comments/${comment.id}" method="POST" style="display: none;">
-                <input type="hidden" name="_token" value="${csrfToken}">
-                <input type="hidden" name="_method" value="PUT">
-                <textarea name="content" rows="2" maxlength="500">${comment.content}</textarea>
-                <button type="submit" class="btn">Save</button>
-                <button type="button" class="btn cancel-edit-comment" data-comment-id="${comment.id}">Cancel</button>
-            </form>
-            <div class="comment-actions">
-                <button class="action-btn like-btn ${comment.user_liked ? 'active' : ''}" data-comment-id="${comment.id}">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20" fill="${comment.user_liked ? '#ef4444' : 'currentColor'}">
-                        <path d="m480-120-58-52q-101-91-167-157T150-447.5Q111-500 95.5-544T80-634q0-94 63-157t157-63q52 0 99 22t81 62q34-40 81-62t99-22q94 0 157 63t63 157q0 46-15.5 90T810-447.5Q771-395 705-329T538-172l-58 52Zm0-108q96-86 158-147.5t98-107q36-45.5 50-81t14-70.5q0-60-40-100t-100-40q-47 0-87 26.5T518-680h-76q-15-41-55-67.5T300-774q-60 0-100 40t-40 100q0 35 14 70.5t50 81q36 45.5 98 107T480-228Zm0-273Z"/>
-                    </svg>
-                    <span class="count-like">${comment.like_count || 0}</span>
-                </button>
-                <button class="action-btn dislike-btn ${comment.user_disliked ? 'active' : ''}" data-comment-id="${comment.id}">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20" fill="${comment.user_disliked ? '#ffffffff' : 'currentColor'}">
-                        <path d="M240-840h440v520L400-40l-50-50q-7-7-11.5-19t-4.5-23v-14l44-174H120q-32 0-56-24t-24-56v-80q0-7 2-15t4-15l120-282q9-20 30-34t44-14Zm360 80H240L120-480v80h360l-54 220 174-174v-406Zm0 406v-406 406Zm80 34v-80h120v-360H680v-80h200v520H680Z"/>
-                    </svg>
-                    <span class="count-dislike">${comment.dislike_count || 0}</span>
-                </button>
-                <button type="button" class="action-btn reply-btn" data-comment-id="${comment.id}" data-post-id="${postId}">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#000000fa">
-                        <path d="M760-200v-160q0-50-35-85t-85-35H273l144 144-57 56-240-240 240-240 57 56-144 144h367q83 0 141.5 58.5T840-360v160h-80Z"/>
-                    </svg>
-                    <span>Reply</span>
-                </button>
-                ${comment.can_update ? `<button type="button" class="action-btn edit-comment-btn" data-comment-id="${comment.id}">Edit</button>` : ''}
-                ${comment.can_delete ? `<form action="/comments/${comment.id}" method="POST" class="inline-form delete-comment-form"><input type="hidden" name="_token" value="${csrfToken}"><input type="hidden" name="_method" value="DELETE"><button type="submit" class="action-btn delete-btn">Delete</button></form>` : ''}
-                ${comment.reply_count > 0 ? `
-                <button type="button" class="action-btn show-replies-btn" data-comment-id="${comment.id}">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" fill="#44ff00ff">
-                        <path d="M480-200q-33 0-56.5-23.5T400-280v-400l-160 160-56-56 240-240 240 240-56 56-160-160v400q0 33-23.5 56.5T480-200Z"/>
-                    </svg>
-                    <span>Show ${comment.reply_count} ${comment.reply_count === 1 ? 'Reply' : 'Replies'}</span>
-                </button>` : ''}
-            </div>
-            <form action="/posts/${postId}/comment" method="POST" class="comment-form reply-form" data-post-id="${postId}" data-parent-id="${comment.id}" style="display: none; margin-top: 10px;">
-                <input type="hidden" name="_token" value="${csrfToken}">
-                <input type="hidden" name="parent_id" value="${comment.id}">
-                <textarea name="content" placeholder="Write a reply..." rows="1" maxlength="500"></textarea>
-                <button type="submit" class="btn">Reply</button>
-                <button type="button" class="btn cancel-reply" data-comment-id="${comment.id}">Cancel</button>
-            </form>
-            <div class="replies-container" id="replies-${comment.id}" style="display: none;"></div>
         `;
         return commentElement;
     };
@@ -662,12 +677,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 const replyCount = repliesContainer.querySelectorAll('.reply, .is-reply').length;
                 if (!showRepliesBtn && replyCount > 0) {
                     showRepliesBtn = document.createElement('button');
-                    showRepliesBtn.className = 'action-btn show-replies-btn';
+                    showRepliesBtn.className = 'comment-btn show-replies show-replies-btn';
                     showRepliesBtn.dataset.commentId = commentId;
                     showRepliesBtn.innerHTML = `
-                        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" fill="#44ff00ff">
-                            <path d="M480-200q-33 0-56.5-23.5T400-280v-400l-160 160-56-56 240-240 240 240-56 56-160-160v400q0 33-23.5 56.5T480-200Z"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
                         <span>Show ${replyCount} ${replyCount === 1 ? 'Reply' : 'Replies'}</span>
                     `;
                     comment.querySelector('.comment-actions').appendChild(showRepliesBtn);
@@ -732,12 +745,13 @@ document.addEventListener("DOMContentLoaded", () => {
                         parent = document.getElementById(`replies-${data.comment.parent_id}`);
                         if (!parent) {
                             parent = document.createElement('div');
-                            parent.className = 'replies-container';
+                            parent.className = 'comment-replies';
                             parent.id = `replies-${data.comment.parent_id}`;
                             parent.style.display = 'none';
                             const parentComment = document.getElementById(`comment-${data.comment.parent_id}`);
                             if (parentComment) {
-                                parentComment.appendChild(parent);
+                                const contentDiv = parentComment.querySelector('.comment-content') || parentComment;
+                                contentDiv.appendChild(parent);
                             } else {
                                 console.error(`Parent comment ${data.comment.parent_id} not found`);
                                 showAlert(t('comment_add_error', 'Failed to add reply'), 'error');
@@ -765,12 +779,10 @@ document.addEventListener("DOMContentLoaded", () => {
                             showRepliesBtn.querySelector('svg').style.transform = 'rotate(180deg)';
                         } else {
                             showRepliesBtn = document.createElement('button');
-                            showRepliesBtn.className = 'action-btn show-replies-btn';
+                            showRepliesBtn.className = 'comment-btn show-replies show-replies-btn';
                             showRepliesBtn.dataset.commentId = data.comment.parent_id;
                             showRepliesBtn.innerHTML = `
-                                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24" fill="#44ff00ff">
-                                    <path d="M480-200q-33 0-56.5-23.5T400-280v-400l-160 160-56-56 240-240 240 240-56 56-160-160v400q0 33-23.5 56.5T480-200Z"/>
-                                </svg>
+                                <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
                                 <span>Show 1 Reply</span>
                             `;
                             if (parentComment) {
@@ -1091,6 +1103,33 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
+    // Share button handler
+    const setupShareButtons = (scope = main) => {
+        scope.querySelectorAll('.post-action.share').forEach(btn => {
+            btn.removeEventListener('click', handleShare);
+            btn.addEventListener('click', handleShare);
+        });
+    };
+
+    const handleShare = async (e) => {
+        const btn = e.currentTarget;
+        const postId = btn.dataset.postId;
+        const url = `${window.location.origin}/posts#post-${postId}`;
+        try {
+            await navigator.clipboard.writeText(url);
+            showAlert(t('link_copied', 'Link copied to clipboard!'), 'success');
+        } catch {
+            // Fallback for older browsers
+            const input = document.createElement('input');
+            input.value = url;
+            document.body.appendChild(input);
+            input.select();
+            document.execCommand('copy');
+            document.body.removeChild(input);
+            showAlert(t('link_copied', 'Link copied to clipboard!'), 'success');
+        }
+    };
+
     // Initialize all event listeners and replies
     setupMobileMenu();
     setupEmojiPicker();
@@ -1099,6 +1138,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setupSortButtons();
     setupCommentToggle();
     setupReactionButtons();
+    setupShareButtons();
     setupViewCounter();
     setupRealTimePolling();
     setupPostForm();
