@@ -16,6 +16,9 @@ class MealLog extends Model
         'food',
         'quantity',
         'calories',
+        'protein',
+        'fats',
+        'carbs',
     ];
 
     // Relation: MealLog belongs to a User

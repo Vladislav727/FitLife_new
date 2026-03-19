@@ -17,13 +17,13 @@ test('authenticated users can access food tracker', function () {
     $response->assertOk();
 });
 
-test('food tracker displays list of foods', function () {
+test('food tracker displays today summary', function () {
     $user = User::factory()->create();
 
     $response = $this->actingAs($user)->get('/tracker/foods');
 
     $response->assertOk();
-    $response->assertViewHas('foods');
+    $response->assertViewHas('todaySummary');
 });
 
 test('users can calculate calories', function () {
@@ -31,10 +31,17 @@ test('users can calculate calories', function () {
 
     $response = $this->actingAs($user)
         ->withHeaders(['X-Requested-With' => 'XMLHttpRequest'])
-        ->post('/tracker/foods/calculate', [
-            'meals' => [
-                'breakfast' => [
-                    ['food' => 'Rice', 'quantity' => 200],
+        ->postJson('/tracker/foods/calculate', [
+            'items' => [
+                [
+                    'food' => 'Rice',
+                    'quantity' => 200,
+                    'meal' => 'Breakfast',
+                    'calories_per_serving' => 130,
+                    'serving_size' => 100,
+                    'protein' => 2.7,
+                    'fat' => 0.3,
+                    'carbs' => 28.2,
                 ],
             ],
         ]);
@@ -44,10 +51,10 @@ test('users can calculate calories', function () {
 
     $this->assertDatabaseHas('meal_logs', [
         'user_id' => $user->id,
-        'meal' => 'breakfast',
+        'meal' => 'Breakfast',
         'food' => 'Rice',
         'quantity' => 200,
-        'calories' => 260, // 130 per 100g * 2
+        'calories' => 260,
     ]);
 });
 
@@ -56,14 +63,37 @@ test('calories calculation for multiple foods', function () {
 
     $response = $this->actingAs($user)
         ->withHeaders(['X-Requested-With' => 'XMLHttpRequest'])
-        ->post('/tracker/foods/calculate', [
-            'meals' => [
-                'breakfast' => [
-                    ['food' => 'Rice', 'quantity' => 100],
-                    ['food' => 'Egg', 'quantity' => 100],
+        ->postJson('/tracker/foods/calculate', [
+            'items' => [
+                [
+                    'food' => 'Rice',
+                    'quantity' => 100,
+                    'meal' => 'Breakfast',
+                    'calories_per_serving' => 130,
+                    'serving_size' => 100,
+                    'protein' => 2.7,
+                    'fat' => 0.3,
+                    'carbs' => 28.2,
                 ],
-                'lunch' => [
-                    ['food' => 'Chicken breast', 'quantity' => 150],
+                [
+                    'food' => 'Egg',
+                    'quantity' => 100,
+                    'meal' => 'Breakfast',
+                    'calories_per_serving' => 155,
+                    'serving_size' => 100,
+                    'protein' => 13.0,
+                    'fat' => 11.0,
+                    'carbs' => 1.1,
+                ],
+                [
+                    'food' => 'Chicken breast',
+                    'quantity' => 150,
+                    'meal' => 'Lunch',
+                    'calories_per_serving' => 165,
+                    'serving_size' => 100,
+                    'protein' => 31.0,
+                    'fat' => 3.6,
+                    'carbs' => 0.0,
                 ],
             ],
         ]);
@@ -73,43 +103,48 @@ test('calories calculation for multiple foods', function () {
 
     $this->assertDatabaseHas('meal_logs', [
         'user_id' => $user->id,
-        'meal' => 'breakfast',
+        'meal' => 'Breakfast',
         'food' => 'Rice',
         'calories' => 130,
     ]);
 
     $this->assertDatabaseHas('meal_logs', [
         'user_id' => $user->id,
-        'meal' => 'breakfast',
+        'meal' => 'Breakfast',
         'food' => 'Egg',
         'calories' => 155,
     ]);
 
     $this->assertDatabaseHas('meal_logs', [
         'user_id' => $user->id,
-        'meal' => 'lunch',
+        'meal' => 'Lunch',
         'food' => 'Chicken breast',
     ]);
 });
 
-test('food calculation requires meals array', function () {
+test('food calculation requires items array', function () {
     $user = User::factory()->create();
 
-    $response = $this->actingAs($user)->post('/tracker/foods/calculate', []);
+    $response = $this->actingAs($user)->postJson('/tracker/foods/calculate', []);
 
-    $response->assertSessionHasErrors('meals');
+    $response->assertUnprocessable();
+    $response->assertJsonValidationErrors('items');
 });
 
 test('empty meals return error', function () {
     $user = User::factory()->create();
 
-    $response = $this->actingAs($user)->post('/tracker/foods/calculate', [
-        'meals' => [
-            'breakfast' => [],
+    $response = $this->actingAs($user)->postJson('/tracker/foods/calculate', [
+        'items' => [
+            [
+                'food' => '',
+                'quantity' => 0,
+                'meal' => 'Breakfast',
+            ],
         ],
     ]);
 
-    $response->assertJson(['success' => false]);
+    $response->assertUnprocessable();
 });
 
 test('meal logs are displayed in food tracker', function () {
@@ -117,7 +152,7 @@ test('meal logs are displayed in food tracker', function () {
 
     MealLog::create([
         'user_id' => $user->id,
-        'meal' => 'breakfast',
+        'meal' => 'Breakfast',
         'food' => 'Rice',
         'quantity' => 200,
         'calories' => 260,
@@ -135,7 +170,7 @@ test('users only see their own meal logs', function () {
 
     MealLog::create([
         'user_id' => $user1->id,
-        'meal' => 'breakfast',
+        'meal' => 'Breakfast',
         'food' => 'Rice',
         'quantity' => 200,
         'calories' => 260,
@@ -143,7 +178,7 @@ test('users only see their own meal logs', function () {
 
     MealLog::create([
         'user_id' => $user2->id,
-        'meal' => 'lunch',
+        'meal' => 'Lunch',
         'food' => 'Chicken breast',
         'quantity' => 150,
         'calories' => 248,
@@ -154,4 +189,40 @@ test('users only see their own meal logs', function () {
     $logs = $response->viewData('mealLogs');
     expect($logs->count())->toBe(1);
     expect($logs->first()->user_id)->toBe($user1->id);
+});
+
+test('users can delete their own meal log', function () {
+    $user = User::factory()->create();
+
+    $log = MealLog::create([
+        'user_id' => $user->id,
+        'meal' => 'Breakfast',
+        'food' => 'Rice',
+        'quantity' => 200,
+        'calories' => 260,
+    ]);
+
+    $response = $this->actingAs($user)->deleteJson("/tracker/foods/log/{$log->id}");
+
+    $response->assertOk();
+    $response->assertJson(['success' => true]);
+    $this->assertDatabaseMissing('meal_logs', ['id' => $log->id]);
+});
+
+test('users cannot delete other users meal log', function () {
+    $user1 = User::factory()->create();
+    $user2 = User::factory()->create();
+
+    $log = MealLog::create([
+        'user_id' => $user2->id,
+        'meal' => 'Breakfast',
+        'food' => 'Rice',
+        'quantity' => 200,
+        'calories' => 260,
+    ]);
+
+    $response = $this->actingAs($user1)->deleteJson("/tracker/foods/log/{$log->id}");
+
+    $response->assertForbidden();
+    $this->assertDatabaseHas('meal_logs', ['id' => $log->id]);
 });

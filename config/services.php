@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+    'calorieninjas' => [
+        'key' => env('CALORIENINJAS_API_KEY'),
+    ],
+
 ];

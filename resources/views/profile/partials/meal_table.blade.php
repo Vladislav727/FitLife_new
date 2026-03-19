@@ -6,12 +6,14 @@
       <th>{{ __('profile.food') }}</th>
       <th>{{ __('profile.quantity') }}</th>
       <th>{{ __('profile.calories') }}</th>
+      <th>{{ __('food.macros') }}</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     @if($mealLogs->isEmpty())
       <tr>
-        <td colspan="5" class="no-data">{{ __('profile.no_meal_history') }}</td>
+        <td colspan="7" class="no-data">{{ __('profile.no_meal_history') }}</td>
       </tr>
     @else
       @foreach($mealLogs as $log)
@@ -21,6 +23,18 @@
           <td>{{ $log->food }}</td>
           <td>{{ $log->quantity }} g/ml</td>
           <td>{{ $log->calories }} kcal</td>
+          <td>
+            <div class="mt-macros">
+              <span class="mt-macros__tag mt-macros__tag--p">P:{{ $log->protein ?? 0 }}g</span>
+              <span class="mt-macros__tag mt-macros__tag--f">F:{{ $log->fats ?? 0 }}g</span>
+              <span class="mt-macros__tag mt-macros__tag--c">C:{{ $log->carbs ?? 0 }}g</span>
+            </div>
+          </td>
+          <td>
+            <button class="mt-delete-log" data-id="{{ $log->id }}" title="{{ __('food.confirm_delete') }}">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+            </button>
+          </td>
         </tr>
       @endforeach
     @endif

@@ -60,8 +60,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Трекер еды
     Route::prefix('tracker/foods')->group(function () {
         Route::get('/', [FoodController::class, 'index'])->name('foods.index');
+        Route::post('/lookup', [FoodController::class, 'lookup'])->name('foods.lookup');
         Route::post('/calculate', [FoodController::class, 'calculate'])->name('foods.calculate');
         Route::get('/history', [FoodController::class, 'history'])->name('foods.history');
+        Route::delete('/log/{mealLog}', [FoodController::class, 'destroy'])->name('foods.destroy');
     });
 
     // Трекер сна
