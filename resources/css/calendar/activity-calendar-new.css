@@ -1,11 +1,6 @@
-/* ═══════════════════════════════════════════════════════════════════════════
-   ACTIVITY CALENDAR STYLES - FitLife v3.0
-   Modern Dark Theme with Glassmorphism
-   ═══════════════════════════════════════════════════════════════════════════ */
+/* ACTIVITY CALENDAR STYLES - FitLife v3.0 */
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   CSS VARIABLES
-   ═══════════════════════════════════════════════════════════════════════════ */
+/* CSS VARIABLES */
 .calendar-page {
     --cal-bg: var(--bg-base);
     --cal-surface: var(--bg-glass-dark);
@@ -50,18 +45,14 @@
     --cal-glow: none;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   BASE LAYOUT
-   ═══════════════════════════════════════════════════════════════════════════ */
+/* BASE LAYOUT */
 .calendar-page {
     background: var(--cal-bg);
     min-height: 100vh;
     padding: 0;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   HEADER
-   ═══════════════════════════════════════════════════════════════════════════ */
+/* HEADER */
 .calendar-header {
     padding: 1.5rem 2rem;
     border-bottom: 1px solid var(--cal-border);
@@ -164,9 +155,7 @@
     height: 18px;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   MAIN LAYOUT - 3 COLUMN
-   ═══════════════════════════════════════════════════════════════════════════ */
+/* MAIN LAYOUT - 3 COLUMN */
 .calendar-layout {
     display: grid;
     grid-template-columns: 360px 1fr 320px;
@@ -176,9 +165,7 @@
     min-height: calc(100vh - 100px);
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   LEFT SIDEBAR
-   ═══════════════════════════════════════════════════════════════════════════ */
+/* LEFT SIDEBAR */
 .calendar-sidebar {
     padding: 1.5rem;
     border-right: 1px solid var(--cal-border);
@@ -473,9 +460,7 @@
     color: var(--cal-rest);
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   MAIN CALENDAR
-   ═══════════════════════════════════════════════════════════════════════════ */
+/* MAIN CALENDAR */
 .calendar-main {
     padding: 1.5rem;
     background: var(--cal-bg);
@@ -661,9 +646,7 @@
     color: var(--cal-primary);
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   RIGHT PANEL - EVENTS
-   ═══════════════════════════════════════════════════════════════════════════ */
+/* RIGHT PANEL - EVENTS */
 .events-panel {
     padding: 1.5rem;
     border-left: 1px solid var(--cal-border);
@@ -988,9 +971,7 @@
 .upcoming-indicator.meditation { background: var(--cal-meditation); }
 .upcoming-indicator.walking { background: var(--cal-walking); }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   MODAL
-   ═══════════════════════════════════════════════════════════════════════════ */
+/* MODAL */
 .modal-overlay {
     position: fixed;
     inset: 0;
@@ -1398,9 +1379,7 @@
     margin: 0;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   TOAST NOTIFICATIONS
-   ═══════════════════════════════════════════════════════════════════════════ */
+/* TOAST NOTIFICATIONS */
 .toast-container {
     position: fixed;
     bottom: 2rem;
@@ -1480,9 +1459,7 @@
     color: var(--cal-text);
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   RESPONSIVE DESIGN
-   ═══════════════════════════════════════════════════════════════════════════ */
+/* RESPONSIVE DESIGN */
 @media (max-width: 1400px) {
     .calendar-layout {
         grid-template-columns: 260px 1fr 300px;
@@ -1655,9 +1632,7 @@
     }
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   ANIMATIONS
-   ═══════════════════════════════════════════════════════════════════════════ */
+/* ANIMATIONS */
 @keyframes pulse {
     0%, 100% { opacity: 1; }
     50% { opacity: 0.6; }

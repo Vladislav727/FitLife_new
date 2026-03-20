@@ -44,9 +44,7 @@
         ::-webkit-scrollbar-track { background: var(--bg-dark); }
         ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }
 
-        /* ═══════════════════════════════════════════════════════════════════
-           NAVIGATION
-        ═══════════════════════════════════════════════════════════════════ */
+        /* NAVIGATION */
         nav {
             position: fixed;
             top: 0;
@@ -154,9 +152,7 @@
             cursor: pointer;
         }
 
-        /* ═══════════════════════════════════════════════════════════════════
-           HERO SECTION
-        ═══════════════════════════════════════════════════════════════════ */
+        /* HERO SECTION */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -265,9 +261,7 @@
             font-size: 0.9rem;
         }
 
-        /* ═══════════════════════════════════════════════════════════════════
-           FEATURES SECTION
-        ═══════════════════════════════════════════════════════════════════ */
+        /* FEATURES SECTION */
         .features {
             padding: 6rem 2rem;
             background: var(--bg-card);
@@ -364,9 +358,7 @@
             font-size: 0.95rem;
         }
 
-        /* ═══════════════════════════════════════════════════════════════════
-           HOW IT WORKS
-        ═══════════════════════════════════════════════════════════════════ */
+        /* HOW IT WORKS */
         .how-it-works {
             padding: 6rem 2rem;
         }
@@ -413,9 +405,7 @@
             font-size: 0.95rem;
         }
 
-        /* ═══════════════════════════════════════════════════════════════════
-           TESTIMONIALS
-        ═══════════════════════════════════════════════════════════════════ */
+        /* TESTIMONIALS */
         .testimonials {
             padding: 6rem 2rem;
             background: var(--bg-card);
@@ -477,9 +467,7 @@
             font-size: 0.85rem;
         }
 
-        /* ═══════════════════════════════════════════════════════════════════
-           CTA SECTION
-        ═══════════════════════════════════════════════════════════════════ */
+        /* CTA SECTION */
         .cta {
             padding: 6rem 2rem;
             text-align: center;
@@ -518,9 +506,7 @@
             margin-bottom: 2rem;
         }
 
-        /* ═══════════════════════════════════════════════════════════════════
-           FOOTER
-        ═══════════════════════════════════════════════════════════════════ */
+        /* FOOTER */
         footer {
             padding: 4rem 2rem 2rem;
             background: var(--bg-card);
@@ -602,9 +588,7 @@
             border-color: var(--primary);
         }
 
-        /* ═══════════════════════════════════════════════════════════════════
-           RESPONSIVE
-        ═══════════════════════════════════════════════════════════════════ */
+        /* RESPONSIVE */
         @media (max-width: 1024px) {
             .footer-content {
                 grid-template-columns: 1fr 1fr;

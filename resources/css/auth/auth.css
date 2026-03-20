@@ -1,11 +1,8 @@
-/**
- * ============================================
- * FitLife - Auth Pages Styles
- * ============================================
- * Login, Register, Forgot Password, Reset Password
+/*
+ * Auth pages (login, register, password reset)
  */
 
-/* ===== AUTH LAYOUT ===== */
+/* Auth layout */
 .auth-layout {
     min-height: 100vh;
     display: flex;
@@ -22,7 +19,7 @@
     padding-top: calc(var(--header-height) + var(--spacing-8));
 }
 
-/* ===== AUTH CARD ===== */
+/* AUTH CARD */
 .auth-card {
     width: 100%;
     max-width: 440px;
@@ -81,7 +78,7 @@
     color: var(--text-secondary);
 }
 
-/* ===== AUTH FORM ===== */
+/* AUTH FORM */
 .auth-form {
     display: flex;
     flex-direction: column;
@@ -109,7 +106,7 @@
     text-decoration: underline;
 }
 
-/* ===== INPUT WITH ICON ===== */
+/* INPUT WITH ICON */
 .auth-input-wrapper {
     position: relative;
 }
@@ -151,7 +148,7 @@
     height: 20px;
 }
 
-/* ===== REMEMBER ME ===== */
+/* REMEMBER ME */
 .auth-remember {
     display: flex;
     align-items: center;
@@ -159,7 +156,7 @@
     gap: var(--spacing-4);
 }
 
-/* ===== AUTH BUTTON ===== */
+/* AUTH BUTTON */
 .auth-submit {
     width: 100%;
     height: 52px;
@@ -189,7 +186,7 @@
     transform: none;
 }
 
-/* ===== DIVIDER ===== */
+/* DIVIDER */
 .auth-divider {
     display: flex;
     align-items: center;
@@ -212,7 +209,7 @@
     letter-spacing: 0.05em;
 }
 
-/* ===== SOCIAL LOGIN ===== */
+/* SOCIAL LOGIN */
 .auth-social {
     display: flex;
     flex-direction: column;
@@ -248,7 +245,7 @@
     height: 20px;
 }
 
-/* ===== AUTH FOOTER ===== */
+/* AUTH FOOTER */
 .auth-footer {
     text-align: center;
     margin-top: var(--spacing-6);
@@ -272,7 +269,7 @@
     text-decoration: underline;
 }
 
-/* ===== ERROR MESSAGES ===== */
+/* ERROR MESSAGES */
 .auth-errors {
     background: var(--error-bg);
     border: 1px solid var(--error-border);
@@ -299,7 +296,7 @@
     content: '•';
 }
 
-/* ===== SUCCESS MESSAGE ===== */
+/* SUCCESS MESSAGE */
 .auth-success {
     background: var(--success-bg);
     border: 1px solid var(--success-border);
@@ -310,7 +307,7 @@
     color: var(--success);
 }
 
-/* ===== VERIFICATION NOTICE ===== */
+/* VERIFICATION NOTICE */
 .auth-notice {
     background: var(--info-bg);
     border: 1px solid var(--info-border);
@@ -331,7 +328,7 @@
     gap: var(--spacing-2);
 }
 
-/* ===== RESPONSIVE ===== */
+/* RESPONSIVE */
 @media (max-width: 480px) {
     .auth-card {
         padding: var(--spacing-6);
@@ -347,7 +344,7 @@
     }
 }
 
-/* ===== AUTH HEADER NAV ===== */
+/* AUTH HEADER NAV */
 .auth-navbar {
     position: fixed;
     top: 0;
@@ -403,7 +400,7 @@
     color: var(--accent);
 }
 
-/* ===== TWO COLUMN AUTH LAYOUT ===== */
+/* TWO COLUMN AUTH LAYOUT */
 @media (min-width: 1024px) {
     .auth-split {
         display: grid;

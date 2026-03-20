@@ -40,4 +40,8 @@ return [
     'water' => 'Water',
     'sleep' => 'Sleep',
     'leaderboard' => 'Leaderboard',
+    'messages' => 'Messages',
+    'chats' => 'Chats',
+    'groups' => 'Groups',
+    'notifications' => 'Notifications',
 ];

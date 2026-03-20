@@ -16,6 +16,9 @@ use App\Http\Controllers\SleepController;
 use App\Http\Controllers\WaterController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\LeaderboardController;
+use App\Http\Controllers\ConversationController;
+use App\Http\Controllers\GroupController;
+use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Route;
 
 // Главная страница
@@ -143,5 +146,45 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::patch('/{calendar}', [CalendarController::class, 'update'])->name('calendar.update');
         Route::delete('/{calendar}', [CalendarController::class, 'destroy'])->name('calendar.destroy');
         Route::get('/events', [CalendarController::class, 'getEvents'])->name('calendar.events');
+    });
+
+    // Чаты — единая страница
+    Route::get('/chats', [ConversationController::class, 'chats'])->name('chats.index');
+
+    // Личные сообщения
+    Route::prefix('conversations')->group(function () {
+        Route::get('/', [ConversationController::class, 'index'])->name('conversations.index');
+        Route::post('/start/{user}', [ConversationController::class, 'start'])->name('conversations.start');
+        Route::get('/{conversation}', [ConversationController::class, 'show'])->name('conversations.show');
+        Route::post('/{conversation}', [ConversationController::class, 'send'])->name('conversations.send');
+        Route::get('/{conversation}/poll', [ConversationController::class, 'poll'])->name('conversations.poll');
+        Route::put('/{conversation}/messages/{message}', [ConversationController::class, 'editMessage'])->name('conversations.editMessage');
+        Route::delete('/{conversation}/messages/{message}', [ConversationController::class, 'deleteMessage'])->name('conversations.deleteMessage');
+        Route::post('/{conversation}/messages/{message}/react', [ConversationController::class, 'reactMessage'])->name('conversations.reactMessage');
+    });
+
+    // Группы
+    Route::prefix('groups')->group(function () {
+        Route::get('/', [GroupController::class, 'index'])->name('groups.index');
+        Route::get('/create', [GroupController::class, 'create'])->name('groups.create');
+        Route::post('/', [GroupController::class, 'store'])->name('groups.store');
+        Route::get('/{group}', [GroupController::class, 'show'])->name('groups.show');
+        Route::post('/{group}/send', [GroupController::class, 'send'])->name('groups.send');
+        Route::get('/{group}/invite', [GroupController::class, 'invite'])->name('groups.invite');
+        Route::post('/{group}/invite', [GroupController::class, 'sendInvite'])->name('groups.sendInvite');
+        Route::post('/{group}/leave', [GroupController::class, 'leave'])->name('groups.leave');
+        Route::delete('/{group}', [GroupController::class, 'destroy'])->name('groups.destroy');
+        Route::get('/{group}/poll', [GroupController::class, 'poll'])->name('groups.poll');
+        Route::post('/{group}/avatar', [GroupController::class, 'updateAvatar'])->name('groups.avatar');
+        Route::put('/{group}/messages/{message}', [GroupController::class, 'editMessage'])->name('groups.editMessage');
+        Route::delete('/{group}/messages/{message}', [GroupController::class, 'deleteMessage'])->name('groups.deleteMessage');
+        Route::post('/{group}/messages/{message}/react', [GroupController::class, 'reactMessage'])->name('groups.reactMessage');
+    });
+
+    // Уведомления
+    Route::prefix('notifications')->group(function () {
+        Route::get('/', [NotificationController::class, 'index'])->name('notifications.index');
+        Route::post('/invite/{invite}/accept', [NotificationController::class, 'acceptInvite'])->name('notifications.invite.accept');
+        Route::post('/invite/{invite}/decline', [NotificationController::class, 'declineInvite'])->name('notifications.invite.decline');
     });
 });

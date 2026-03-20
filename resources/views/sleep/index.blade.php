@@ -16,7 +16,7 @@
             </div>
         </header>
 
-        {{-- ═══ Top Grid: Progress Ring + Quick Add ═══ --}}
+        {{-- Top Grid: Progress Ring + Quick Add --}}
         <div class="sleep-top-grid">
             {{-- Progress Ring Card --}}
             <section class="sleep-progress-card" aria-labelledby="kpi-heading">
@@ -83,7 +83,7 @@
             </section>
         </div>
 
-        {{-- ═══ Today's Sleep ═══ --}}
+        {{-- Today's Sleep --}}
         @if($todaySleeps->count() > 0)
         <section class="sleep-today-section" aria-labelledby="today-heading">
             <h3 id="today-heading">{{ __('sleep.todays_sleep') }}</h3>
@@ -101,7 +101,7 @@
         </section>
         @endif
 
-        {{-- ═══ History Table ═══ --}}
+        {{-- History Table --}}
         <section id="history-section" aria-labelledby="history-heading">
             <h3 id="history-heading">{{ __('sleep.history') }}</h3>
             @if($sleeps->isEmpty())
@@ -139,7 +139,7 @@
             @endif
         </section>
 
-        {{-- ═══ Average Card ═══ --}}
+        {{-- Average Card --}}
         @if($average)
             <section aria-labelledby="average-heading">
                 <h3 id="average-heading">{{ __('sleep.summary') }}</h3>

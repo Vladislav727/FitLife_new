@@ -34,6 +34,13 @@
                                 <button class="sp-btn sp-btn--primary">{{ __('profile.follow') }}</button>
                             @endif
                         </form>
+                        @if(Auth::user()->isMutualFollow($user))
+                            <a href="{{ route('conversations.start', $user) }}" class="sp-btn sp-btn--outline" onclick="event.preventDefault(); document.getElementById('start-dm-{{ $user->id }}').submit();">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16" style="vertical-align:middle;margin-right:4px"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                                {{ __('messages.send_message') }}
+                            </a>
+                            <form id="start-dm-{{ $user->id }}" action="{{ route('conversations.start', $user) }}" method="POST" style="display:none">@csrf</form>
+                        @endif
                     @endif
                 </div>
                 <span class="sp-username">{{ '@' . $user->username }}</span>

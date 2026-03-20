@@ -16,7 +16,7 @@
             </div>
         </header>
 
-        {{-- ═══ Top Grid: Progress + Quick Add ═══ --}}
+        {{-- Top Grid: Progress + Quick Add --}}
         <div class="water-top-grid">
             {{-- Progress Ring Card --}}
             <section class="water-progress-card" aria-labelledby="kpi-heading">
@@ -94,7 +94,7 @@
             </section>
         </div>
 
-        {{-- ═══ Today's Log ═══ --}}
+        {{-- Today's Log --}}
         @if($todayLogs->count() > 0)
         <section class="water-today-section" aria-labelledby="today-heading">
             <h3 id="today-heading">{{ __('water.today_intake') }}</h3>
@@ -112,7 +112,7 @@
         </section>
         @endif
 
-        {{-- ═══ History Table ═══ --}}
+        {{-- History Table --}}
         <section id="history-section" aria-labelledby="history-heading">
             <h3 id="history-heading">{{ __('water.hydration_history') }}</h3>
             @if($historyLogs->isEmpty())

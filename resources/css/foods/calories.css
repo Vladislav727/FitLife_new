@@ -1,7 +1,4 @@
-/* ═══════════════════════════════════════════════════════════════════════════
-   CALORIE CALCULATOR STYLES - FitLife v2.0
-   Dark Sport Theme - Yellow/Warning Accent
-   ═══════════════════════════════════════════════════════════════════════════ */
+/* CALORIE CALCULATOR STYLES - FitLife v2.0 */
 
 /* Hide mobile toggle */
 #mobile-toggle {
@@ -37,9 +34,7 @@
     margin-bottom: var(--space-4);
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   BIOGRAPHY CARD (Calculator Container)
-   ═══════════════════════════════════════════════════════════════════════════ */
+/* BIOGRAPHY CARD (Calculator Container) */
 
 .biography-card {
     background: var(--bg-surface);
@@ -64,9 +59,7 @@
     font-size: var(--text-2xl);
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   FORM LOGGING (Calculator Form)
-   ═══════════════════════════════════════════════════════════════════════════ */
+/* FORM LOGGING (Calculator Form) */
 
 .form-logging {
     display: grid;
@@ -127,9 +120,7 @@
     color: var(--text-primary);
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   CALCULATE BUTTON
-   ═══════════════════════════════════════════════════════════════════════════ */
+/* CALCULATE BUTTON */
 
 .calculate-btn {
     grid-column: 1 / -1;
@@ -165,9 +156,7 @@
     fill: var(--bg-base);
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   KPI CONTAINER (Results)
-   ═══════════════════════════════════════════════════════════════════════════ */
+/* KPI CONTAINER (Results) */
 
 .kpi-container {
     display: grid;
@@ -223,9 +212,7 @@
     background: var(--bg-elevated);
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   RESPONSIVE
-   ═══════════════════════════════════════════════════════════════════════════ */
+/* RESPONSIVE */
 
 @media (max-width: 768px) {
     .biography-card {

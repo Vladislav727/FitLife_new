@@ -1,9 +1,6 @@
-/* ═══════════════════════════════════════════════════════════════════════════
-   FITLIFE BASE COMPONENTS - Shared Utility Classes
-   Import this BEFORE page-specific CSS files so pages can extend these.
-   ═══════════════════════════════════════════════════════════════════════════ */
+/* FITLIFE BASE COMPONENTS - Shared Utility Classes */
 
-/* ── Page Header ──
+/* Page Header 
    Standard header used at the top of every page.
    Usage:
    <div class="fl-page-header">
@@ -12,8 +9,7 @@
        <h1>Title</h1>
        <p>Subtitle</p>
      </div>
-   </div>
-   ─────────────────────────────────────────────────────────────────────── */
+   </div> */
 
 .fl-page-header {
     display: flex;
@@ -72,7 +68,7 @@
     margin-top: var(--space-1);
 }
 
-/* ── Card ──
+/* Card 
    Standard card container.
    Variants: --accent, --warning, --secondary, --danger (border accents)
    Usage:
@@ -86,8 +82,7 @@
        <a class="fl-card__action">View all →</a>
      </div>
      <div class="fl-card__body">...</div>
-   </div>
-   ─────────────────────────────────────────────────────────────────────── */
+   </div> */
 
 .fl-card {
     background: var(--bg-surface);
@@ -181,14 +176,13 @@
     /* Flexible inner content container */
 }
 
-/* ── Buttons ──
+/* Buttons 
    Standard button system.
    Sizes: default (44px), --sm (36px), --lg (48px)
    Colors: --primary, --accent, --secondary, --warning, --danger, --ghost
    Usage:
    <button class="fl-btn fl-btn--primary">Save</button>
-   <button class="fl-btn fl-btn--danger fl-btn--sm">Delete</button>
-   ─────────────────────────────────────────────────────────────────────── */
+   <button class="fl-btn fl-btn--danger fl-btn--sm">Delete</button> */
 
 .fl-btn {
     display: inline-flex;
@@ -326,14 +320,13 @@
     background: var(--danger-bg);
 }
 
-/* ── Forms ──
+/* Forms 
    Standard form component system.
    Usage:
    <div class="fl-form__group">
      <label class="fl-form__label">Label</label>
      <input class="fl-form__input" type="text">
-   </div>
-   ─────────────────────────────────────────────────────────────────────── */
+   </div> */
 
 .fl-form__group {
     display: flex;
@@ -417,14 +410,13 @@
     margin-top: var(--space-1);
 }
 
-/* ── Table ──
+/* Table 
    Standard table styling.
    Usage:
    <table class="fl-table">
      <thead><tr><th>...</th></tr></thead>
      <tbody><tr><td>...</td></tr></tbody>
-   </table>
-   ─────────────────────────────────────────────────────────────────────── */
+   </table> */
 
 .fl-table {
     width: 100%;
@@ -471,11 +463,10 @@
     padding: var(--space-8);
 }
 
-/* ── Badge ──
+/* Badge 
    Inline status labels.
    Usage:
-   <span class="fl-badge fl-badge--success">Active</span>
-   ─────────────────────────────────────────────────────────────────────── */
+   <span class="fl-badge fl-badge--success">Active</span> */
 
 .fl-badge {
     display: inline-flex;
@@ -523,13 +514,12 @@
     color: var(--secondary);
 }
 
-/* ── Notification / Alert ──
+/* Notification / Alert 
    Dismissable alert bar.
    Usage:
    <div class="fl-alert fl-alert--success" role="alert">
      <span>Success message</span>
-   </div>
-   ─────────────────────────────────────────────────────────────────────── */
+   </div> */
 
 .fl-alert {
     display: none;
@@ -573,9 +563,8 @@
     color: var(--info);
 }
 
-/* ── Pagination ──
-   Standard pagination controls.
-   ─────────────────────────────────────────────────────────────────────── */
+/* Pagination 
+   Standard pagination controls. */
 
 .fl-pagination {
     display: flex;
@@ -620,9 +609,8 @@
     cursor: not-allowed;
 }
 
-/* ── Empty State ──
-   Shown when there is no data to display.
-   ─────────────────────────────────────────────────────────────────────── */
+/* Empty State 
+   Shown when there is no data to display. */
 
 .fl-empty {
     display: flex;
@@ -656,9 +644,8 @@
     max-width: 360px;
 }
 
-/* ── Result / KPI Card ──
-   Displays a highlighted value (calories, glasses, hours, etc.)
-   ─────────────────────────────────────────────────────────────────────── */
+/* Result / KPI Card 
+   Displays a highlighted value (calories, glasses, hours, etc.) */
 
 .fl-result {
     display: flex;
@@ -735,9 +722,8 @@
     color: var(--text-muted);
 }
 
-/* ── Progress Bar ──
-   Simple progress indicator.
-   ─────────────────────────────────────────────────────────────────────── */
+/* Progress Bar 
+   Simple progress indicator. */
 
 .fl-progress {
     height: 10px;
@@ -769,7 +755,7 @@
     background: linear-gradient(90deg, var(--danger), var(--danger-light));
 }
 
-/* ── Responsive utilities ── */
+/* Responsive utilities */
 
 @media (max-width: 768px) {
     .fl-page-header__icon {

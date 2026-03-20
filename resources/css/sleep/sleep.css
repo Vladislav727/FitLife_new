@@ -1,7 +1,4 @@
-/* ═══════════════════════════════════════════════════════════════════════════
-   SLEEP TRACKER STYLES - FitLife v3.0
-   Dark Sport Theme - Orange Accent
-   ═══════════════════════════════════════════════════════════════════════════ */
+/* SLEEP TRACKER STYLES - FitLife v3.0 */
 
 /* Hide mobile toggle */
 #mobile-toggle {
@@ -44,9 +41,7 @@
     border: 0;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   TOP GRID — Progress Ring + Quick Add
-   ═══════════════════════════════════════════════════════════════════════════ */
+/* TOP GRID — Progress Ring + Quick Add */
 
 .sleep-top-grid {
     display: grid;
@@ -55,7 +50,7 @@
     margin-bottom: var(--space-6);
 }
 
-/* ─── Progress Ring Card ─── */
+/* Progress Ring Card */
 .sleep-progress-card {
     background: var(--bg-surface);
     border: 1px solid var(--border-subtle);
@@ -162,7 +157,7 @@
     transition: width 0.8s ease;
 }
 
-/* ─── Quick Add Card ─── */
+/* Quick Add Card */
 .sleep-add-card {
     background: var(--bg-surface);
     border: 1px solid var(--border-subtle);
@@ -241,9 +236,7 @@
     transform: translateY(-1px);
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   TODAY'S SLEEP PILLS
-   ═══════════════════════════════════════════════════════════════════════════ */
+/* TODAY'S SLEEP PILLS */
 
 .sleep-today-section {
     margin-bottom: var(--space-6);
@@ -282,9 +275,7 @@
     color: var(--text-muted);
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   EMPTY STATE
-   ═══════════════════════════════════════════════════════════════════════════ */
+/* EMPTY STATE */
 
 .sleep-empty {
     display: flex;
@@ -310,9 +301,7 @@
     font-size: var(--text-base);
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   HISTORY TABLE
-   ═══════════════════════════════════════════════════════════════════════════ */
+/* HISTORY TABLE */
 
 .history-table {
     width: 100%;
@@ -377,9 +366,7 @@
     color: var(--danger);
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   SUMMARY CARD
-   ═══════════════════════════════════════════════════════════════════════════ */
+/* SUMMARY CARD */
 
 .sleep-summary-card {
     display: flex;
@@ -435,9 +422,7 @@
     margin-top: var(--space-1);
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   RESPONSIVE
-   ═══════════════════════════════════════════════════════════════════════════ */
+/* RESPONSIVE */
 
 @media (max-width: 768px) {
     .sleep-top-grid {

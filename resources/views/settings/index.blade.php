@@ -656,7 +656,7 @@
     }
 }
 
-/* ─── Appearance Form ─── */
+/* Appearance Form */
 .appearance-form {
     padding: 24px;
 }
@@ -793,7 +793,7 @@
     transition: color 0.2s ease;
 }
 
-/* ─── Light Theme Overrides ─── */
+/* Light Theme Overrides */
 [data-theme="light"] .sidebar-card {
     background: linear-gradient(165deg, rgba(0, 0, 0, 0.01) 0%, transparent 50%), #ffffff;
     border-color: rgba(0, 0, 0, 0.08);

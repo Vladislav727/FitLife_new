@@ -153,4 +153,25 @@ class User extends Authenticatable
     {
         return $this->role === $role;
     }
+
+    public function conversations()
+    {
+        return Conversation::where('user_one_id', $this->id)
+            ->orWhere('user_two_id', $this->id);
+    }
+
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class, 'group_members')->withPivot('role')->withTimestamps();
+    }
+
+    public function groupInvites()
+    {
+        return $this->hasMany(GroupInvite::class, 'user_id')->where('status', 'pending');
+    }
+
+    public function isMutualFollow(User $user): bool
+    {
+        return $this->isFollowing($user) && $user->isFollowing($this);
+    }
 }

@@ -108,7 +108,7 @@
         {{-- Main Sections --}}
         <main class="pe-content">
 
-            {{-- ═══ SECTION 1: Avatar & Banner ═══ --}}
+            {{-- SECTION 1: Avatar & Banner --}}
             <section id="section-avatar" class="pe-card" aria-labelledby="avatar-heading">
                 <div class="pe-card__header">
                     <div class="pe-card__header-icon">
@@ -158,7 +158,7 @@
                 </div>
             </section>
 
-            {{-- ═══ SECTION 2: Basic Information ═══ --}}
+            {{-- SECTION 2: Basic Information --}}
             <section id="section-info" class="pe-card" aria-labelledby="info-heading">
                 <div class="pe-card__header">
                     <div class="pe-card__header-icon">
@@ -266,7 +266,7 @@
                 </form>
             </section>
 
-            {{-- ═══ SECTION 3: Password Security ═══ --}}
+            {{-- SECTION 3: Password Security --}}
             <section id="section-password" class="pe-card" aria-labelledby="password-heading">
                 <div class="pe-card__header">
                     <div class="pe-card__header-icon pe-card__header-icon--accent">
@@ -355,7 +355,7 @@
                 </form>
             </section>
 
-            {{-- ═══ SECTION 4: Danger Zone ═══ --}}
+            {{-- SECTION 4: Danger Zone --}}
             <section id="section-danger" class="pe-card pe-card--danger" aria-labelledby="danger-heading">
                 <div class="pe-card__header">
                     <div class="pe-card__header-icon pe-card__header-icon--danger">

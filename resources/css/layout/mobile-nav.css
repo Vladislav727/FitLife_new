@@ -3,9 +3,7 @@
  * Bottom navigation for mobile devices
  */
 
-/* ================================
-   Mobile Bottom Nav
-   ================================ */
+/* Mobile Bottom Nav */
 .mobile-bottom-nav {
     display: none;
     position: fixed;

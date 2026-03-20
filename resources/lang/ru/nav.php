@@ -40,4 +40,8 @@ return [
     'water' => 'Вода',
     'sleep' => 'Сон',
     'leaderboard' => 'Рейтинг',
+    'messages' => 'Сообщения',
+    'chats' => 'Чаты',
+    'groups' => 'Группы',
+    'notifications' => 'Уведомления',
 ];

@@ -1,7 +1,4 @@
-/* ═══════════════════════════════════════════════════════════════════════════
-   WATER TRACKER STYLES - FitLife v3.0
-   Dark Sport Theme - Blue Accent
-   ═══════════════════════════════════════════════════════════════════════════ */
+/* WATER TRACKER STYLES - FitLife v3.0 */
 
 /* Hide mobile toggle */
 #mobile-toggle {
@@ -48,9 +45,7 @@
     border: 0;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   TOP GRID — Progress + Quick Add
-   ═══════════════════════════════════════════════════════════════════════════ */
+/* TOP GRID — Progress + Quick Add */
 
 .water-top-grid {
     display: grid;
@@ -59,7 +54,7 @@
     margin-bottom: var(--space-6);
 }
 
-/* ─── Progress Ring Card ─── */
+/* Progress Ring Card */
 .water-progress-card {
     background: var(--bg-surface);
     border: 1px solid var(--border-subtle);
@@ -166,7 +161,7 @@
     transition: width 0.8s ease;
 }
 
-/* ─── Quick Add Card ─── */
+/* Quick Add Card */
 .water-add-card {
     background: var(--bg-surface);
     border: 1px solid var(--border-subtle);
@@ -335,9 +330,7 @@
     transform: translateY(-1px);
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   TODAY'S PILLS
-   ═══════════════════════════════════════════════════════════════════════════ */
+/* TODAY'S PILLS */
 
 .water-today-section {
     margin-bottom: var(--space-6);
@@ -382,9 +375,7 @@
     color: var(--text-muted);
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   EMPTY STATE
-   ═══════════════════════════════════════════════════════════════════════════ */
+/* EMPTY STATE */
 
 .water-empty {
     display: flex;
@@ -412,9 +403,7 @@
     max-width: 280px;
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   HISTORY TABLE
-   ═══════════════════════════════════════════════════════════════════════════ */
+/* HISTORY TABLE */
 
 .history-table {
     width: 100%;
@@ -465,9 +454,7 @@
     border-radius: var(--radius-full);
 }
 
-/* ═══════════════════════════════════════════════════════════════════════════
-   RESPONSIVE
-   ═══════════════════════════════════════════════════════════════════════════ */
+/* RESPONSIVE */
 
 @media (max-width: 768px) {
     .water-top-grid {

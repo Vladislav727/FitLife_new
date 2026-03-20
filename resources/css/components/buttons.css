@@ -1,0 +1,111 @@
+/*
+ * Button styles
+ */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-5);
+    font-size: var(--text-sm);
+    font-weight: var(--font-semibold);
+    border-radius: var(--radius-md);
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+}
+
+/* Variants */
+.btn-primary {
+    background: var(--primary);
+    color: var(--bg-base);
+    font-weight: var(--font-semibold);
+}
+
+.btn-primary:hover:not(:disabled) {
+    background: var(--primary-light);
+}
+
+.btn-secondary {
+    background: var(--bg-glass-light);
+    color: var(--text-primary);
+    border: 1px solid var(--border-default);
+}
+
+.btn-secondary:hover:not(:disabled) {
+    background: var(--bg-elevated);
+    border-color: var(--primary);
+}
+
+.btn-success {
+    background: var(--success);
+    color: var(--bg-base);
+    font-weight: var(--font-semibold);
+}
+
+.btn-success:hover:not(:disabled) {
+    background: var(--success-light);
+}
+
+.btn-danger {
+    background: var(--danger);
+    color: white;
+    font-weight: var(--font-semibold);
+}
+
+.btn-danger:hover:not(:disabled) {
+    background: var(--danger-light);
+}
+
+.btn-ghost {
+    background: transparent;
+    color: var(--text-secondary);
+}
+
+.btn-ghost:hover:not(:disabled) {
+    background: var(--bg-glass-light);
+    color: var(--text-primary);
+}
+
+/* Sizes */
+.btn-sm {
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--text-xs);
+}
+
+.btn-lg {
+    padding: var(--space-4) var(--space-8);
+    font-size: var(--text-base);
+}
+
+/* Icon buttons */
+.btn-icon {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border-radius: var(--radius-full);
+}
+
+.btn-icon.btn-sm {
+    width: 32px;
+    height: 32px;
+}
+
+.btn-icon.btn-lg {
+    width: 48px;
+    height: 48px;
+}

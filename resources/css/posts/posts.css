@@ -3,9 +3,7 @@
  * Modern design matching welcome page
  */
 
-/* ================================
-   Layout
-   ================================ */
+/* Layout */
 .community-page {
     display: grid;
     grid-template-columns: 1fr 320px;
@@ -28,9 +26,7 @@
     min-width: 0;
 }
 
-/* ================================
-   Create Post Box
-   ================================ */
+/* Create Post Box */
 .create-post-box {
     background: var(--bg-glass-dark);
     border: 1px solid var(--border-default);
@@ -105,9 +101,7 @@
     height: 20px;
 }
 
-/* ================================
-   Create Post Modal/Expanded
-   ================================ */
+/* Create Post Modal/Expanded */
 .create-post-expanded {
     background: var(--bg-glass-dark);
     border: 1px solid var(--border-default);
@@ -342,9 +336,7 @@
     transform: none;
 }
 
-/* ================================
-   Sort Bar
-   ================================ */
+/* Sort Bar */
 .sort-bar {
     display: flex;
     align-items: center;
@@ -386,9 +378,7 @@
     height: 18px;
 }
 
-/* ================================
-   Post Card - Modern Style
-   ================================ */
+/* Post Card - Modern Style */
 .posts-feed {
     display: flex;
     flex-direction: column;
@@ -630,9 +620,7 @@
     color: var(--danger-light);
 }
 
-/* ================================
-   Comments Section
-   ================================ */
+/* Comments Section */
 .comments-section {
     padding: 1.25rem;
     display: none;
@@ -721,9 +709,7 @@
     gap: 0;
 }
 
-/* ================================
-   Comment Item (new design)
-   ================================ */
+/* Comment Item (new design) */
 .comment-item {
     display: flex;
     gap: 0.875rem;
@@ -1172,9 +1158,7 @@
     color: var(--text-primary);
 }
 
-/* ================================
-   Edit Post Form
-   ================================ */
+/* Edit Post Form */
 .edit-post-form {
     padding: 1rem;
     background: rgba(17, 17, 17, 0.5);
@@ -1249,9 +1233,7 @@
     color: var(--text-primary);
 }
 
-/* ================================
-   Sidebar
-   ================================ */
+/* Sidebar */
 .community-sidebar {
     display: flex;
     flex-direction: column;
@@ -1437,9 +1419,7 @@
     color: var(--text-muted);
 }
 
-/* ================================
-   Alerts
-   ================================ */
+/* Alerts */
 .alert {
     padding: 0.875rem 1rem;
     border-radius: var(--radius-sm);
@@ -1459,9 +1439,7 @@
     color: var(--danger);
 }
 
-/* ================================
-   Empty State
-   ================================ */
+/* Empty State */
 .empty-posts {
     text-align: center;
     padding: 4rem 2rem;
@@ -1500,9 +1478,7 @@
     color: var(--text-secondary);
 }
 
-/* ================================
-   Pagination
-   ================================ */
+/* Pagination */
 .pagination-wrapper {
     display: flex;
     justify-content: center;
@@ -1550,9 +1526,7 @@
     cursor: not-allowed;
 }
 
-/* ================================
-   Responsive
-   ================================ */
+/* Responsive */
 @media (max-width: 640px) {
     .post-card {
         flex-direction: column;
@@ -1581,9 +1555,7 @@
     }
 }
 
-/* ================================
-   Legacy Support (keep old classes working)
-   ================================ */
+/* Legacy Support (keep old classes working) */
 .create-post {
     background: var(--bg-glass-dark);
     border: 1px solid var(--border-default);
@@ -2067,9 +2039,7 @@
     padding: 0;
 }
 
-/* ================================
-   Comment Partial Styles (legacy)
-   ================================ */
+/* Comment Partial Styles (legacy) */
 .comment {
     padding: 0.75rem 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.04);
@@ -2304,9 +2274,7 @@
     display: inline;
 }
 
-/* ================================
-   Emoji Picker
-   ================================ */
+/* Emoji Picker */
 .emoji-picker-wrapper {
     position: relative;
 }

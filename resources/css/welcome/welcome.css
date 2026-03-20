@@ -3,18 +3,14 @@
  * Landing page for FitLife
  */
 
-/* ================================
-   Welcome Layout
-   ================================ */
+/* Welcome Layout */
 .welcome-layout {
     min-height: 100vh;
     background: var(--color-bg);
     color: var(--color-text);
 }
 
-/* ================================
-   Welcome Header/Navbar
-   ================================ */
+/* Welcome Header/Navbar */
 .welcome-header {
     position: fixed;
     top: 0;
@@ -115,9 +111,7 @@
     padding: 0.5rem;
 }
 
-/* ================================
-   Hero Section
-   ================================ */
+/* Hero Section */
 .welcome-hero {
     padding: 8rem 2rem 5rem;
     text-align: center;
@@ -195,9 +189,7 @@
     height: 20px;
 }
 
-/* ================================
-   Sections
-   ================================ */
+/* Sections */
 .welcome-section {
     padding: 5rem 2rem;
     max-width: 1200px;
@@ -223,9 +215,7 @@
     margin: 0 auto;
 }
 
-/* ================================
-   Features Section
-   ================================ */
+/* Features Section */
 .welcome-features {
     background: var(--color-bg);
 }
@@ -284,9 +274,7 @@
     line-height: 1.6;
 }
 
-/* ================================
-   Testimonials Section
-   ================================ */
+/* Testimonials Section */
 .welcome-testimonials {
     background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-surface) 100%);
 }
@@ -351,9 +339,7 @@
     color: var(--color-primary);
 }
 
-/* ================================
-   About Section
-   ================================ */
+/* About Section */
 .welcome-about {
     background: var(--color-surface);
 }
@@ -362,9 +348,7 @@
     max-width: 800px;
 }
 
-/* ================================
-   Lightbox
-   ================================ */
+/* Lightbox */
 .welcome-lightbox {
     display: none;
     position: fixed;
@@ -444,9 +428,7 @@
     right: -60px;
 }
 
-/* ================================
-   Footer
-   ================================ */
+/* Footer */
 .welcome-footer {
     background: var(--color-surface);
     border-top: 1px solid var(--color-border);
@@ -487,9 +469,7 @@
     text-decoration: underline;
 }
 
-/* ================================
-   Animations
-   ================================ */
+/* Animations */
 @keyframes welcomeSlideIn {
     from {
         transform: translateY(30px);
@@ -501,9 +481,7 @@
     }
 }
 
-/* ================================
-   Responsive Design
-   ================================ */
+/* Responsive Design */
 @media (max-width: 1024px) {
     .welcome-hero-title {
         font-size: 2.75rem;
@@ -624,9 +602,7 @@
     }
 }
 
-/* ================================
-   Accessibility
-   ================================ */
+/* Accessibility */
 @media (prefers-reduced-motion: reduce) {
     .welcome-hero-title,
     .welcome-hero-subtitle,
@@ -649,9 +625,7 @@
     }
 }
 
-/* ================================
-   Print Styles
-   ================================ */
+/* Print Styles */
 @media print {
     .welcome-header,
     .welcome-lightbox,

@@ -79,6 +79,11 @@
                     <span>{{ __('nav.leaderboard') }}</span>
                 </a>
 
+                <a href="{{ route('chats.index') }}" class="nav-item {{ request()->routeIs('chats.*') || request()->routeIs('conversations.*') || request()->routeIs('groups.*') ? 'active' : '' }}">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                    <span>{{ __('nav.chats') }}</span>
+                </a>
+
                 @if(Auth::user()->role === 'admin')
                 <a href="{{ route('admin.dashboard') }}" class="nav-item {{ request()->routeIs('admin.*') ? 'active' : '' }}">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
@@ -95,13 +100,25 @@
                 </button>
 
                 <!-- User Menu -->
+                @php
+                    $notifCount = Auth::user()->groupInvites()->count();
+                    $unreadMsgCount = \App\Models\ConversationMessage::whereHas('conversation', function($q) {
+                        $q->where('user_one_id', Auth::id())->orWhere('user_two_id', Auth::id());
+                    })->where('user_id', '!=', Auth::id())->whereNull('read_at')->count();
+                    $totalBadge = $notifCount + $unreadMsgCount;
+                @endphp
                 <div class="user-menu" id="userMenu">
                     <button class="user-menu-trigger" id="userMenuTrigger">
-                        <img 
-                            src="{{ Auth::user()->avatar ? asset('storage/' . Auth::user()->avatar) : asset('storage/logo/defaultPhoto.jpg') }}" 
-                            alt="{{ Auth::user()->name }}" 
-                            class="user-menu-avatar"
-                        >
+                        <div class="user-menu-avatar-wrap">
+                            <img 
+                                src="{{ Auth::user()->avatar ? asset('storage/' . Auth::user()->avatar) : asset('storage/logo/defaultPhoto.jpg') }}" 
+                                alt="{{ Auth::user()->name }}" 
+                                class="user-menu-avatar"
+                            >
+                            @if($totalBadge > 0)
+                                <span class="user-menu-badge">{{ $totalBadge > 99 ? '99+' : $totalBadge }}</span>
+                            @endif
+                        </div>
                         <div class="user-menu-info">
                             <div class="user-menu-name">{{ Auth::user()->name }}</div>
                         </div>
@@ -132,6 +149,13 @@
                             <a href="{{ route('settings.index') }}" class="user-dropdown-item">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>
                                 <span>{{ __('nav.settings') }}</span>
+                            </a>
+                            <a href="{{ route('notifications.index') }}" class="user-dropdown-item">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                                <span>{{ __('nav.notifications') }}</span>
+                                @if($notifCount > 0)
+                                    <span class="user-dropdown-badge">{{ $notifCount }}</span>
+                                @endif
                             </a>
                             <div class="user-dropdown-divider"></div>
                             <form method="POST" action="{{ route('logout') }}" style="margin: 0;">
@@ -211,6 +235,10 @@
                 <a href="{{ route('leaderboard.index') }}" class="mobile-menu-link {{ request()->routeIs('leaderboard.*') ? 'active' : '' }}">
                     <svg viewBox="0 -960 960 960"><path d="M160-200h160v-320H160v320Zm240 0h160v-560H400v560Zm240 0h160v-240H640v240ZM80-120v-480h240v-240h320v320h240v400H80Z"/></svg>
                     <span>{{ __('nav.leaderboard') }}</span>
+                </a>
+                <a href="{{ route('chats.index') }}" class="mobile-menu-link {{ request()->routeIs('chats.*') || request()->routeIs('conversations.*') || request()->routeIs('groups.*') ? 'active' : '' }}">
+                    <svg viewBox="0 -960 960 960"><path d="M240-400h480v-80H240v80Zm0-120h480v-80H240v80Zm0-120h480v-80H240v80ZM80-80v-720q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H240L80-80Z"/></svg>
+                    <span>{{ __('nav.chats') }}</span>
                 </a>
                 <a href="{{ route('calories.index') }}" class="mobile-menu-link {{ request()->routeIs('calories.*') ? 'active' : '' }}">
                     <svg viewBox="0 -960 960 960"><path d="M320-240h60v-80h80v-60h-80v-80h-60v80h-80v60h80v80Z"/></svg>
