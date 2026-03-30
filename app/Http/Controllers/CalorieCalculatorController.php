@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class CalorieCalculatorController extends Controller
 {
-    // Show today's calorie summary for the authenticated user
+
     public function index()
     {
         $user = Auth::user();
@@ -17,10 +17,9 @@ class CalorieCalculatorController extends Controller
         return view('calories.index', compact('user', 'todayCalories'));
     }
 
-    // Calculate daily calorie needs and macronutrients
     public function calculate(Request $request)
     {
-        // Validate input
+
         $data = $request->validate([
             'weight' => 'required|numeric|min:30|max:300',
             'height' => 'required|numeric|min:100|max:250',
@@ -29,10 +28,8 @@ class CalorieCalculatorController extends Controller
             'goal_type' => 'required|in:lose_weight,maintain,gain_weight',
         ]);
 
-        // Calculate BMR (Mifflin-St Jeor, male)
         $bmr = 10 * $data['weight'] + 6.25 * $data['height'] - 5 * $data['age'] + 5;
 
-        // Adjust for activity
         $activityFactor = match ($data['activity_level']) {
             'sedentary' => 1.2,
             'light' => 1.375,
@@ -42,14 +39,12 @@ class CalorieCalculatorController extends Controller
 
         $tdee = $bmr * $activityFactor;
 
-        // Adjust for goal
         $calories = match ($data['goal_type']) {
             'lose_weight' => $tdee - 500,
             'gain_weight' => $tdee + 500,
             default => $tdee
         };
 
-        // Macronutrients distribution
         $protein = round($data['weight'] * 1.8);
         $fat = round(($calories * 0.25) / 9);
         $carbs = round(($calories - ($protein * 4 + $fat * 9)) / 4);
@@ -62,7 +57,6 @@ class CalorieCalculatorController extends Controller
         ) + ['goal' => $data['goal_type']]);
     }
 
-    // Get total calories consumed today for a user
     private function getTodayCalories(int $userId): int
     {
         return MealLog::where('user_id', $userId)

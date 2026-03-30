@@ -1,7 +1,7 @@
 <div class="comment-item {{ $comment->parent_id ? 'is-reply' : '' }}" id="comment-{{ $comment->id }}" data-comment-id="{{ $comment->id }}">
-    <img src="{{ $comment->user->avatar ? asset('storage/' . $comment->user->avatar) : asset('storage/logo/defaultPhoto.jpg') }}" 
+    <img src="{{ $comment->user->avatar ? asset('storage/' . $comment->user->avatar) : asset('storage/logo/defaultPhoto.jpg') }}"
          alt="{{ $comment->user->name }}" class="comment-avatar">
-    
+
     <div class="comment-content">
         <div class="comment-header">
             <a href="{{ route('profile.show', $comment->user->id) }}" class="comment-author">{{ $comment->user->name }}</a>
@@ -11,12 +11,11 @@
             @endif
             <span class="comment-time">{{ $comment->created_at->diffForHumans() }}</span>
         </div>
-        
+
         <div class="comment-text" id="comment-text-{{ $comment->id }}">
             <p>{{ $comment->content }}</p>
         </div>
 
-        <!-- Edit Form -->
         <form id="edit-comment-form-{{ $comment->id }}" class="comment-edit-form" action="{{ route('comments.update', $comment) }}" method="POST" style="display: none;">
             @csrf
             @method('PUT')
@@ -65,7 +64,6 @@
             @endif
         </div>
 
-        <!-- Reply Form -->
         <form action="{{ route('posts.comment', $post) }}" method="POST" class="comment-reply-form" data-post-id="{{ $post->id }}" data-parent-id="{{ $comment->id }}" style="display: none;">
             @csrf
             <input type="hidden" name="parent_id" value="{{ $comment->id }}">
@@ -76,7 +74,6 @@
             </div>
         </form>
 
-        <!-- Nested Replies -->
         <div class="comment-replies" id="replies-{{ $comment->id }}" style="display: none;">
             @foreach($comment->replies as $reply)
                 @include('posts.partials.comment', ['comment' => $reply, 'post' => $post])

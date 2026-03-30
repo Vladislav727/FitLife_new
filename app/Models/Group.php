@@ -35,6 +35,22 @@ class Group extends Model
 
     public function hasMember(User $user): bool
     {
-        return $this->members()->where('user_id', $user->id)->exists();
+        return $this->members()->where('group_members.user_id', $user->id)->exists();
+    }
+
+    public function getMemberRole(User $user): ?string
+    {
+        return $this->members()->where('group_members.user_id', $user->id)->value('group_members.role');
+    }
+
+    public function isAdmin(User $user): bool
+    {
+        $role = $this->getMemberRole($user);
+        return in_array($role, ['owner', 'admin']);
+    }
+
+    public function pinnedMessages()
+    {
+        return $this->messages()->whereNotNull('pinned_at')->orderByDesc('pinned_at');
     }
 }

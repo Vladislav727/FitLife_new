@@ -16,7 +16,6 @@
       </div>
     </header>
 
-    {{-- Stats Bar --}}
     <div class="goals-stats">
       <div class="goals-stat-card">
         <div class="goals-stat-icon goals-stat-icon--total">
@@ -53,7 +52,6 @@
       </div>
     </div>
 
-    {{-- Section Header --}}
     <section class="goals-header-section" aria-labelledby="create-goal-heading">
       <h3 id="create-goal-heading">{{ __('goals.your_goals') }}</h3>
       <a href="{{ route('goals.create') }}" class="create-btn">
@@ -64,7 +62,6 @@
       </a>
     </section>
 
-    {{-- Goals Grid --}}
     <section aria-labelledby="goals-heading">
       <div class="goals-grid">
         @forelse($goals as $goal)

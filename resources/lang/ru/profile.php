@@ -66,7 +66,6 @@ return [
     'amount_ml' => 'Количество (мл)',
     'no_water_logs' => 'Записей о воде пока нет.',
 
-    // Страница редактирования профиля
     'edit_profile' => 'Редактирование профиля',
     'profile_picture' => 'Аватар и баннер',
     'basic_information' => 'Основная информация',
@@ -93,17 +92,14 @@ return [
     'enter_new_password' => 'Введите новый пароль',
     'confirm_new_password' => 'Подтвердите новый пароль',
 
-    // Additional
     'personal_info' => 'Личная информация',
     'physical_data' => 'Физические данные',
 
-    // User Profile Show
     'back_to_community' => 'Назад к сообществу',
     'stats' => 'Статистика',
     'posts_count' => 'Публикации',
     'friends_count' => 'Друзья',
 
-    // Социальное (подписки)
     'follow' => 'Подписаться',
     'following' => 'Подписки',
     'following_label' => 'Подписки',

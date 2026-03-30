@@ -26,7 +26,6 @@ return [
     'fri' => 'Pk',
     'sat' => 'Se',
 
-    // Activity Calendar page
     'page_title' => 'FitLife — Aktivitāšu kalendārs',
     'activity_calendar' => 'Aktivitāšu kalendārs',
     'subtitle' => 'Plānojiet treniņus un sekojiet progresam',
@@ -40,7 +39,6 @@ return [
     'filter_by_type' => 'Filtrēt pēc veida:',
     'all_events' => 'Visi notikumi',
 
-    // Event types
     'type_workout' => 'Treniņš',
     'type_rest' => 'Atpūta',
     'type_goal' => 'Mērķis',
@@ -56,10 +54,9 @@ return [
     'type_walking' => 'Pastaiga',
     'type_meditation' => 'Meditācija',    'type_custom' => 'Pielāgots',
 
-    // Custom type
     'custom_type_name' => 'Pielāgota tipa nosaukums',
     'custom_type_placeholder' => 'Ievadiet aktivitātes veidu...',
-    // New UI elements
+
     'this_month_stats' => 'Šī mēneša statistika',
     'total_events' => 'Kopā notikumi',
     'completed' => 'Pabeigti',
@@ -75,7 +72,6 @@ return [
     'delete' => 'Dzēst',
     'delete_confirm' => 'Vai tiešām vēlaties dzēst šo notikumu? Šo darbību nevar atsaukt.',
 
-    // Month names
     'january' => 'Janvāris',
     'february' => 'Februāris',
     'march' => 'Marts',

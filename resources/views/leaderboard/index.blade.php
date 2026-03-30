@@ -6,7 +6,6 @@
 <div class="lb-page">
     <h1 class="lb-heading">{{ __('leaderboard.title') }}</h1>
 
-    {{-- Tabs --}}
     <div class="lb-tabs">
         <a href="{{ route('leaderboard.index', ['tab' => 'calories']) }}"
            class="lb-tab {{ $tab === 'calories' ? 'active' : '' }}">
@@ -30,7 +29,6 @@
         </a>
     </div>
 
-    {{-- Leaderboard Table --}}
     @php
         $items = match($tab) {
             'water' => $topWater,

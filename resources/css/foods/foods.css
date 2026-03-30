@@ -1,6 +1,4 @@
-/* MEAL TRACKER - FitLife v3.0 */
 
-/* Page Layout */
 .mt-page {
     max-width: 960px;
     margin: 0 auto;
@@ -10,7 +8,6 @@
     gap: var(--space-6);
 }
 
-/* Page Header */
 .mt-header {
     display: flex;
     align-items: center;
@@ -44,7 +41,6 @@
     margin-top: var(--space-1);
 }
 
-/* Notification */
 .mt-notification {
     padding: var(--space-4);
     border-radius: var(--radius-lg);
@@ -67,7 +63,6 @@
     color: var(--danger);
 }
 
-/* Card */
 .mt-card {
     background: var(--bg-surface);
     border: 1px solid var(--border-subtle);
@@ -114,7 +109,6 @@
     margin-top: 2px;
 }
 
-/* Today's Summary Grid */
 .mt-summary-section {
     border-color: rgba(245, 158, 11, 0.25);
     background: linear-gradient(135deg, var(--bg-surface) 0%, rgba(245, 158, 11, 0.04) 100%);
@@ -172,7 +166,6 @@
     letter-spacing: 0.05em;
 }
 
-/* Meal Tab Selector */
 .mt-meal-selector {
     display: flex;
     gap: var(--space-2);
@@ -222,7 +215,6 @@
 .mt-meal-tab__icon--dinner { background: rgba(99, 102, 241, 0.12); color: #6366f1; }
 .mt-meal-tab__icon--snack { background: rgba(245, 158, 11, 0.12); color: #f59e0b; }
 
-/* Food Form */
 .mt-food-form {
     display: flex;
     flex-direction: column;
@@ -235,7 +227,6 @@
     margin-top: var(--space-2);
 }
 
-/* Food Items List */
 .mt-items-list {
     display: flex;
     flex-direction: column;
@@ -269,7 +260,6 @@
     min-width: 0;
 }
 
-/* Inputs */
 .mt-input {
     padding: var(--space-3);
     background: var(--bg-base);
@@ -305,7 +295,6 @@
     flex-shrink: 0;
 }
 
-/* Lookup Button */
 .mt-lookup-btn {
     width: 40px;
     height: 40px;
@@ -328,7 +317,6 @@
     color: var(--bg-base);
 }
 
-/* Suggestions Dropdown */
 .mt-suggestions {
     position: absolute;
     top: 100%;
@@ -388,7 +376,6 @@
     color: var(--warning);
 }
 
-/* Food Info Tags */
 .mt-food-item__info {
     display: flex;
     gap: var(--space-2);
@@ -432,7 +419,6 @@
     font-weight: var(--font-bold);
 }
 
-/* Remove Button */
 .mt-remove-btn {
     width: 28px;
     height: 28px;
@@ -455,7 +441,6 @@
     color: white;
 }
 
-/* Add Food Button */
 .mt-add-btn {
     display: flex;
     align-items: center;
@@ -479,14 +464,12 @@
     background: rgba(245, 158, 11, 0.06);
 }
 
-/* Error Message */
 .error-message {
     font-size: var(--text-xs);
     color: var(--danger);
     margin-top: var(--space-2);
 }
 
-/* Primary Button */
 .mt-btn {
     display: inline-flex;
     align-items: center;
@@ -524,7 +507,6 @@
     box-shadow: none;
 }
 
-/* Delete Log Button */
 .mt-delete-log {
     width: 28px;
     height: 28px;
@@ -546,7 +528,6 @@
     color: white;
 }
 
-/* History Table */
 .history-table {
     width: 100%;
     border-collapse: separate;
@@ -592,7 +573,6 @@
     padding: var(--space-8);
 }
 
-/* Macros Column */
 .mt-macros {
     display: flex;
     gap: var(--space-1);
@@ -612,7 +592,6 @@
 .mt-macros__tag--f { background: rgba(239, 68, 68, 0.12); color: #ef4444; }
 .mt-macros__tag--c { background: rgba(34, 197, 94, 0.12); color: #22c55e; }
 
-/* Pagination */
 .pagination {
     display: flex;
     justify-content: center;
@@ -656,7 +635,6 @@
     cursor: not-allowed;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .mt-page {
         padding: var(--space-4) var(--space-3) var(--space-10);

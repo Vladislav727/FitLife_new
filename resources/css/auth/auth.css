@@ -1,8 +1,4 @@
-/*
- * Auth pages (login, register, password reset)
- */
 
-/* Auth layout */
 .auth-layout {
     min-height: 100vh;
     display: flex;
@@ -19,7 +15,6 @@
     padding-top: calc(var(--header-height) + var(--spacing-8));
 }
 
-/* AUTH CARD */
 .auth-card {
     width: 100%;
     max-width: 440px;
@@ -78,7 +73,6 @@
     color: var(--text-secondary);
 }
 
-/* AUTH FORM */
 .auth-form {
     display: flex;
     flex-direction: column;
@@ -106,7 +100,6 @@
     text-decoration: underline;
 }
 
-/* INPUT WITH ICON */
 .auth-input-wrapper {
     position: relative;
 }
@@ -148,7 +141,6 @@
     height: 20px;
 }
 
-/* REMEMBER ME */
 .auth-remember {
     display: flex;
     align-items: center;
@@ -156,7 +148,6 @@
     gap: var(--spacing-4);
 }
 
-/* AUTH BUTTON */
 .auth-submit {
     width: 100%;
     height: 52px;
@@ -186,7 +177,6 @@
     transform: none;
 }
 
-/* DIVIDER */
 .auth-divider {
     display: flex;
     align-items: center;
@@ -209,7 +199,6 @@
     letter-spacing: 0.05em;
 }
 
-/* SOCIAL LOGIN */
 .auth-social {
     display: flex;
     flex-direction: column;
@@ -245,7 +234,6 @@
     height: 20px;
 }
 
-/* AUTH FOOTER */
 .auth-footer {
     text-align: center;
     margin-top: var(--spacing-6);
@@ -269,7 +257,6 @@
     text-decoration: underline;
 }
 
-/* ERROR MESSAGES */
 .auth-errors {
     background: var(--error-bg);
     border: 1px solid var(--error-border);
@@ -296,7 +283,6 @@
     content: '•';
 }
 
-/* SUCCESS MESSAGE */
 .auth-success {
     background: var(--success-bg);
     border: 1px solid var(--success-border);
@@ -307,7 +293,6 @@
     color: var(--success);
 }
 
-/* VERIFICATION NOTICE */
 .auth-notice {
     background: var(--info-bg);
     border: 1px solid var(--info-border);
@@ -328,23 +313,21 @@
     gap: var(--spacing-2);
 }
 
-/* RESPONSIVE */
 @media (max-width: 480px) {
     .auth-card {
         padding: var(--spacing-6);
         border-radius: var(--radius-xl);
     }
-    
+
     .auth-title {
         font-size: var(--text-xl);
     }
-    
+
     .auth-social {
         flex-direction: column;
     }
 }
 
-/* AUTH HEADER NAV */
 .auth-navbar {
     position: fixed;
     top: 0;
@@ -400,14 +383,13 @@
     color: var(--accent);
 }
 
-/* TWO COLUMN AUTH LAYOUT */
 @media (min-width: 1024px) {
     .auth-split {
         display: grid;
         grid-template-columns: 1fr 1fr;
         min-height: 100vh;
     }
-    
+
     .auth-split-left {
         display: flex;
         align-items: center;
@@ -415,7 +397,7 @@
         padding: var(--spacing-8);
         background: var(--bg-secondary);
     }
-    
+
     .auth-split-right {
         display: flex;
         flex-direction: column;
@@ -426,7 +408,7 @@
         position: relative;
         overflow: hidden;
     }
-    
+
     .auth-split-right::before {
         content: '';
         position: absolute;
@@ -436,12 +418,12 @@
         height: 4px;
         background: var(--gradient-accent);
     }
-    
+
     .auth-hero {
         max-width: 480px;
         text-align: center;
     }
-    
+
     .auth-hero-icon {
         width: 120px;
         height: 120px;
@@ -453,26 +435,26 @@
         justify-content: center;
         box-shadow: var(--shadow-accent-lg);
     }
-    
+
     .auth-hero-icon svg {
         width: 64px;
         height: 64px;
         color: var(--text-inverse);
     }
-    
+
     .auth-hero-title {
         font-size: var(--text-3xl);
         font-weight: var(--font-bold);
         color: var(--text-primary);
         margin-bottom: var(--spacing-4);
     }
-    
+
     .auth-hero-description {
         font-size: var(--text-lg);
         color: var(--text-secondary);
         line-height: var(--leading-relaxed);
     }
-    
+
     .auth-hero-features {
         margin-top: var(--spacing-8);
         display: flex;
@@ -480,13 +462,13 @@
         gap: var(--spacing-4);
         text-align: left;
     }
-    
+
     .auth-hero-feature {
         display: flex;
         align-items: center;
         gap: var(--spacing-3);
     }
-    
+
     .auth-hero-feature-icon {
         width: 32px;
         height: 32px;
@@ -498,12 +480,12 @@
         color: var(--accent);
         flex-shrink: 0;
     }
-    
+
     .auth-hero-feature-icon svg {
         width: 16px;
         height: 16px;
     }
-    
+
     .auth-hero-feature-text {
         font-size: var(--text-sm);
         color: var(--text-secondary);

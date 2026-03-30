@@ -1,29 +1,24 @@
 <?php
 
 return [
-    // Page title
+
     'page_title' => 'FitLife - Your Path to Wellness',
 
-    // Navigation
     'nav_features' => 'Features',
     'nav_testimonials' => 'Testimonials',
     'nav_about' => 'About',
 
-    // Auth buttons
     'dashboard' => 'Dashboard',
     'log_in' => 'Log In',
     'sign_up' => 'Sign Up',
 
-    // Hero section
     'hero_title' => 'Transform Your Life with FitLife',
     'hero_subtitle' => 'Discover a smarter way to achieve your fitness goals with our all-in-one platform.',
     'hero_hidden_title' => 'Welcome',
 
-    // Features section
     'features_title' => 'Why FitLife?',
     'features_subtitle' => 'Tools designed for real results.',
 
-    // Feature cards
     'feature_workouts_title' => 'Personalized Workouts',
     'feature_workouts_desc' => 'Create custom workout plans tailored to your goals. Access tutorials and sync with wearables.',
     'feature_workouts_alt' => 'Person lifting weights',
@@ -48,7 +43,6 @@ return [
     'feature_goals_desc' => 'Set and track fitness goals with personalized updates.',
     'feature_goals_alt' => 'Mindfulness meditation',
 
-    // Testimonials section
     'testimonials_title' => 'What Our Users Say',
     'testimonials_subtitle' => 'Real stories from FitLife users.',
 
@@ -61,11 +55,9 @@ return [
     'testimonial_3_text' => '"Better sleep improved my workouts."',
     'testimonial_3_author' => '- Lisa M.',
 
-    // About section
     'about_title' => 'About FitLife',
     'about_text' => 'Since 2020, FitLife has empowered millions to live healthier lives.',
 
-    // Footer
     'footer_copyright' => '© :year FitLife. All rights reserved.',
     'footer_privacy' => 'Privacy Policy',
     'footer_terms' => 'Terms of Service',

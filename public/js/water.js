@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // Mobile sidebar toggle
+
   const mobileToggle = document.getElementById('mobile-toggle');
   const sidebar = document.getElementById('sidebar');
 
@@ -18,20 +18,17 @@ document.addEventListener("DOMContentLoaded", function () {
   if (mobileToggle && sidebar) {
     mobileToggle.addEventListener('click', toggleSidebar);
 
-    // Close sidebar when clicking outside
     document.addEventListener('click', e => {
       if (!sidebar.contains(e.target) && !mobileToggle.contains(e.target)) {
         closeSidebar();
       }
     });
 
-    // Close sidebar on Escape key
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') closeSidebar();
     });
   }
 
-  // Animated count-up numbers
   const countUps = document.querySelectorAll('.count-up');
   countUps.forEach(val => {
     const target = parseFloat(val.dataset.target || 0);

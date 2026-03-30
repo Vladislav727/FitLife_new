@@ -19,7 +19,6 @@ return [
     'previous' => 'Previous',
     'next' => 'Next',
 
-    // Additional
     'total_photos' => 'Total Photos',
     'choose_file' => 'Choose file or drag & drop',
 ];

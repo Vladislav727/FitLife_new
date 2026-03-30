@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class WaterController extends Controller
 {
-    // Show water intake history
+
     public function index()
     {
         $todayLogs = WaterLog::where('user_id', Auth::id())
@@ -27,7 +27,6 @@ class WaterController extends Controller
         return view('water.index', compact('todayLogs', 'historyLogs', 'todayTotal', 'dailyGoal'));
     }
 
-    // Store new water intake
     public function store(Request $request)
     {
         $request->validate([

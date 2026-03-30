@@ -148,7 +148,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: 
+            background:
                 radial-gradient(circle at 30% 30%, var(--primary-glow) 0%, transparent 50%),
                 radial-gradient(circle at 70% 70%, rgba(6, 182, 212, 0.2) 0%, transparent 50%);
             pointer-events: none;
@@ -395,7 +395,7 @@
     </style>
 </head>
 <body>
-    <!-- Navigation -->
+
     <nav>
         <a href="/" class="logo">
             <div class="logo-icon">F</div>
@@ -408,17 +408,15 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <div class="auth-container">
         <div class="auth-card">
-            <!-- Header -->
+
             <div class="auth-header">
                 <div class="auth-icon">F</div>
                 <h1><span class="gradient">{{ __('auth.create_account') }}</span></h1>
                 <p>{{ __('auth.register_subtitle') }}</p>
             </div>
 
-            <!-- Errors -->
             @if ($errors->any())
                 <div class="alert alert-error">
                     <ul>
@@ -429,11 +427,9 @@
                 </div>
             @endif
 
-            <!-- Form -->
             <form method="POST" action="{{ route('register') }}">
                 @csrf
 
-                <!-- Name -->
                 <div class="form-group">
                     <label for="name" class="form-label">{{ __('auth.name') }}</label>
                     <div class="input-wrapper">
@@ -441,20 +437,19 @@
                             <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
                             <circle cx="12" cy="7" r="4"/>
                         </svg>
-                        <input 
-                            type="text" 
-                            id="name" 
-                            name="name" 
-                            value="{{ old('name') }}" 
-                            class="form-input @error('name') is-error @enderror" 
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            value="{{ old('name') }}"
+                            class="form-input @error('name') is-error @enderror"
                             placeholder="{{ __('auth.name') }}"
-                            required 
+                            required
                             autofocus
                         >
                     </div>
                 </div>
 
-                <!-- Username -->
                 <div class="form-group">
                     <label for="username" class="form-label">{{ __('auth.username') }}</label>
                     <div class="input-wrapper">
@@ -462,19 +457,18 @@
                             <circle cx="12" cy="12" r="4"/>
                             <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"/>
                         </svg>
-                        <input 
-                            type="text" 
-                            id="username" 
-                            name="username" 
-                            value="{{ old('username') }}" 
-                            class="form-input @error('username') is-error @enderror" 
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            value="{{ old('username') }}"
+                            class="form-input @error('username') is-error @enderror"
                             placeholder="{{ __('auth.username') }}"
                             required
                         >
                     </div>
                 </div>
 
-                <!-- Email -->
                 <div class="form-group">
                     <label for="email" class="form-label">{{ __('auth.email') }}</label>
                     <div class="input-wrapper">
@@ -482,19 +476,18 @@
                             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                             <polyline points="22,6 12,13 2,6"/>
                         </svg>
-                        <input 
-                            type="email" 
-                            id="email" 
-                            name="email" 
-                            value="{{ old('email') }}" 
-                            class="form-input @error('email') is-error @enderror" 
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            value="{{ old('email') }}"
+                            class="form-input @error('email') is-error @enderror"
                             placeholder="{{ __('auth.email') }}"
                             required
                         >
                     </div>
                 </div>
 
-                <!-- Password -->
                 <div class="form-group">
                     <label for="password" class="form-label">{{ __('auth.password') }}</label>
                     <div class="input-wrapper">
@@ -502,11 +495,11 @@
                             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
                             <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
                         </svg>
-                        <input 
-                            type="password" 
-                            id="password" 
-                            name="password" 
-                            class="form-input @error('password') is-error @enderror" 
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            class="form-input @error('password') is-error @enderror"
                             placeholder="{{ __('auth.password') }}"
                             required
                         >
@@ -519,7 +512,6 @@
                     </div>
                 </div>
 
-                <!-- Confirm Password -->
                 <div class="form-group">
                     <label for="password_confirmation" class="form-label">{{ __('auth.confirm_password') }}</label>
                     <div class="input-wrapper">
@@ -527,11 +519,11 @@
                             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
                             <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
                         </svg>
-                        <input 
-                            type="password" 
-                            id="password_confirmation" 
-                            name="password_confirmation" 
-                            class="form-input" 
+                        <input
+                            type="password"
+                            id="password_confirmation"
+                            name="password_confirmation"
+                            class="form-input"
                             placeholder="{{ __('auth.confirm_password') }}"
                             required
                         >
@@ -544,7 +536,6 @@
                     </div>
                 </div>
 
-                <!-- Terms -->
                 <div class="form-group">
                     <label class="checkbox-label">
                         <input type="checkbox" name="terms" class="checkbox-input" required>
@@ -552,13 +543,11 @@
                     </label>
                 </div>
 
-                <!-- Submit -->
                 <button type="submit" class="submit-btn">
                     {{ __('auth.register') }}
                 </button>
             </form>
 
-            <!-- Footer -->
             <div class="auth-footer">
                 <span>{{ __('auth.have_account') }}</span>
                 <a href="{{ route('login') }}">{{ __('auth.login') }}</a>

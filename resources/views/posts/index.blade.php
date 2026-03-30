@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="community-page">
-    <!-- Main Content -->
+
     <div class="community-main">
         @if (session('success'))
             <script>document.addEventListener('DOMContentLoaded', () => window.toast?.success('{{ session('success') }}'));</script>
@@ -11,26 +11,25 @@
             <script>document.addEventListener('DOMContentLoaded', () => window.toast?.error('{{ session('error') }}'));</script>
         @endif
 
-        <!-- Create Post Section -->
         <section class="create-post">
             <form id="post-form" action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @error('content') <script>document.addEventListener('DOMContentLoaded', () => window.toast?.error('{{ $message }}'));</script> @enderror
                 @error('photo') <script>document.addEventListener('DOMContentLoaded', () => window.toast?.error('{{ $message }}'));</script> @enderror
                 @error('video') <script>document.addEventListener('DOMContentLoaded', () => window.toast?.error('{{ $message }}'));</script> @enderror
-                
+
                 <div class="create-post-header">
-                    <img src="{{ Auth::user()->avatar ? asset('storage/' . Auth::user()->avatar) : asset('storage/logo/defaultPhoto.jpg') }}" 
+                    <img src="{{ Auth::user()->avatar ? asset('storage/' . Auth::user()->avatar) : asset('storage/logo/defaultPhoto.jpg') }}"
                          alt="{{ Auth::user()->name }}" class="create-post-avatar">
                     <textarea name="content" placeholder="{{ __('posts.whats_on_your_mind') }}" rows="3" maxlength="1000"></textarea>
                 </div>
-                
+
                 <div class="preview-container" style="display: none;">
                     <img id="image-preview" alt="{{ __('posts.image_preview') }}" style="display: none;" />
                     <video id="video-preview" controls style="display: none;"></video>
                     <button id="remove-media" type="button" style="display: none;">×</button>
                 </div>
-                
+
                 <div class="create-footer">
                     <div class="left-controls">
                         <label class="file-label" title="{{ __('posts.attach_photo') }}">
@@ -80,7 +79,6 @@
             </form>
         </section>
 
-        <!-- Sort Bar -->
         <div class="sort-bar">
             <button class="sort-btn active">
                 <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
@@ -96,11 +94,10 @@
             </button>
         </div>
 
-        <!-- Posts Feed -->
         <section class="posts-feed">
             @forelse($posts as $post)
             <article class="post-card" id="post-{{ $post->id }}" data-post-id="{{ $post->id }}">
-                <!-- Vote Column -->
+
                 <div class="post-votes">
                     <button class="vote-btn upvote {{ Auth::check() && $post->isLikedBy(Auth::id()) ? 'active' : '' }}" data-post-id="{{ $post->id }}">
                         <svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
@@ -111,10 +108,9 @@
                     </button>
                 </div>
 
-                <!-- Post Content -->
                 <div class="post-content">
                     <div class="post-meta">
-                        <img src="{{ $post->user->avatar ? asset('storage/' . $post->user->avatar) : asset('storage/logo/defaultPhoto.jpg') }}" 
+                        <img src="{{ $post->user->avatar ? asset('storage/' . $post->user->avatar) : asset('storage/logo/defaultPhoto.jpg') }}"
                              alt="{{ $post->user->name }}" class="post-author-avatar">
                         <a href="{{ route('profile.show', $post->user->id) }}" class="post-author">{{ $post->user->name }}</a>
                         <span class="post-dot">•</span>
@@ -137,7 +133,6 @@
                         </div>
                     @endif
 
-                    <!-- Post Actions -->
                     <div class="post-actions">
                         <button class="post-action comments comment-toggle" data-post-id="{{ $post->id }}" data-count="{{ $post->allComments()->count() }}">
                             <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
@@ -169,7 +164,6 @@
                         @endcan
                     </div>
 
-                    <!-- Edit Post Form (hidden) -->
                     <form id="edit-post-form-{{ $post->id }}" action="{{ route('posts.update', $post) }}" method="POST" enctype="multipart/form-data" class="edit-post-form">
                         @csrf
                         @method('PUT')
@@ -203,11 +197,10 @@
                         </div>
                     </form>
 
-                    <!-- Comments Section -->
                     <div class="comments-section" id="comments-{{ $post->id }}" style="display: none;">
                         <form action="{{ route('posts.comment', $post) }}" method="POST" class="comment-form" data-post-id="{{ $post->id }}">
                             @csrf
-                            <img src="{{ Auth::user()->avatar ? asset('storage/' . Auth::user()->avatar) : asset('storage/logo/defaultPhoto.jpg') }}" 
+                            <img src="{{ Auth::user()->avatar ? asset('storage/' . Auth::user()->avatar) : asset('storage/logo/defaultPhoto.jpg') }}"
                                  alt="{{ Auth::user()->name }}" class="comment-form-avatar">
                             <div class="comment-form-input">
                                 <textarea name="content" placeholder="{{ __('posts.write_comment') }}" maxlength="500"></textarea>
@@ -235,21 +228,19 @@
             @endforelse
         </section>
 
-        <!-- Pagination -->
         <div class="pagination-wrapper">
             {{ $posts->links() }}
         </div>
     </div>
 
-    <!-- Sidebar -->
     <aside class="community-sidebar">
-        <!-- About Community -->
+
         <div class="sidebar-card">
             <div class="sidebar-card-header">About Community</div>
             <div class="sidebar-card-body">
                 <h3 class="sidebar-card-title">FitLife Community</h3>
                 <p class="sidebar-card-desc">Share your fitness journey, get motivated, and connect with others who share your passion for health and wellness.</p>
-                
+
                 <div class="sidebar-stats">
                     <div class="sidebar-stat">
                         <div class="sidebar-stat-value">{{ \App\Models\User::count() }}</div>
@@ -260,7 +251,7 @@
                         <div class="sidebar-stat-label">Posts</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-created">
                     <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20a2 2 0 002 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11zM9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm-8 4H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/></svg>
                     <span>Created Jan 2024</span>
@@ -268,7 +259,6 @@
             </div>
         </div>
 
-        <!-- Community Rules -->
         <div class="sidebar-card">
             <div class="sidebar-card-header">Community Rules</div>
             <div class="sidebar-card-body">
@@ -297,7 +287,6 @@
             </div>
         </div>
 
-        <!-- Top Contributors -->
         <div class="sidebar-card">
             <div class="sidebar-card-header">Top Contributors</div>
             <div class="sidebar-card-body">
@@ -311,7 +300,7 @@
                     @foreach($topUsers as $index => $user)
                         <a href="{{ route('profile.show', $user->id) }}" class="top-user">
                             <span class="top-user-rank {{ $index === 0 ? 'gold' : ($index === 1 ? 'silver' : ($index === 2 ? 'bronze' : '')) }}">{{ $index + 1 }}</span>
-                            <img src="{{ $user->avatar ? asset('storage/' . $user->avatar) : asset('storage/logo/defaultPhoto.jpg') }}" 
+                            <img src="{{ $user->avatar ? asset('storage/' . $user->avatar) : asset('storage/logo/defaultPhoto.jpg') }}"
                                  alt="{{ $user->name }}" class="top-user-avatar">
                             <div class="top-user-info">
                                 <div class="top-user-name">{{ $user->name }}</div>

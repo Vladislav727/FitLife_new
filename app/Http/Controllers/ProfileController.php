@@ -60,13 +60,12 @@ class ProfileController extends Controller
 
         $user->update($data);
 
-        // ✅ Исправленный редирект и статус
         return redirect('/profile')->with('status', 'profile-updated');
     }
 
     public function updatePassword(Request $request)
     {
-        // Rate limiting: максимум 5 попыток в минуту
+
         $key = 'password_update_'.Auth::id();
         if (\Illuminate\Support\Facades\RateLimiter::tooManyAttempts($key, 5)) {
             $seconds = \Illuminate\Support\Facades\RateLimiter::availableIn($key);

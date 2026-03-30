@@ -15,7 +15,6 @@ abstract class TestCase extends BaseTestCase
 
         $this->withoutVite();
 
-        // Прогоняем миграции перед каждым тестом
         $this->artisan('migrate');
     }
 }

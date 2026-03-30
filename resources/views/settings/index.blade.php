@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="settings-page">
-    {{-- Back Button --}}
+
     <a href="{{ route('profile.edit') }}" class="back-link">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M19 12H5M12 19l-7-7 7-7"/>
@@ -12,13 +12,11 @@
         {{ __('settings.back_to_profile') }}
     </a>
 
-    {{-- Page Header --}}
     <div class="settings-header">
         <h1>{{ __('settings.title') }}</h1>
         <p>{{ __('settings.subtitle') }}</p>
     </div>
 
-    {{-- Success Alert --}}
     @if(session('success'))
         <div class="settings-alert success">
             <div class="alert-icon">
@@ -30,9 +28,8 @@
         </div>
     @endif
 
-    {{-- Settings Layout --}}
     <div class="settings-layout">
-        {{-- Sidebar --}}
+
         <aside class="settings-sidebar">
             <div class="sidebar-card">
                 <div class="sidebar-section">
@@ -95,9 +92,8 @@
             </div>
         </aside>
 
-        {{-- Main Content --}}
         <main class="settings-content">
-            {{-- Language Tab --}}
+
             <div class="content-card settings-tab" id="tab-language">
                 <div class="card-header">
                     <div class="header-icon">
@@ -150,7 +146,6 @@
                 </form>
             </div>
 
-            {{-- Appearance Tab --}}
             <div class="content-card settings-tab" id="tab-appearance" style="display: none;">
                 <div class="card-header">
                     <div class="header-icon">

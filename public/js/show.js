@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const formData = new FormData(form);
             const token = form.querySelector('input[name="_token"]').value;
 
-            // Remove any existing error messages
             const existingError = form.closest('.friend-actions').querySelector('.friend-error');
             if (existingError) existingError.remove();
 
@@ -33,7 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const friendActions = form.closest('.friend-actions');
 
-                // Update UI based on action
                 if (data.action === 'request_sent') {
                     friendActions.innerHTML = `
                         <span class="friend-status">Friend request sent</span>

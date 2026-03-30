@@ -1,12 +1,9 @@
-/* ADMIN STYLES - FitLife v2.0 */
 
-/* Admin Layout */
 .admin-container {
     min-height: 100vh;
     background: var(--bg-base);
 }
 
-/* Admin Header */
 .admin-header {
     background: var(--bg-surface);
     border-bottom: 1px solid var(--border-subtle);
@@ -80,7 +77,6 @@
     color: var(--text-primary);
 }
 
-/* Admin Main Content */
 .admin-main {
     padding: var(--space-6);
     max-width: 1400px;
@@ -103,7 +99,6 @@
     font-size: var(--text-base);
 }
 
-/* Stats Cards */
 .admin-stats {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -184,7 +179,6 @@
     color: var(--danger);
 }
 
-/* Admin Cards */
 .admin-card {
     background: var(--bg-surface);
     border: 1px solid var(--border-subtle);
@@ -211,7 +205,6 @@
     gap: var(--space-2);
 }
 
-/* Admin Tables */
 .admin-table-container {
     overflow-x: auto;
 }
@@ -272,7 +265,6 @@
     color: var(--text-muted);
 }
 
-/* Status Badges */
 .status-badge {
     display: inline-flex;
     align-items: center;
@@ -302,7 +294,6 @@
     color: var(--warning);
 }
 
-/* Role Badges */
 .role-badge {
     display: inline-flex;
     align-items: center;
@@ -322,7 +313,6 @@
     color: var(--text-muted);
 }
 
-/* Action Buttons */
 .action-btn {
     width: 32px;
     height: 32px;
@@ -348,7 +338,6 @@
     color: var(--danger);
 }
 
-/* Search & Filters */
 .admin-filters {
     display: flex;
     gap: var(--space-4);
@@ -403,7 +392,6 @@
     border-color: var(--primary);
 }
 
-/* Pagination */
 .admin-pagination {
     display: flex;
     justify-content: space-between;
@@ -454,7 +442,6 @@
     color: var(--bg-base);
 }
 
-/* Add Button */
 .btn-add {
     display: inline-flex;
     align-items: center;
@@ -473,8 +460,6 @@
 .btn-add:hover {
     background: var(--primary-light);
 }
-
-/* ADMIN SECTIONS (Statistics, Charts) */
 
 .admin-title {
     font-size: var(--text-2xl);
@@ -530,14 +515,12 @@
     max-height: 350px;
 }
 
-/* RESPONSIVE */
-
 @media (max-width: 1024px) {
     .admin-header {
         flex-wrap: wrap;
         gap: var(--space-4);
     }
-    
+
     .admin-nav {
         order: 3;
         width: 100%;
@@ -549,23 +532,23 @@
     .admin-main {
         padding: var(--space-4);
     }
-    
+
     .admin-stats {
         grid-template-columns: 1fr;
     }
-    
+
     .admin-filters {
         flex-direction: column;
     }
-    
+
     .search-input {
         max-width: none;
     }
-    
+
     .admin-table {
         font-size: var(--text-xs);
     }
-    
+
     .admin-table th,
     .admin-table td {
         padding: var(--space-3);

@@ -66,7 +66,6 @@ return [
     'amount_ml' => 'Amount (ml)',
     'no_water_logs' => 'No water logs yet.',
 
-    // Profile Edit Page
     'edit_profile' => 'Edit Profile',
     'profile_picture' => 'Avatar & Banner',
     'basic_information' => 'Basic Information',
@@ -93,17 +92,14 @@ return [
     'enter_new_password' => 'Enter new password',
     'confirm_new_password' => 'Confirm new password',
 
-    // Additional
     'personal_info' => 'Personal Information',
     'physical_data' => 'Physical Data',
 
-    // User Profile Show
     'back_to_community' => 'Back to Community',
     'stats' => 'Stats',
     'posts_count' => 'Posts',
     'friends_count' => 'Friends',
 
-    // Social (follow)
     'follow' => 'Follow',
     'following' => 'Following',
     'following_label' => 'Following',

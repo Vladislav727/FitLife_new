@@ -1,13 +1,8 @@
-/* ADMIN DASHBOARD STYLES - FitLife v2.0 */
-
-/* ADMIN DASHBOARD CONTENT */
 
 .admindashboard-content {
     max-width: 1400px;
     margin: 0 auto;
 }
-
-/* HEADER */
 
 .admindashboard-header {
     margin-bottom: var(--space-8);
@@ -33,8 +28,6 @@
     color: var(--text-muted);
 }
 
-/* STATS GRID */
-
 .admindashboard-stats-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -42,7 +35,6 @@
     margin-bottom: var(--space-8);
 }
 
-/* Stat Card */
 .admindashboard-stat-card {
     background: var(--bg-surface);
     border: 1px solid var(--border-subtle);
@@ -79,8 +71,6 @@
     letter-spacing: 0.5px;
     margin-bottom: var(--space-4);
 }
-
-/* BUTTONS */
 
 .admindashboard-btn {
     display: inline-flex;
@@ -130,8 +120,6 @@
     border-color: var(--accent);
 }
 
-/* SECTIONS */
-
 .admindashboard-sections {
     display: flex;
     flex-direction: column;
@@ -153,8 +141,6 @@
     padding-bottom: var(--space-3);
     border-bottom: 1px solid var(--border-subtle);
 }
-
-/* TABLE */
 
 .admindashboard-table {
     overflow-x: auto;
@@ -214,7 +200,6 @@
     border-radius: 0 0 var(--radius-md) 0;
 }
 
-/* Action Buttons in Table */
 .admindashboard-table td .admindashboard-btn {
     margin-right: var(--space-2);
     margin-bottom: var(--space-1);
@@ -223,8 +208,6 @@
 .admindashboard-table td form {
     display: inline;
 }
-
-/* RESPONSIVE */
 
 @media (max-width: 1024px) {
     .admindashboard-stats-grid {
@@ -255,7 +238,6 @@
         font-size: var(--text-xs);
     }
 
-    /* Stack action buttons on mobile */
     .admindashboard-table td .admindashboard-btn {
         display: block;
         width: 100%;

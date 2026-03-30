@@ -16,9 +16,8 @@
             </div>
         </header>
 
-        {{-- Top Grid: Progress Ring + Quick Add --}}
         <div class="sleep-top-grid">
-            {{-- Progress Ring Card --}}
+
             <section class="sleep-progress-card" aria-labelledby="kpi-heading">
                 <h3 id="kpi-heading" class="sr-only">{{ __('sleep.todays_sleep') }}</h3>
                 @php
@@ -58,7 +57,6 @@
                 </div>
             </section>
 
-            {{-- Quick Add Form Card --}}
             <section class="sleep-add-card" aria-labelledby="sleep-form-heading">
                 <h3 id="sleep-form-heading">{{ __('sleep.log_your_sleep') }}</h3>
                 <form action="{{ route('sleep.store') }}" method="POST" class="sleep-form">
@@ -83,7 +81,6 @@
             </section>
         </div>
 
-        {{-- Today's Sleep --}}
         @if($todaySleeps->count() > 0)
         <section class="sleep-today-section" aria-labelledby="today-heading">
             <h3 id="today-heading">{{ __('sleep.todays_sleep') }}</h3>
@@ -101,7 +98,6 @@
         </section>
         @endif
 
-        {{-- History Table --}}
         <section id="history-section" aria-labelledby="history-heading">
             <h3 id="history-heading">{{ __('sleep.history') }}</h3>
             @if($sleeps->isEmpty())
@@ -139,7 +135,6 @@
             @endif
         </section>
 
-        {{-- Average Card --}}
         @if($average)
             <section aria-labelledby="average-heading">
                 <h3 id="average-heading">{{ __('sleep.summary') }}</h3>

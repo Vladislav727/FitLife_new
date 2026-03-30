@@ -31,7 +31,6 @@
                     @csrf
                     @method('PATCH')
 
-                    {{-- Personal Information Section --}}
                     <div class="bio-section">
                         <div class="bio-section-header">
                             <div class="bio-section-icon bio-section-icon--personal">
@@ -68,7 +67,6 @@
                         </div>
                     </div>
 
-                    {{-- Physical Data Section --}}
                     <div class="bio-section">
                         <div class="bio-section-header">
                             <div class="bio-section-icon bio-section-icon--physical">

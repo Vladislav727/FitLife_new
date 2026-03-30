@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentMeal = 'Breakfast';
     let itemCounter = 1;
 
-    // ── Notification ──
     function showNotification(message, type = 'success') {
         const el = document.getElementById('notification');
         if (!el) return;
@@ -14,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => { el.className = 'mt-notification'; }, 4000);
     }
 
-    // ── Meal Tab Selector ──
     document.querySelectorAll('.mt-meal-tab').forEach(tab => {
         tab.addEventListener('click', () => {
             document.querySelectorAll('.mt-meal-tab').forEach(t => t.classList.remove('active'));
@@ -23,7 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // ── Lookup food via API ──
     async function lookupFood(foodInput, item) {
         const query = foodInput.value.trim();
         if (!query) return;
@@ -68,7 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // ── Select food from suggestions ──
     function selectFood(item, food, foodInput) {
         foodInput.value = food.name;
         item.dataset.calories = food.calories;
@@ -80,7 +76,6 @@ document.addEventListener('DOMContentLoaded', () => {
         updateItemInfo(item);
     }
 
-    // ── Update nutrition info display ──
     function updateItemInfo(item) {
         const qty = parseFloat(item.querySelector('.mt-input--qty').value) || 0;
         const servingSize = parseFloat(item.dataset.servingSize) || 100;
@@ -103,7 +98,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // ── Attach listeners to a food item ──
     function attachItemListeners(item) {
         const foodInput = item.querySelector('.mt-input--food');
         const qtyInput = item.querySelector('.mt-input--qty');
@@ -111,7 +105,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const removeBtn = item.querySelector('.mt-remove-btn');
         const suggestionsEl = item.querySelector('.mt-suggestions');
 
-        // Debounced auto-lookup on typing
         let debounceTimer;
         foodInput.addEventListener('input', () => {
             clearTimeout(debounceTimer);
@@ -124,10 +117,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 500);
         });
 
-        // Manual lookup button
         lookupBtn.addEventListener('click', () => lookupFood(foodInput, item));
 
-        // Enter key triggers lookup
         foodInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
                 e.preventDefault();
@@ -135,10 +126,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Quantity changes recalculate info
         qtyInput.addEventListener('input', () => updateItemInfo(item));
 
-        // Remove item
         if (removeBtn) {
             removeBtn.addEventListener('click', () => {
                 item.remove();
@@ -146,7 +135,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // Close suggestions on outside click
         document.addEventListener('click', (e) => {
             if (!item.contains(e.target)) {
                 suggestionsEl.style.display = 'none';
@@ -154,7 +142,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ── Update remove button visibility ──
     function updateRemoveButtons() {
         const items = document.querySelectorAll('#food-items .mt-food-item');
         items.forEach(item => {
@@ -163,7 +150,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ── Add new food item row ──
     document.getElementById('add-item-btn').addEventListener('click', () => {
         const container = document.getElementById('food-items');
         const div = document.createElement('div');
@@ -196,7 +182,6 @@ document.addEventListener('DOMContentLoaded', () => {
         div.querySelector('.mt-input--food').focus();
     });
 
-    // ── Save meals ──
     document.getElementById('save-btn').addEventListener('click', async () => {
         const items = document.querySelectorAll('#food-items .mt-food-item');
         const payload = [];
@@ -244,13 +229,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (data.success) {
                 showNotification(t.saved || 'Meal logged!', 'success');
 
-                // Update today's summary
                 document.getElementById('sum-calories').textContent = data.daily.calories;
                 document.getElementById('sum-protein').textContent = data.daily.protein + (t.g || 'g');
                 document.getElementById('sum-fats').textContent = data.daily.fats + (t.g || 'g');
                 document.getElementById('sum-carbs').textContent = data.daily.carbs + (t.g || 'g');
 
-                // Add new rows to history table
                 const tbody = document.querySelector('.history-table tbody');
                 if (tbody) {
                     const noData = tbody.querySelector('.no-data');
@@ -275,7 +258,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     attachDeleteListeners();
                 }
 
-                // Reset form
                 document.getElementById('food-items').innerHTML = '';
                 const firstItem = document.createElement('div');
                 firstItem.className = 'mt-food-item';
@@ -315,7 +297,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // ── Delete log entry ──
     function attachDeleteListeners() {
         document.querySelectorAll('.mt-delete-log').forEach(btn => {
             btn.removeEventListener('click', handleDelete);
@@ -340,7 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (data.success) {
                 btn.closest('tr').remove();
                 showNotification(t.deleted || 'Deleted', 'success');
-                // Reload to update summary — simple approach
+
                 window.location.reload();
             }
         } catch {
@@ -348,7 +329,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // ── AJAX Pagination ──
     function attachPaginationListeners() {
         document.querySelectorAll('.pagination a').forEach(link => {
             link.addEventListener('click', async e => {
@@ -380,7 +360,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ── Initialize ──
     document.querySelectorAll('#food-items .mt-food-item').forEach(attachItemListeners);
     attachPaginationListeners();
     attachDeleteListeners();

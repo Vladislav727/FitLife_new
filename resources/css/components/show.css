@@ -1,12 +1,8 @@
-/* USER PROFILE SHOW PAGE - FitLife v2.0 */
-
-/* PAGE LAYOUT */
 
 .user-profile-page {
     padding: 0;
 }
 
-/* Back Link */
 .up-back-link {
     display: inline-flex;
     align-items: center;
@@ -26,8 +22,6 @@
 .up-back-link svg {
     flex-shrink: 0;
 }
-
-/* PROFILE HEADER CARD */
 
 .up-profile-card {
     background: var(--bg-glass-dark);
@@ -50,7 +44,6 @@
     z-index: 2;
 }
 
-/* Banner */
 .up-banner {
     position: relative;
     height: 180px;
@@ -70,7 +63,6 @@
     background: linear-gradient(to bottom, transparent 40%, rgba(10, 10, 10, 0.85) 100%);
 }
 
-/* Profile Info */
 .up-profile-info {
     display: flex;
     align-items: flex-end;
@@ -125,8 +117,6 @@
     font-size: 0.875rem;
     color: var(--text-muted);
 }
-
-/* FRIEND ACTIONS */
 
 .up-actions {
     display: flex;
@@ -189,8 +179,6 @@
     border-color: var(--danger);
 }
 
-/* CONTENT GRID */
-
 .up-grid {
     display: grid;
     grid-template-columns: 300px 1fr;
@@ -198,15 +186,11 @@
     align-items: start;
 }
 
-/* SIDEBAR */
-
 .up-sidebar {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
-
-/* CARDS */
 
 .up-card {
     background: var(--bg-glass-dark);
@@ -261,8 +245,6 @@
     margin: 0;
 }
 
-/* BIO LIST */
-
 .up-bio-list {
     padding: 0.25rem 0;
 }
@@ -294,8 +276,6 @@
     font-weight: 500;
     color: var(--text-primary);
 }
-
-/* STATS */
 
 .up-stats {
     display: grid;
@@ -330,8 +310,6 @@
     letter-spacing: 0.05em;
 }
 
-/* POSTS FEED (reuses community .post-card styles) */
-
 .up-main {
     min-width: 0;
 }
@@ -343,7 +321,6 @@
     margin-top: 0.75rem;
 }
 
-/* Override community post-card flex (no vote column here) */
 .up-posts-feed .post-card {
     display: block;
 }
@@ -367,7 +344,6 @@
     fill: currentColor;
 }
 
-/* Empty State */
 .up-empty-state {
     display: flex;
     flex-direction: column;
@@ -391,8 +367,6 @@
     color: var(--text-muted);
     margin: 0;
 }
-
-/* RESPONSIVE */
 
 @media (max-width: 1024px) {
     .up-grid {

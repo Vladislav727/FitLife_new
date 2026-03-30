@@ -1,11 +1,8 @@
-/* WATER TRACKER STYLES - FitLife v3.0 */
 
-/* Hide mobile toggle */
 #mobile-toggle {
     display: none;
 }
 
-/* Page Header */
 #fitlife-container main > header {
     margin-bottom: var(--space-6);
 }
@@ -26,7 +23,6 @@
     font-size: var(--text-base);
 }
 
-/* Section Headings */
 #fitlife-container section h3 {
     font-size: var(--text-lg);
     font-weight: var(--font-semibold);
@@ -45,8 +41,6 @@
     border: 0;
 }
 
-/* TOP GRID — Progress + Quick Add */
-
 .water-top-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -54,7 +48,6 @@
     margin-bottom: var(--space-6);
 }
 
-/* Progress Ring Card */
 .water-progress-card {
     background: var(--bg-surface);
     border: 1px solid var(--border-subtle);
@@ -161,7 +154,6 @@
     transition: width 0.8s ease;
 }
 
-/* Quick Add Card */
 .water-add-card {
     background: var(--bg-surface);
     border: 1px solid var(--border-subtle);
@@ -175,7 +167,6 @@
     margin-bottom: var(--space-5);
 }
 
-/* Preset Buttons */
 .water-presets {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -235,7 +226,6 @@
     text-transform: uppercase;
 }
 
-/* Divider */
 .water-divider {
     display: flex;
     align-items: center;
@@ -259,7 +249,6 @@
     white-space: nowrap;
 }
 
-/* Custom Amount Form */
 .water-custom-form {
     display: flex;
     gap: var(--space-3);
@@ -330,8 +319,6 @@
     transform: translateY(-1px);
 }
 
-/* TODAY'S PILLS */
-
 .water-today-section {
     margin-bottom: var(--space-6);
 }
@@ -375,8 +362,6 @@
     color: var(--text-muted);
 }
 
-/* EMPTY STATE */
-
 .water-empty {
     display: flex;
     flex-direction: column;
@@ -402,8 +387,6 @@
     color: var(--text-muted);
     max-width: 280px;
 }
-
-/* HISTORY TABLE */
 
 .history-table {
     width: 100%;
@@ -453,8 +436,6 @@
     font-size: var(--text-xs);
     border-radius: var(--radius-full);
 }
-
-/* RESPONSIVE */
 
 @media (max-width: 768px) {
     .water-top-grid {

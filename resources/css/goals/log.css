@@ -1,11 +1,8 @@
-/* GOAL LOG STYLES - FitLife v2.0 */
 
-/* Hide mobile toggle */
 #mobile-toggle {
     display: none;
 }
 
-/* Page Header */
 #fitlife-container main > header {
     margin-bottom: var(--space-6);
 }
@@ -26,15 +23,12 @@
     font-size: var(--text-base);
 }
 
-/* Section Headings */
 #fitlife-container section h3 {
     font-size: var(--text-lg);
     font-weight: var(--font-semibold);
     color: var(--text-primary);
     margin-bottom: var(--space-4);
 }
-
-/* LOG CARD */
 
 .log-card {
     background: var(--bg-surface);
@@ -43,8 +37,6 @@
     padding: var(--space-8);
     max-width: 500px;
 }
-
-/* LOG FORM */
 
 .log-form {
     display: flex;
@@ -85,8 +77,6 @@
     color: var(--text-muted);
 }
 
-/* CALCULATE BUTTON */
-
 .calculate-btn {
     display: inline-flex;
     align-items: center;
@@ -106,8 +96,6 @@
     background: var(--primary-light);
     transform: translateY(-1px);
 }
-
-/* RESPONSIVE */
 
 @media (max-width: 768px) {
     .log-card {

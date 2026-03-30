@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
-    // Show the main dashboard with user stats and logs
+
     public function index()
     {
         $user = Auth::user();
@@ -43,25 +43,21 @@ class DashboardController extends Controller
         ]);
     }
 
-    // AJAX: Load paginated meal logs
     public function mealLogsAjax(Request $request)
     {
         return $this->ajaxLogResponse($request, MealLog::class, 'profile.partials.meal_table', 'meals');
     }
 
-    // AJAX: Load paginated sleep logs
     public function sleepLogsAjax(Request $request)
     {
         return $this->ajaxLogResponse($request, Sleep::class, 'profile.partials.sleep_table', 'sleep');
     }
 
-    // AJAX: Load paginated water logs
     public function waterLogsAjax(Request $request)
     {
         return $this->ajaxLogResponse($request, WaterLog::class, 'profile.partials.water_table', 'water');
     }
 
-    // Generic method for AJAX log rendering
     private function ajaxLogResponse(Request $request, string $model, string $view, string $pageName)
     {
         $logs = $this->getPaginatedLogs($model, Auth::id(), $pageName);
@@ -73,7 +69,6 @@ class DashboardController extends Controller
         return redirect()->route('dashboard');
     }
 
-    // Get paginated logs for a specific model
     private function getPaginatedLogs(string $model, int $userId, string $pageName)
     {
         return $model::where('user_id', $userId)

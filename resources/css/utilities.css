@@ -1,8 +1,4 @@
-/*
- * Utility classes + grid helpers
- */
 
-/* Grid */
 .grid {
     display: grid;
     gap: var(--space-6);
@@ -23,14 +19,12 @@
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 }
 
-/* Display */
 .hidden { display: none !important; }
 .block { display: block; }
 .inline-block { display: inline-block; }
 .flex { display: flex; }
 .inline-flex { display: inline-flex; }
 
-/* Flexbox */
 .flex-row { flex-direction: row; }
 .flex-col { flex-direction: column; }
 .flex-wrap { flex-wrap: wrap; }
@@ -45,7 +39,6 @@
 .flex-1 { flex: 1; }
 .flex-none { flex: none; }
 
-/* Gap */
 .gap-1 { gap: var(--space-1); }
 .gap-2 { gap: var(--space-2); }
 .gap-3 { gap: var(--space-3); }
@@ -54,7 +47,6 @@
 .gap-6 { gap: var(--space-6); }
 .gap-8 { gap: var(--space-8); }
 
-/* Margin */
 .m-0 { margin: 0; }
 .m-auto { margin: auto; }
 .mx-auto { margin-left: auto; margin-right: auto; }
@@ -69,7 +61,6 @@
 .mb-6 { margin-bottom: var(--space-6); }
 .mb-8 { margin-bottom: var(--space-8); }
 
-/* Padding */
 .p-0 { padding: 0; }
 .p-2 { padding: var(--space-2); }
 .p-4 { padding: var(--space-4); }
@@ -78,13 +69,11 @@
 .px-4 { padding-left: var(--space-4); padding-right: var(--space-4); }
 .py-4 { padding-top: var(--space-4); padding-bottom: var(--space-4); }
 
-/* Sizing */
 .w-full { width: 100%; }
 .w-auto { width: auto; }
 .h-full { height: 100%; }
 .min-h-screen { min-height: 100vh; }
 
-/* Text */
 .text-left { text-align: left; }
 .text-center { text-align: center; }
 .text-right { text-align: right; }
@@ -108,7 +97,6 @@
     white-space: nowrap;
 }
 
-/* Color helpers */
 .text-primary { color: var(--text-primary); }
 .text-secondary { color: var(--text-secondary); }
 .text-muted { color: var(--text-muted); }
@@ -121,7 +109,6 @@
 .bg-elevated { background: var(--bg-elevated); }
 .bg-glass { background: var(--bg-glass); }
 
-/* Border */
 .border { border: 1px solid var(--border-default); }
 .border-subtle { border: 1px solid var(--border-subtle); }
 .rounded-sm { border-radius: var(--radius-sm); }
@@ -130,7 +117,6 @@
 .rounded-xl { border-radius: var(--radius-xl); }
 .rounded-full { border-radius: var(--radius-full); }
 
-/* Position */
 .relative { position: relative; }
 .absolute { position: absolute; }
 .fixed { position: fixed; }
@@ -141,13 +127,11 @@
 .bottom-0 { bottom: 0; }
 .left-0 { left: 0; }
 
-/* Overflow */
 .overflow-hidden { overflow: hidden; }
 .overflow-auto { overflow: auto; }
 .overflow-x-auto { overflow-x: auto; }
 .overflow-y-auto { overflow-y: auto; }
 
-/* Misc */
 .cursor-pointer { cursor: pointer; }
 .cursor-not-allowed { cursor: not-allowed; }
 

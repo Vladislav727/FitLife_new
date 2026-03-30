@@ -1,47 +1,41 @@
-/*
- * CSS Variables / Design Tokens
- * All colors, spacing, typography, etc.
- */
 
 :root {
-    /* Brand colors */
+
     --primary: #007AFF;
     --primary-light: #4DA7FF;
     --primary-dark: #0066E6;
     --primary-50: rgba(0, 122, 255, 0.05);
     --primary-100: rgba(0, 122, 255, 0.1);
     --primary-200: rgba(0, 122, 255, 0.2);
-    
+
     --secondary: #FF5A20;
     --secondary-light: #FF885C;
     --secondary-dark: #E64E1B;
-    
+
     --accent: #7C3AED;
     --accent-light: #A78BFA;
     --accent-dark: #6D28D9;
-    
-    /* Semantic */
+
     --success: #16A34A;
     --success-light: #66D69A;
     --success-bg: rgba(22, 163, 74, 0.1);
-    
+
     --warning: #F59E0B;
     --warning-light: #FFD37A;
     --warning-bg: rgba(245, 158, 11, 0.1);
-    
+
     --danger: #DC2626;
     --danger-light: #FF8A8A;
     --danger-bg: rgba(220, 38, 38, 0.1);
-    
+
     --info: #007AFF;
     --info-light: #4DA7FF;
     --info-bg: rgba(0, 122, 255, 0.1);
-    
+
     --purple: #7C3AED;
     --purple-light: #A78BFA;
     --purple-bg: rgba(124, 58, 237, 0.1);
-    
-    /* Backgrounds (pure black base) */
+
     --bg-base: #000000;
     --bg-surface: #0a0a0a;
     --bg-elevated: #111111;
@@ -49,20 +43,17 @@
     --bg-glass: #0a0a0a;
     --bg-glass-light: #111111;
     --bg-glass-dark: #050505;
-    
-    /* Text */
+
     --text-primary: #E6EEF4;
     --text-secondary: #AAB6C0;
     --text-muted: #7F8A94;
     --text-disabled: #3A4448;
-    
-    /* Borders */
+
     --border-subtle: rgba(230, 238, 244, 0.06);
     --border-default: rgba(230, 238, 244, 0.10);
     --border-strong: rgba(230, 238, 244, 0.16);
     --border-focus: rgba(0, 122, 255, 0.5);
-    
-    /* Shadows */
+
     --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.16);
     --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.2);
     --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.24);
@@ -70,11 +61,10 @@
     --shadow-xl: 0 16px 40px rgba(0, 0, 0, 0.36);
     --shadow-glow: none;
     --shadow-glow-strong: none;
-    
-    /* Typography */
+
     --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     --font-mono: 'SF Mono', 'Fira Code', monospace;
-    
+
     --text-xs: 0.75rem;
     --text-sm: 0.875rem;
     --text-base: 1rem;
@@ -83,19 +73,18 @@
     --text-2xl: 1.5rem;
     --text-3xl: 1.875rem;
     --text-4xl: 2.25rem;
-    
+
     --font-light: 300;
     --font-normal: 400;
     --font-medium: 500;
     --font-semibold: 600;
     --font-bold: 700;
     --font-extrabold: 800;
-    
+
     --leading-tight: 1.25;
     --leading-normal: 1.5;
     --leading-relaxed: 1.75;
-    
-    /* Spacing scale */
+
     --space-0: 0;
     --space-1: 4px;
     --space-2: 8px;
@@ -107,16 +96,14 @@
     --space-10: 40px;
     --space-12: 48px;
     --space-16: 64px;
-    
-    /* Legacy spacing aliases (used in some pages) */
+
     --space-xs: var(--space-1);
     --space-sm: var(--space-2);
     --space-md: var(--space-4);
     --space-lg: var(--space-6);
     --space-xl: var(--space-8);
     --space-2xl: var(--space-12);
-    
-    /* Border radius */
+
     --radius-xs: 4px;
     --radius-sm: 8px;
     --radius-md: 12px;
@@ -124,23 +111,21 @@
     --radius-xl: 24px;
     --radius-2xl: 32px;
     --radius-full: 9999px;
-    
-    /* Transitions */
+
     --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
     --ease-in: cubic-bezier(0.4, 0, 1, 1);
     --ease-out: cubic-bezier(0, 0, 0.2, 1);
     --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    
+
     --duration-fast: 150ms;
     --duration-base: 250ms;
     --duration-slow: 350ms;
     --duration-slower: 500ms;
-    
+
     --transition-fast: var(--duration-fast) var(--ease-default);
     --transition-base: var(--duration-base) var(--ease-default);
     --transition-slow: var(--duration-slow) var(--ease-default);
 
-    /* Z-index */
     --z-dropdown: 100;
     --z-sticky: 200;
     --z-fixed: 300;
@@ -149,15 +134,13 @@
     --z-popover: 600;
     --z-tooltip: 700;
     --z-toast: 800;
-    
-    /* Layout dimensions */
+
     --sidebar-width: 280px;
     --sidebar-width-collapsed: 80px;
     --header-height: 72px;
     --content-max-width: 1400px;
     --mobile-nav-height: 72px;
 
-    /* Aliases for compatibility with older pages */
     --color-bg: var(--bg-base);
     --color-surface: var(--bg-surface);
     --color-surface-hover: var(--bg-hover);
@@ -171,15 +154,13 @@
     --color-error: var(--danger);
     --color-warning: var(--warning);
     --transition-normal: var(--transition-base);
-    
-    /* Auth page compat */
+
     --bg-primary: var(--bg-base);
     --surface: var(--bg-surface);
     --surface-hover: var(--bg-hover);
     --border: var(--border-default);
     --text-inverse: #ffffff;
-    
-    /* --spacing-* aliases */
+
     --spacing-0: var(--space-0);
     --spacing-1: var(--space-1);
     --spacing-2: var(--space-2);
@@ -191,18 +172,15 @@
     --spacing-10: var(--space-10);
     --spacing-12: var(--space-12);
     --spacing-16: var(--space-16);
-    
-    /* Gradients */
+
     --gradient-accent: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
     --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-    
-    /* Accent shadows */
+
     --shadow-accent-sm: 0 2px 6px rgba(34, 197, 94, 0.15);
     --shadow-accent-md: 0 4px 12px rgba(34, 197, 94, 0.18);
     --shadow-accent-lg: 0 8px 20px rgba(34, 197, 94, 0.2);
 }
 
-/* Light theme */
 [data-theme="light"] {
     --bg-base: #f5f5f5;
     --bg-surface: #ffffff;

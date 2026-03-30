@@ -1,6 +1,3 @@
-/*
- * Toast notifications
- */
 
 .toast-container {
     position: fixed;
@@ -76,7 +73,6 @@
     fill: #a1a1aa;
 }
 
-/* Types */
 .toast-success {
     border-color: var(--border-strong);
 }

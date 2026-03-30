@@ -133,14 +133,12 @@ test('users can toggle comment reactions', function () {
         'content' => 'Comment for toggle',
     ]);
 
-    // First like
     $this->actingAs($user)->post("/comments/{$comment->id}/toggle-reaction", [
         'type' => 'like',
     ]);
 
     expect(CommentLike::where('comment_id', $comment->id)->where('type', 'like')->count())->toBe(1);
 
-    // Toggle to dislike
     $this->actingAs($user)->post("/comments/{$comment->id}/toggle-reaction", [
         'type' => 'dislike',
     ]);
@@ -201,6 +199,5 @@ test('deleting parent comment also deletes replies', function () {
 
     $this->actingAs($user)->delete("/comments/{$parentComment->id}");
 
-    // Parent should be deleted
     expect(Comment::find($parentId))->toBeNull();
 });

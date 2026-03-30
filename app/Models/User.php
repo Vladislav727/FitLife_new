@@ -25,6 +25,7 @@ class User extends Authenticatable
         'role',
         'bio',
         'language',
+        'last_seen_at',
     ];
 
     protected $hidden = [
@@ -37,6 +38,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'last_seen_at' => 'datetime',
         ];
     }
 
@@ -173,5 +175,10 @@ class User extends Authenticatable
     public function isMutualFollow(User $user): bool
     {
         return $this->isFollowing($user) && $user->isFollowing($this);
+    }
+
+    public function isOnline(): bool
+    {
+        return $this->last_seen_at && $this->last_seen_at->gt(now()->subMinutes(3));
     }
 }

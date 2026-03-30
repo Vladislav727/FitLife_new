@@ -1,11 +1,8 @@
-/* ADMIN EVENTS MANAGEMENT STYLES - FitLife v2.0 */
 
 .events-content {
     max-width: 1400px;
     margin: 0 auto;
 }
-
-/* HEADER */
 
 .events-header {
     display: flex;
@@ -42,8 +39,6 @@
     color: var(--text-primary);
     border-color: var(--accent);
 }
-
-/* SEARCH & FILTER */
 
 .events-search {
     display: flex;
@@ -89,16 +84,12 @@
     cursor: pointer;
 }
 
-/* EVENTS SECTION */
-
 .events-section {
     background: var(--bg-surface);
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-xl);
     padding: var(--space-6);
 }
-
-/* TABLE */
 
 .events-table {
     overflow-x: auto;
@@ -150,8 +141,6 @@
     border-bottom: none;
 }
 
-/* BUTTONS */
-
 .events-btn {
     display: inline-flex;
     align-items: center;
@@ -186,8 +175,6 @@
 .events-btn-primary:hover {
     background: var(--accent-dark);
 }
-
-/* PAGINATION */
 
 .events-pagination {
     margin-top: var(--space-5);
@@ -235,8 +222,6 @@
     color: white;
     border-color: var(--accent);
 }
-
-/* RESPONSIVE */
 
 @media (max-width: 768px) {
     .events-header {

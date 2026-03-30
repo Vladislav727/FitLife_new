@@ -54,7 +54,6 @@ test('post comments only returns top-level comments', function () {
         'content' => 'Reply comment',
     ]);
 
-    // Only top-level comments (no parent_id)
     expect($post->comments)->toHaveCount(1);
 });
 

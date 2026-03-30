@@ -37,7 +37,7 @@ test('zero sleep duration is valid edge case', function () {
 });
 
 test('sleep duration converts minutes to hours', function () {
-    $totalMinutes = 450; // 7.5 hours
+    $totalMinutes = 450;
 
     $hours = $totalMinutes / 60;
 

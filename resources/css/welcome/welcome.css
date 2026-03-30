@@ -1,16 +1,10 @@
-/**
- * Welcome Page Styles
- * Landing page for FitLife
- */
 
-/* Welcome Layout */
 .welcome-layout {
     min-height: 100vh;
     background: var(--color-bg);
     color: var(--color-text);
 }
 
-/* Welcome Header/Navbar */
 .welcome-header {
     position: fixed;
     top: 0;
@@ -111,7 +105,6 @@
     padding: 0.5rem;
 }
 
-/* Hero Section */
 .welcome-hero {
     padding: 8rem 2rem 5rem;
     text-align: center;
@@ -189,7 +182,6 @@
     height: 20px;
 }
 
-/* Sections */
 .welcome-section {
     padding: 5rem 2rem;
     max-width: 1200px;
@@ -215,7 +207,6 @@
     margin: 0 auto;
 }
 
-/* Features Section */
 .welcome-features {
     background: var(--color-bg);
 }
@@ -274,7 +265,6 @@
     line-height: 1.6;
 }
 
-/* Testimonials Section */
 .welcome-testimonials {
     background: linear-gradient(180deg, var(--color-bg) 0%, var(--color-surface) 100%);
 }
@@ -339,7 +329,6 @@
     color: var(--color-primary);
 }
 
-/* About Section */
 .welcome-about {
     background: var(--color-surface);
 }
@@ -348,7 +337,6 @@
     max-width: 800px;
 }
 
-/* Lightbox */
 .welcome-lightbox {
     display: none;
     position: fixed;
@@ -428,7 +416,6 @@
     right: -60px;
 }
 
-/* Footer */
 .welcome-footer {
     background: var(--color-surface);
     border-top: 1px solid var(--color-border);
@@ -469,7 +456,6 @@
     text-decoration: underline;
 }
 
-/* Animations */
 @keyframes welcomeSlideIn {
     from {
         transform: translateY(30px);
@@ -481,20 +467,19 @@
     }
 }
 
-/* Responsive Design */
 @media (max-width: 1024px) {
     .welcome-hero-title {
         font-size: 2.75rem;
     }
-    
+
     .welcome-section-title {
         font-size: 2rem;
     }
-    
+
     .welcome-lightbox-nav.prev {
         left: 10px;
     }
-    
+
     .welcome-lightbox-nav.next {
         right: 10px;
     }
@@ -504,7 +489,7 @@
     .welcome-header {
         padding: 1rem;
     }
-    
+
     .welcome-nav-links {
         display: none;
         position: absolute;
@@ -516,62 +501,62 @@
         padding: 1rem;
         border-bottom: 1px solid var(--color-border);
     }
-    
+
     .welcome-nav-links.active {
         display: flex;
     }
-    
+
     .welcome-nav-link {
         padding: 0.75rem 1rem;
     }
-    
+
     .welcome-menu-toggle {
         display: block;
     }
-    
+
     .welcome-hero {
         padding: 6rem 1rem 3rem;
     }
-    
+
     .welcome-hero-title {
         font-size: 2rem;
     }
-    
+
     .welcome-hero-subtitle {
         font-size: 1rem;
     }
-    
+
     .welcome-hero-cta {
         padding: 0.875rem 2rem;
         font-size: 1rem;
     }
-    
+
     .welcome-section {
         padding: 3rem 1rem;
     }
-    
+
     .welcome-section-title {
         font-size: 1.75rem;
     }
-    
+
     .welcome-section-subtitle {
         font-size: 1rem;
     }
-    
+
     .welcome-feature-grid,
     .welcome-testimonial-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
     }
-    
+
     .welcome-testimonial-card {
         padding: 1.5rem;
     }
-    
+
     .welcome-footer {
         padding: 2rem 1rem;
     }
-    
+
     .welcome-footer-links {
         gap: 1rem;
     }
@@ -581,28 +566,27 @@
     .welcome-logo-text {
         font-size: 1.25rem;
     }
-    
+
     .welcome-hero-title {
         font-size: 1.75rem;
     }
-    
+
     .welcome-auth-buttons {
         flex-direction: column;
         gap: 0.5rem;
     }
-    
+
     .welcome-auth-buttons .btn {
         width: 100%;
         justify-content: center;
     }
-    
+
     .welcome-lightbox-nav {
         width: 40px;
         height: 40px;
     }
 }
 
-/* Accessibility */
 @media (prefers-reduced-motion: reduce) {
     .welcome-hero-title,
     .welcome-hero-subtitle,
@@ -618,28 +602,27 @@
     .welcome-header {
         background: var(--color-bg);
     }
-    
+
     .welcome-feature-card,
     .welcome-testimonial-card {
         border-width: 2px;
     }
 }
 
-/* Print Styles */
 @media print {
     .welcome-header,
     .welcome-lightbox,
     .welcome-menu-toggle {
         display: none !important;
     }
-    
+
     .welcome-hero,
     .welcome-section,
     .welcome-footer {
         background: none;
         border: none;
     }
-    
+
     .welcome-feature-image img {
         border: 1px solid #000;
     }

@@ -16,7 +16,6 @@
       </div>
     </header>
 
-    {{-- Back Link --}}
     <a href="{{ route('goals.index') }}" class="back-link">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
       {{ __('goals.back_to_goals') }}
@@ -28,7 +27,6 @@
         <form action="{{ route('goals.store') }}" method="POST" class="goal-form">
           @csrf
 
-          {{-- Type Selector Cards --}}
           <div class="form-group">
             <label>{{ __('goals.goal_type') }}</label>
             <div class="goal-type-grid">

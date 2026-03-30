@@ -10,7 +10,7 @@
     @vite(['resources/css/app.css'])
 </head>
 <body class="auth-layout">
-    <!-- Header -->
+
     <header class="auth-navbar">
         <a href="{{ url('/') }}" class="auth-navbar-brand">
             <div class="auth-navbar-brand-icon">
@@ -30,10 +30,9 @@
         </div>
     </header>
 
-    <!-- Main Content -->
     <div class="auth-container">
         <div class="auth-card">
-            <!-- Header -->
+
             <div class="auth-header">
                 <div class="auth-logo">
                     <div class="auth-logo-icon auth-logo-icon--info">
@@ -47,14 +46,12 @@
                 <p class="auth-subtitle">{{ __('auth.verify_email_text') }}</p>
             </div>
 
-            <!-- Session Status -->
             @if (session('status') == 'verification-link-sent')
                 <div class="auth-status auth-status--success">
                     {{ __('auth.verification_link_sent') }}
                 </div>
             @endif
 
-            <!-- Info Box -->
             <div class="auth-info">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="10"/>
@@ -64,7 +61,6 @@
                 <p>{{ __('auth.verify_email_info') }}</p>
             </div>
 
-            <!-- Actions -->
             <div class="auth-actions">
                 <form method="POST" action="{{ route('verification.send') }}">
                     @csrf
@@ -74,7 +70,6 @@
                 </form>
             </div>
 
-            <!-- Footer -->
             <div class="auth-footer">
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf

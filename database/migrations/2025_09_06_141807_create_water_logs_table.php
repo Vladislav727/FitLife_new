@@ -11,7 +11,7 @@ return new class extends Migration
         Schema::create('water_logs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->integer('amount'); // количество воды в мл
+            $table->integer('amount');
             $table->timestamps();
         });
     }

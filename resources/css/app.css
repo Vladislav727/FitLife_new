@@ -1,24 +1,16 @@
-/*
- * FitLife - Main stylesheet
- * Imports + shared components that didn't warrant their own file
- */
 
-/* Core */
 @import 'core/variables.css';
 @import 'core/reset.css';
 
-/* Layout */
 @import 'layout/header.css';
 @import 'layout/sidebar.css';
 @import 'layout/mobile-nav.css';
 
-/* Shared components */
 @import 'base.css';
 @import 'components/buttons.css';
 @import 'components/forms.css';
 @import 'components/toasts.css';
 
-/* Page styles */
 @import 'auth/auth.css';
 @import 'welcome/welcome.css';
 @import 'dashboard/dashboard.css';
@@ -42,12 +34,8 @@
 @import 'components/show.css';
 @import 'messages/messages.css';
 
-/* Utilities & responsive */
 @import 'utilities.css';
 @import 'responsive.css';
-
-
-/* ---- App layout ---- */
 
 #app {
     display: flex;
@@ -70,9 +58,6 @@
     width: 100%;
     margin: 0 auto;
 }
-
-
-/* ---- Mobile menu toggle ---- */
 
 .mobile-menu-toggle {
     display: none;
@@ -124,7 +109,6 @@
     box-shadow: var(--shadow-glow);
 }
 
-/* Mobile bottom nav */
 .mobile-nav {
     display: none;
     position: fixed;
@@ -169,9 +153,6 @@
 .mobile-nav-link.active {
     color: var(--primary-light);
 }
-
-
-/* ---- Page header & alerts ---- */
 
 .page-header {
     margin-bottom: var(--space-8);
@@ -223,9 +204,6 @@
     color: var(--info);
 }
 
-
-/* ---- Cards ---- */
-
 .card {
     background: var(--bg-surface);
     border: 1px solid var(--border-subtle);
@@ -262,9 +240,6 @@
     border-top: 1px solid var(--border-subtle);
     background: var(--bg-glass-light);
 }
-
-
-/* ---- Stat cards ---- */
 
 .stat-card {
     background: var(--bg-surface);
@@ -333,9 +308,6 @@
     background: var(--danger-bg);
 }
 
-
-/* ---- Progress bars ---- */
-
 .progress-bar {
     width: 100%;
     height: 8px;
@@ -355,7 +327,6 @@
 .progress-fill.warning { background: var(--warning); }
 .progress-fill.danger { background: var(--danger); }
 
-/* Circular progress */
 .circular-progress {
     position: relative;
     width: 120px;
@@ -399,9 +370,6 @@
     font-size: var(--text-xs);
     color: var(--text-muted);
 }
-
-
-/* ---- Avatars & badges ---- */
 
 .avatar {
     border-radius: var(--radius-full);
@@ -448,9 +416,6 @@
     color: var(--danger);
 }
 
-
-/* ---- Tables ---- */
-
 .table-container {
     overflow-x: auto;
     border-radius: var(--radius-lg);
@@ -493,9 +458,6 @@
 .table tbody tr:last-child td {
     border-bottom: none;
 }
-
-
-/* ---- Animations ---- */
 
 @keyframes fadeIn {
     from { opacity: 0; }
@@ -550,7 +512,6 @@
 .animate-pulse { animation: pulse 2s infinite; }
 .animate-spin { animation: spin 1s linear infinite; }
 
-/* Stagger for lists */
 .stagger-animation > * {
     animation: slideUp 0.4s var(--ease-out) backwards;
 }
@@ -561,7 +522,6 @@
 .stagger-animation > *:nth-child(5) { animation-delay: 0.25s; }
 .stagger-animation > *:nth-child(6) { animation-delay: 0.3s; }
 
-/* Loading skeleton */
 .skeleton {
     background: linear-gradient(
         90deg,

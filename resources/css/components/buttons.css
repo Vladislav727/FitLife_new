@@ -1,6 +1,3 @@
-/*
- * Button styles
- */
 
 .btn {
     display: inline-flex;
@@ -29,7 +26,6 @@
     fill: currentColor;
 }
 
-/* Variants */
 .btn-primary {
     background: var(--primary);
     color: var(--bg-base);
@@ -81,7 +77,6 @@
     color: var(--text-primary);
 }
 
-/* Sizes */
 .btn-sm {
     padding: var(--space-2) var(--space-3);
     font-size: var(--text-xs);
@@ -92,7 +87,6 @@
     font-size: var(--text-base);
 }
 
-/* Icon buttons */
 .btn-icon {
     width: 40px;
     height: 40px;

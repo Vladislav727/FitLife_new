@@ -26,7 +26,6 @@ return [
     'fri' => 'Fri',
     'sat' => 'Sat',
 
-    // Activity Calendar page
     'page_title' => 'FitLife — Activity Calendar',
     'activity_calendar' => 'Activity Calendar',
     'subtitle' => 'Plan your workouts and track your progress',
@@ -40,7 +39,6 @@ return [
     'filter_by_type' => 'Filter by Type:',
     'all_events' => 'All Events',
 
-    // Event types
     'type_workout' => 'Workout',
     'type_rest' => 'Rest',
     'type_goal' => 'Goal',
@@ -56,12 +54,8 @@ return [
     'type_walking' => 'Walking',
     'type_meditation' => 'Meditation',
     'type_custom' => 'Custom',
-
-    // Custom type
     'custom_type_name' => 'Custom Type Name',
     'custom_type_placeholder' => 'Enter your activity type...',
-
-    // New UI elements
     'this_month_stats' => 'This Month Stats',
     'total_events' => 'Total Events',
     'completed' => 'Completed',
@@ -76,8 +70,6 @@ return [
     'cancel' => 'Cancel',
     'delete' => 'Delete',
     'delete_confirm' => 'Are you sure you want to delete this event? This action cannot be undone.',
-
-    // Month names
     'january' => 'January',
     'february' => 'February',
     'march' => 'March',

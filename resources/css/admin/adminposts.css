@@ -1,11 +1,9 @@
-/* ADMIN POSTS STYLES - FitLife v2.0 */
 
 .posts-content {
     max-width: 1400px;
     margin: 0 auto;
 }
 
-/* Header */
 .posts-header {
     display: flex;
     align-items: center;
@@ -42,7 +40,6 @@
     border-color: var(--accent);
 }
 
-/* Search */
 .posts-search {
     margin-bottom: var(--space-6);
 }
@@ -69,7 +66,6 @@
     color: var(--text-muted);
 }
 
-/* Posts Section */
 .posts-section {
     background: var(--bg-surface);
     border: 1px solid var(--border-subtle);
@@ -77,7 +73,6 @@
     padding: var(--space-6);
 }
 
-/* Table */
 .posts-table {
     overflow-x: auto;
 }
@@ -128,7 +123,6 @@
     border-bottom: none;
 }
 
-/* Button */
 .posts-btn {
     display: inline-flex;
     align-items: center;
@@ -154,7 +148,6 @@
     color: white;
 }
 
-/* Pagination */
 .posts-pagination {
     margin-top: var(--space-5);
     display: flex;
@@ -202,7 +195,6 @@
     border-color: var(--accent);
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .posts-header {
         flex-direction: column;

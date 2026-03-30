@@ -11,10 +11,10 @@ class CreateMealLogsTable extends Migration
         Schema::create('meal_logs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('meal'); // Breakfast, Lunch, Dinner, Snack
+            $table->string('meal');
             $table->string('food');
-            $table->integer('quantity'); // граммы/мл
-            $table->integer('calories'); // подсчитанные калории
+            $table->integer('quantity');
+            $table->integer('calories');
             $table->timestamps();
         });
     }

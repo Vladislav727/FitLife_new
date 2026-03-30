@@ -19,7 +19,6 @@ return [
     'previous' => 'Iepriekšējais',
     'next' => 'Nākamais',
 
-    // Additional
     'total_photos' => 'Kopā fotogrāfiju',
     'choose_file' => 'Izvēlieties failu vai velciet',
 ];

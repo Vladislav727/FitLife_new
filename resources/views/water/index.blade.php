@@ -16,9 +16,8 @@
             </div>
         </header>
 
-        {{-- Top Grid: Progress + Quick Add --}}
         <div class="water-top-grid">
-            {{-- Progress Ring Card --}}
+
             <section class="water-progress-card" aria-labelledby="kpi-heading">
                 <h3 id="kpi-heading" class="sr-only">{{ __('water.todays_hydration') }}</h3>
                 <div class="water-ring-wrap">
@@ -56,7 +55,6 @@
                 </div>
             </section>
 
-            {{-- Quick Add Card --}}
             <section class="water-add-card" aria-labelledby="water-form-heading">
                 <h3 id="water-form-heading">{{ __('water.add_water_intake') }}</h3>
 
@@ -94,7 +92,6 @@
             </section>
         </div>
 
-        {{-- Today's Log --}}
         @if($todayLogs->count() > 0)
         <section class="water-today-section" aria-labelledby="today-heading">
             <h3 id="today-heading">{{ __('water.today_intake') }}</h3>
@@ -112,7 +109,6 @@
         </section>
         @endif
 
-        {{-- History Table --}}
         <section id="history-section" aria-labelledby="history-heading">
             <h3 id="history-heading">{{ __('water.hydration_history') }}</h3>
             @if($historyLogs->isEmpty())

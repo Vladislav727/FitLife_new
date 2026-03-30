@@ -11,11 +11,11 @@ return new class extends Migration
         Schema::create('goals', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->text('description')->nullable(); // ← добавь это
-            $table->string('type'); // steps, calories, sleep, weight
+            $table->text('description')->nullable();
+            $table->string('type');
             $table->decimal('target_value', 10, 2);
             $table->decimal('current_value', 10, 2)->default(0);
-            $table->date('end_date')->nullable(); // <- nullable, чтобы не было ошибок вставки
+            $table->date('end_date')->nullable();
             $table->timestamps();
             $table->string('title')->nullable();
             $table->integer('change')->default(0);

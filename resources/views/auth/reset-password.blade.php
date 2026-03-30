@@ -10,7 +10,7 @@
     @vite(['resources/css/app.css'])
 </head>
 <body class="auth-layout">
-    <!-- Header -->
+
     <header class="auth-navbar">
         <a href="{{ url('/') }}" class="auth-navbar-brand">
             <div class="auth-navbar-brand-icon">
@@ -22,10 +22,9 @@
         </a>
     </header>
 
-    <!-- Main Content -->
     <div class="auth-container">
         <div class="auth-card">
-            <!-- Header -->
+
             <div class="auth-header">
                 <div class="auth-logo">
                     <div class="auth-logo-icon">
@@ -39,7 +38,6 @@
                 <p class="auth-subtitle">{{ __('auth.reset_password_text') }}</p>
             </div>
 
-            <!-- Errors -->
             @if ($errors->any())
                 <div class="auth-errors">
                     <ul>
@@ -50,12 +48,10 @@
                 </div>
             @endif
 
-            <!-- Form -->
             <form method="POST" action="{{ route('password.store') }}" class="auth-form">
                 @csrf
                 <input type="hidden" name="token" value="{{ $request->route('token') }}">
 
-                <!-- Email -->
                 <div class="form-group">
                     <label for="email" class="form-label">{{ __('auth.email') }}</label>
                     <div class="auth-input-wrapper">
@@ -63,20 +59,19 @@
                             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                             <polyline points="22,6 12,13 2,6"/>
                         </svg>
-                        <input 
-                            type="email" 
-                            id="email" 
-                            name="email" 
-                            value="{{ old('email', $request->email) }}" 
-                            class="form-input @error('email') is-error @enderror" 
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            value="{{ old('email', $request->email) }}"
+                            class="form-input @error('email') is-error @enderror"
                             placeholder="{{ __('auth.email') }}"
-                            required 
+                            required
                             autofocus
                         >
                     </div>
                 </div>
 
-                <!-- Password -->
                 <div class="form-group">
                     <label for="password" class="form-label">{{ __('auth.new_password') }}</label>
                     <div class="auth-input-wrapper">
@@ -84,11 +79,11 @@
                             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
                             <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
                         </svg>
-                        <input 
-                            type="password" 
-                            id="password" 
-                            name="password" 
-                            class="form-input @error('password') is-error @enderror" 
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            class="form-input @error('password') is-error @enderror"
                             placeholder="{{ __('auth.new_password') }}"
                             required
                         >
@@ -101,7 +96,6 @@
                     </div>
                 </div>
 
-                <!-- Confirm Password -->
                 <div class="form-group">
                     <label for="password_confirmation" class="form-label">{{ __('auth.confirm_password') }}</label>
                     <div class="auth-input-wrapper">
@@ -109,11 +103,11 @@
                             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
                             <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
                         </svg>
-                        <input 
-                            type="password" 
-                            id="password_confirmation" 
-                            name="password_confirmation" 
-                            class="form-input" 
+                        <input
+                            type="password"
+                            id="password_confirmation"
+                            name="password_confirmation"
+                            class="form-input"
                             placeholder="{{ __('auth.confirm_password') }}"
                             required
                         >
@@ -126,7 +120,6 @@
                     </div>
                 </div>
 
-                <!-- Submit -->
                 <button type="submit" class="auth-submit">
                     {{ __('auth.reset_password') }}
                 </button>

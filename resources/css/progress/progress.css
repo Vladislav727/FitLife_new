@@ -1,11 +1,8 @@
-/* PROGRESS PHOTOS STYLES - FitLife v3.0 */
 
-/* Hide mobile toggle */
 #mobile-toggle {
     display: none;
 }
 
-/* Page Header */
 #fitlife-container main > header {
     margin-bottom: var(--space-6);
 }
@@ -22,15 +19,12 @@
     font-size: var(--text-base);
 }
 
-/* Section Headings */
 #fitlife-container section h3 {
     font-size: var(--text-lg);
     font-weight: var(--font-semibold);
     color: var(--text-primary);
     margin-bottom: var(--space-4);
 }
-
-/* TOP GRID — Stats + Upload */
 
 .progress-top-grid {
     display: grid;
@@ -39,7 +33,6 @@
     margin-bottom: var(--space-6);
 }
 
-/* Stats Card */
 .progress-stats-card {
     background: var(--bg-surface);
     border: 1px solid var(--border-subtle);
@@ -96,7 +89,6 @@
     text-align: center;
 }
 
-/* Upload Card */
 .progress-upload-card {
     background: var(--bg-surface);
     border: 1px solid var(--border-subtle);
@@ -110,7 +102,6 @@
     gap: var(--space-4);
 }
 
-/* File Drop Zone */
 .progress-file-drop {
     display: flex;
     flex-direction: column;
@@ -160,7 +151,6 @@
     overflow: hidden;
 }
 
-/* Upload Bottom Row */
 .progress-upload-bottom {
     display: flex;
     align-items: flex-end;
@@ -228,15 +218,12 @@
     background: var(--primary-light);
 }
 
-/* GALLERY GRID */
-
 .gallery-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: var(--space-5);
 }
 
-/* Photo Item */
 .photo-item {
     background: var(--bg-surface);
     border: 1px solid var(--border-subtle);
@@ -251,7 +238,6 @@
     border-color: var(--primary);
 }
 
-/* Image Wrapper with Overlay */
 .photo-img-wrap {
     position: relative;
     overflow: hidden;
@@ -292,7 +278,6 @@
     opacity: 1;
 }
 
-/* Photo Info */
 .photo-info {
     padding: var(--space-4);
     display: flex;
@@ -314,7 +299,6 @@
     white-space: nowrap;
 }
 
-/* Photo Actions Footer */
 .photo-actions {
     padding: var(--space-3) var(--space-4);
     display: flex;
@@ -384,7 +368,6 @@
     border-color: var(--danger);
 }
 
-/* Empty State */
 .progress-empty {
     grid-column: 1 / -1;
     display: flex;
@@ -406,8 +389,6 @@
     color: var(--text-muted);
     font-size: var(--text-base);
 }
-
-/* LIGHTBOX */
 
 #lightbox {
     position: fixed;
@@ -508,8 +489,6 @@
 .lightbox-nav.next {
     right: -70px;
 }
-
-/* RESPONSIVE */
 
 @media (max-width: 768px) {
     .progress-top-grid {

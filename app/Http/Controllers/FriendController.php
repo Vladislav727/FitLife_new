@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class FriendController extends Controller
 {
-    // Send a friend request
+
     public function store(Request $request, User $user)
     {
         $me = Auth::user();
@@ -36,7 +36,6 @@ class FriendController extends Controller
         ], 201);
     }
 
-    // Accept a friend request
     public function accept(Request $request, User $user)
     {
         $friendRequest = Friend::where('user_id', $user->id)
@@ -50,7 +49,6 @@ class FriendController extends Controller
 
         $friendRequest->update(['status' => 'accepted']);
 
-        // Create reciprocal friendship
         Friend::create([
             'user_id' => Auth::id(),
             'friend_id' => $user->id,
@@ -64,7 +62,6 @@ class FriendController extends Controller
         ], 200);
     }
 
-    // Remove an existing friendship
     public function remove(Request $request, User $user)
     {
         $friendship = Friend::where(function ($query) use ($user) {

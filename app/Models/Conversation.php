@@ -37,4 +37,9 @@ class Conversation extends Model
     {
         return $query->where('user_one_id', $userId)->orWhere('user_two_id', $userId);
     }
+
+    public function pinnedMessages()
+    {
+        return $this->messages()->whereNotNull('pinned_at')->orderByDesc('pinned_at');
+    }
 }

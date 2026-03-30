@@ -16,9 +16,8 @@
             </div>
         </header>
 
-        {{-- Stats + Upload Top Grid --}}
         <div class="progress-top-grid">
-            {{-- Stats Card --}}
+
             <div class="progress-stats-card">
                 <div class="progress-stats-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -38,7 +37,6 @@
                 @endif
             </div>
 
-            {{-- Upload Card --}}
             <section class="progress-upload-card" aria-labelledby="photo-form-heading">
                 <h3 id="photo-form-heading">{{ __('progress.add_new_photo') }}</h3>
                 <form action="{{ route('progress.store') }}" method="POST" enctype="multipart/form-data" class="progress-upload-form">
@@ -65,7 +63,6 @@
             </section>
         </div>
 
-        {{-- Gallery --}}
         <section aria-labelledby="photos-heading">
             <h3 id="photos-heading">{{ __('progress.your_progress_photos') }}</h3>
             <div class="gallery-grid">
@@ -115,7 +112,6 @@
             </div>
         </section>
 
-        {{-- Lightbox --}}
         <div id="lightbox" role="dialog" aria-hidden="true">
             <div class="lightbox-content">
                 <button class="lightbox-close" aria-label="{{ __('progress.close') }}">×</button>

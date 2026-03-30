@@ -66,7 +66,6 @@ return [
     'amount_ml' => 'Daudzums (ml)',
     'no_water_logs' => 'Pagaidām nav ūdens ierakstu.',
 
-    // Profila rediģēšanas lapa
     'edit_profile' => 'Rediģēt profilu',
     'profile_picture' => 'Avatars un baneris',
     'basic_information' => 'Pamatinformācija',
@@ -93,17 +92,14 @@ return [
     'enter_new_password' => 'Ievadiet jauno paroli',
     'confirm_new_password' => 'Apstipriniet jauno paroli',
 
-    // Additional
     'personal_info' => 'Personīgā informācija',
     'physical_data' => 'Fizikālie dati',
 
-    // User Profile Show
     'back_to_community' => 'Atpakaļ uz kopienu',
     'stats' => 'Statistika',
     'posts_count' => 'Ieraksti',
     'friends_count' => 'Draugi',
 
-    // Sociālais (sekošana)
     'follow' => 'Sekot',
     'following' => 'Seko',
     'following_label' => 'Seko',

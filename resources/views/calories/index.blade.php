@@ -3,7 +3,7 @@
 @section('content')
 <div id="fitlife-container" role="application" aria-label="{{ __('food.calorie_calc_label') }}">
     <main>
-        <!-- Mobile menu toggle button -->
+
         <button id="mobile-toggle" aria-controls="sidebar" aria-expanded="false">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                 <path d="M4 6h16M4 12h16M4 18h16" />
@@ -11,7 +11,7 @@
         </button>
 
         <header>
-            <!-- Page header -->
+
             <div class="header-left">
                 <h1><span>FitLife</span> {{ __('food.calorie_macro_calc') }}</h1>
                 <p class="muted">{{ __('food.calc_daily_needs') }}</p>
@@ -19,33 +19,29 @@
         </header>
 
         <section aria-labelledby="calculator-heading">
-            <!-- Calorie calculator form container -->
+
             <div class="biography-card">
                 <h3 id="calculator-heading">{{ __('food.calorie_calculator') }}</h3>
                 <form action="{{ route('calories.calculate') }}" method="POST" class="form-logging">
                     @csrf
 
-                    <!-- Weight input -->
                     <div class="form-group">
                         <label for="weight">{{ __('food.weight_kg') }}</label>
                         <input type="number" id="weight" name="weight" placeholder="{{ __('food.weight_kg') }}"
                             value="{{ old('weight', $user->weight) }}" required>
                     </div>
 
-                    <!-- Height input -->
                     <div class="form-group">
                         <label for="height">{{ __('food.height_cm') }}</label>
                         <input type="number" id="height" name="height" placeholder="{{ __('food.height_cm') }}"
                             value="{{ old('height', $user->height) }}" required>
                     </div>
 
-                    <!-- Age input -->
                     <div class="form-group">
                         <label for="age">{{ __('food.age') }}</label>
                         <input type="number" id="age" name="age" placeholder="{{ __('food.age') }}" value="{{ old('age', $user->age) }}" required>
                     </div>
 
-                    <!-- Activity level select -->
                     <div class="form-group">
                         <label for="activity_level">{{ __('food.activity_level') }}</label>
                         <select id="activity_level" name="activity_level" required>
@@ -57,7 +53,6 @@
                         </select>
                     </div>
 
-                    <!-- Goal select -->
                     <div class="form-group">
                         <label for="goal_type">{{ __('food.goal') }}</label>
                         <select id="goal_type" name="goal_type" required>
@@ -68,7 +63,6 @@
                         </select>
                     </div>
 
-                    <!-- Calculate button -->
                     <button type="submit" class="calculate-btn">
                         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#ffffffff">
                             <path d="M320-240h60v-80h80v-60h-80v-80h-60v80h-80v60h80v80Zm200-30h200v-60H520v60Zm0-100h200v-60H520v60Zm44-152 56-56 56 56 42-42-56-58 56-56-42-42-56 56-56-56-42 42 56 56-56 58 42 42Zm-314-70h200v-60H250v60Zm-50 472q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/>
@@ -81,7 +75,7 @@
 
         @isset($calories)
             <section aria-labelledby="results-heading">
-                <!-- Results display -->
+
                 <h3 id="results-heading">{{ __('food.your_results') }}</h3>
                 <div class="kpi-container">
                     <div class="kpi-card">
@@ -124,6 +118,6 @@
 @endsection
 
 @section('scripts')
-    <!-- Page-specific JavaScript for calorie calculator -->
+
     <script src="{{ asset('js/calories.js') }}"></script>
 @endsection

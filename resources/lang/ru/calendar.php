@@ -26,7 +26,6 @@ return [
     'fri' => 'Пт',
     'sat' => 'Сб',
 
-    // Activity Calendar page
     'page_title' => 'FitLife — Календарь активности',
     'activity_calendar' => 'Календарь активности',
     'subtitle' => 'Планируйте тренировки и отслеживайте прогресс',
@@ -40,7 +39,6 @@ return [
     'filter_by_type' => 'Фильтр по типу:',
     'all_events' => 'Все события',
 
-    // Event types
     'type_workout' => 'Тренировка',
     'type_rest' => 'Отдых',
     'type_goal' => 'Цель',
@@ -56,10 +54,9 @@ return [
     'type_walking' => 'Прогулка',
     'type_meditation' => 'Медитация',    'type_custom' => 'Свой тип',
 
-    // Custom type
     'custom_type_name' => 'Название типа',
     'custom_type_placeholder' => 'Введите тип активности...',
-    // New UI elements
+
     'this_month_stats' => 'Статистика за месяц',
     'total_events' => 'Всего событий',
     'completed' => 'Выполнено',
@@ -75,7 +72,6 @@ return [
     'delete' => 'Удалить',
     'delete_confirm' => 'Вы уверены, что хотите удалить это событие? Это действие нельзя отменить.',
 
-    // Month names
     'january' => 'Январь',
     'february' => 'Февраль',
     'march' => 'Март',

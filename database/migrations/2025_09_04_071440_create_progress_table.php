@@ -10,8 +10,8 @@ return new class extends Migration
     {
         Schema::create('progress', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // связь с пользователем
-            $table->string('photo'); // путь к фото
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('photo');
             $table->string('description')->nullable();
             $table->timestamps();
         });

@@ -21,32 +21,25 @@ use App\Http\Controllers\GroupController;
 use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Route;
 
-// Главная страница
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-// Политика конфиденциальности и условия
 Route::get('/privacy-policy', fn () => view('privacy-policy'))->name('privacy-policy');
 Route::get('/terms-of-service', fn () => view('terms-of-service'))->name('terms-of-service');
 
-// Authentication routes
 Route::middleware('web')->group(function () {
     require __DIR__.'/auth.php';
 });
 
-// **Подключаем админку**
 require __DIR__.'/admin.php';
 
-// Все маршруты для авторизованных пользователей
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    // Настройки
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
     Route::patch('/settings/language', [SettingsController::class, 'updateLanguage'])->name('settings.language');
 
-    // Профиль
     Route::prefix('profile')->group(function () {
         Route::get('/', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::get('/{user}', [ProfileController::class, 'show'])->name('profile.show');
@@ -55,22 +48,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.avatar.update');
     });
 
-    // Друзья
     Route::prefix('friends')->group(function () {
         Route::post('/{user}', [FriendController::class, 'store'])->name('friends.store');
         Route::post('/{user}/accept', [FriendController::class, 'accept'])->name('friends.accept');
         Route::delete('/{user}', [FriendController::class, 'remove'])->name('friends.remove');
     });
 
-    // Подписки (follow/unfollow)
     Route::post('/follow/{user}', [FollowController::class, 'toggle'])->name('follow.toggle');
     Route::get('/profile/{user}/followers', [FollowController::class, 'followers'])->name('follow.followers');
     Route::get('/profile/{user}/following', [FollowController::class, 'following'])->name('follow.following');
 
-    // Рейтинг пользователей
     Route::get('/leaderboard', [LeaderboardController::class, 'index'])->name('leaderboard.index');
 
-    // Трекер еды
     Route::prefix('tracker/foods')->group(function () {
         Route::get('/', [FoodController::class, 'index'])->name('foods.index');
         Route::post('/lookup', [FoodController::class, 'lookup'])->name('foods.lookup');
@@ -79,19 +68,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::delete('/log/{mealLog}', [FoodController::class, 'destroy'])->name('foods.destroy');
     });
 
-    // Трекер сна
     Route::prefix('tracker/sleep')->group(function () {
         Route::get('/', [SleepController::class, 'index'])->name('sleep.index');
         Route::post('/', [SleepController::class, 'store'])->name('sleep.store');
     });
 
-    // Трекер воды
     Route::prefix('tracker/water')->group(function () {
         Route::get('/', [WaterController::class, 'index'])->name('water.index');
         Route::post('/', [WaterController::class, 'store'])->name('water.store');
     });
 
-    // Прогресс-фото
     Route::prefix('progress-photos')->group(function () {
         Route::get('/', [ProgressPhotoController::class, 'index'])->name('progress.index');
         Route::post('/', [ProgressPhotoController::class, 'store'])->name('progress.store');
@@ -99,7 +85,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::delete('/{progress}', [ProgressPhotoController::class, 'destroy'])->name('progress.destroy');
     });
 
-    // Цели
     Route::prefix('goals')->group(function () {
         Route::get('/', [GoalController::class, 'index'])->name('goals.index');
         Route::get('/create', [GoalController::class, 'create'])->name('goals.create');
@@ -111,20 +96,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::delete('/{goal}', [GoalController::class, 'destroy'])->name('goals.destroy');
     });
 
-    // Калькулятор калорий
     Route::prefix('calories')->group(function () {
         Route::get('/', [CalorieCalculatorController::class, 'index'])->name('calories.index');
         Route::post('/', [CalorieCalculatorController::class, 'calculate'])->name('calories.calculate');
     });
 
-    // Биография
     Route::prefix('biography')->group(function () {
         Route::get('/', [BiographyController::class, 'edit'])->name('biography.edit');
         Route::post('/', [BiographyController::class, 'store'])->name('biography.store');
         Route::patch('/', [BiographyController::class, 'update'])->name('biography.update');
     });
 
-    // Посты и комментарии
     Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
     Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
     Route::put('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
@@ -139,7 +121,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/comments/{comment}/toggle-reaction', [CommentController::class, 'toggleReaction'])->name('comments.toggle-reaction');
     Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
 
-    // Календарь активности
     Route::prefix('calendar')->group(function () {
         Route::get('/', [CalendarController::class, 'index'])->name('activity-calendar');
         Route::post('/', [CalendarController::class, 'store'])->name('calendar.store');
@@ -148,22 +129,28 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/events', [CalendarController::class, 'getEvents'])->name('calendar.events');
     });
 
-    // Чаты — единая страница
     Route::get('/chats', [ConversationController::class, 'chats'])->name('chats.index');
+    Route::get('/favorites', [ConversationController::class, 'favorites'])->name('favorites.index');
 
-    // Личные сообщения
     Route::prefix('conversations')->group(function () {
         Route::get('/', [ConversationController::class, 'index'])->name('conversations.index');
         Route::post('/start/{user}', [ConversationController::class, 'start'])->name('conversations.start');
         Route::get('/{conversation}', [ConversationController::class, 'show'])->name('conversations.show');
         Route::post('/{conversation}', [ConversationController::class, 'send'])->name('conversations.send');
         Route::get('/{conversation}/poll', [ConversationController::class, 'poll'])->name('conversations.poll');
+        Route::get('/{conversation}/history', [ConversationController::class, 'loadHistory'])->name('conversations.history');
+        Route::get('/{conversation}/search', [ConversationController::class, 'search'])->name('conversations.search');
+        Route::post('/{conversation}/typing', [ConversationController::class, 'typing'])->name('conversations.typing');
+        Route::get('/{conversation}/typing-status', [ConversationController::class, 'typingStatus'])->name('conversations.typingStatus');
         Route::put('/{conversation}/messages/{message}', [ConversationController::class, 'editMessage'])->name('conversations.editMessage');
         Route::delete('/{conversation}/messages/{message}', [ConversationController::class, 'deleteMessage'])->name('conversations.deleteMessage');
         Route::post('/{conversation}/messages/{message}/react', [ConversationController::class, 'reactMessage'])->name('conversations.reactMessage');
+        Route::post('/{conversation}/messages/{message}/forward', [ConversationController::class, 'forward'])->name('conversations.forward');
+        Route::post('/{conversation}/messages/{message}/pin', [ConversationController::class, 'pinMessage'])->name('conversations.pinMessage');
+        Route::post('/{conversation}/messages/{message}/favorite', [ConversationController::class, 'toggleFavorite'])->name('conversations.toggleFavorite');
+        Route::post('/{conversation}/theme', [ConversationController::class, 'setTheme'])->name('conversations.setTheme');
     });
 
-    // Группы
     Route::prefix('groups')->group(function () {
         Route::get('/', [GroupController::class, 'index'])->name('groups.index');
         Route::get('/create', [GroupController::class, 'create'])->name('groups.create');
@@ -175,13 +162,27 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/{group}/leave', [GroupController::class, 'leave'])->name('groups.leave');
         Route::delete('/{group}', [GroupController::class, 'destroy'])->name('groups.destroy');
         Route::get('/{group}/poll', [GroupController::class, 'poll'])->name('groups.poll');
+        Route::get('/{group}/history', [GroupController::class, 'loadHistory'])->name('groups.history');
+        Route::get('/{group}/search', [GroupController::class, 'search'])->name('groups.search');
+        Route::post('/{group}/typing', [GroupController::class, 'typing'])->name('groups.typing');
+        Route::get('/{group}/typing-status', [GroupController::class, 'typingStatus'])->name('groups.typingStatus');
         Route::post('/{group}/avatar', [GroupController::class, 'updateAvatar'])->name('groups.avatar');
+        Route::put('/{group}/name', [GroupController::class, 'updateName'])->name('groups.updateName');
+        Route::put('/{group}/description', [GroupController::class, 'updateDescription'])->name('groups.updateDescription');
+        Route::post('/{group}/members/{user}/role', [GroupController::class, 'setRole'])->name('groups.setRole');
+        Route::delete('/{group}/members/{user}', [GroupController::class, 'removeMember'])->name('groups.removeMember');
         Route::put('/{group}/messages/{message}', [GroupController::class, 'editMessage'])->name('groups.editMessage');
         Route::delete('/{group}/messages/{message}', [GroupController::class, 'deleteMessage'])->name('groups.deleteMessage');
         Route::post('/{group}/messages/{message}/react', [GroupController::class, 'reactMessage'])->name('groups.reactMessage');
+        Route::post('/{group}/messages/{message}/forward', [GroupController::class, 'forward'])->name('groups.forward');
+        Route::post('/{group}/messages/{message}/pin', [GroupController::class, 'pinMessage'])->name('groups.pinMessage');
+        Route::post('/{group}/messages/{message}/favorite', [GroupController::class, 'toggleFavorite'])->name('groups.toggleFavorite');
+        Route::post('/{group}/theme', [GroupController::class, 'setTheme'])->name('groups.setTheme');
+        Route::post('/{group}/polls', [GroupController::class, 'createPoll'])->name('groups.createPoll');
+        Route::post('/{group}/polls/{poll}/vote', [GroupController::class, 'votePoll'])->name('groups.votePoll');
+        Route::get('/{group}/members/search', [GroupController::class, 'searchMembers'])->name('groups.searchMembers');
     });
 
-    // Уведомления
     Route::prefix('notifications')->group(function () {
         Route::get('/', [NotificationController::class, 'index'])->name('notifications.index');
         Route::post('/invite/{invite}/accept', [NotificationController::class, 'acceptInvite'])->name('notifications.invite.accept');

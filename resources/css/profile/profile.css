@@ -1,13 +1,10 @@
-/* PROFILE PAGE STYLES - FitLife v2.0 */
 
-/* Profile Container */
 .profile-container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 var(--space-4);
 }
 
-/* Profile Header / Banner Section */
 .profile-header {
     position: relative;
     background: var(--bg-surface);
@@ -38,7 +35,6 @@
     background: linear-gradient(to bottom, transparent 50%, rgba(10, 10, 10, 0.8) 100%);
 }
 
-/* Profile Info Section */
 .profile-info {
     position: relative;
     padding: var(--space-6);
@@ -113,7 +109,6 @@
     gap: var(--space-3);
 }
 
-/* Profile Buttons */
 .btn-edit-profile {
     padding: var(--space-2) var(--space-5);
     background: var(--bg-elevated);
@@ -162,7 +157,6 @@
     transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
-/* Primary saved-state (always visible, no hover color swap) */
 .btn-save {
     background: var(--primary);
     color: var(--bg-base);
@@ -170,7 +164,6 @@
     box-shadow: var(--shadow-accent-md);
 }
 
-/* Secondary neutral button */
 .btn-cancel {
     background: var(--bg-elevated);
     color: var(--text-primary);
@@ -179,7 +172,6 @@
     box-shadow: var(--shadow-sm);
 }
 
-/* Danger action (delete) */
 .btn-delete {
     background: var(--danger);
     color: white;
@@ -187,7 +179,6 @@
     box-shadow: 0 6px 18px rgba(239,68,68,0.18);
 }
 
-/* Remove hover color changes — keep visual state stable on hover */
 .btn-save:hover,
 .btn-cancel:hover,
 .btn-delete:hover {
@@ -212,7 +203,6 @@
     color: var(--text-muted);
 }
 
-/* Profile Content Tabs */
 .profile-tabs {
     display: flex;
     gap: var(--space-2);
@@ -243,7 +233,6 @@
     border-bottom-color: var(--primary);
 }
 
-/* Tab Content */
 .tab-content {
     display: none;
 }
@@ -252,7 +241,6 @@
     display: block;
 }
 
-/* Profile Cards Section */
 .profile-cards {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -274,7 +262,6 @@
     margin-bottom: var(--space-4);
 }
 
-/* Biography Card */
 .bio-item {
     display: flex;
     justify-content: space-between;
@@ -297,7 +284,6 @@
     font-size: var(--text-sm);
 }
 
-/* Goals Card */
 .goals-list {
     display: flex;
     flex-direction: column;
@@ -331,7 +317,6 @@
     transition: width var(--transition-base);
 }
 
-/* Edit Profile Form */
 .edit-profile-form {
     background: var(--bg-surface);
     border: 1px solid var(--border-subtle);
@@ -454,7 +439,6 @@
     color: var(--danger);
 }
 
-/* Friends List */
 .friends-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -500,9 +484,6 @@
     color: var(--text-muted);
 }
 
-/* PROFILE EDIT PAGE STYLES */
-
-/* Page Header */
 header h1 {
     font-size: var(--text-2xl);
     font-weight: var(--font-bold);
@@ -510,7 +491,6 @@ header h1 {
     margin-bottom: var(--space-2);
 }
 
-/* Alert Messages */
 .alert {
     padding: var(--space-4);
     border-radius: var(--radius-md);
@@ -524,7 +504,6 @@ header h1 {
     color: var(--primary-light);
 }
 
-/* Profile Card Section */
 .profile-card {
     background: var(--bg-surface);
     border: 1px solid var(--border-subtle);
@@ -542,7 +521,6 @@ header h1 {
     border-bottom: 1px solid var(--border-subtle);
 }
 
-/* Banner with Avatar Section */
 .profile-banner {
     margin-bottom: var(--space-6);
 }
@@ -612,7 +590,6 @@ header h1 {
     color: var(--bg-base);
 }
 
-/* Profile Form */
 .profile-form {
     display: flex;
     flex-direction: column;
@@ -663,14 +640,12 @@ header h1 {
     color: var(--text-muted);
 }
 
-/* Error Text */
 .error-text {
     color: var(--danger);
     font-size: var(--text-xs);
     margin-top: var(--space-1);
 }
 
-/* Save Button */
 .save-btn {
     display: inline-flex;
     align-items: center;
@@ -698,7 +673,6 @@ header h1 {
     height: 18px;
 }
 
-/* Delete Button */
 .delete-btn {
     display: inline-flex;
     align-items: center;
@@ -725,63 +699,60 @@ header h1 {
     height: 18px;
 }
 
-/* Muted Text */
 .muted {
     color: var(--text-muted);
     font-size: var(--text-sm);
     margin-bottom: var(--space-4);
 }
 
-/* RESPONSIVE */
-
 @media (max-width: 768px) {
     .profile-banner {
         height: 150px;
     }
-    
+
     .banner-bg {
         height: 150px;
     }
-    
+
     .banner-avatar {
         width: 80px;
         height: 80px;
     }
-    
+
     .profile-avatar {
         width: 100px;
         height: 100px;
         top: -50px;
     }
-    
+
     .profile-info {
         padding-top: var(--space-14);
     }
-    
+
     .profile-details {
         flex-direction: column;
     }
-    
+
     .profile-actions {
         width: 100%;
     }
-    
+
     .profile-actions button {
         flex: 1;
     }
-    
+
     .profile-stats {
         justify-content: space-around;
     }
-    
+
     .profile-tabs {
         padding: 0 var(--space-4);
     }
-    
+
     .profile-cards {
         grid-template-columns: 1fr;
     }
-    
+
     .profile-form .form-grid {
         grid-template-columns: 1fr;
     }
@@ -791,13 +762,11 @@ header h1 {
     .profile-name {
         font-size: var(--text-xl);
     }
-    
+
     .form-grid {
         grid-template-columns: 1fr;
     }
 }
-
-/* FORM INPUTS & FIELDS */
 
 .form-input {
     width: 100%;
@@ -832,15 +801,12 @@ header h1 {
     opacity: 0.6;
 }
 
-/* Textarea styling */
 .form-input[type="textarea"],
 textarea.form-input {
     resize: vertical;
     min-height: 100px;
     font-family: inherit;
 }
-
-/* FORM ACTIONS & BUTTONS */
 
 .form-actions {
     display: flex;
@@ -947,8 +913,6 @@ textarea.form-input {
     height: 18px;
 }
 
-/* DANGER ZONE */
-
 .profile-card-danger {
     border-left: 4px solid var(--danger);
 }
@@ -974,29 +938,25 @@ textarea.form-input {
     font-weight: var(--font-semibold);
 }
 
-/* FORM GROUP FULL WIDTH */
-
 .form-group-full {
     grid-column: 1 / -1;
 }
-
-/* RESPONSIVE ADJUSTMENTS */
 
 @media (max-width: 768px) {
     .form-actions {
         flex-direction: column-reverse;
     }
-    
+
     .save-btn,
     .btn-cancel,
     .delete-btn {
         width: 100%;
     }
-    
+
     .profile-card {
         padding: var(--space-4);
     }
-    
+
     .profile-card h3 {
         font-size: var(--text-base);
     }
@@ -1006,38 +966,34 @@ textarea.form-input {
     .form-input {
         font-size: 16px;
     }
-    
+
     .profile-banner {
         margin-bottom: var(--space-4);
     }
-    
+
     .banner-avatar {
         width: 80px;
         height: 80px;
         border-width: 3px;
     }
-    
+
     .change-avatar-label {
         font-size: var(--text-xs);
         padding: var(--space-1) var(--space-2);
     }
-    
+
     .section-description {
         padding: var(--space-3);
         font-size: var(--text-xs);
     }
 }
 
-/* PROFILE EDIT PAGE — Redesigned v2.0 */
-
-/* Page Container */
 .profile-edit-page {
     max-width: 1100px;
     margin: 0 auto;
     padding: 0;
 }
 
-/* Back Link */
 .pe-back-link {
     display: inline-flex;
     align-items: center;
@@ -1065,7 +1021,6 @@ textarea.form-input {
     transition: transform var(--transition-fast);
 }
 
-/* Page Header */
 .pe-header {
     display: flex;
     align-items: center;
@@ -1106,7 +1061,6 @@ textarea.form-input {
     margin: 0;
 }
 
-/* Alerts */
 .pe-alert {
     display: flex;
     align-items: center;
@@ -1155,7 +1109,6 @@ textarea.form-input {
     }
 }
 
-/* Layout: Sidebar + Content */
 .pe-layout {
     display: grid;
     grid-template-columns: 260px 1fr;
@@ -1163,7 +1116,6 @@ textarea.form-input {
     align-items: start;
 }
 
-/* Sidebar */
 .pe-sidebar__card {
     background: var(--bg-surface);
     border: 1px solid var(--border-subtle);
@@ -1294,7 +1246,6 @@ textarea.form-input {
     color: var(--danger);
 }
 
-/* Content Cards */
 .pe-content {
     display: flex;
     flex-direction: column;
@@ -1383,7 +1334,6 @@ textarea.form-input {
     color: var(--text-muted);
 }
 
-/* Banner Preview */
 .pe-banner-preview__bg {
     position: relative;
     width: 100%;
@@ -1454,7 +1404,7 @@ textarea.form-input {
     gap: var(--space-2);
     padding: var(--space-2) var(--space-4);
     background: rgba(0, 0, 0, 0.6);
-    
+
     color: var(--text-primary);
     font-size: var(--text-sm);
     font-weight: var(--font-medium);
@@ -1469,7 +1419,6 @@ textarea.form-input {
     color: var(--bg-base);
 }
 
-/* Form Styles */
 .pe-form {
     display: flex;
     flex-direction: column;
@@ -1563,7 +1512,6 @@ textarea.form-input {
     color: var(--primary);
 }
 
-/* Fix: icon is before input, use wrap focus-within */
 .pe-form__input-wrap:focus-within .pe-form__input-icon {
     color: var(--primary);
 }
@@ -1613,7 +1561,6 @@ textarea.form-input {
     margin-top: var(--space-1);
 }
 
-/* Form Actions */
 .pe-form__actions {
     display: flex;
     gap: var(--space-3);
@@ -1623,7 +1570,6 @@ textarea.form-input {
     border-top: 1px solid var(--border-subtle);
 }
 
-/* Buttons */
 .pe-btn {
     display: inline-flex;
     align-items: center;
@@ -1646,7 +1592,6 @@ textarea.form-input {
     flex-shrink: 0;
 }
 
-/* Primary (green) */
 .pe-btn--primary {
     background: var(--primary);
     color: var(--bg-base);
@@ -1663,7 +1608,6 @@ textarea.form-input {
     transform: translateY(0);
 }
 
-/* Secondary (neutral) */
 .pe-btn--secondary {
     background: var(--bg-elevated);
     color: var(--text-primary);
@@ -1676,7 +1620,6 @@ textarea.form-input {
     background: var(--bg-hover);
 }
 
-/* Danger (red) */
 .pe-btn--danger {
     background: var(--danger);
     color: white;
@@ -1693,7 +1636,6 @@ textarea.form-input {
     transform: translateY(0);
 }
 
-/* Danger Zone Box */
 .pe-danger-box {
     display: flex;
     align-items: center;
@@ -1723,8 +1665,6 @@ textarea.form-input {
     color: var(--text-secondary);
     font-weight: var(--font-semibold);
 }
-
-/* PROFILE EDIT - RESPONSIVE */
 
 @media (max-width: 1024px) {
     .pe-layout {
@@ -1857,7 +1797,7 @@ textarea.form-input {
     }
 
     .pe-form__input {
-        font-size: 16px; /* Prevents iOS zoom */
+        font-size: 16px;
     }
 
     .pe-form__textarea {

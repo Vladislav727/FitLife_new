@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('media_type')->nullable()->after('media_path');
         });
 
-        // Make body nullable for media-only messages
         Schema::table('conversation_messages', function (Blueprint $table) {
             $table->text('body')->nullable()->change();
         });

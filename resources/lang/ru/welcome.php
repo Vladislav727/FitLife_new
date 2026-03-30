@@ -1,29 +1,24 @@
 <?php
 
 return [
-    // Page title
+
     'page_title' => 'FitLife - Ваш путь к здоровью',
 
-    // Navigation
     'nav_features' => 'Возможности',
     'nav_testimonials' => 'Отзывы',
     'nav_about' => 'О нас',
 
-    // Auth buttons
     'dashboard' => 'Панель управления',
     'log_in' => 'Войти',
     'sign_up' => 'Регистрация',
 
-    // Hero section
     'hero_title' => 'Преобразите свою жизнь с FitLife',
     'hero_subtitle' => 'Откройте для себя умный способ достижения фитнес-целей с нашей универсальной платформой.',
     'hero_hidden_title' => 'Добро пожаловать',
 
-    // Features section
     'features_title' => 'Почему FitLife?',
     'features_subtitle' => 'Инструменты, созданные для реальных результатов.',
 
-    // Feature cards
     'feature_workouts_title' => 'Персональные тренировки',
     'feature_workouts_desc' => 'Создавайте индивидуальные планы тренировок под ваши цели. Доступ к урокам и синхронизация с устройствами.',
     'feature_workouts_alt' => 'Человек поднимает штангу',
@@ -48,7 +43,6 @@ return [
     'feature_goals_desc' => 'Ставьте и отслеживайте фитнес-цели с персональными обновлениями.',
     'feature_goals_alt' => 'Медитация осознанности',
 
-    // Testimonials section
     'testimonials_title' => 'Что говорят наши пользователи',
     'testimonials_subtitle' => 'Реальные истории от пользователей FitLife.',
 
@@ -61,11 +55,9 @@ return [
     'testimonial_3_text' => '"Лучший сон улучшил мои тренировки."',
     'testimonial_3_author' => '- Лиза М.',
 
-    // About section
     'about_title' => 'О FitLife',
     'about_text' => 'С 2020 года FitLife помогает миллионам людей вести здоровый образ жизни.',
 
-    // Footer
     'footer_copyright' => '© :year FitLife. Все права защищены.',
     'footer_privacy' => 'Политика конфиденциальности',
     'footer_terms' => 'Условия использования',

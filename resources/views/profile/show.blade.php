@@ -5,7 +5,6 @@
 @section('content')
 <div class="sp-page">
 
-    {{-- Profile Header Card --}}
     <div class="sp-header-card">
         <div class="sp-banner">
             @if($user->banner)
@@ -45,7 +44,6 @@
                 </div>
                 <span class="sp-username">{{ '@' . $user->username }}</span>
 
-                {{-- Stats Row --}}
                 <div class="sp-stats-row">
                     <div class="sp-stat">
                         <span class="sp-stat__value">{{ $user->posts_count ?? $user->posts->count() }}</span>
@@ -61,7 +59,6 @@
                     </a>
                 </div>
 
-                {{-- Bio --}}
                 @if($user->bio)
                     <p class="sp-bio">{{ $user->bio }}</p>
                 @endif
@@ -69,7 +66,6 @@
         </div>
     </div>
 
-    {{-- Content Tabs --}}
     <div class="sp-tabs">
         <button class="sp-tab active" data-sp-tab="posts">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
@@ -81,7 +77,6 @@
         </button>
     </div>
 
-    {{-- Posts Tab --}}
     <div class="sp-tab-content active" id="sptab-posts">
         @forelse($user->posts()->latest()->get() as $post)
             <article class="post-card" id="post-{{ $post->id }}">
@@ -125,7 +120,6 @@
         @endforelse
     </div>
 
-    {{-- About Tab --}}
     <div class="sp-tab-content" id="sptab-about">
         <div class="sp-about-grid">
             <div class="sp-card">

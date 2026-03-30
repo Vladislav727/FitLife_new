@@ -21,10 +21,10 @@
 </head>
 <body>
     @auth
-    <!-- Main Header -->
+
     <header class="main-header" id="mainHeader">
         <div class="header-container">
-            <!-- Logo -->
+
             <a href="{{ route('dashboard') }}" class="header-logo">
                 <div class="header-logo-icon">
                     <svg viewBox="0 0 24 24"><path d="M13.5 5.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zM9.8 8.9L7 23h2.1l1.8-8 2.1 2v6h2v-7.5l-2.1-2 .6-3C14.8 12 16.8 13 19 13v-2c-1.9 0-3.5-1-4.3-2.4l-1-1.6c-.4-.6-1-1-1.7-1-.3 0-.5.1-.8.1L6 8.3V13h2V9.6l1.8-.7"/></svg>
@@ -32,7 +32,6 @@
                 <span class="header-logo-text">FitLife</span>
             </a>
 
-            <!-- Main Navigation -->
             <nav class="header-nav">
                 <a href="{{ route('dashboard') }}" class="nav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
@@ -92,14 +91,12 @@
                 @endif
             </nav>
 
-            <!-- Header Actions -->
             <div class="header-actions">
-                <!-- Mobile Menu Button -->
+
                 <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
                     <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
                 </button>
 
-                <!-- User Menu -->
                 @php
                     $notifCount = Auth::user()->groupInvites()->count();
                     $unreadMsgCount = \App\Models\ConversationMessage::whereHas('conversation', function($q) {
@@ -110,9 +107,9 @@
                 <div class="user-menu" id="userMenu">
                     <button class="user-menu-trigger" id="userMenuTrigger">
                         <div class="user-menu-avatar-wrap">
-                            <img 
-                                src="{{ Auth::user()->avatar ? asset('storage/' . Auth::user()->avatar) : asset('storage/logo/defaultPhoto.jpg') }}" 
-                                alt="{{ Auth::user()->name }}" 
+                            <img
+                                src="{{ Auth::user()->avatar ? asset('storage/' . Auth::user()->avatar) : asset('storage/logo/defaultPhoto.jpg') }}"
+                                alt="{{ Auth::user()->name }}"
                                 class="user-menu-avatar"
                             >
                             @if($totalBadge > 0)
@@ -127,9 +124,9 @@
 
                     <div class="user-dropdown" id="userDropdown">
                         <div class="user-dropdown-header">
-                            <img 
-                                src="{{ Auth::user()->avatar ? asset('storage/' . Auth::user()->avatar) : asset('storage/logo/defaultPhoto.jpg') }}" 
-                                alt="{{ Auth::user()->name }}" 
+                            <img
+                                src="{{ Auth::user()->avatar ? asset('storage/' . Auth::user()->avatar) : asset('storage/logo/defaultPhoto.jpg') }}"
+                                alt="{{ Auth::user()->name }}"
                                 class="user-dropdown-avatar"
                             >
                             <div class="user-dropdown-info">
@@ -172,10 +169,8 @@
         </div>
     </header>
 
-    <!-- Mobile Menu Overlay -->
     <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
 
-    <!-- Mobile Menu Panel -->
     <aside class="mobile-menu-panel" id="mobileMenuPanel">
         <div class="mobile-menu-header">
             <a href="{{ route('dashboard') }}" class="mobile-menu-logo">
@@ -259,9 +254,9 @@
 
         <div class="mobile-menu-footer">
             <a href="{{ route('profile.edit') }}" class="mobile-user-card">
-                <img 
-                    src="{{ Auth::user()->avatar ? asset('storage/' . Auth::user()->avatar) : asset('storage/logo/defaultPhoto.jpg') }}" 
-                    alt="{{ Auth::user()->name }}" 
+                <img
+                    src="{{ Auth::user()->avatar ? asset('storage/' . Auth::user()->avatar) : asset('storage/logo/defaultPhoto.jpg') }}"
+                    alt="{{ Auth::user()->name }}"
                     class="mobile-user-avatar"
                 >
                 <div class="mobile-user-info">
@@ -272,7 +267,6 @@
         </div>
     </aside>
 
-    <!-- Mobile Bottom Navigation -->
     <nav class="mobile-bottom-nav">
         <div class="mobile-nav-items">
             <a href="{{ route('dashboard') }}" class="mobile-nav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
@@ -298,7 +292,6 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <main class="main-content">
         <div class="content-wrapper">
             @yield('content')
@@ -306,7 +299,7 @@
     </main>
 
     @else
-    <!-- Guest Layout -->
+
     <main>
         @yield('content')
     </main>
@@ -325,7 +318,7 @@
             // User menu toggle
             const userMenu = document.getElementById('userMenu');
             const userMenuTrigger = document.getElementById('userMenuTrigger');
-            
+
             if (userMenu && userMenuTrigger) {
                 userMenuTrigger.addEventListener('click', (e) => {
                     e.stopPropagation();
@@ -375,14 +368,14 @@
                     this.init();
                     const toast = document.createElement('div');
                     toast.className = `toast toast-${type}`;
-                    
+
                     const icons = {
                         success: '<svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>',
                         error: '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>',
                         warning: '<svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-8h2v8z"/></svg>',
                         info: '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>'
                     };
-                    
+
                     toast.innerHTML = `
                         <div class="toast-icon">${icons[type] || icons.info}</div>
                         <div class="toast-message">${message}</div>
@@ -390,14 +383,14 @@
                             <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
                         </button>
                     `;
-                    
+
                     this.container.appendChild(toast);
-                    
+
                     // Trigger animation
                     requestAnimationFrame(() => {
                         toast.classList.add('show');
                     });
-                    
+
                     // Auto remove
                     setTimeout(() => {
                         toast.classList.remove('show');

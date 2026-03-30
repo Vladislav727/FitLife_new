@@ -22,7 +22,6 @@ return [
     'update_password' => 'Update Password',
     'password_updated' => 'Password updated successfully',
 
-    // Navigation
     'home' => 'Home',
     'features' => 'Features',
     'testimonials' => 'Testimonials',
@@ -31,48 +30,40 @@ return [
     'log_in' => 'Log In',
     'sign_up' => 'Sign Up',
 
-    // Login page
     'welcome_back' => 'Welcome Back',
     'login_subtitle' => 'Sign in to your FitLife account',
     'fitlife_account' => 'FitLife account',
     'login_cta' => 'Sign In',
 
-    // Register page
     'create_account' => 'Create Your Account',
     'register_subtitle' => 'Join FitLife and start your fitness journey',
     'start_journey' => 'and start your journey',
     'register_cta' => 'Create Account',
 
-    // Footer
     'privacy_policy' => 'Privacy Policy',
     'terms_of_service' => 'Terms of Service',
     'contact_us' => 'Contact Us',
     'all_rights_reserved' => 'All rights reserved.',
 
-    // Confirm password
     'confirm' => 'Confirm',
     'confirm_password_subtitle' => 'This is a secure area. Please confirm your password before continuing.',
     'secure_area_message' => 'This is a secure area of the application. Please confirm your password before continuing.',
 
-    // Forgot password
     'forgot_password_title' => 'Forgot Password',
     'forgot_password_subtitle' => 'Enter your email and we\'ll send you a reset link',
     'forgot_password_message' => 'Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.',
     'email_password_reset_link' => 'Email Password Reset Link',
     'back_to_login' => 'Back to Login',
 
-    // Reset password
     'reset_password_subtitle' => 'Enter your new password below',
     'set_new_password' => 'Set New Password',
 
-    // Verify email
     'verify_email' => 'Verify Email',
     'verify_email_subtitle' => 'Please verify your email address',
     'verify_email_message' => 'Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.',
     'verification_link_sent' => 'A new verification link has been sent to the email address you provided during registration.',
     'resend_verification_email' => 'Resend Verification Email',
 
-    // Additional keys
     'have_account' => 'Already have an account?',
     'agree_terms_prefix' => 'I agree to the',
     'terms' => 'Terms of Service',

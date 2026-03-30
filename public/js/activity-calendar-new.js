@@ -1,39 +1,29 @@
-/**
- * FitLife Activity Calendar v3.0
- * Modern, feature-rich calendar component
- */
 
 document.addEventListener('DOMContentLoaded', () => {
-    // ═══════════════════════════════════════════════════════════════════════════
-    // DOM ELEMENTS
-    // ═══════════════════════════════════════════════════════════════════════════
+
     const elements = {
-        // Main Calendar
+
         calendarDays: document.getElementById('calendar-days'),
         currentMonth: document.querySelector('.current-month'),
         prevMonthBtn: document.querySelector('.prev-month'),
         nextMonthBtn: document.querySelector('.next-month'),
         todayBtn: document.getElementById('today-btn'),
-        
-        // Mini Calendar
+
         miniCalendarGrid: document.querySelector('.mini-calendar-grid'),
         miniMonthYear: document.querySelector('.mini-month-year'),
         prevMiniBtn: document.querySelector('.prev-mini'),
         nextMiniBtn: document.querySelector('.next-mini'),
-        
-        // Events Panel
+
         eventsTimeline: document.getElementById('events-timeline'),
         selectedDateTitle: document.getElementById('selected-date-title'),
         eventFilter: document.getElementById('event-filter'),
         upcomingList: document.getElementById('upcoming-list'),
-        
-        // Stats
+
         totalEvents: document.getElementById('total-events'),
         completedEvents: document.getElementById('completed-events'),
         workoutCount: document.getElementById('workout-count'),
         streakCount: document.getElementById('streak-count'),
-        
-        // Modal
+
         eventModal: document.getElementById('event-modal'),
         eventForm: document.getElementById('event-form'),
         modalTitle: document.getElementById('modal-title'),
@@ -44,30 +34,23 @@ document.addEventListener('DOMContentLoaded', () => {
         closeModalBtn: document.getElementById('close-modal'),
         cancelBtn: document.getElementById('cancel-btn'),
         addFirstEventBtn: document.getElementById('add-first-event'),
-        
-        // Delete Modal
+
         deleteModal: document.getElementById('delete-modal'),
         deleteEventId: document.getElementById('delete-event-id'),
         closeDeleteModalBtn: document.getElementById('close-delete-modal'),
         cancelDeleteBtn: document.getElementById('cancel-delete-btn'),
         confirmDeleteBtn: document.getElementById('confirm-delete-btn'),
-        
-        // Quick Add
+
         quickBtns: document.querySelectorAll('.quick-btn'),
-        
-        // Toast
+
         toastContainer: document.getElementById('toast-container'),
     };
 
-    // ═══════════════════════════════════════════════════════════════════════════
-    // STATE
-    // ═══════════════════════════════════════════════════════════════════════════
     let currentDate = new Date();
     let selectedDate = new Date();
     let allEvents = [];
     let csrfToken = document.querySelector('meta[name="csrf-token"]')?.content;
-    
-    // Get translations from window object (set by Blade template)
+
     const translations = window.calendarTranslations || {
         noEventsToday: 'No events for this day',
         addFirstEvent: 'Add your first event',
@@ -77,9 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
         noDescription: 'No description'
     };
 
-    // ═══════════════════════════════════════════════════════════════════════════
-    // UTILITY FUNCTIONS
-    // ═══════════════════════════════════════════════════════════════════════════
     const formatDate = (date) => {
         const year = date.getFullYear();
         const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -118,15 +98,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const capitalizeFirst = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
-    // ═══════════════════════════════════════════════════════════════════════════
-    // TOAST NOTIFICATIONS
-    // ═══════════════════════════════════════════════════════════════════════════
     const showToast = (message, type = 'success') => {
         const toast = document.createElement('div');
         toast.className = `toast ${type}`;
         toast.innerHTML = `
             <svg class="toast-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                ${type === 'success' 
+                ${type === 'success'
                     ? '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline>'
                     : '<circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line>'
                 }
@@ -139,13 +116,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 </svg>
             </button>
         `;
-        
+
         elements.toastContainer.appendChild(toast);
-        
+
         toast.querySelector('.toast-close').addEventListener('click', () => {
             toast.remove();
         });
-        
+
         setTimeout(() => {
             if (toast.parentElement) {
                 toast.style.animation = 'slideIn 0.3s ease reverse';
@@ -154,9 +131,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 4000);
     };
 
-    // ═══════════════════════════════════════════════════════════════════════════
-    // API FUNCTIONS
-    // ═══════════════════════════════════════════════════════════════════════════
     const fetchEvents = async (startDate, endDate) => {
         try {
             const response = await fetch(`/calendar/events?start=${startDate}&end=${endDate}`, {
@@ -233,14 +207,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // ═══════════════════════════════════════════════════════════════════════════
-    // RENDER FUNCTIONS
-    // ═══════════════════════════════════════════════════════════════════════════
     const loadEvents = async () => {
         const start = new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1);
         const end = new Date(currentDate.getFullYear(), currentDate.getMonth() + 2, 0);
         allEvents = await fetchEvents(formatDate(start), formatDate(end));
-        
+
         renderCalendar();
         renderMiniCalendar();
         renderEventsPanel();
@@ -254,12 +225,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
         const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
-        
-        // Calculate offset (Monday = 0)
+
         let startOffset = firstDay.getDay() - 1;
         if (startOffset < 0) startOffset = 6;
 
-        // Previous month days
         const prevMonthLastDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
         for (let i = startOffset - 1; i >= 0; i--) {
             const day = prevMonthLastDay.getDate() - i;
@@ -267,13 +236,11 @@ document.addEventListener('DOMContentLoaded', () => {
             renderDay(date, true);
         }
 
-        // Current month days
         for (let day = 1; day <= lastDay.getDate(); day++) {
             const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
             renderDay(date, false);
         }
 
-        // Next month days
         const totalCells = elements.calendarDays.children.length;
         const remainingCells = totalCells % 7 === 0 ? 0 : 7 - (totalCells % 7);
         for (let day = 1; day <= remainingCells; day++) {
@@ -285,7 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const renderDay = (date, isOtherMonth) => {
         const dateStr = formatDate(date);
         const dayEvents = allEvents.filter(e => e.start === dateStr);
-        
+
         const dayEl = document.createElement('div');
         dayEl.className = 'calendar-day';
         if (isOtherMonth) dayEl.classList.add('other-month');
@@ -310,8 +277,7 @@ document.addEventListener('DOMContentLoaded', () => {
             dayEl.classList.add('selected');
             selectedDate = date;
             renderEventsPanel();
-            
-            // Update mini calendar selection
+
             document.querySelectorAll('.mini-day.selected').forEach(el => el.classList.remove('selected'));
             const miniDay = document.querySelector(`.mini-day[data-date="${dateStr}"]`);
             if (miniDay) miniDay.classList.add('selected');
@@ -328,7 +294,6 @@ document.addEventListener('DOMContentLoaded', () => {
         elements.miniCalendarGrid.innerHTML = '';
         elements.miniMonthYear.textContent = getMonthName(currentDate);
 
-        // Weekday headers
         const weekdays = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
         weekdays.forEach(day => {
             const header = document.createElement('div');
@@ -339,11 +304,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
         const lastDay = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
-        
+
         let startOffset = firstDay.getDay() - 1;
         if (startOffset < 0) startOffset = 6;
 
-        // Previous month
         const prevMonthLastDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
         for (let i = startOffset - 1; i >= 0; i--) {
             const day = prevMonthLastDay.getDate() - i;
@@ -351,13 +315,11 @@ document.addEventListener('DOMContentLoaded', () => {
             renderMiniDay(date, true);
         }
 
-        // Current month
         for (let day = 1; day <= lastDay.getDate(); day++) {
             const date = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
             renderMiniDay(date, false);
         }
 
-        // Next month
         const totalCells = elements.miniCalendarGrid.children.length;
         const remainingCells = totalCells % 7 === 0 ? 0 : 7 - (totalCells % 7);
         for (let day = 1; day <= remainingCells; day++) {
@@ -369,12 +331,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const renderMiniDay = (date, isOtherMonth) => {
         const dateStr = formatDate(date);
         const hasEvent = allEvents.some(e => e.start === dateStr);
-        
+
         const dayEl = document.createElement('div');
         dayEl.className = 'mini-day';
         dayEl.dataset.date = dateStr;
         dayEl.textContent = date.getDate();
-        
+
         if (isOtherMonth) dayEl.classList.add('other-month');
         if (isToday(date)) dayEl.classList.add('today');
         if (isSameDay(date, selectedDate)) dayEl.classList.add('selected');
@@ -382,20 +344,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         dayEl.addEventListener('click', () => {
             selectedDate = date;
-            
-            // If clicking on different month, navigate there
+
             if (date.getMonth() !== currentDate.getMonth()) {
                 currentDate = new Date(date.getFullYear(), date.getMonth(), 1);
                 renderCalendar();
                 renderMiniCalendar();
             } else {
-                // Update selection
+
                 document.querySelectorAll('.mini-day.selected').forEach(el => el.classList.remove('selected'));
                 dayEl.classList.add('selected');
-                
+
                 document.querySelectorAll('.calendar-day.selected').forEach(el => el.classList.remove('selected'));
                 const calDay = document.querySelector(`.calendar-day:not(.other-month)`);
-                // Find and select the calendar day
+
                 const calDays = document.querySelectorAll('.calendar-day:not(.other-month)');
                 calDays.forEach(d => {
                     if (d.querySelector('.day-number').textContent == date.getDate()) {
@@ -403,7 +364,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
             }
-            
+
             renderEventsPanel();
         });
 
@@ -414,7 +375,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const dateStr = formatDate(selectedDate);
         const filter = elements.eventFilter.value;
         let dayEvents = allEvents.filter(e => e.start === dateStr);
-        
+
         if (filter !== 'all') {
             dayEvents = dayEvents.filter(e => e.type === filter);
         }
@@ -446,7 +407,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="event-actions">
                         <button class="event-action-btn complete" data-id="${event.id}" title="${event.completed ? 'Mark incomplete' : 'Mark complete'}">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                ${event.completed 
+                                ${event.completed
                                     ? '<path d="M3 12a9 9 0 1 0 18 0 9 9 0 0 0 -18 0"></path><path d="M9 12l2 2l4 -4"></path>'
                                     : '<circle cx="12" cy="12" r="10"></circle>'
                                 }
@@ -464,7 +425,6 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `).join('');
 
-        // Add event listeners
         elements.eventsTimeline.querySelectorAll('.event-action-btn.complete').forEach(btn => {
             btn.addEventListener('click', async (e) => {
                 e.stopPropagation();
@@ -520,7 +480,6 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
         }).join('');
 
-        // Click to navigate to that date
         elements.upcomingList.querySelectorAll('.upcoming-item').forEach(item => {
             item.addEventListener('click', () => {
                 const date = new Date(item.dataset.date);
@@ -536,78 +495,69 @@ document.addEventListener('DOMContentLoaded', () => {
     const updateStats = () => {
         const monthStart = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
         const monthEnd = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
-        
-        // Filter events for current month only
+
         const monthEvents = allEvents.filter(e => {
             const date = new Date(e.start);
             return date >= monthStart && date <= monthEnd;
         });
 
-        // Count total events this month
         const total = monthEvents.length;
-        
-        // Count completed events
+
         const completed = monthEvents.filter(e => e.completed).length;
-        
-        // Count workout-type events (excluding rest and goal)
+
         const workoutTypes = ['workout', 'running', 'cycling', 'swimming', 'weightlifting', 'yoga', 'boxing', 'crossfit', 'hiking', 'dance', 'walking', 'meditation'];
         const workouts = monthEvents.filter(e => workoutTypes.includes(e.type)).length;
 
-        // Calculate streak - count consecutive days with completed workouts
         let streak = 0;
         const today = new Date();
         today.setHours(0, 0, 0, 0);
-        
+
         for (let i = 0; i < 365; i++) {
             const checkDate = new Date(today);
             checkDate.setDate(checkDate.getDate() - i);
             const dateStr = formatDate(checkDate);
-            const hasCompletedWorkout = allEvents.some(e => 
-                e.start === dateStr && 
-                e.completed && 
+            const hasCompletedWorkout = allEvents.some(e =>
+                e.start === dateStr &&
+                e.completed &&
                 workoutTypes.includes(e.type)
             );
             if (hasCompletedWorkout) {
                 streak++;
             } else if (i > 0) {
-                // Break streak if no workout (but allow today to not have one yet)
+
                 break;
             }
         }
 
-        // Update DOM
         if (elements.totalEvents) elements.totalEvents.textContent = total;
         if (elements.completedEvents) elements.completedEvents.textContent = completed;
         if (elements.workoutCount) elements.workoutCount.textContent = workouts;
         if (elements.streakCount) elements.streakCount.textContent = streak;
     };
 
-    // ═══════════════════════════════════════════════════════════════════════════
-    // MODAL FUNCTIONS
-    // ═══════════════════════════════════════════════════════════════════════════
     const openModal = (dateStr = null, type = null) => {
         elements.eventForm.reset();
         elements.eventId.value = '';
         elements.modalTitle.textContent = 'Add Event';
-        
+
         if (dateStr) {
             elements.eventDate.value = dateStr;
         } else {
             elements.eventDate.value = formatDate(selectedDate);
         }
-        
+
         if (type) {
             const typeRadio = document.querySelector(`input[name="type"][value="${type}"]`);
             if (typeRadio) typeRadio.checked = true;
         }
-        
+
         elements.eventModal.classList.add('active');
         elements.eventDate.focus();
     };
 
     const closeModal = () => {
         elements.eventModal.classList.remove('active');
-        // Reset custom type input
+
         const customTypeInput = document.getElementById('custom-type-input');
         const customTypeNameInput = document.getElementById('custom-type-name');
         if (customTypeInput) {
@@ -623,10 +573,6 @@ document.addEventListener('DOMContentLoaded', () => {
         elements.deleteEventId.value = '';
     };
 
-    // ═══════════════════════════════════════════════════════════════════════════
-    // EVENT LISTENERS
-    // ═══════════════════════════════════════════════════════════════════════════
-    // Navigation
     elements.prevMonthBtn?.addEventListener('click', () => {
         currentDate.setMonth(currentDate.getMonth() - 1);
         loadEvents();
@@ -653,22 +599,19 @@ document.addEventListener('DOMContentLoaded', () => {
         loadEvents();
     });
 
-    // Filter
     elements.eventFilter?.addEventListener('change', () => {
         renderEventsPanel();
     });
 
-    // Modal
     elements.openModalBtn?.addEventListener('click', () => openModal());
     elements.addFirstEventBtn?.addEventListener('click', () => openModal());
     elements.closeModalBtn?.addEventListener('click', closeModal);
     elements.cancelBtn?.addEventListener('click', closeModal);
-    
+
     elements.eventModal?.addEventListener('click', (e) => {
         if (e.target === elements.eventModal) closeModal();
     });
 
-    // Custom type toggle
     const customTypeRadio = document.getElementById('custom-type-radio');
     const customTypeInput = document.getElementById('custom-type-input');
     const customTypeNameInput = document.getElementById('custom-type-name');
@@ -686,10 +629,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Delete Modal
     elements.closeDeleteModalBtn?.addEventListener('click', closeDeleteModal);
     elements.cancelDeleteBtn?.addEventListener('click', closeDeleteModal);
-    
+
     elements.deleteModal?.addEventListener('click', (e) => {
         if (e.target === elements.deleteModal) closeDeleteModal();
     });
@@ -708,20 +650,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Form Submit
     elements.eventForm?.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
+
         const formData = new FormData(elements.eventForm);
         const selectedType = formData.get('type');
-        
-        // Validate type is selected
+
         if (!selectedType) {
             showToast('Please select an event type', 'error');
             return;
         }
-        
-        // Handle custom type
+
         if (selectedType === 'custom') {
             const customTypeName = formData.get('custom_type')?.trim();
             if (!customTypeName) {
@@ -729,15 +668,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('custom-type-name')?.focus();
                 return;
             }
-            // Replace 'custom' with the actual custom type name
+
             formData.set('type', customTypeName.toLowerCase().replace(/\s+/g, '_'));
         }
-        
+
         try {
             await createEvent(formData);
             showToast('Event created successfully!');
             closeModal();
-            // Reset custom type input
+
             if (customTypeInput) {
                 customTypeInput.style.display = 'none';
                 customTypeNameInput.value = '';
@@ -748,7 +687,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Quick Add Buttons
     elements.quickBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             const type = btn.dataset.type;
@@ -756,9 +694,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Keyboard shortcuts
     document.addEventListener('keydown', (e) => {
-        // Escape to close modals
+
         if (e.key === 'Escape') {
             if (elements.deleteModal.classList.contains('active')) {
                 closeDeleteModal();
@@ -766,8 +703,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 closeModal();
             }
         }
-        
-        // Arrow keys for navigation (when no modal open)
+
         if (!elements.eventModal.classList.contains('active') && !elements.deleteModal.classList.contains('active')) {
             if (e.key === 'ArrowLeft' && e.altKey) {
                 currentDate.setMonth(currentDate.getMonth() - 1);
@@ -776,7 +712,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentDate.setMonth(currentDate.getMonth() + 1);
                 loadEvents();
             } else if (e.key === 't' && !e.ctrlKey && !e.metaKey) {
-                // Don't trigger if typing in input
+
                 if (document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
                     currentDate = new Date();
                     selectedDate = new Date();
@@ -790,8 +726,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // ═══════════════════════════════════════════════════════════════════════════
-    // INITIALIZATION
-    // ═══════════════════════════════════════════════════════════════════════════
     loadEvents();
 });

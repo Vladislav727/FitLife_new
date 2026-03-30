@@ -379,7 +379,7 @@
     </style>
 </head>
 <body>
-    <!-- Navigation -->
+
     <nav>
         <a href="/" class="logo">
             <div class="logo-icon">F</div>
@@ -404,13 +404,11 @@
         <button class="mobile-menu" id="mobileMenu">☰</button>
     </nav>
 
-    <!-- Page Header -->
     <section class="page-header">
         <h1><span class="gradient">Terms of Service</span></h1>
         <p>Last updated: January 22, 2026</p>
     </section>
 
-    <!-- Content -->
     <main class="content">
         <div class="content-card">
             <h2>1. Acceptance of Terms</h2>
@@ -461,7 +459,6 @@
         </div>
     </main>
 
-    <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-brand">

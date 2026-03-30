@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Avatar preview
+
     const avatarInput = document.getElementById('avatar');
     const avatarPreview = document.querySelector('.pe-banner-preview__avatar');
 
@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Banner preview
     const bannerInput = document.getElementById('banner');
     const bannerBg = document.querySelector('.pe-banner-preview__bg');
 

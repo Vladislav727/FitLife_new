@@ -12,7 +12,7 @@ class CreateLikesTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('post_id')->constrained()->onDelete('cascade');
-            $table->enum('type', ['post', 'comment']); // fixed
+            $table->enum('type', ['post', 'comment']);
             $table->timestamps();
             $table->boolean('is_like')->default(true);
             $table->unique(['user_id', 'post_id', 'type']);

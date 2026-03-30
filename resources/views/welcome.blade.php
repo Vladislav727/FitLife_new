@@ -170,7 +170,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: 
+            background:
                 radial-gradient(circle at 20% 50%, var(--primary-glow) 0%, transparent 50%),
                 radial-gradient(circle at 80% 50%, rgba(6, 182, 212, 0.2) 0%, transparent 50%);
             pointer-events: none;
@@ -678,7 +678,7 @@
     </style>
 </head>
 <body>
-    <!-- Navigation -->
+
     <nav>
         <a href="/" class="logo">
             <div class="logo-icon">F</div>
@@ -703,7 +703,6 @@
         <button class="mobile-menu" id="mobileMenu">☰</button>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
             <div class="hero-badge fade-in-up">
@@ -715,7 +714,7 @@
                 Starts Here
             </h1>
             <p class="fade-in-up" style="animation-delay: 0.2s">
-                Track workouts, monitor nutrition, set goals, and connect with a community 
+                Track workouts, monitor nutrition, set goals, and connect with a community
                 of fitness enthusiasts. All in one powerful platform.
             </p>
             <div class="hero-buttons fade-in-up" style="animation-delay: 0.3s">
@@ -743,7 +742,6 @@
         </div>
     </section>
 
-    <!-- Features Section -->
     <section class="features" id="features">
         <div class="section-header">
             <span class="section-tag">Features</span>
@@ -785,7 +783,6 @@
         </div>
     </section>
 
-    <!-- How It Works -->
     <section class="how-it-works" id="how-it-works">
         <div class="section-header">
             <span class="section-tag">How It Works</span>
@@ -812,7 +809,6 @@
         </div>
     </section>
 
-    <!-- Testimonials -->
     <section class="testimonials" id="testimonials">
         <div class="section-header">
             <span class="section-tag">Testimonials</span>
@@ -857,7 +853,6 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
     <section class="cta">
         <div class="cta-content">
             <h2>Ready to Transform Your Life?</h2>
@@ -870,7 +865,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-brand">

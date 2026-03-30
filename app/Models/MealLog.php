@@ -9,7 +9,6 @@ class MealLog extends Model
 {
     use HasFactory;
 
-    // Mass assignable attributes
     protected $fillable = [
         'user_id',
         'meal',
@@ -21,7 +20,6 @@ class MealLog extends Model
         'carbs',
     ];
 
-    // Relation: MealLog belongs to a User
     public function user()
     {
         return $this->belongsTo(User::class);

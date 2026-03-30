@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Cache;
 
 class CommentController extends Controller
 {
-    // Update comment
+
     public function update(Request $request, Comment $comment)
     {
         try {
@@ -48,7 +48,6 @@ class CommentController extends Controller
         }
     }
 
-    // Delete comment
     public function destroy(Request $request, Comment $comment)
     {
         try {
@@ -82,7 +81,6 @@ class CommentController extends Controller
         }
     }
 
-    // Like/dislike comment
     public function toggleReaction(Request $request, Comment $comment)
     {
         try {

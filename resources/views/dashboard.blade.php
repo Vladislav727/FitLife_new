@@ -2,15 +2,14 @@
 
 @section('content')
 <div class="dashboard-page">
-    <!-- Header -->
+
     <div class="dashboard-header">
         <h1 class="dashboard-greeting">{{ __('dashboard.welcome_back') }} <span>{{ Auth::user()->name }}</span> 👋</h1>
         <p class="dashboard-date">{{ now()->translatedFormat('l, d F Y') }}</p>
     </div>
 
-    <!-- Stats Row -->
     <div class="stats-row">
-        <!-- Calories -->
+
         <div class="stat-card">
             <div class="stat-card-header">
                 <div class="stat-card-icon calories">
@@ -27,7 +26,6 @@
             </div>
         </div>
 
-        <!-- Water -->
         <div class="stat-card">
             <div class="stat-card-header">
                 <div class="stat-card-icon water">
@@ -44,7 +42,6 @@
             </div>
         </div>
 
-        <!-- Sleep -->
         <div class="stat-card">
             <div class="stat-card-header">
                 <div class="stat-card-icon sleep">
@@ -61,7 +58,6 @@
             </div>
         </div>
 
-        <!-- Goals -->
         <div class="stat-card">
             <div class="stat-card-header">
                 <div class="stat-card-icon goals">
@@ -80,11 +76,10 @@
         </div>
     </div>
 
-    <!-- Main Grid -->
     <div class="dashboard-grid">
-        <!-- Main Column -->
+
         <div class="dashboard-main">
-            <!-- Upcoming Events -->
+
             <div class="dash-card">
                 <div class="dash-card-header">
                     <h2 class="dash-card-title">
@@ -126,7 +121,6 @@
                 </div>
             </div>
 
-            <!-- Goals Progress -->
             <div class="dash-card">
                 <div class="dash-card-header">
                     <h2 class="dash-card-title">
@@ -168,7 +162,6 @@
                 </div>
             </div>
 
-            <!-- Progress Photos -->
             <div class="dash-card">
                 <div class="dash-card-header">
                     <h2 class="dash-card-title">
@@ -189,9 +182,9 @@
                     @else
                         <div class="photos-grid">
                             @foreach($photos as $idx => $photo)
-                                <div class="photo-item" 
+                                <div class="photo-item"
                                      data-idx="{{ $idx }}"
-                                     data-img="{{ asset('storage/' . $photo->photo) }}" 
+                                     data-img="{{ asset('storage/' . $photo->photo) }}"
                                      data-desc="{{ $photo->description ?? '' }}"
                                      data-date="{{ $photo->created_at->format('M d, Y') }}"
                                      onclick="openLightbox(this)">
@@ -207,16 +200,15 @@
             </div>
         </div>
 
-        <!-- Sidebar -->
         <div class="dashboard-sidebar">
-            <!-- Profile Card -->
+
             <div class="profile-card">
-                <img src="{{ Auth::user()->avatar ? asset('storage/' . Auth::user()->avatar) : asset('storage/logo/defaultPhoto.jpg') }}" 
-                     alt="{{ Auth::user()->name }}" 
+                <img src="{{ Auth::user()->avatar ? asset('storage/' . Auth::user()->avatar) : asset('storage/logo/defaultPhoto.jpg') }}"
+                     alt="{{ Auth::user()->name }}"
                      class="profile-card-avatar">
                 <div class="profile-card-name">{{ Auth::user()->name }}</div>
                 <div class="profile-card-username">{{ '@' . Auth::user()->username }}</div>
-                
+
                 @php $bio = Auth::user()->biography; @endphp
                 <div class="profile-stats-grid">
                     <div class="profile-stat-item">
@@ -236,11 +228,10 @@
                         <div class="profile-stat-label">{{ __('dashboard.goals') }}</div>
                     </div>
                 </div>
-                
+
                 <a href="{{ route('profile.edit') }}" class="profile-card-btn">{{ __('dashboard.edit_profile') }}</a>
             </div>
 
-<!-- Lightbox -->
 <div id="lightbox" class="lightbox">
     <div class="lightbox-backdrop" onclick="closeLightbox()"></div>
     <div class="lightbox-content">

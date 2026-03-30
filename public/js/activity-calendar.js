@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const eventFilter = document.querySelector('#event-filter');
     let currentDate = new Date();
 
-    // Fetch events from server
     async function fetchEvents() {
         const start = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).toISOString().split('T')[0];
         const end = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).toISOString().split('T')[0];
@@ -30,7 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Render calendar
     async function renderCalendar() {
         calendarGrid.innerHTML = '';
         calendarGrid.append(...Array.from({ length: 7 }, (_, i) => {
@@ -77,7 +75,6 @@ document.addEventListener('DOMContentLoaded', () => {
         monthDisplay.textContent = currentDate.toLocaleString('en-US', { month: 'long', year: 'numeric' });
     }
 
-    // Render events
     async function renderEvents(filter = 'all') {
         const events = await fetchEvents();
         eventList.innerHTML = '';
@@ -95,7 +92,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Add event
     eventForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const formData = new FormData(eventForm);
@@ -125,12 +121,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Event filter
     eventFilter.addEventListener('change', () => {
         renderEvents(eventFilter.value);
     });
 
-    // Month navigation
     prevMonthBtn.addEventListener('click', () => {
         currentDate.setMonth(currentDate.getMonth() - 1);
         renderCalendar();
@@ -143,7 +137,6 @@ document.addEventListener('DOMContentLoaded', () => {
         renderEvents(eventFilter.value);
     });
 
-    // Initialize
     renderCalendar();
     renderEvents();
 });

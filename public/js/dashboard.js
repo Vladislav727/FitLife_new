@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    // Animate circular metrics
     const animateMetrics = () => {
         document.querySelectorAll('.circular-progress').forEach(circle => {
             const targetValue = parseFloat(circle.getAttribute('data-value'));
@@ -35,7 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // Animate progress bars
     const animateProgressBars = () => {
         document.querySelectorAll('.progress-bar').forEach(bar => {
             const percent = parseInt(bar.getAttribute('data-progress'));
@@ -57,7 +55,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // Lightbox functionality
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const lightboxDesc = document.getElementById('lightbox-desc');
@@ -119,7 +116,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Helper to show alerts
     function showAlert(message, type) {
         if (!alertContainer) {
             console.warn('Alert container not found');
@@ -142,11 +138,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 3000);
     }
 
-    // Initialize animations
     animateMetrics();
     animateProgressBars();
 
-    // Animate calendar events
     document.querySelectorAll('.event-item').forEach((item, idx) => {
         item.style.animationDelay = `${idx * 0.1}s`;
     });

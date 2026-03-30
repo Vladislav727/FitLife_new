@@ -24,7 +24,6 @@ return [
     'eat_more' => 'Постарайтесь есть больше для энергии!',
     'too_much' => 'Вы съели много калорий, не забудьте подвигаться!',
 
-    // Meal Tracker page
     'app_label' => 'FitLife Трекер питания',
     'menu' => 'Меню',
     'meal_tracker' => 'Трекер питания',
@@ -63,7 +62,6 @@ return [
     'no_valid_meals' => 'Нет валидных записей для сохранения',
     'macros' => 'Б / Ж / У',
 
-    // Calorie Calculator page
     'calorie_calc_label' => 'FitLife Калькулятор калорий',
     'calorie_macro_calc' => 'Калькулятор калорий и макронутриентов',
     'calc_daily_needs' => 'Рассчитайте ваши ежедневные потребности в калориях и макросах!',

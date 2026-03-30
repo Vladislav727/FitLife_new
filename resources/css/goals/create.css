@@ -1,11 +1,8 @@
-/* GOAL FORMS (CREATE/EDIT) STYLES - FitLife v3.0 */
 
-/* Hide mobile toggle */
 #mobile-toggle {
     display: none;
 }
 
-/* Page Header */
 #fitlife-container main > header {
     margin-bottom: var(--space-6);
 }
@@ -26,15 +23,12 @@
     font-size: var(--text-base);
 }
 
-/* Section Headings */
 #fitlife-container section h3 {
     font-size: var(--text-lg);
     font-weight: var(--font-semibold);
     color: var(--text-primary);
     margin-bottom: var(--space-4);
 }
-
-/* BACK LINK */
 
 .back-link {
     display: inline-flex;
@@ -57,8 +51,6 @@
     color: var(--primary);
 }
 
-/* GOAL CARD */
-
 .goal-card {
     background: var(--bg-surface);
     border: 1px solid var(--border-subtle);
@@ -66,8 +58,6 @@
     padding: var(--space-8);
     max-width: 640px;
 }
-
-/* GOAL FORM */
 
 .goal-form {
     display: flex;
@@ -87,14 +77,11 @@
     color: var(--text-secondary);
 }
 
-/* Two-column row */
 .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-4);
 }
-
-/* TYPE SELECTOR CARDS */
 
 .goal-type-grid {
     display: grid;
@@ -170,8 +157,6 @@
 .goal-type-option-icon--weight { background: rgba(245, 158, 11, 0.15); }
 .goal-type-option-icon--weight svg { stroke: var(--warning); }
 
-/* INPUT STYLES */
-
 .goal-form .form-group input[type="text"],
 .goal-form .form-group input[type="number"],
 .goal-form .form-group input[type="date"],
@@ -201,7 +186,6 @@
     color: var(--text-muted);
 }
 
-/* Select Styling */
 .goal-form .form-group select {
     appearance: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23a3a3a3' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
@@ -217,15 +201,12 @@
     padding: var(--space-2);
 }
 
-/* Textarea */
 .goal-form .form-group textarea {
     min-height: 100px;
     resize: vertical;
     line-height: 1.6;
     height: auto;
 }
-
-/* BUTTONS */
 
 .calculate-btn {
     display: inline-flex;
@@ -258,7 +239,6 @@
     transform: translateY(0);
 }
 
-/* Form Actions */
 .form-actions {
     display: flex;
     gap: var(--space-3);
@@ -270,7 +250,6 @@
     min-width: 120px;
 }
 
-/* Cancel Button */
 .form-actions a.calculate-btn {
     background: var(--bg-elevated) !important;
     color: var(--text-primary) !important;
@@ -283,7 +262,6 @@
     border-color: var(--text-muted);
 }
 
-/* Delete Button */
 .goal-card form[onsubmit*="confirm"] .calculate-btn,
 button.calculate-btn[style*="dc3545"] {
     background: var(--danger) !important;
@@ -295,8 +273,6 @@ button.calculate-btn[style*="dc3545"] {
 button.calculate-btn[style*="dc3545"]:hover {
     background: var(--danger) !important;
 }
-
-/* RESPONSIVE */
 
 @media (max-width: 768px) {
     .goal-type-grid {
@@ -312,8 +288,6 @@ button.calculate-btn[style*="dc3545"]:hover {
     }
 }
 
-/* ERROR MESSAGES */
-
 .error-message,
 .form-group .error {
     color: var(--danger);
@@ -326,8 +300,6 @@ button.calculate-btn[style*="dc3545"]:hover {
 .form-group textarea.error {
     border-color: var(--danger);
 }
-
-/* RESPONSIVE */
 
 @media (max-width: 768px) {
     .goal-card {

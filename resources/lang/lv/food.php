@@ -24,7 +24,6 @@ return [
     'eat_more' => 'Mēģiniet ēst vairāk enerģijai!',
     'too_much' => 'Jūs apēdāt daudz kaloriju, neaizmirstiet kustēties!',
 
-    // Meal Tracker page
     'app_label' => 'FitLife Ēdienreižu izsekotājs',
     'menu' => 'Izvēlne',
     'meal_tracker' => 'Ēdienreižu izsekotājs',
@@ -63,7 +62,6 @@ return [
     'no_valid_meals' => 'Nav derīgu ēdienreižu saglabāšanai',
     'macros' => 'O / T / O',
 
-    // Calorie Calculator page
     'calorie_calc_label' => 'FitLife Kaloriju kalkulators',
     'calorie_macro_calc' => 'Kaloriju un makro kalkulators',
     'calc_daily_needs' => 'Aprēķiniet savas ikdienas kaloriju un makro vajadzības!',

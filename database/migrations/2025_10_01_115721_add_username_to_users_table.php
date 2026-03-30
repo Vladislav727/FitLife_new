@@ -11,14 +11,13 @@ return new class extends Migration
 {
     public function up(): void
     {
-        // Добавляем username, если нет
+
         if (! Schema::hasColumn('users', 'username')) {
             Schema::table('users', function (Blueprint $table) {
                 $table->string('username', 20)->nullable()->after('name');
             });
         }
 
-        // Заполняем пустые username
         $users = User::whereNull('username')->orWhere('username', '')->get();
         foreach ($users as $index => $user) {
             $base = Str::slug($user->name, '') ?: 'user';
@@ -30,7 +29,6 @@ return new class extends Migration
             $user->update(['username' => $username]);
         }
 
-        // Добавляем unique, если его ещё нет
         $connection = Schema::getConnection()->getDriverName();
 
         if ($connection === 'mysql') {
@@ -64,7 +62,7 @@ return new class extends Migration
                 try {
                     $table->dropUnique(['username']);
                 } catch (\Throwable $e) {
-                    // индекс уже мог быть удалён
+
                 }
                 $table->dropColumn('username');
             });

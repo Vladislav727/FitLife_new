@@ -1,11 +1,8 @@
-/* BIOGRAPHY STYLES - FitLife v3.0 */
 
-/* Hide mobile toggle */
 #mobile-toggle {
     display: none;
 }
 
-/* Page Header */
 #fitlife-container main > header {
     margin-bottom: var(--space-6);
 }
@@ -25,8 +22,6 @@
     color: var(--text-muted);
     font-size: var(--text-base);
 }
-
-/* SUCCESS MESSAGE */
 
 .success-msg {
     display: flex;
@@ -48,8 +43,6 @@
     flex-shrink: 0;
 }
 
-/* BIOGRAPHY CARD */
-
 .biography-card {
     background: var(--bg-surface);
     border: 1px solid var(--border-subtle);
@@ -58,15 +51,11 @@
     max-width: 640px;
 }
 
-/* BIOGRAPHY FORM */
-
 .biography-form {
     display: flex;
     flex-direction: column;
     gap: var(--space-6);
 }
-
-/* SECTIONS */
 
 .bio-section {
     display: flex;
@@ -127,14 +116,12 @@
     color: var(--text-muted);
 }
 
-/* Two-column row */
 .bio-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-4);
 }
 
-/* Form groups */
 .biography-form .form-group {
     display: flex;
     flex-direction: column;
@@ -147,7 +134,6 @@
     color: var(--text-secondary);
 }
 
-/* Input Styles */
 .biography-form .form-group input[type="text"],
 .biography-form .form-group input[type="number"],
 .biography-form .form-group select {
@@ -173,7 +159,6 @@
     color: var(--text-muted);
 }
 
-/* Input with suffix */
 .input-with-suffix {
     position: relative;
     display: flex;
@@ -194,7 +179,6 @@
     pointer-events: none;
 }
 
-/* Select Styling */
 .biography-form .form-group select {
     appearance: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23a3a3a3' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
@@ -208,8 +192,6 @@
     background: var(--bg-elevated);
     color: var(--text-primary);
 }
-
-/* SAVE BUTTON */
 
 .save-btn {
     display: inline-flex;
@@ -249,8 +231,6 @@
     stroke: var(--bg-base);
 }
 
-/* RESPONSIVE */
-
 @media (max-width: 768px) {
     .biography-card {
         padding: var(--space-5);
@@ -261,7 +241,6 @@
     }
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .biography-card {
         padding: var(--space-5);

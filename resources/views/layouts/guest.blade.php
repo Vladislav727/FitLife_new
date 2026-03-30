@@ -7,7 +7,7 @@
         <title>{{ config('app.name', 'FitLife') }}</title>
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-        
+
         <style>
             .guest-container {
                 min-height: 100vh;
@@ -18,7 +18,7 @@
                 padding: 1.5rem;
                 background: linear-gradient(135deg, #0a0a0a 0%, #141414 50%, #0a0a0a 100%);
             }
-            
+
             .guest-card {
                 width: 100%;
                 max-width: 28rem;
@@ -28,24 +28,24 @@
                 border-radius: 1rem;
                 box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             }
-            
+
             .guest-logo {
                 display: flex;
                 justify-content: center;
                 margin-bottom: 1.5rem;
             }
-            
+
             .guest-logo a {
                 color: #22c55e;
                 font-size: 2rem;
                 font-weight: 700;
                 text-decoration: none;
             }
-            
+
             .text-gray-600 {
                 color: #a1a1aa !important;
             }
-            
+
             .text-gray-400 {
                 color: #a1a1aa !important;
             }

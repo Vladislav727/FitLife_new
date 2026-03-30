@@ -20,13 +20,11 @@ return [
     'menu' => 'Меню',
     'toggle_menu' => 'Открыть меню',
 
-    // Sidebar sections
     'main' => 'Главное',
     'trackers' => 'Трекеры',
     'tools' => 'Инструменты',
     'admin_panel' => 'Панель администратора',
 
-    // Navigation items
     'community' => 'Сообщество',
     'meal_tracker' => 'Трекер питания',
     'progress_photos' => 'Фото прогресса',

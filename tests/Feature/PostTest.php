@@ -199,11 +199,9 @@ test('users can toggle reactions', function () {
         'views' => 0,
     ]);
 
-    // Like
     $this->actingAs($user)->post("/posts/{$post->id}/reaction", ['type' => 'like']);
     expect(Like::where('post_id', $post->id)->where('type', 'post')->where('is_like', true)->count())->toBe(1);
 
-    // Toggle to dislike
     $this->actingAs($user)->post("/posts/{$post->id}/reaction", ['type' => 'dislike']);
     expect(Like::where('post_id', $post->id)->where('type', 'post')->where('is_like', false)->count())->toBe(1);
     expect(Like::where('post_id', $post->id)->where('type', 'post')->where('is_like', true)->count())->toBe(0);

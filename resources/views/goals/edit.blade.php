@@ -2,16 +2,15 @@
 
 @section('content')
 <div id="fitlife-container" role="application" aria-label="{{ __('goals.fitlife_edit_goal') }}">
-  <!-- Main Content -->
+
   <main>
-    <!-- Mobile Menu Toggle -->
+
     <button id="mobile-toggle" aria-controls="sidebar" aria-expanded="false">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
         <path d="M4 6h16M4 12h16M4 18h16" />
       </svg>
     </button>
 
-    <!-- Page Header -->
     <header>
       <div class="header-left">
         <h1><span>FitLife</span> {{ __('goals.edit') }}</h1>
@@ -19,7 +18,6 @@
       </div>
     </header>
 
-    <!-- Goal Form Section -->
     <section aria-labelledby="goal-form-heading">
       <h3 id="goal-form-heading">{{ __('goals.edit') }}</h3>
       <div class="goal-card">
@@ -58,7 +56,6 @@
           </div>
         </form>
 
-        <!-- Delete Form -->
         <form action="{{ route('goals.destroy', $goal) }}" method="POST" style="margin-top: 20px;" onsubmit="return confirm('{{ __('goals.delete_confirm') }}');">
           @csrf
           @method('DELETE')

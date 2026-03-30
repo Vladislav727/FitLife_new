@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class GoalController extends Controller
 {
-    // Show all goals for the authenticated user
+
     public function index()
     {
         $goals = Goal::where('user_id', Auth::id())->get();
@@ -17,13 +17,11 @@ class GoalController extends Controller
         return view('goals.index', compact('goals'));
     }
 
-    // Show form to create a new goal
     public function create()
     {
         return view('goals.create');
     }
 
-    // Store a new goal
     public function store(Request $request)
     {
         $request->validate([
@@ -45,7 +43,6 @@ class GoalController extends Controller
         return redirect()->route('goals.index')->with('success', '');
     }
 
-    // Show form to edit a goal
     public function edit(Goal $goal)
     {
         if ($goal->user_id !== Auth::id()) {
@@ -55,7 +52,6 @@ class GoalController extends Controller
         return view('goals.edit', compact('goal'));
     }
 
-    // Update an existing goal
     public function update(Request $request, Goal $goal)
     {
         if ($goal->user_id !== Auth::id()) {
@@ -79,7 +75,6 @@ class GoalController extends Controller
         return redirect()->route('goals.index')->with('success', 'Goal updated successfully');
     }
 
-    // Delete a goal
     public function destroy(Goal $goal)
     {
         if ($goal->user_id !== Auth::id()) {
@@ -91,10 +86,9 @@ class GoalController extends Controller
         return redirect()->route('goals.index')->with('success', 'Goal deleted successfully');
     }
 
-    // Show goal progress log
     public function log(Goal $goal)
     {
-        // Проверка что цель принадлежит пользователю
+
         if ($goal->user_id !== Auth::id()) {
             abort(403, 'Unauthorized');
         }
@@ -102,10 +96,9 @@ class GoalController extends Controller
         return view('goals.log', compact('goal'));
     }
 
-    // Store a progress log entry
     public function storeLog(Request $request, Goal $goal)
     {
-        // Проверка что цель принадлежит пользователю
+
         if ($goal->user_id !== Auth::id()) {
             abort(403, 'Unauthorized');
         }
@@ -114,10 +107,8 @@ class GoalController extends Controller
             'value' => 'required|numeric|min:0',
         ]);
 
-        // Calculate change (difference from current value)
         $change = $request->value - $goal->current_value;
 
-        // Save progress log
         GoalLog::create([
             'goal_id' => $goal->id,
             'value' => $request->value,
@@ -125,11 +116,9 @@ class GoalController extends Controller
             'date' => now()->toDateString(),
         ]);
 
-        // Update current goal value
         $goal->current_value = $request->value;
         $goal->save();
 
-        // Trigger confetti if goal completed and not already shown
         $sessionKey = 'goal_'.$goal->id.'_completed';
         if ($goal->current_value >= $goal->target_value && ! session()->has($sessionKey)) {
             session()->put($sessionKey, true);

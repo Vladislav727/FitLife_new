@@ -148,7 +148,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: 
+            background:
                 radial-gradient(circle at 30% 30%, var(--primary-glow) 0%, transparent 50%),
                 radial-gradient(circle at 70% 70%, rgba(6, 182, 212, 0.2) 0%, transparent 50%);
             pointer-events: none;
@@ -408,7 +408,7 @@
     </style>
 </head>
 <body>
-    <!-- Navigation -->
+
     <nav>
         <a href="/" class="logo">
             <div class="logo-icon">F</div>
@@ -421,24 +421,21 @@
         </div>
     </nav>
 
-    <!-- Main Content -->
     <div class="auth-container">
         <div class="auth-card">
-            <!-- Header -->
+
             <div class="auth-header">
                 <div class="auth-icon">F</div>
                 <h1><span class="gradient">{{ __('auth.welcome_back') }}</span></h1>
                 <p>{{ __('auth.login_subtitle') }}</p>
             </div>
 
-            <!-- Session Status -->
             @if (session('status'))
                 <div class="alert alert-success">
                     {{ session('status') }}
                 </div>
             @endif
 
-            <!-- Errors -->
             @if ($errors->any())
                 <div class="alert alert-error">
                     <ul>
@@ -449,11 +446,9 @@
                 </div>
             @endif
 
-            <!-- Form -->
             <form method="POST" action="{{ route('login') }}">
                 @csrf
 
-                <!-- Email -->
                 <div class="form-group">
                     <label for="email" class="form-label">{{ __('auth.email') }}</label>
                     <div class="input-wrapper">
@@ -461,20 +456,19 @@
                             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                             <polyline points="22,6 12,13 2,6"/>
                         </svg>
-                        <input 
-                            type="email" 
-                            id="email" 
-                            name="email" 
-                            value="{{ old('email') }}" 
-                            class="form-input @error('email') is-error @enderror" 
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            value="{{ old('email') }}"
+                            class="form-input @error('email') is-error @enderror"
                             placeholder="{{ __('auth.email') }}"
-                            required 
+                            required
                             autofocus
                         >
                     </div>
                 </div>
 
-                <!-- Password -->
                 <div class="form-group">
                     <div class="form-label-row">
                         <label for="password" class="form-label">{{ __('auth.password') }}</label>
@@ -487,11 +481,11 @@
                             <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
                             <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
                         </svg>
-                        <input 
-                            type="password" 
-                            id="password" 
-                            name="password" 
-                            class="form-input @error('password') is-error @enderror" 
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            class="form-input @error('password') is-error @enderror"
                             placeholder="{{ __('auth.password') }}"
                             required
                         >
@@ -504,7 +498,6 @@
                     </div>
                 </div>
 
-                <!-- Remember Me -->
                 <div class="form-group">
                     <label class="checkbox-label">
                         <input type="checkbox" name="remember" class="checkbox-input">
@@ -512,13 +505,11 @@
                     </label>
                 </div>
 
-                <!-- Submit -->
                 <button type="submit" class="submit-btn">
                     {{ __('auth.login') }}
                 </button>
             </form>
 
-            <!-- Footer -->
             <div class="auth-footer">
                 <span>{{ __('auth.no_account') }}</span>
                 <a href="{{ route('register') }}">{{ __('auth.register') }}</a>

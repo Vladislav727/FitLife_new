@@ -22,7 +22,6 @@ return [
     'update_password' => 'Atjaunināt paroli',
     'password_updated' => 'Parole veiksmīgi atjaunināta',
 
-    // Navigation
     'home' => 'Sākums',
     'features' => 'Funkcijas',
     'testimonials' => 'Atsauksmes',
@@ -31,48 +30,40 @@ return [
     'log_in' => 'Pieslēgties',
     'sign_up' => 'Reģistrēties',
 
-    // Login page
     'welcome_back' => 'Laipni lūdzam atpakaļ',
     'login_subtitle' => 'Piesakieties savā FitLife kontā',
     'fitlife_account' => 'FitLife kontam',
     'login_cta' => 'Pieslēgties',
 
-    // Register page
     'create_account' => 'Izveidojiet kontu',
     'register_subtitle' => 'Pievienojieties FitLife un sāciet savu fitnesa ceļojumu',
     'start_journey' => 'un sāciet savu ceļojumu',
     'register_cta' => 'Izveidot kontu',
 
-    // Footer
     'privacy_policy' => 'Privātuma politika',
     'terms_of_service' => 'Lietošanas noteikumi',
     'contact_us' => 'Sazināties ar mums',
     'all_rights_reserved' => 'Visas tiesības aizsargātas.',
 
-    // Confirm password
     'confirm' => 'Apstiprināt',
     'confirm_password_subtitle' => 'Šī ir droša zona. Lūdzu, apstipriniet savu paroli.',
     'secure_area_message' => 'Šī ir droša lietojumprogrammas zona. Lūdzu, apstipriniet savu paroli pirms turpināšanas.',
 
-    // Forgot password
     'forgot_password_title' => 'Aizmirsāt paroli',
     'forgot_password_subtitle' => 'Ievadiet e-pastu un mēs nosūtīsim atiestatīšanas saiti',
     'forgot_password_message' => 'Aizmirsāt paroli? Nav problēmu. Vienkārši paziņojiet mums savu e-pasta adresi, un mēs nosūtīsim jums paroles atiestatīšanas saiti.',
     'email_password_reset_link' => 'Nosūtīt atiestatīšanas saiti',
     'back_to_login' => 'Atpakaļ uz pieslēgšanos',
 
-    // Reset password
     'reset_password_subtitle' => 'Ievadiet jauno paroli zemāk',
     'set_new_password' => 'Iestatīt jaunu paroli',
 
-    // Verify email
     'verify_email' => 'Verificēt e-pastu',
     'verify_email_subtitle' => 'Lūdzu, apstipriniet savu e-pasta adresi',
     'verify_email_message' => 'Paldies par reģistrēšanos! Pirms sākat, lūdzu, apstipriniet savu e-pasta adresi, noklikšķinot uz saites, ko tikko nosūtījām. Ja neesat saņēmis e-pastu, mēs ar prieku nosūtīsim vēl vienu.',
     'verification_link_sent' => 'Jauna verifikācijas saite ir nosūtīta uz e-pasta adresi, ko norādījāt reģistrācijas laikā.',
     'resend_verification_email' => 'Atkārtoti nosūtīt verifikācijas e-pastu',
 
-    // Additional keys
     'have_account' => 'Jau ir konts?',
     'agree_terms_prefix' => 'Es piekrītu',
     'terms' => 'Lietošanas noteikumiem',

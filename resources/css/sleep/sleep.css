@@ -1,11 +1,8 @@
-/* SLEEP TRACKER STYLES - FitLife v3.0 */
 
-/* Hide mobile toggle */
 #mobile-toggle {
     display: none;
 }
 
-/* Page Header */
 #fitlife-container main > header {
     margin-bottom: var(--space-6);
 }
@@ -22,7 +19,6 @@
     font-size: var(--text-base);
 }
 
-/* Section Headings */
 #fitlife-container section h3 {
     font-size: var(--text-lg);
     font-weight: var(--font-semibold);
@@ -41,8 +37,6 @@
     border: 0;
 }
 
-/* TOP GRID — Progress Ring + Quick Add */
-
 .sleep-top-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -50,7 +44,6 @@
     margin-bottom: var(--space-6);
 }
 
-/* Progress Ring Card */
 .sleep-progress-card {
     background: var(--bg-surface);
     border: 1px solid var(--border-subtle);
@@ -157,7 +150,6 @@
     transition: width 0.8s ease;
 }
 
-/* Quick Add Card */
 .sleep-add-card {
     background: var(--bg-surface);
     border: 1px solid var(--border-subtle);
@@ -236,8 +228,6 @@
     transform: translateY(-1px);
 }
 
-/* TODAY'S SLEEP PILLS */
-
 .sleep-today-section {
     margin-bottom: var(--space-6);
 }
@@ -275,8 +265,6 @@
     color: var(--text-muted);
 }
 
-/* EMPTY STATE */
-
 .sleep-empty {
     display: flex;
     flex-direction: column;
@@ -300,8 +288,6 @@
     color: var(--text-muted);
     font-size: var(--text-base);
 }
-
-/* HISTORY TABLE */
 
 .history-table {
     width: 100%;
@@ -341,7 +327,6 @@
     background: var(--bg-elevated);
 }
 
-/* Duration Badges */
 .sleep-duration-badge {
     display: inline-flex;
     align-items: center;
@@ -365,8 +350,6 @@
     background: rgba(239, 68, 68, 0.15);
     color: var(--danger);
 }
-
-/* SUMMARY CARD */
 
 .sleep-summary-card {
     display: flex;
@@ -421,8 +404,6 @@
     color: var(--text-muted);
     margin-top: var(--space-1);
 }
-
-/* RESPONSIVE */
 
 @media (max-width: 768px) {
     .sleep-top-grid {

@@ -150,14 +150,12 @@ test('user friends relationship returns only accepted friends', function () {
     $user2 = User::factory()->create();
     $user3 = User::factory()->create();
 
-    // Pending friend request
     Friend::create([
         'user_id' => $user1->id,
         'friend_id' => $user2->id,
         'status' => 'pending',
     ]);
 
-    // Accepted friendship
     Friend::create([
         'user_id' => $user1->id,
         'friend_id' => $user3->id,

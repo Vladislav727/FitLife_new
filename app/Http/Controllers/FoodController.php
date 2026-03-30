@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Log;
 
 class FoodController extends Controller
 {
-    // Fallback nutrition data per 100g when API is unavailable
+
     private array $fallbackFoods = [
         'rice' => ['calories' => 130, 'protein' => 2.7, 'fat' => 0.3, 'carbs' => 28.2],
         'chicken breast' => ['calories' => 165, 'protein' => 31.0, 'fat' => 3.6, 'carbs' => 0.0],
@@ -36,7 +36,6 @@ class FoodController extends Controller
             ->latest()
             ->paginate(10);
 
-        // Today's summary
         $todayLogs = MealLog::where('user_id', Auth::id())
             ->whereDate('created_at', today())
             ->get();
@@ -91,7 +90,6 @@ class FoodController extends Controller
             }
         }
 
-        // Fallback to local database if API returned nothing
         if (empty($items)) {
             $items = $this->fallbackLookup($query);
         }
@@ -134,7 +132,6 @@ class FoodController extends Controller
             $fats = round(($item['fat'] ?? 0) * $ratio, 1);
             $carbs = round(($item['carbs'] ?? 0) * $ratio, 1);
 
-            // If no API data provided, try local lookup
             if (empty($item['calories_per_serving'])) {
                 $localData = $this->getLocalNutrition($food);
                 if ($localData) {
@@ -170,7 +167,6 @@ class FoodController extends Controller
             ], 422);
         }
 
-        // Daily totals (including old meals today)
         $todayLogs = MealLog::where('user_id', Auth::id())
             ->whereDate('created_at', today())
             ->get();

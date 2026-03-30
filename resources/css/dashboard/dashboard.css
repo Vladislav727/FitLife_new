@@ -1,9 +1,4 @@
-/**
- * Dashboard Styles - FitLife
- * Modern dark theme dashboard with gradient accents
- */
 
-/* Global SVG Reset for Dashboard */
 .dashboard-page svg {
     width: 1em;
     height: 1em;
@@ -11,7 +6,6 @@
     fill: currentColor;
 }
 
-/* Dashboard Layout */
 .dashboard-page {
     padding: 0;
 }
@@ -40,7 +34,6 @@
     color: var(--text-muted);
 }
 
-/* Stats Cards Row */
 .stats-row {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -209,7 +202,6 @@
     color: var(--text-muted);
 }
 
-/* Main Grid */
 .dashboard-grid {
     display: grid;
     grid-template-columns: 1fr 360px;
@@ -234,7 +226,6 @@
     gap: 1.5rem;
 }
 
-/* Cards */
 .dash-card {
     background: var(--bg-glass-dark);
     border: 1px solid var(--border-default);
@@ -291,7 +282,6 @@
     padding: 1.25rem 1.5rem;
 }
 
-/* Events List */
 .events-list {
     display: flex;
     flex-direction: column;
@@ -395,7 +385,6 @@
     color: var(--secondary);
 }
 
-/* Goals List */
 .goals-list {
     display: flex;
     flex-direction: column;
@@ -479,7 +468,6 @@
     color: var(--text-secondary);
 }
 
-/* Photos Grid */
 .photos-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -539,7 +527,6 @@
     font-weight: 500;
 }
 
-/* Profile Card */
 .profile-card {
     text-align: center;
     background: var(--bg-glass-dark);
@@ -556,7 +543,7 @@
     margin: 0 auto 1rem;
     border: 3px solid transparent;
     background: linear-gradient(var(--bg-glass-dark), var(--bg-glass-dark)) padding-box,
-                */ /* cleaned */
+                */
 }
 
 .profile-card-name {
@@ -627,7 +614,6 @@
     box-shadow: 0 10px 40px rgba(34, 197, 94, 0.4);
 }
 
-/* Friends List */
 .friends-list {
     display: flex;
     flex-direction: column;
@@ -675,7 +661,6 @@
     color: var(--text-secondary);
 }
 
-/* Empty State */
 .empty-state {
     display: flex;
     flex-direction: column;
@@ -729,7 +714,6 @@
     box-shadow: 0 6px 20px rgba(34, 197, 94, 0.4);
 }
 
-/* Lightbox */
 .lightbox {
     position: fixed;
     inset: 0;
@@ -751,7 +735,7 @@
     position: absolute;
     inset: 0;
     background: rgba(10, 10, 10, 0.95);
-    
+
 }
 
 .lightbox-content {

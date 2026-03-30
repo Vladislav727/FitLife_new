@@ -1,8 +1,8 @@
 <?php
 
 test('water intake percentage of daily goal', function () {
-    $intake = 1500; // ml
-    $dailyGoal = 2000; // ml
+    $intake = 1500;
+    $dailyGoal = 2000;
 
     $percentage = ($intake / $dailyGoal) * 100;
 

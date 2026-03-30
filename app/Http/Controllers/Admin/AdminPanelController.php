@@ -15,7 +15,7 @@ class AdminPanelController extends Controller
         $totalUsers = User::count();
         $totalPosts = Post::count();
         $totalEvents = Calendar::count();
-        $activeUsers = User::where('updated_at', '>=', now()->subDays(30))->count(); // Замена last_login на updated_at
+        $activeUsers = User::where('updated_at', '>=', now()->subDays(30))->count();
         $recentPosts = Post::with('user')->latest()->take(10)->get();
         $recentEvents = Calendar::with('user')->latest()->take(10)->get();
 
@@ -97,7 +97,7 @@ class AdminPanelController extends Controller
     public function statistics()
     {
         $totalUsers = User::count();
-        $activeUsers = User::where('updated_at', '>=', now()->subDays(30))->count(); // Замена last_login на updated_at
+        $activeUsers = User::where('updated_at', '>=', now()->subDays(30))->count();
 
         return view('admin.statistics', compact('totalUsers', 'activeUsers'));
     }

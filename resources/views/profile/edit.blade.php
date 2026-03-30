@@ -5,7 +5,6 @@
 @section('content')
 <div class="profile-edit-page" role="application" aria-label="FitLife Profile Settings">
 
-    {{-- Back Link --}}
     <a href="{{ route('profile.show', $user->id) }}" class="pe-back-link">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M19 12H5M12 19l-7-7 7-7"/>
@@ -13,7 +12,6 @@
         {{ __('profile.back_to_profile') }}
     </a>
 
-    {{-- Page Header --}}
     <div class="pe-header">
         <div class="pe-header__icon">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -27,7 +25,6 @@
         </div>
     </div>
 
-    {{-- Success Alert --}}
     @if (session('status'))
         <div class="pe-alert pe-alert--success" role="alert">
             <div class="pe-alert__icon">
@@ -39,7 +36,6 @@
         </div>
     @endif
 
-    {{-- Error Summary --}}
     @if ($errors->any())
         <div class="pe-alert pe-alert--error" role="alert">
             <div class="pe-alert__icon">
@@ -51,13 +47,11 @@
         </div>
     @endif
 
-    {{-- Main Content --}}
     <div class="pe-layout">
 
-        {{-- Sidebar Navigation --}}
         <aside class="pe-sidebar">
             <div class="pe-sidebar__card">
-                {{-- User Preview --}}
+
                 <div class="pe-sidebar__user">
                     <img class="pe-sidebar__avatar"
                          src="{{ $user->avatar ? asset('storage/' . $user->avatar) . '?t=' . time() : asset('storage/logo/defaultPhoto.jpg') }}"
@@ -70,7 +64,6 @@
 
                 <div class="pe-sidebar__divider"></div>
 
-                {{-- Nav Links --}}
                 <nav class="pe-sidebar__nav">
                     <a href="#section-avatar" class="pe-sidebar__link active" data-section="section-avatar">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -105,10 +98,8 @@
             </div>
         </aside>
 
-        {{-- Main Sections --}}
         <main class="pe-content">
 
-            {{-- SECTION 1: Avatar & Banner --}}
             <section id="section-avatar" class="pe-card" aria-labelledby="avatar-heading">
                 <div class="pe-card__header">
                     <div class="pe-card__header-icon">
@@ -148,8 +139,6 @@
                     </div>
                 </div>
 
-                {{-- Hidden file inputs are inside the form in section-info --}}
-
                 <div class="pe-card__hint">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
@@ -158,7 +147,6 @@
                 </div>
             </section>
 
-            {{-- SECTION 2: Basic Information --}}
             <section id="section-info" class="pe-card" aria-labelledby="info-heading">
                 <div class="pe-card__header">
                     <div class="pe-card__header-icon">
@@ -177,12 +165,11 @@
                     @csrf
                     @method('PATCH')
 
-                    {{-- Hidden file inputs (connected to labels in avatar section) --}}
                     <input type="file" id="banner" name="banner" accept="image/*" style="display: none;">
                     <input type="file" id="avatar" name="avatar" accept="image/*" style="display: none;">
 
                     <div class="pe-form__grid">
-                        {{-- Name --}}
+
                         <div class="pe-form__group">
                             <label for="name" class="pe-form__label">
                                 {{ __('profile.name') }} <span class="pe-form__required">*</span>
@@ -202,7 +189,6 @@
                             @enderror
                         </div>
 
-                        {{-- Username --}}
                         <div class="pe-form__group">
                             <label for="username" class="pe-form__label">
                                 {{ __('profile.username') }} <span class="pe-form__required">*</span>
@@ -219,7 +205,6 @@
                             @enderror
                         </div>
 
-                        {{-- Email --}}
                         <div class="pe-form__group">
                             <label for="email" class="pe-form__label">
                                 {{ __('profile.email') }} <span class="pe-form__required">*</span>
@@ -239,7 +224,6 @@
                             @enderror
                         </div>
 
-                        {{-- Bio --}}
                         <div class="pe-form__group pe-form__group--full">
                             <label for="bio" class="pe-form__label">{{ __('profile.bio') }}</label>
                             <textarea class="pe-form__textarea" id="bio" name="bio" rows="4"
@@ -266,7 +250,6 @@
                 </form>
             </section>
 
-            {{-- SECTION 3: Password Security --}}
             <section id="section-password" class="pe-card" aria-labelledby="password-heading">
                 <div class="pe-card__header">
                     <div class="pe-card__header-icon pe-card__header-icon--accent">
@@ -286,7 +269,7 @@
                     @method('PUT')
 
                     <div class="pe-form__stack">
-                        {{-- Current Password --}}
+
                         <div class="pe-form__group">
                             <label for="current_password" class="pe-form__label">
                                 {{ __('profile.current_password') }} <span class="pe-form__required">*</span>
@@ -305,7 +288,6 @@
                             @enderror
                         </div>
 
-                        {{-- New Password --}}
                         <div class="pe-form__group">
                             <label for="password" class="pe-form__label">
                                 {{ __('profile.new_password') }} <span class="pe-form__required">*</span>
@@ -324,7 +306,6 @@
                             @enderror
                         </div>
 
-                        {{-- Confirm Password --}}
                         <div class="pe-form__group">
                             <label for="password_confirmation" class="pe-form__label">
                                 {{ __('profile.confirm_password') }} <span class="pe-form__required">*</span>
@@ -355,7 +336,6 @@
                 </form>
             </section>
 
-            {{-- SECTION 4: Danger Zone --}}
             <section id="section-danger" class="pe-card pe-card--danger" aria-labelledby="danger-heading">
                 <div class="pe-card__header">
                     <div class="pe-card__header-icon pe-card__header-icon--danger">

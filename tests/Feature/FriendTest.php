@@ -131,7 +131,6 @@ test('accepting friend request creates reciprocal friendship', function () {
 
     $this->actingAs($user2)->post("/friends/{$user1->id}/accept");
 
-    // Check reciprocal friendship was created
     $this->assertDatabaseHas('friends', [
         'user_id' => $user2->id,
         'friend_id' => $user1->id,

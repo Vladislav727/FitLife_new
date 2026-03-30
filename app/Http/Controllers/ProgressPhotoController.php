@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 
 class ProgressPhotoController extends Controller
 {
-    // Show all progress photos for authenticated user
+
     public function index()
     {
         $progressPhotos = Auth::user()->progress()->latest()->get();
@@ -17,7 +17,6 @@ class ProgressPhotoController extends Controller
         return view('progress.index', compact('progressPhotos'));
     }
 
-    // Store a new progress photo
     public function store(Request $request)
     {
         $request->validate([
@@ -33,7 +32,6 @@ class ProgressPhotoController extends Controller
         return back()->with('success', '');
     }
 
-    // Update photo description
     public function update(Request $request, Progress $progress)
     {
         $this->authorizeUser($progress);
@@ -47,7 +45,6 @@ class ProgressPhotoController extends Controller
         return back()->with('success', '');
     }
 
-    // Delete a photo
     public function destroy(Progress $progress)
     {
         $this->authorizeUser($progress);
@@ -58,7 +55,6 @@ class ProgressPhotoController extends Controller
         return back()->with('success', '');
     }
 
-    // Helper: check if the authenticated user owns the progress photo
     private function authorizeUser(Progress $progress)
     {
         if ($progress->user_id !== Auth::id()) {

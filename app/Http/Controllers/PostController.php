@@ -33,11 +33,11 @@ class PostController extends Controller
 
                 switch ($sort) {
                     case 'top':
-                        // Sort by likes - dislikes
+
                         $query->orderByRaw('(SELECT COUNT(*) FROM likes WHERE likes.post_id = posts.id AND likes.type = ? AND likes.is_like = 1) - (SELECT COUNT(*) FROM likes WHERE likes.post_id = posts.id AND likes.type = ? AND likes.is_like = 0) DESC', ['post', 'post']);
                         break;
                     case 'hot':
-                        // Hot = recent + popular (posts from last 7 days with most engagement)
+
                         $query->where('created_at', '>=', now()->subDays(7))
                             ->orderByRaw('((SELECT COUNT(*) FROM likes WHERE likes.post_id = posts.id AND likes.type = ? AND likes.is_like = 1) + (SELECT COUNT(*) FROM comments WHERE comments.post_id = posts.id)) / (TIMESTAMPDIFF(HOUR, posts.created_at, NOW()) + 1) DESC', ['post']);
                         break;
@@ -122,7 +122,7 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         try {
-            // Use Policy for authorization (allows admin or owner)
+
             if (! Auth::user()->can('update', $post)) {
                 if ($request->expectsJson()) {
                     return response()->json(['success' => false, 'message' => 'Unauthorized'], 403);
@@ -199,7 +199,7 @@ class PostController extends Controller
     public function destroy(Request $request, Post $post)
     {
         try {
-            // Use Policy for authorization (allows admin or owner)
+
             if (! Auth::user()->can('delete', $post)) {
                 if ($request->expectsJson()) {
                     return response()->json(['success' => false, 'message' => 'Unauthorized'], 403);
@@ -247,11 +247,11 @@ class PostController extends Controller
             $resultType = $request->input('type');
 
             if ($existing && $existing->is_like === $isLike) {
-                // Same reaction clicked - remove it
+
                 $existing->delete();
                 $resultType = null;
             } else {
-                // Create or update reaction
+
                 Like::updateOrCreate(
                     ['post_id' => $post->id, 'user_id' => $userId, 'type' => 'post'],
                     ['is_like' => $isLike]
@@ -344,19 +344,17 @@ class PostController extends Controller
 
             $userId = Auth::id();
 
-            // Check if user already viewed this post (using database, not cache)
             $alreadyViewed = PostView::where('post_id', $post->id)
                 ->where('user_id', $userId)
                 ->exists();
 
             if (! $alreadyViewed) {
-                // Record the view
+
                 PostView::create([
                     'post_id' => $post->id,
                     'user_id' => $userId,
                 ]);
 
-                // Update cached view count
                 $post->views = PostView::where('post_id', $post->id)->count();
                 $post->save();
             }
@@ -390,7 +388,6 @@ class PostController extends Controller
                 ->pluck('count', 'post_id')
                 ->toArray();
 
-            // Include posts with 0 views
             $result = [];
             foreach ($postIds as $postId) {
                 $result[$postId] = $views[$postId] ?? 0;
@@ -552,12 +549,10 @@ class PostController extends Controller
     {
         $sorts = ['newest', 'top', 'hot'];
 
-        // Forget specific keys used in index caching
         foreach ($sorts as $sort) {
             Cache::forget("posts_page_{$page}_sort_{$sort}");
         }
 
-        // Backwards-compatibility: some places may use 'posts_page_1'
         Cache::forget("posts_page_{$page}");
     }
 }

@@ -10,7 +10,7 @@
     @vite(['resources/css/app.css'])
 </head>
 <body class="auth-layout">
-    <!-- Header -->
+
     <header class="auth-navbar">
         <a href="{{ url('/') }}" class="auth-navbar-brand">
             <div class="auth-navbar-brand-icon">
@@ -25,10 +25,9 @@
         </div>
     </header>
 
-    <!-- Main Content -->
     <div class="auth-container">
         <div class="auth-card">
-            <!-- Header -->
+
             <div class="auth-header">
                 <div class="auth-logo">
                     <div class="auth-logo-icon auth-logo-icon--warning">
@@ -43,14 +42,12 @@
                 <p class="auth-subtitle">{{ __('auth.forgot_password_text') }}</p>
             </div>
 
-            <!-- Session Status -->
             @if (session('status'))
                 <div class="auth-status auth-status--success">
                     {{ session('status') }}
                 </div>
             @endif
 
-            <!-- Errors -->
             @if ($errors->any())
                 <div class="auth-errors">
                     <ul>
@@ -61,11 +58,9 @@
                 </div>
             @endif
 
-            <!-- Form -->
             <form method="POST" action="{{ route('password.email') }}" class="auth-form">
                 @csrf
 
-                <!-- Email -->
                 <div class="form-group">
                     <label for="email" class="form-label">{{ __('auth.email') }}</label>
                     <div class="auth-input-wrapper">
@@ -73,26 +68,24 @@
                             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                             <polyline points="22,6 12,13 2,6"/>
                         </svg>
-                        <input 
-                            type="email" 
-                            id="email" 
-                            name="email" 
-                            value="{{ old('email') }}" 
-                            class="form-input @error('email') is-error @enderror" 
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            value="{{ old('email') }}"
+                            class="form-input @error('email') is-error @enderror"
                             placeholder="{{ __('auth.email') }}"
-                            required 
+                            required
                             autofocus
                         >
                     </div>
                 </div>
 
-                <!-- Submit -->
                 <button type="submit" class="auth-submit">
                     {{ __('auth.send_reset_link') }}
                 </button>
             </form>
 
-            <!-- Footer -->
             <div class="auth-footer">
                 <span>{{ __('auth.remember_password') }}</span>
                 <a href="{{ route('login') }}">{{ __('auth.login') }}</a>

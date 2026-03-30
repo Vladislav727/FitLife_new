@@ -1,8 +1,8 @@
 <?php
 
 test('BMI calculated correctly', function () {
-    $weight = 70; // kg
-    $height = 175; // cm
+    $weight = 70;
+    $height = 175;
 
     $heightInMeters = $height / 100;
     $bmi = $weight / ($heightInMeters * $heightInMeters);
@@ -63,24 +63,22 @@ test('BMI category obese', function () {
 });
 
 test('BMR calculation for male', function () {
-    $weight = 70; // kg
-    $height = 175; // cm
+    $weight = 70;
+    $height = 175;
     $age = 25;
     $gender = 'male';
 
-    // Mifflin-St Jeor Equation
     $bmr = (10 * $weight) + (6.25 * $height) - (5 * $age) + 5;
 
     expect(round($bmr))->toEqual(1674);
 });
 
 test('BMR calculation for female', function () {
-    $weight = 60; // kg
-    $height = 165; // cm
+    $weight = 60;
+    $height = 165;
     $age = 25;
     $gender = 'female';
 
-    // Mifflin-St Jeor Equation
     $bmr = (10 * $weight) + (6.25 * $height) - (5 * $age) - 161;
 
     expect(round($bmr))->toEqual(1345);

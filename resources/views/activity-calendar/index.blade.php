@@ -3,8 +3,7 @@
 @section('content')
 <div class="calendar-page">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    
-    <!-- Translations for JavaScript -->
+
     <script>
         window.calendarTranslations = {
             noEventsToday: "{{ __('calendar.no_events_today') }}",
@@ -28,8 +27,7 @@
             noDescription: "{{ __('calendar.event_description') }}"
         };
     </script>
-    
-    <!-- Header -->
+
     <header class="calendar-header">
         <div class="header-content">
             <div class="header-left">
@@ -63,11 +61,10 @@
         </div>
     </header>
 
-    <!-- Main Content -->
     <div class="calendar-layout">
-        <!-- Sidebar -->
+
         <aside class="calendar-sidebar">
-            <!-- Mini Calendar -->
+
             <div class="mini-calendar-card">
                 <div class="mini-calendar-header">
                     <button class="mini-nav-btn prev-mini" aria-label="{{ __('calendar.previous_month') }}">
@@ -83,11 +80,10 @@
                     </button>
                 </div>
                 <div class="mini-calendar-grid">
-                    <!-- Generated via JS -->
+
                 </div>
             </div>
 
-            <!-- Stats Card -->
             <div class="stats-card">
                 <h3 class="card-title">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -117,7 +113,6 @@
                 </div>
             </div>
 
-            <!-- Event Types Legend -->
             <div class="legend-card">
                 <h3 class="card-title">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -163,7 +158,6 @@
                 </div>
             </div>
 
-            <!-- Quick Add Buttons -->
             <div class="quick-add-card">
                 <h3 class="card-title">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -211,9 +205,8 @@
             </div>
         </aside>
 
-        <!-- Main Calendar -->
         <main class="calendar-main">
-            <!-- Calendar Navigation -->
+
             <div class="calendar-nav">
                 <button class="nav-btn prev-month" aria-label="{{ __('calendar.previous_month') }}">
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -228,7 +221,6 @@
                 </button>
             </div>
 
-            <!-- Calendar Grid -->
             <div class="main-calendar">
                 <div class="calendar-weekdays">
                     <div class="weekday">{{ __('calendar.mon') }}</div>
@@ -240,12 +232,11 @@
                     <div class="weekday weekend">{{ __('calendar.sun') }}</div>
                 </div>
                 <div class="calendar-days" id="calendar-days">
-                    <!-- Generated via JS -->
+
                 </div>
             </div>
         </main>
 
-        <!-- Right Panel - Events Timeline -->
         <aside class="events-panel">
             <div class="panel-header">
                 <h3 class="panel-title">
@@ -269,7 +260,7 @@
                     </select>
                 </div>
             </div>
-            
+
             <div class="events-timeline" id="events-timeline">
                 <div class="empty-state">
                     <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -288,7 +279,6 @@
                 </div>
             </div>
 
-            <!-- Upcoming Events -->
             <div class="upcoming-section">
                 <h4 class="section-title">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -298,13 +288,12 @@
                     {{ __('calendar.upcoming_events') }}
                 </h4>
                 <div class="upcoming-list" id="upcoming-list">
-                    <!-- Generated via JS -->
+
                 </div>
             </div>
         </aside>
     </div>
 
-    <!-- Event Modal -->
     <div class="modal-overlay" id="event-modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -319,7 +308,7 @@
             <form id="event-form" class="event-form">
                 @csrf
                 <input type="hidden" id="event-id" name="event_id" value="">
-                
+
                 <div class="form-row">
                     <div class="form-group">
                         <label for="event-date">
@@ -489,7 +478,7 @@
                             <span class="type-name">{{ __('calendar.type_custom') }}</span>
                         </label>
                     </div>
-                    <!-- Custom Type Input -->
+
                     <div class="custom-type-input" id="custom-type-input" style="display: none;">
                         <label for="custom-type-name">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -528,7 +517,6 @@
         </div>
     </div>
 
-    <!-- Delete Confirmation Modal -->
     <div class="modal-overlay" id="delete-modal">
         <div class="modal-content modal-small">
             <div class="modal-header">
@@ -562,7 +550,6 @@
         </div>
     </div>
 
-    <!-- Toast Notifications -->
     <div class="toast-container" id="toast-container"></div>
 </div>
 @endsection

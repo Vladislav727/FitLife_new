@@ -1,29 +1,24 @@
 <?php
 
 return [
-    // Page title
+
     'page_title' => 'FitLife - Jūsu ceļš uz veselību',
 
-    // Navigation
     'nav_features' => 'Funkcijas',
     'nav_testimonials' => 'Atsauksmes',
     'nav_about' => 'Par mums',
 
-    // Auth buttons
     'dashboard' => 'Vadības panelis',
     'log_in' => 'Ieiet',
     'sign_up' => 'Reģistrēties',
 
-    // Hero section
     'hero_title' => 'Pārveidojiet savu dzīvi ar FitLife',
     'hero_subtitle' => 'Atklājiet gudrāku veidu, kā sasniegt savus fitnesa mērķus ar mūsu universālo platformu.',
     'hero_hidden_title' => 'Laipni lūdzam',
 
-    // Features section
     'features_title' => 'Kāpēc FitLife?',
     'features_subtitle' => 'Rīki, kas radīti reāliem rezultātiem.',
 
-    // Feature cards
     'feature_workouts_title' => 'Personalizēti treniņi',
     'feature_workouts_desc' => 'Izveidojiet pielāgotus treniņu plānus jūsu mērķiem. Piekļūstiet pamācībām un sinhronizējiet ar viedierīcēm.',
     'feature_workouts_alt' => 'Cilvēks ceļ svarus',
@@ -48,7 +43,6 @@ return [
     'feature_goals_desc' => 'Izvirziet un izsekojiet fitnesa mērķus ar personalizētiem atjauninājumiem.',
     'feature_goals_alt' => 'Apzinātības meditācija',
 
-    // Testimonials section
     'testimonials_title' => 'Ko saka mūsu lietotāji',
     'testimonials_subtitle' => 'Īsti stāsti no FitLife lietotājiem.',
 
@@ -61,11 +55,9 @@ return [
     'testimonial_3_text' => '"Labāks miegs uzlaboja manus treniņus."',
     'testimonial_3_author' => '- Līza M.',
 
-    // About section
     'about_title' => 'Par FitLife',
     'about_text' => 'Kopš 2020. gada FitLife ir palīdzējis miljoniem cilvēku dzīvot veselīgāk.',
 
-    // Footer
     'footer_copyright' => '© :year FitLife. Visas tiesības aizsargātas.',
     'footer_privacy' => 'Privātuma politika',
     'footer_terms' => 'Lietošanas noteikumi',

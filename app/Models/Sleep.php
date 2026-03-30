@@ -9,7 +9,6 @@ class Sleep extends Model
 {
     use HasFactory;
 
-    // Mass assignable attributes
     protected $fillable = [
         'user_id',
         'date',
@@ -18,7 +17,6 @@ class Sleep extends Model
         'duration',
     ];
 
-    // Relation: Sleep record belongs to a User
     public function user()
     {
         return $this->belongsTo(User::class);

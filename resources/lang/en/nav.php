@@ -20,13 +20,11 @@ return [
     'menu' => 'Menu',
     'toggle_menu' => 'Toggle menu',
 
-    // Sidebar sections
     'main' => 'Main',
     'trackers' => 'Trackers',
     'tools' => 'Tools',
     'admin_panel' => 'Admin Panel',
 
-    // Navigation items
     'community' => 'Community',
     'meal_tracker' => 'Meal Tracker',
     'progress_photos' => 'Progress Photos',

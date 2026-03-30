@@ -26,7 +26,6 @@ return [
     'goal_deleted' => 'Mērķis veiksmīgi dzēsts',
     'progress_logged' => 'Progress veiksmīgi reģistrēts',
 
-    // Index page
     'fitlife_goals' => 'FitLife Mērķi',
     'track_progress_subtitle' => 'Izseko savu ikdienas progresu un paliec motivēts!',
     'your_goals' => 'Jūsu mērķi',
@@ -36,7 +35,6 @@ return [
     'current' => 'Pašreizējais',
     'no_goals_start_creating' => 'Mērķu vēl nav. Sāciet veidot savus mērķus!',
 
-    // Create page
     'fitlife_create_goal' => 'FitLife Izveidot mērķi',
     'create_new_goal' => 'Izveidot jaunu mērķi',
     'set_new_goal_subtitle' => 'Uzstādiet jaunu mērķi, lai paliktu motivēti!',
@@ -50,14 +48,12 @@ return [
     'description_optional' => 'Apraksts (neobligāts)',
     'add_description' => 'Pievienot aprakstu',
 
-    // Edit page
     'fitlife_edit_goal' => 'FitLife Rediģēt mērķi',
     'update_goal_subtitle' => 'Atjauniniet sava mērķa informāciju',
     'update_goal' => 'Atjaunināt mērķi',
     'cancel' => 'Atcelt',
     'delete_confirm' => 'Vai tiešām vēlaties dzēst šo mērķi?',
 
-    // Log page
     'fitlife_log_progress' => 'FitLife Reģistrēt progresu',
     'update_progress_for' => 'Atjauniniet savu progresu :type mērķim',
     'log_progress_for' => 'Reģistrēt progresu :type',
@@ -65,7 +61,6 @@ return [
     'enter_todays_value' => 'Ievadiet šodienas vērtību',
     'submit' => 'Iesniegt',
 
-    // Additional
     'total_goals' => 'Kopā mērķi',
     'active_goals' => 'Aktīvie',
     'back_to_goals' => 'Atpakaļ uz mērķiem',

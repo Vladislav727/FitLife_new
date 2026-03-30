@@ -24,7 +24,6 @@ return [
     'eat_more' => 'Try to eat a bit more calories for energy!',
     'too_much' => 'You consumed a lot of calories, don\'t forget to move!',
 
-    // Meal Tracker page
     'app_label' => 'FitLife Meal Tracker',
     'menu' => 'Menu',
     'meal_tracker' => 'Meal Tracker',
@@ -63,7 +62,6 @@ return [
     'no_valid_meals' => 'No valid meals to save',
     'macros' => 'P / F / C',
 
-    // Calorie Calculator page
     'calorie_calc_label' => 'FitLife Calorie Calculator',
     'calorie_macro_calc' => 'Calorie & Macro Calculator',
     'calc_daily_needs' => 'Calculate your daily calorie and macro needs!',

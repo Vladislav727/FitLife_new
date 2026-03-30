@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Mobile menu toggle
+
     const mobileToggle = document.getElementById('mobile-toggle');
     const sidebar = document.getElementById('sidebar');
 
@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Lightbox setup
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const lightboxDesc = document.getElementById('lightbox-desc');
@@ -26,7 +25,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const photos = document.querySelectorAll('.photo-item');
     let currentIdx = -1;
 
-    // Open lightbox function
     const openLightbox = idx => {
         if (idx < 0 || idx >= photos.length) return;
         currentIdx = idx;
@@ -37,13 +35,11 @@ document.addEventListener("DOMContentLoaded", function () {
         lightbox.setAttribute('aria-hidden', 'false');
     };
 
-    // Close lightbox function
     const closeLightbox = () => {
         lightbox.setAttribute('aria-hidden', 'true');
         currentIdx = -1;
     };
 
-    // Photo click & keyboard events
     photos.forEach((photo, idx) => {
         const img = photo.querySelector('.photo-img');
         img.addEventListener('click', () => openLightbox(idx));
@@ -55,17 +51,14 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Lightbox close events
     closeBtn.addEventListener('click', closeLightbox);
     lightbox.addEventListener('click', e => {
         if (e.target === lightbox) closeLightbox();
     });
 
-    // Lightbox navigation buttons
     prevBtn.addEventListener('click', () => openLightbox((currentIdx - 1 + photos.length) % photos.length));
     nextBtn.addEventListener('click', () => openLightbox((currentIdx + 1) % photos.length));
 
-    // Keyboard navigation for lightbox
     document.addEventListener('keydown', e => {
         if (lightbox.getAttribute('aria-hidden') === 'false') {
             if (e.key === 'Escape') closeLightbox();
@@ -74,7 +67,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Close sidebar with Escape key
     document.addEventListener('keydown', e => {
         if (e.key === 'Escape') {
             sidebar.classList.remove('active');

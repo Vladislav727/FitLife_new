@@ -1,15 +1,13 @@
-// DOMContentLoaded event
+
 document.addEventListener("DOMContentLoaded", function () {
   const mobileToggle = document.getElementById('mobile-toggle');
   const sidebar = document.getElementById('sidebar');
 
-  // Mobile menu toggle
   mobileToggle.addEventListener('click', () => {
     const isOpen = sidebar.classList.toggle('active');
     mobileToggle.setAttribute('aria-expanded', isOpen);
   });
 
-  // Close sidebar when clicking outside
   document.addEventListener('click', e => {
     if (sidebar.classList.contains('active') && !sidebar.contains(e.target) && !mobileToggle.contains(e.target)) {
       sidebar.classList.remove('active');
@@ -17,7 +15,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // Close sidebar with Escape key
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') {
       sidebar.classList.remove('active');

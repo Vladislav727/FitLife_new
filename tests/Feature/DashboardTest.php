@@ -23,7 +23,6 @@ test('authenticated users can access dashboard', function () {
 test('dashboard displays user statistics', function () {
     $user = User::factory()->create();
 
-    // Create some sample data
     MealLog::create([
         'user_id' => $user->id,
         'meal' => 'breakfast',

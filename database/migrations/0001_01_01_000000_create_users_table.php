@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
@@ -20,7 +17,6 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
 
-            // Дополнительные поля для UserFactory и тестов
             $table->integer('age')->nullable();
             $table->decimal('weight', 5, 2)->nullable();
             $table->decimal('height', 5, 2)->nullable();
@@ -46,9 +42,6 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('users');

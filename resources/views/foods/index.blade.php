@@ -4,7 +4,6 @@
 <div class="mt-page">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    {{-- Page Header --}}
     <div class="mt-header">
         <div class="mt-header__icon">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -18,10 +17,8 @@
         </div>
     </div>
 
-    {{-- Notification --}}
     <div class="mt-notification" id="notification" role="alert"></div>
 
-    {{-- Today's Summary --}}
     <section class="mt-card mt-summary-section">
         <div class="mt-card__header">
             <div class="mt-card__header-icon mt-card__header-icon--warning">
@@ -54,7 +51,6 @@
         </div>
     </section>
 
-    {{-- Add Food Section --}}
     <section class="mt-card" id="add-food-section">
         <div class="mt-card__header">
             <div class="mt-card__header-icon mt-card__header-icon--warning">
@@ -69,7 +65,7 @@
         </div>
 
         <div class="mt-food-form">
-            {{-- Meal type selector --}}
+
             <div class="mt-meal-selector">
                 @php $meals = ['Breakfast', 'Lunch', 'Dinner', 'Snack']; @endphp
                 @foreach($meals as $meal)
@@ -94,7 +90,6 @@
                 @endforeach
             </div>
 
-            {{-- Food items list --}}
             <div class="mt-items-list" id="food-items">
                 <div class="mt-food-item" data-index="0">
                     <div class="mt-food-item__row">
@@ -133,7 +128,6 @@
         </div>
     </section>
 
-    {{-- Meal History --}}
     <section class="mt-card" id="history-section">
         <div class="mt-card__header">
             <div class="mt-card__header-icon">

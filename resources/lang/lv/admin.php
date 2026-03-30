@@ -1,7 +1,7 @@
 <?php
 
 return [
-    // Dashboard
+
     'dashboard' => 'Administratora panelis',
     'dashboard_subtitle' => 'Pārvaldīt lietotājus, ierakstus un notikumus',
     'total_users' => 'Kopā lietotāju',
@@ -13,14 +13,12 @@ return [
     'view_profile' => 'Skatīt profilu',
     'back_to_dashboard' => '← Atpakaļ uz paneli',
 
-    // Statistics
     'statistics' => 'Statistika',
     'user_registrations' => 'Lietotāju reģistrācijas (pa mēnešiem)',
     'post_creations' => 'Ierakstu izveide (pa mēnešiem)',
     'new_users' => 'Jauni lietotāji',
     'new_posts' => 'Jauni ieraksti',
 
-    // Events Management
     'events_management' => 'Notikumu pārvaldība',
     'search_events' => 'Meklēt notikumus...',
     'all_types' => 'Visi veidi',
@@ -30,14 +28,12 @@ return [
     'no_events_found' => 'Notikumi nav atrasti.',
     'confirm_delete_event' => 'Vai tiešām vēlaties dzēst šo notikumu?',
 
-    // Posts Management
     'posts_management' => 'Ierakstu pārvaldība',
     'search_posts' => 'Meklēt ierakstus...',
     'no_posts_found' => 'Ieraksti nav atrasti.',
     'no_recent_posts' => 'Nav neseno ierakstu.',
     'confirm_delete_post' => 'Vai tiešām vēlaties dzēst šo ierakstu?',
 
-    // Users Management
     'users_management' => 'Lietotāju pārvaldība',
     'search_users' => 'Meklēt lietotājus...',
     'all_roles' => 'Visas lomas',
@@ -48,7 +44,6 @@ return [
     'back_to_user' => '← Atpakaļ uz lietotāju',
     'confirm_delete_user' => 'Vai tiešām vēlaties dzēst šo lietotāju?',
 
-    // User Details
     'user_details' => 'Lietotāja dati',
     'edit_user_details' => 'Rediģēt lietotāja datus',
     'update_user' => 'Atjaunināt lietotāju',
@@ -57,7 +52,6 @@ return [
     'no_posts' => 'Nav ierakstu.',
     'no_friends' => 'Nav draugu.',
 
-    // Biography
     'biography' => 'Biogrāfija',
     'full_name' => 'Pilns vārds',
     'age' => 'Vecums',
@@ -65,7 +59,6 @@ return [
     'weight' => 'Svars',
     'gender' => 'Dzimums',
 
-    // Table Headers
     'id' => 'ID',
     'user' => 'Lietotājs',
     'content' => 'Saturs',
@@ -83,7 +76,6 @@ return [
     'username' => 'Lietotājvārds',
     'last_login' => 'Pēdējā pieteikšanās',
 
-    // Buttons
     'view' => 'Skatīt',
     'edit' => 'Rediģēt',
     'delete' => 'Dzēst',

@@ -40,7 +40,7 @@ class Goal extends Model
 
     public function progressPercent(): float
     {
-        // Guard against division by zero or negative targets
+
         $target = (float) $this->target_value;
         $current = (float) $this->current_value;
 

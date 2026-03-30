@@ -7,52 +7,32 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-/**
- * Фабрика для создания пользователей.
- * Применяется при тестировании и сидировании базы данных.
- */
 class UserFactory extends Factory
 {
-    /**
-     * Модель, с которой связана фабрика.
-     *
-     * @var string
-     */
+
     protected $model = User::class;
 
-    /**
-     * Определяет значения по умолчанию для полей модели User.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         return [
-            // Основная информация
+
             'name' => fake()->name(),
             'username' => fake()->unique()->regexify('[a-zA-Z][a-zA-Z0-9_]{4,14}'),
 
-            // Контактные данные
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
 
-            // Безопасность
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
 
-            // Дополнительные данные
             'bio' => fake()->sentence(),
             'avatar' => fake()->imageUrl(200, 200, 'people'),
 
-            // Временные метки
             'created_at' => now(),
             'updated_at' => now(),
         ];
     }
 
-    /**
-     * Состояние для неактивного пользователя.
-     */
     public function unverified(): static
     {
         return $this->state(fn (array $attributes) => [
@@ -60,9 +40,6 @@ class UserFactory extends Factory
         ]);
     }
 
-    /**
-     * Состояние администратора.
-     */
     public function admin(): static
     {
         return $this->state(fn (array $attributes) => [
@@ -70,9 +47,6 @@ class UserFactory extends Factory
         ]);
     }
 
-    /**
-     * Состояние пользователя с профилем (био и аватар).
-     */
     public function withProfile(): static
     {
         return $this->afterCreating(function (User $user) {

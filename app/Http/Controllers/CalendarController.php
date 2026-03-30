@@ -9,13 +9,12 @@ use Illuminate\Support\Facades\Auth;
 
 class CalendarController extends Controller
 {
-    // Show the calendar page
+
     public function index()
     {
         return view('activity-calendar.index');
     }
 
-    // Store a new event
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -44,7 +43,6 @@ class CalendarController extends Controller
         ]);
     }
 
-    // Update an existing event
     public function update(Request $request, $id)
     {
         $calendar = Calendar::findOrFail($id);
@@ -62,7 +60,6 @@ class CalendarController extends Controller
         return response()->json(['success' => true]);
     }
 
-    // Fetch events for AJAX
     public function getEvents(Request $request)
     {
         $start = $request->query('start', Carbon::today()->toDateString());
@@ -85,7 +82,6 @@ class CalendarController extends Controller
         return response()->json($events);
     }
 
-    // Delete an event
     public function destroy($id)
     {
         $calendar = Calendar::findOrFail($id);
