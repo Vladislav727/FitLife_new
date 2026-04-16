@@ -54,7 +54,8 @@
 .header-logo-icon svg {
     width: 20px;
     height: 20px;
-    fill: white;
+    fill: none;
+    stroke: white;
 }
 
 .header-logo-text {
@@ -90,7 +91,8 @@
 .nav-item svg {
     width: 18px;
     height: 18px;
-    fill: currentColor;
+    fill: none;
+    stroke: currentColor;
     opacity: 0.7;
     transition: all var(--transition-fast);
 }

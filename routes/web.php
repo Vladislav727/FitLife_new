@@ -41,21 +41,21 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::prefix('profile')->group(function () {
         Route::get('/', [ProfileController::class, 'edit'])->name('profile.edit');
-        Route::get('/{user}', [ProfileController::class, 'show'])->name('profile.show');
+        Route::get('/{user:username}', [ProfileController::class, 'show'])->name('profile.show');
         Route::patch('/', [ProfileController::class, 'update'])->name('profile.update');
         Route::delete('/', [ProfileController::class, 'destroy'])->name('profile.destroy');
         Route::post('/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.avatar.update');
     });
 
     Route::prefix('friends')->group(function () {
-        Route::post('/{user}', [FriendController::class, 'store'])->name('friends.store');
-        Route::post('/{user}/accept', [FriendController::class, 'accept'])->name('friends.accept');
-        Route::delete('/{user}', [FriendController::class, 'remove'])->name('friends.remove');
+        Route::post('/{user:username}', [FriendController::class, 'store'])->name('friends.store');
+        Route::post('/{user:username}/accept', [FriendController::class, 'accept'])->name('friends.accept');
+        Route::delete('/{user:username}', [FriendController::class, 'remove'])->name('friends.remove');
     });
 
-    Route::post('/follow/{user}', [FollowController::class, 'toggle'])->name('follow.toggle');
-    Route::get('/profile/{user}/followers', [FollowController::class, 'followers'])->name('follow.followers');
-    Route::get('/profile/{user}/following', [FollowController::class, 'following'])->name('follow.following');
+    Route::post('/follow/{user:username}', [FollowController::class, 'toggle'])->name('follow.toggle');
+    Route::get('/profile/{user:username}/followers', [FollowController::class, 'followers'])->name('follow.followers');
+    Route::get('/profile/{user:username}/following', [FollowController::class, 'following'])->name('follow.following');
 
     Route::prefix('tracker/foods')->group(function () {
         Route::get('/', [FoodController::class, 'index'])->name('foods.index');
@@ -132,7 +132,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::prefix('conversations')->group(function () {
         Route::get('/', [ConversationController::class, 'index'])->name('conversations.index');
-        Route::post('/start/{user}', [ConversationController::class, 'start'])->name('conversations.start');
+        Route::post('/start/{user:username}', [ConversationController::class, 'start'])->name('conversations.start');
         Route::get('/{conversation}', [ConversationController::class, 'show'])->name('conversations.show');
         Route::post('/{conversation}', [ConversationController::class, 'send'])->name('conversations.send');
         Route::get('/{conversation}/poll', [ConversationController::class, 'poll'])->name('conversations.poll');
@@ -167,8 +167,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/{group}/avatar', [GroupController::class, 'updateAvatar'])->name('groups.avatar');
         Route::put('/{group}/name', [GroupController::class, 'updateName'])->name('groups.updateName');
         Route::put('/{group}/description', [GroupController::class, 'updateDescription'])->name('groups.updateDescription');
-        Route::post('/{group}/members/{user}/role', [GroupController::class, 'setRole'])->name('groups.setRole');
-        Route::delete('/{group}/members/{user}', [GroupController::class, 'removeMember'])->name('groups.removeMember');
+        Route::post('/{group}/members/{user:username}/role', [GroupController::class, 'setRole'])->name('groups.setRole');
+        Route::delete('/{group}/members/{user:username}', [GroupController::class, 'removeMember'])->name('groups.removeMember');
         Route::put('/{group}/messages/{message}', [GroupController::class, 'editMessage'])->name('groups.editMessage');
         Route::delete('/{group}/messages/{message}', [GroupController::class, 'deleteMessage'])->name('groups.deleteMessage');
         Route::post('/{group}/messages/{message}/react', [GroupController::class, 'reactMessage'])->name('groups.reactMessage');

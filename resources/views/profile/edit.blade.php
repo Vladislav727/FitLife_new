@@ -73,7 +73,7 @@
 @section('content')
 <div class="profile-edit-page" role="application" aria-label="FitLife Profile Settings">
 
-    <a href="{{ route('profile.show', $user->id) }}" class="pe-back-link">
+    <a href="{{ route('profile.show', $user->username) }}" class="pe-back-link">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M19 12H5M12 19l-7-7 7-7"/>
         </svg>
@@ -303,7 +303,7 @@
                     </div>
 
                     <div class="pe-form__actions">
-                        <a href="{{ route('profile.show', $user->id) }}" class="pe-btn pe-btn--secondary">
+                        <a href="{{ route('profile.show', $user->username) }}" class="pe-btn pe-btn--secondary">
                             {{ __('profile.cancel') }}
                         </a>
                         <button type="submit" class="pe-btn pe-btn--primary">

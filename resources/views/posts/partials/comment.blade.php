@@ -4,7 +4,7 @@
 
     <div class="comment-content">
         <div class="comment-header">
-            <a href="{{ route('profile.show', $comment->user->id) }}" class="comment-author">{{ $comment->user->name }}</a>
+            <a href="{{ route('profile.show', $comment->user->username) }}" class="comment-author">{{ $comment->user->name }}</a>
             <span class="comment-username">{{ '@' . $comment->user->username }}</span>
             <span class="comment-time">{{ $comment->created_at->diffForHumans() }}</span>
         </div>

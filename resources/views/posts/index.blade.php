@@ -67,7 +67,7 @@
             @forelse($posts as $post)
             <article class="post" id="post-{{ $post->id }}" data-post-id="{{ $post->id }}">
                 <div class="post-header">
-                    <a href="{{ route('profile.show', $post->user->id) }}" class="post-author">
+                    <a href="{{ route('profile.show', $post->user->username) }}" class="post-author">
                         <img src="{{ $post->user->avatar ? asset('storage/' . $post->user->avatar) : asset('storage/logo/defaultPhoto.jpg') }}" alt="" class="post-avatar">
                         <div class="post-author-info">
                             <span class="post-author-name">{{ $post->user->name }}</span>

@@ -537,7 +537,7 @@ class PostController extends Controller
                 'name' => $user->name,
                 'avatar' => $user->avatar,
                 'username' => $user->username,
-                'profile_url' => route('profile.show', $user->id),
+                'profile_url' => route('profile.show', $user->username),
             ],
             'created_at_diff' => $post->created_at->diffForHumans(),
             'views' => $post->views,
@@ -562,7 +562,7 @@ class PostController extends Controller
                 'name' => $post->user->name,
                 'username' => $post->user->username,
                 'avatar' => $post->user->avatar,
-                'profile_url' => route('profile.show', $post->user->id),
+                'profile_url' => route('profile.show', $post->user->username),
             ],
             'created_at_diff' => $post->created_at->diffForHumans(),
             'views' => $post->views,
@@ -594,7 +594,7 @@ class PostController extends Controller
             'user_avatar' => $comment->user->avatar,
             'user' => [
                 'username' => $comment->user->username,
-                'profile_url' => route('profile.show', $comment->user->id),
+                'profile_url' => route('profile.show', $comment->user->username),
             ],
             'created_at_diff' => $comment->created_at->diffForHumans(),
             'parent_id' => $comment->parent_id,
@@ -646,7 +646,7 @@ class PostController extends Controller
                     'username' => $user->username,
                     'avatar' => $user->avatar ? asset('storage/' . $user->avatar) : asset('storage/logo/defaultPhoto.jpg'),
                     'online' => $user->isOnline(),
-                    'url' => route('profile.show', $user->id),
+                    'url' => route('profile.show', $user->username),
                 ];
             });
 

@@ -15,70 +15,75 @@
         -webkit-text-size-adjust: 100% !important;
     }
 
-    /* Полный мобильный фикс чата */
+    /* Мобильный layout чата */
     .main-content {
         padding: 0 !important;
+        padding-top: 64px !important;
         overflow: hidden !important;
-        height: 100dvh !important;
-        height: 100vh !important;
     }
     .content-wrapper {
         padding: 0 !important;
-        height: 100% !important;
+        height: calc(100vh - 64px) !important;
+        height: calc(100dvh - 64px) !important;
         overflow: hidden !important;
     }
-    .main-header {
-        display: none !important;
-    }
     .messenger {
-        height: 100dvh !important;
-        height: 100vh !important;
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
-        bottom: 0 !important;
-        z-index: 100 !important;
+        height: 100% !important;
+        display: flex !important;
         border-radius: 0 !important;
     }
     .messenger__main {
         height: 100% !important;
+        min-height: 0 !important;
         display: flex !important;
         flex-direction: column !important;
     }
     .chat-page {
         height: 100% !important;
+        min-height: 0 !important;
         display: flex !important;
         flex-direction: column !important;
     }
     .chat-header {
         flex-shrink: 0 !important;
-        z-index: 10 !important;
     }
     .chat-messages {
-        flex: 1 !important;
+        flex: 1 1 0% !important;
         min-height: 0 !important;
         overflow-y: auto !important;
         -webkit-overflow-scrolling: touch !important;
     }
     .chat-input {
         flex-shrink: 0 !important;
-        position: relative !important;
-        z-index: 10 !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 6px !important;
         padding: 8px 10px !important;
         padding-bottom: max(8px, env(safe-area-inset-bottom)) !important;
         background: var(--bg-surface, #111114) !important;
         border-top: 1px solid var(--border-default, rgba(255,255,255,0.06)) !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
     }
     .chat-input__field {
+        flex: 1 !important;
+        min-width: 0 !important;
         min-height: 36px !important;
         max-height: 100px !important;
     }
     .chat-input__send,
     .chat-input__media,
     .chat-input__voice {
-        width: 36px !important;
-        height: 36px !important;
+        width: 34px !important;
+        height: 34px !important;
+        flex-shrink: 0 !important;
+        padding: 0 !important;
+    }
+    .chat-reply-preview,
+    .chat-media-preview {
+        flex-shrink: 0 !important;
+    }
+    #typingIndicator {
         flex-shrink: 0 !important;
     }
 }
@@ -1117,47 +1122,35 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <script>
-// Mobile keyboard handler — keeps chat input visible like Telegram
+// Mobile keyboard handler
 (function() {
     if (window.innerWidth > 900) return;
+    var wrapper = document.querySelector('.content-wrapper');
     var messenger = document.querySelector('.messenger');
     var chatMessages = document.getElementById('chatMessages');
-    var chatInput = document.querySelector('.chat-input');
-    if (!messenger || !chatInput) return;
+    var chatField = document.getElementById('chatBody');
+    if (!messenger) return;
+    var headerH = 64;
 
-    // Use visualViewport to detect keyboard
     if (window.visualViewport) {
-        var lastHeight = window.visualViewport.height;
         function onViewportResize() {
             var vv = window.visualViewport;
-            var keyboardHeight = window.innerHeight - vv.height;
-            if (keyboardHeight > 50) {
-                // Keyboard is open
-                messenger.style.height = vv.height + 'px';
-                messenger.style.top = vv.offsetTop + 'px';
-            } else {
-                // Keyboard is closed
-                messenger.style.height = '';
-                messenger.style.top = '';
-            }
-            // Scroll to bottom
+            var available = vv.height - headerH;
+            if (available < 200) available = vv.height; // keyboard pushed header off
+            if (wrapper) wrapper.style.height = available + 'px';
+            messenger.style.height = '100%';
             if (chatMessages) {
-                setTimeout(function() {
-                    chatMessages.scrollTop = chatMessages.scrollHeight;
-                }, 50);
+                setTimeout(function() { chatMessages.scrollTop = chatMessages.scrollHeight; }, 50);
             }
         }
         window.visualViewport.addEventListener('resize', onViewportResize);
         window.visualViewport.addEventListener('scroll', onViewportResize);
     }
 
-    // Also handle focus/blur on input as fallback
-    var chatField = document.getElementById('chatBody');
     if (chatField) {
         chatField.addEventListener('focus', function() {
             setTimeout(function() {
                 if (chatMessages) chatMessages.scrollTop = chatMessages.scrollHeight;
-                chatField.scrollIntoView({ block: 'nearest' });
             }, 300);
         });
     }
