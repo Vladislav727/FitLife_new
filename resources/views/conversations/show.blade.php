@@ -14,6 +14,73 @@
         font-size: 16px !important;
         -webkit-text-size-adjust: 100% !important;
     }
+
+    /* Полный мобильный фикс чата */
+    .main-content {
+        padding: 0 !important;
+        overflow: hidden !important;
+        height: 100dvh !important;
+        height: 100vh !important;
+    }
+    .content-wrapper {
+        padding: 0 !important;
+        height: 100% !important;
+        overflow: hidden !important;
+    }
+    .main-header {
+        display: none !important;
+    }
+    .messenger {
+        height: 100dvh !important;
+        height: 100vh !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        z-index: 100 !important;
+        border-radius: 0 !important;
+    }
+    .messenger__main {
+        height: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    .chat-page {
+        height: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+    .chat-header {
+        flex-shrink: 0 !important;
+        z-index: 10 !important;
+    }
+    .chat-messages {
+        flex: 1 !important;
+        min-height: 0 !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+    }
+    .chat-input {
+        flex-shrink: 0 !important;
+        position: relative !important;
+        z-index: 10 !important;
+        padding: 8px 10px !important;
+        padding-bottom: max(8px, env(safe-area-inset-bottom)) !important;
+        background: var(--bg-surface, #111114) !important;
+        border-top: 1px solid var(--border-default, rgba(255,255,255,0.06)) !important;
+    }
+    .chat-input__field {
+        min-height: 36px !important;
+        max-height: 100px !important;
+    }
+    .chat-input__send,
+    .chat-input__media,
+    .chat-input__voice {
+        width: 36px !important;
+        height: 36px !important;
+        flex-shrink: 0 !important;
+    }
 }
 </style>
 @endsection
@@ -1046,6 +1113,54 @@ document.addEventListener('DOMContentLoaded', function() {
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && lightbox.classList.contains('active')) closeLightbox();
     });
+})();
+</script>
+
+<script>
+// Mobile keyboard handler — keeps chat input visible like Telegram
+(function() {
+    if (window.innerWidth > 900) return;
+    var messenger = document.querySelector('.messenger');
+    var chatMessages = document.getElementById('chatMessages');
+    var chatInput = document.querySelector('.chat-input');
+    if (!messenger || !chatInput) return;
+
+    // Use visualViewport to detect keyboard
+    if (window.visualViewport) {
+        var lastHeight = window.visualViewport.height;
+        function onViewportResize() {
+            var vv = window.visualViewport;
+            var keyboardHeight = window.innerHeight - vv.height;
+            if (keyboardHeight > 50) {
+                // Keyboard is open
+                messenger.style.height = vv.height + 'px';
+                messenger.style.top = vv.offsetTop + 'px';
+            } else {
+                // Keyboard is closed
+                messenger.style.height = '';
+                messenger.style.top = '';
+            }
+            // Scroll to bottom
+            if (chatMessages) {
+                setTimeout(function() {
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }, 50);
+            }
+        }
+        window.visualViewport.addEventListener('resize', onViewportResize);
+        window.visualViewport.addEventListener('scroll', onViewportResize);
+    }
+
+    // Also handle focus/blur on input as fallback
+    var chatField = document.getElementById('chatBody');
+    if (chatField) {
+        chatField.addEventListener('focus', function() {
+            setTimeout(function() {
+                if (chatMessages) chatMessages.scrollTop = chatMessages.scrollHeight;
+                chatField.scrollIntoView({ block: 'nearest' });
+            }, 300);
+        });
+    }
 })();
 </script>
 @endsection
