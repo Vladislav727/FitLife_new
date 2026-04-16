@@ -13,6 +13,7 @@
                 <option value="">{{ __('admin.all_roles') }}</option>
                 <option value="user">{{ __('admin.users') }}</option>
                 <option value="admin">{{ __('admin.admins') }}</option>
+                <option value="super_admin">Super Admin</option>
             </select>
         </div>
 
@@ -43,12 +44,16 @@
                                 <td>{{ $user->created_at->format('M d, Y') }}</td>
                                 <td>
                                     <a href="{{ route('admin.users.show', $user) }}" class="users-btn users-btn-primary">{{ __('admin.view') }}</a>
+                                    @if(!$user->isSuperAdmin() || auth()->user()->isSuperAdmin())
                                     <a href="{{ route('admin.users.edit', $user) }}" class="users-btn users-btn-secondary">{{ __('admin.edit') }}</a>
+                                    @endif
+                                    @if(!$user->isSuperAdmin())
                                     <form action="{{ route('admin.users.delete', $user) }}" method="POST" style="display:inline;">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="users-btn users-btn-danger" onclick="return confirm('{{ __('admin.confirm_delete_user') }}')">{{ __('admin.delete') }}</button>
                                     </form>
+                                    @endif
                                 </td>
                             </tr>
                         @empty

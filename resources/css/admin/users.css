@@ -164,6 +164,12 @@
     border: 1px solid var(--danger);
 }
 
+.role-super_admin {
+    background: rgba(168, 85, 247, 0.15);
+    color: #a855f7;
+    border: 1px solid #a855f7;
+}
+
 .users-btn {
     display: inline-flex;
     align-items: center;

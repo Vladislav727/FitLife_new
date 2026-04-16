@@ -43,16 +43,32 @@ class AdminPanelController extends Controller
 
     public function usersEdit(User $user)
     {
+        if ($user->isSuperAdmin() && ! auth()->user()->isSuperAdmin()) {
+            abort(403);
+        }
+
         return view('admin.users.edit', compact('user'));
     }
 
     public function usersUpdate(Request $request, User $user)
     {
+        if ($user->isSuperAdmin() && ! auth()->user()->isSuperAdmin()) {
+            abort(403);
+        }
+
+        $allowedRoles = auth()->user()->isSuperAdmin()
+            ? 'in:user,admin,super_admin'
+            : 'in:user,admin';
+
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email,'.$user->id,
-            'role' => 'required|in:user,admin',
+            'role' => 'required|'.$allowedRoles,
         ]);
+
+        if (! auth()->user()->isSuperAdmin() && isset($validated['role']) && $validated['role'] !== $user->role) {
+            unset($validated['role']);
+        }
 
         $user->update($validated);
 
@@ -61,6 +77,10 @@ class AdminPanelController extends Controller
 
     public function usersDelete(User $user)
     {
+        if ($user->isSuperAdmin()) {
+            abort(403);
+        }
+
         $user->delete();
 
         return redirect()->route('admin.users')->with('success', 'User deleted successfully');

@@ -161,6 +161,16 @@ class User extends Authenticatable
         return $this->role === $role;
     }
 
+    public function isSuperAdmin(): bool
+    {
+        return $this->role === 'super_admin';
+    }
+
+    public function isAdmin(): bool
+    {
+        return in_array($this->role, ['admin', 'super_admin']);
+    }
+
     public function conversations()
     {
         return Conversation::where('user_one_id', $this->id)

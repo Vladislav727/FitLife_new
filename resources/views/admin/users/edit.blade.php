@@ -28,10 +28,16 @@
                 </div>
                 <div class="users-form-group">
                     <label for="role">{{ __('admin.role') }}</label>
-                    <select id="role" name="role" class="users-select" required>
+                    <select id="role" name="role" class="users-select" required {{ !auth()->user()->isSuperAdmin() ? 'disabled' : '' }}>
                         <option value="user" {{ $user->role === 'user' ? 'selected' : '' }}>{{ __('admin.user') }}</option>
                         <option value="admin" {{ $user->role === 'admin' ? 'selected' : '' }}>Admin</option>
+                        @if(auth()->user()->isSuperAdmin())
+                        <option value="super_admin" {{ $user->role === 'super_admin' ? 'selected' : '' }}>Super Admin</option>
+                        @endif
                     </select>
+                    @if(!auth()->user()->isSuperAdmin())
+                    <input type="hidden" name="role" value="{{ $user->role }}">
+                    @endif
                     @error('role')
                         <span class="users-error">{{ $message }}</span>
                     @enderror
