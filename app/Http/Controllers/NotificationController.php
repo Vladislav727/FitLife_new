@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\GroupInvite;
+use App\Models\Notification;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class NotificationController extends Controller
@@ -15,9 +17,27 @@ class NotificationController extends Controller
             ->where('status', 'pending')
             ->with(['group', 'sender'])
             ->latest()
-            ->paginate(20);
+            ->get();
 
-        return view('notifications.index', compact('invites'));
+        $notifications = Notification::where('user_id', $user->id)
+            ->with(['sender', 'notifiable'])
+            ->latest()
+            ->paginate(30);
+
+        return view('notifications.index', compact('invites', 'notifications'));
+    }
+
+    public function markAsRead(Request $request)
+    {
+        Notification::where('user_id', Auth::id())
+            ->whereNull('read_at')
+            ->update(['read_at' => now()]);
+
+        if ($request->expectsJson()) {
+            return response()->json(['success' => true]);
+        }
+
+        return back();
     }
 
     public function acceptInvite(GroupInvite $invite)

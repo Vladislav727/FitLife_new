@@ -113,4 +113,9 @@ return [
     'poll_closed' => 'Опрос завершён',
 
     'mention' => 'Упоминание',
+
+    'mark_all_read' => 'Прочитать все',
+    'notif_liked_post' => 'оценил(а) ваш пост',
+    'notif_commented_post' => 'прокомментировал(а) ваш пост',
+    'notif_mentioned_you' => 'упомянул(а) вас в комментарии',
 ];

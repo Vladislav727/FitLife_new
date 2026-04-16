@@ -37,7 +37,6 @@ return [
     'meals' => 'Meals',
     'water' => 'Water',
     'sleep' => 'Sleep',
-    'leaderboard' => 'Leaderboard',
     'messages' => 'Messages',
     'chats' => 'Chats',
     'groups' => 'Groups',

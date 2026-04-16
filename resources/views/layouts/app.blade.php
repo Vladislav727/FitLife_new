@@ -73,11 +73,6 @@
                     <span>{{ __('nav.progress') }}</span>
                 </a>
 
-                <a href="{{ route('leaderboard.index') }}" class="nav-item {{ request()->routeIs('leaderboard.*') ? 'active' : '' }}">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 21h8m-4-4v4m-5-8h10l1-4H6l1 4zm1-4l1-4h6l1 4m-8 0h10"/><path d="M12 1v4"/></svg>
-                    <span>{{ __('nav.leaderboard') }}</span>
-                </a>
-
                 <a href="{{ route('chats.index') }}" class="nav-item {{ request()->routeIs('chats.*') || request()->routeIs('conversations.*') || request()->routeIs('groups.*') ? 'active' : '' }}">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
                     <span>{{ __('nav.chats') }}</span>
@@ -98,7 +93,8 @@
                 </button>
 
                 @php
-                    $notifCount = Auth::user()->groupInvites()->count();
+                    $notifCount = Auth::user()->groupInvites()->count()
+                        + \App\Models\Notification::where('user_id', Auth::id())->whereNull('read_at')->count();
                     $unreadMsgCount = \App\Models\ConversationMessage::whereHas('conversation', function($q) {
                         $q->where('user_one_id', Auth::id())->orWhere('user_two_id', Auth::id());
                     })->where('user_id', '!=', Auth::id())->whereNull('read_at')->count();
@@ -226,10 +222,6 @@
                 <a href="{{ route('goals.index') }}" class="mobile-menu-link {{ request()->routeIs('goals.*') ? 'active' : '' }}">
                     <svg viewBox="0 -960 960 960"><path d="M480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Z"/></svg>
                     <span>{{ __('nav.goals') }}</span>
-                </a>
-                <a href="{{ route('leaderboard.index') }}" class="mobile-menu-link {{ request()->routeIs('leaderboard.*') ? 'active' : '' }}">
-                    <svg viewBox="0 -960 960 960"><path d="M160-200h160v-320H160v320Zm240 0h160v-560H400v560Zm240 0h160v-240H640v240ZM80-120v-480h240v-240h320v320h240v400H80Z"/></svg>
-                    <span>{{ __('nav.leaderboard') }}</span>
                 </a>
                 <a href="{{ route('chats.index') }}" class="mobile-menu-link {{ request()->routeIs('chats.*') || request()->routeIs('conversations.*') || request()->routeIs('groups.*') ? 'active' : '' }}">
                     <svg viewBox="0 -960 960 960"><path d="M240-400h480v-80H240v80Zm0-120h480v-80H240v80Zm0-120h480v-80H240v80ZM80-80v-720q0-33 23.5-56.5T160-880h640q33 0 56.5 23.5T880-800v480q0 33-23.5 56.5T800-240H240L80-80Z"/></svg>

@@ -37,7 +37,6 @@ return [
     'meals' => 'Maltītes',
     'water' => 'Ūdens',
     'sleep' => 'Miegs',
-    'leaderboard' => 'Reitings',
     'messages' => 'Ziņojumi',
     'chats' => 'Čati',
     'groups' => 'Grupas',

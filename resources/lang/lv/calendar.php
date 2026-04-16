@@ -33,7 +33,7 @@ return [
     'next_month' => 'Nākamais mēnesis',
     'event_type' => 'Notikuma veids',
     'select_event_type' => 'Izvēlieties notikuma veidu',
-    'description_placeholder' => 'Piem., spēka treniņš vai 5 km skrējiens',
+    'description_placeholder' => 'Piem., spēka treniņš',
     'save_event' => 'Saglabāt notikumu',
     'your_events' => 'Jūsu notikumi',
     'filter_by_type' => 'Filtrēt pēc veida:',

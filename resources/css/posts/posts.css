@@ -45,7 +45,6 @@
     flex-shrink: 0;
     border: 2px solid transparent;
     background: linear-gradient(var(--bg-glass-dark), var(--bg-glass-dark)) padding-box,
-                */
 }
 
 .create-post-input {
@@ -132,7 +131,6 @@
     flex-shrink: 0;
     border: 2px solid transparent;
     background: linear-gradient(var(--bg-glass-dark), var(--bg-glass-dark)) padding-box,
-                */
 }
 
 .create-post .create-post-header textarea {
@@ -699,9 +697,7 @@
 }
 
 .comment-item.is-reply {
-    margin-left: 2.5rem;
-    padding-left: 1rem;
-    border-left: 2px solid rgba(34, 197, 94, 0.3);
+    padding-left: 2.5rem;
     border-bottom: none;
 }
 
@@ -744,9 +740,34 @@
     color: var(--text-muted);
 }
 
-.comment-item .comment-reply-to {
-    font-size: 0.8125rem;
+.comment-item .comment-mention {
     color: var(--primary);
+    font-weight: 600;
+}
+
+.comment-quote {
+    background: var(--bg-elevated, #f3f4f6);
+    border-left: 3px solid var(--primary, #6366f1);
+    border-radius: 0 8px 8px 0;
+    padding: 6px 10px;
+    margin-bottom: 6px;
+    cursor: pointer;
+    transition: background 0.15s;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.comment-quote:hover { background: #f0f0f0; }
+.comment-quote-author { font-size: 0.75rem; font-weight: 600; color: var(--primary, #6366f1); line-height: 1.3; }
+.comment-quote-username { font-weight: 400; color: var(--text-muted, #6b7280); }
+.comment-quote-text {
+    font-size: 0.8rem;
+    color: var(--text-muted, #6b7280);
+    line-height: 1.3;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 .comment-item .comment-time {
@@ -788,7 +809,7 @@
 }
 
 .comment-btn:hover {
-    background: rgba(34, 197, 94, 0.1);
+    background: var(--bg-elevated);
     color: var(--text-primary);
 }
 
@@ -800,22 +821,22 @@
 
 .comment-btn.like:hover,
 .comment-btn.like.active {
-    background: rgba(34, 197, 94, 0.1);
-    color: var(--primary);
+    background: rgba(244, 63, 94, 0.1);
+    color: #f43f5e;
 }
 
 .comment-btn.like.active svg {
-    fill: var(--primary);
+    fill: #f43f5e;
 }
 
 .comment-btn.dislike:hover,
 .comment-btn.dislike.active {
-    background: rgba(239, 68, 68, 0.1);
-    color: var(--danger);
+    background: rgba(99, 102, 241, 0.1);
+    color: #6366f1;
 }
 
 .comment-btn.dislike.active svg {
-    fill: var(--danger);
+    fill: #6366f1;
 }
 
 .comment-btn.reply:hover {

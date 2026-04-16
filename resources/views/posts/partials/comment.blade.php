@@ -1,4 +1,4 @@
-<div class="comment-item {{ $comment->parent_id ? 'is-reply' : '' }}" id="comment-{{ $comment->id }}" data-comment-id="{{ $comment->id }}">
+<div class="comment-item {{ $comment->parent_id ? 'is-reply' : '' }}" id="comment-{{ $comment->id }}" data-comment-id="{{ $comment->id }}" data-root-id="{{ $comment->parent_id ?: $comment->id }}">
     <img src="{{ $comment->user->avatar ? asset('storage/' . $comment->user->avatar) : asset('storage/logo/defaultPhoto.jpg') }}"
          alt="{{ $comment->user->name }}" class="comment-avatar">
 
@@ -6,14 +6,20 @@
         <div class="comment-header">
             <a href="{{ route('profile.show', $comment->user->id) }}" class="comment-author">{{ $comment->user->name }}</a>
             <span class="comment-username">{{ '@' . $comment->user->username }}</span>
-            @if($comment->parent_id && $comment->parent && $comment->parent->user)
-                <span class="comment-reply-to">→ {{ '@' . $comment->parent->user->username }}</span>
-            @endif
             <span class="comment-time">{{ $comment->created_at->diffForHumans() }}</span>
         </div>
 
         <div class="comment-text" id="comment-text-{{ $comment->id }}">
-            <p>{{ $comment->content }}</p>
+            @php
+                $quoted = $comment->replyTo ?: $comment->parent;
+            @endphp
+            @if($comment->parent_id && $quoted)
+                <div class="comment-quote" onclick="document.getElementById('comment-{{ $quoted->id }}')?.scrollIntoView({behavior:'smooth', block:'center'})">
+                    <span class="comment-quote-author">{{ $quoted->user->name }} <span class="comment-quote-username">{{ '@' . $quoted->user->username }}</span></span>
+                    <span class="comment-quote-text">{{ Str::limit($quoted->content, 100) }}</span>
+                </div>
+            @endif
+            <p>{!! $comment->parent_id ? preg_replace('/(^@\S+)/', '<span class="comment-mention">$1</span>', e($comment->content)) : e($comment->content) !!}</p>
         </div>
 
         <form id="edit-comment-form-{{ $comment->id }}" class="comment-edit-form" action="{{ route('comments.update', $comment) }}" method="POST" style="display: none;">
@@ -37,7 +43,7 @@
                 <span>{{ $comment->likes()->where('type', 'dislike')->count() }}</span>
             </button>
 
-            <button class="comment-btn reply reply-btn" data-comment-id="{{ $comment->id }}" data-post-id="{{ $post->id }}">
+            <button class="comment-btn reply reply-btn" data-comment-id="{{ $comment->parent_id ?: $comment->id }}" data-reply-to-id="{{ $comment->id }}" data-reply-to-user="{{ $comment->user->username }}" data-post-id="{{ $post->id }}">
                 <svg viewBox="0 0 24 24"><path d="M10 9V5l-7 7 7 7v-4.1c5 0 8.5 1.6 11 5.1-1-5-4-10-11-11z"/></svg>
                 <span>{{ __('posts.reply') }}</span>
             </button>
@@ -55,29 +61,6 @@
                     </button>
                 </form>
             @endif
-
-            @if ($comment->replies->count() > 0)
-                <button class="comment-btn show-replies show-replies-btn" data-comment-id="{{ $comment->id }}">
-                    <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
-                    <span>{{ $comment->replies->count() }} {{ $comment->replies->count() === 1 ? __('posts.reply_singular') : __('posts.replies') }}</span>
-                </button>
-            @endif
-        </div>
-
-        <form action="{{ route('posts.comment', $post) }}" method="POST" class="comment-reply-form" data-post-id="{{ $post->id }}" data-parent-id="{{ $comment->id }}" style="display: none;">
-            @csrf
-            <input type="hidden" name="parent_id" value="{{ $comment->id }}">
-            <textarea name="content" placeholder="{{ __('posts.write_reply') }}" maxlength="500"></textarea>
-            <div class="comment-reply-btns">
-                <button type="submit" class="btn-reply">{{ __('posts.reply') }}</button>
-                <button type="button" class="btn-cancel cancel-reply" data-comment-id="{{ $comment->id }}">{{ __('posts.cancel') }}</button>
-            </div>
-        </form>
-
-        <div class="comment-replies" id="replies-{{ $comment->id }}" style="display: none;">
-            @foreach($comment->replies as $reply)
-                @include('posts.partials.comment', ['comment' => $reply, 'post' => $post])
-            @endforeach
         </div>
     </div>
 </div>

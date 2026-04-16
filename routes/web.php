@@ -15,7 +15,6 @@ use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SleepController;
 use App\Http\Controllers\WaterController;
 use App\Http\Controllers\FollowController;
-use App\Http\Controllers\LeaderboardController;
 use App\Http\Controllers\ConversationController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\NotificationController;
@@ -57,8 +56,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/follow/{user}', [FollowController::class, 'toggle'])->name('follow.toggle');
     Route::get('/profile/{user}/followers', [FollowController::class, 'followers'])->name('follow.followers');
     Route::get('/profile/{user}/following', [FollowController::class, 'following'])->name('follow.following');
-
-    Route::get('/leaderboard', [LeaderboardController::class, 'index'])->name('leaderboard.index');
 
     Route::prefix('tracker/foods')->group(function () {
         Route::get('/', [FoodController::class, 'index'])->name('foods.index');
@@ -116,6 +113,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/posts/{post}/views', [PostController::class, 'incrementViews'])->name('posts.views');
     Route::post('/posts/views/bulk', [PostController::class, 'bulkViews'])->name('posts.views.bulk');
     Route::post('/posts/stats/bulk', [PostController::class, 'bulkStats'])->name('posts.stats.bulk');
+    Route::get('/posts/search-users', [PostController::class, 'searchUsers'])->name('posts.searchUsers');
 
     Route::put('/comments/{comment}', [CommentController::class, 'update'])->name('comments.update');
     Route::post('/comments/{comment}/toggle-reaction', [CommentController::class, 'toggleReaction'])->name('comments.toggle-reaction');
@@ -185,6 +183,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::prefix('notifications')->group(function () {
         Route::get('/', [NotificationController::class, 'index'])->name('notifications.index');
+        Route::post('/read', [NotificationController::class, 'markAsRead'])->name('notifications.read');
         Route::post('/invite/{invite}/accept', [NotificationController::class, 'acceptInvite'])->name('notifications.invite.accept');
         Route::post('/invite/{invite}/decline', [NotificationController::class, 'declineInvite'])->name('notifications.invite.decline');
     });

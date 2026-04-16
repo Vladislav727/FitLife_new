@@ -141,11 +141,19 @@ document.addEventListener("DOMContentLoaded", () => {
             const fd = new FormData(); fd.append('type', type);
             const data = await apiFetch(isComment ? `/comments/${id}/toggle-reaction` : `/posts/${id}/reaction`, fd);
             if (!data.success) throw new Error(data.message || 'Failed');
-            const parent = btn.closest(isComment ? '.comment-actions' : '.post-votes') || btn.closest('.post-actions');
-            const likeBtn = parent.querySelector('.vote-btn.upvote, .like-btn, .comment-btn.like');
-            const dislikeBtn = parent.querySelector('.vote-btn.downvote, .dislike-btn, .comment-btn.dislike');
-            if (likeBtn) likeBtn.classList.toggle('active', data.type === 'like');
-            if (dislikeBtn) dislikeBtn.classList.toggle('active', data.type === 'dislike');
+            const parent = btn.closest(isComment ? '.comment-actions' : '.post-reactions') || btn.closest('.post-footer');
+            const likeBtn = parent.querySelector('.vote-btn.upvote, .like-btn, .reaction-btn.like, .comment-btn.like');
+            const dislikeBtn = parent.querySelector('.vote-btn.downvote, .dislike-btn, .reaction-btn.dislike, .comment-btn.dislike');
+            if (likeBtn) {
+                likeBtn.classList.toggle('active', data.type === 'like');
+                const likeSvg = likeBtn.querySelector('svg');
+                if (likeSvg) likeSvg.setAttribute('fill', data.type === 'like' ? 'currentColor' : 'none');
+            }
+            if (dislikeBtn) {
+                dislikeBtn.classList.toggle('active', data.type === 'dislike');
+                const dislikeSvg = dislikeBtn.querySelector('svg');
+                if (dislikeSvg) dislikeSvg.setAttribute('fill', data.type === 'dislike' ? 'currentColor' : 'none');
+            }
             const voteCountEl = parent.querySelector('.vote-count');
             const likeCountEl = likeBtn?.querySelector('.count-like, span');
             const dislikeCountEl = dislikeBtn?.querySelector('.count-dislike, span');
@@ -159,8 +167,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const setupReactionButtons = () => {
         main.addEventListener('click', e => {
-            const likeBtn = e.target.closest('.vote-btn.upvote, .like-btn, .comment-btn.like');
-            const dislikeBtn = e.target.closest('.vote-btn.downvote, .dislike-btn, .comment-btn.dislike');
+            const likeBtn = e.target.closest('.vote-btn.upvote, .like-btn, .reaction-btn.like, .comment-btn.like');
+            const dislikeBtn = e.target.closest('.vote-btn.downvote, .dislike-btn, .reaction-btn.dislike, .comment-btn.dislike');
             const btn = likeBtn || dislikeBtn;
             if (!btn) return;
             e.preventDefault(); e.stopPropagation();
@@ -188,12 +196,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
         }, { threshold: 0.3 });
-        main.querySelectorAll('.post-card').forEach(post => observer.observe(post));
+        main.querySelectorAll('.post').forEach(post => observer.observe(post));
     };
 
     const setupRealTimePolling = () => {
         setInterval(async () => {
-            const postCards = main.querySelectorAll('.post-card[data-post-id]');
+            const postCards = main.querySelectorAll('.post[data-post-id]');
             if (postCards.length === 0) return;
             const postIds = Array.from(postCards).map(c => c.dataset.postId);
             try {
@@ -206,17 +214,23 @@ document.addEventListener("DOMContentLoaded", () => {
                 const data = await response.json();
                 if (!data.posts) return;
                 Object.entries(data.posts).forEach(([postId, stats]) => {
-                    const card = main.querySelector(`.post-card[data-post-id="${postId}"]`);
+                    const card = main.querySelector(`.post[data-post-id="${postId}"]`);
                     if (!card) return;
-                    card.querySelectorAll('.count-view').forEach(el => el.textContent = stats.views);
-                    card.querySelectorAll('.like-btn .count-like').forEach(el => el.textContent = stats.likes);
-                    card.querySelectorAll('.dislike-btn .count-dislike').forEach(el => el.textContent = stats.dislikes);
-                    card.querySelectorAll('.comment-count').forEach(el => el.textContent = stats.comments);
-                    const likeBtn = card.querySelector('.like-btn[data-post-id]');
-                    const dislikeBtn = card.querySelector('.dislike-btn[data-post-id]');
-                    if (likeBtn) { likeBtn.classList.toggle('active', stats.user_liked); likeBtn.querySelector('svg')?.setAttribute('fill', stats.user_liked ? '#ef4444' : 'currentColor'); }
-                    if (dislikeBtn) { dislikeBtn.classList.toggle('active', stats.user_disliked); dislikeBtn.querySelector('svg')?.setAttribute('fill', stats.user_disliked ? '#ffffff' : 'currentColor'); }
-                    const contentEl = card.querySelector('.post-content p');
+                    card.querySelectorAll('.action-btn.views span').forEach(el => el.textContent = stats.views);
+                    const likeBtn = card.querySelector('.reaction-btn.like[data-post-id]');
+                    const dislikeBtn = card.querySelector('.reaction-btn.dislike[data-post-id]');
+                    if (likeBtn) {
+                        likeBtn.classList.toggle('active', stats.user_liked);
+                        likeBtn.querySelector('span').textContent = stats.likes;
+                        likeBtn.querySelector('svg')?.setAttribute('fill', stats.user_liked ? 'currentColor' : 'none');
+                    }
+                    if (dislikeBtn) {
+                        dislikeBtn.classList.toggle('active', stats.user_disliked);
+                        dislikeBtn.querySelector('span').textContent = stats.dislikes;
+                        dislikeBtn.querySelector('svg')?.setAttribute('fill', stats.user_disliked ? 'currentColor' : 'none');
+                    }
+                    card.querySelectorAll('.comment-toggle span').forEach(el => el.textContent = stats.comments);
+                    const contentEl = card.querySelector('.post-text p');
                     if (contentEl && contentEl.dataset.updatedAt !== stats.updated_at) { contentEl.textContent = stats.content; contentEl.dataset.updatedAt = stats.updated_at; }
                 });
             } catch {}
@@ -224,22 +238,22 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const setupSortButtons = () => {
-        const sortButtons = document.querySelectorAll('.sort-btn');
+        const sortButtons = document.querySelectorAll('.feed-tab');
         if (sortButtons.length === 0) return;
-        const sortMap = { top: ['top', 'топ'], hot: ['hot', 'гор'], newest: ['new', 'нов'] };
-        const getSortParam = text => { for (const [key, words] of Object.entries(sortMap)) { if (words.some(w => text.includes(w))) return key; } return 'newest'; };
         sortButtons.forEach(btn => {
             btn.addEventListener('click', function(e) {
                 e.preventDefault(); e.stopPropagation();
                 sortButtons.forEach(b => b.classList.remove('active'));
                 this.classList.add('active');
                 const url = new URL(window.location.href);
-                url.searchParams.set('sort', getSortParam(this.textContent.trim().toLowerCase()));
+                const sort = this.dataset.sort || 'newest';
+                url.searchParams.set('sort', sort === 'new' ? 'newest' : sort);
                 window.location.href = url.toString();
             });
         });
         const currentSort = new URLSearchParams(window.location.search).get('sort') || 'newest';
-        sortButtons.forEach(btn => btn.classList.toggle('active', getSortParam(btn.textContent.trim().toLowerCase()) === currentSort));
+        const sortAlias = currentSort === 'newest' ? 'new' : currentSort;
+        sortButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.sort === sortAlias));
     };
 
     const defaultAvatar = '/storage/logo/defaultPhoto.jpg';
@@ -249,7 +263,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const createPostElement = (post, token) => {
         const el = document.createElement('article');
-        el.className = 'post-card'; el.id = `post-${post.id}`; el.dataset.postId = post.id;
+        el.className = 'post'; el.id = `post-${post.id}`; el.dataset.postId = post.id;
         const avatar = post.user.avatar ? '/storage/' + post.user.avatar : defaultAvatar;
         const editPreview = (type, id) => {
             const hasSrc = post.media_path && post.media_type === type;
@@ -301,8 +315,21 @@ document.addEventListener("DOMContentLoaded", () => {
         const el = document.createElement('div');
         el.className = `comment-item ${comment.parent_id ? 'is-reply' : ''}`;
         el.id = `comment-${comment.id}`; el.dataset.commentId = comment.id;
+        el.dataset.rootId = comment.parent_id || comment.id;
         const avatar = comment.user_avatar ? `/storage/${comment.user_avatar}` : defaultAvatar;
         const esc = comment.content.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        let displayContent = esc;
+        let quoteHtml = '';
+        if (comment.parent_id) {
+            displayContent = esc.replace(/^(@\S+)/, '<span class="comment-mention">$1</span>');
+            if (comment.quoted_name) {
+                const pText = (comment.quoted_content || '').replace(/</g, '&lt;').replace(/>/g, '&gt;').substring(0, 100);
+                quoteHtml = `<div class="comment-quote" onclick="document.getElementById('comment-${comment.quoted_comment_id}')?.scrollIntoView({behavior:'smooth', block:'center'})">`
+                    + `<span class="comment-quote-author">${comment.quoted_name.replace(/</g,'&lt;')} <span class="comment-quote-username">@${(comment.quoted_username||'').replace(/</g,'&lt;')}</span></span>`
+                    + `<span class="comment-quote-text">${pText}</span></div>`;
+            }
+        }
+        const rootId = comment.parent_id || comment.id;
         const aBtn = (cls, attr, icon, label) => `<button class="comment-btn ${cls}" ${attr}>${svg24(icon)}<span>${label}</span></button>`;
         el.innerHTML = `
             <img src="${avatar}" alt="${comment.user_name}" class="comment-avatar">
@@ -310,10 +337,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="comment-header">
                     <a href="/profile/${comment.user_id}" class="comment-author">${comment.user_name}</a>
                     <span class="comment-username">@${comment.user?.username || ''}</span>
-                    ${comment.parent_id ? `<span class="comment-reply-to">→ @${comment.parent_username || ''}</span>` : ''}
                     <span class="comment-time">${comment.created_at_diff || 'just now'}</span>
                 </div>
-                <div class="comment-text" id="comment-text-${comment.id}"><p>${esc}</p></div>
+                <div class="comment-text" id="comment-text-${comment.id}">${quoteHtml}<p>${displayContent}</p></div>
                 <form id="edit-comment-form-${comment.id}" class="comment-edit-form" action="/comments/${comment.id}" method="POST" style="display: none;">
                     <input type="hidden" name="_token" value="${token}"><input type="hidden" name="_method" value="PUT">
                     <textarea name="content" maxlength="500">${esc}</textarea>
@@ -325,43 +351,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="comment-actions">
                     ${aBtn(`like ${comment.user_liked ? 'active' : ''}`, `data-comment-id="${comment.id}"`, SVG.heartSmall, comment.like_count || 0)}
                     ${aBtn(`dislike ${comment.user_disliked ? 'active' : ''}`, `data-comment-id="${comment.id}"`, SVG.dislikeSmall, comment.dislike_count || 0)}
-                    ${aBtn('reply reply-btn', `data-comment-id="${comment.id}" data-post-id="${postId}"`, SVG.reply, 'Reply')}
+                    ${aBtn('reply reply-btn', `data-comment-id="${rootId}" data-reply-to-id="${comment.id}" data-reply-to-user="${comment.user?.username || ''}" data-post-id="${postId}"`, SVG.reply, 'Reply')}
                     ${comment.can_update ? aBtn('edit edit-comment-btn', `data-comment-id="${comment.id}"`, SVG.edit, 'Edit') : ''}
                     ${comment.can_delete ? `<form action="/comments/${comment.id}" method="POST" class="inline-delete"><input type="hidden" name="_token" value="${token}"><input type="hidden" name="_method" value="DELETE"><button type="submit" class="comment-btn delete">${svg24(SVG.trash)}<span>Delete</span></button></form>` : ''}
-                    ${comment.reply_count > 0 ? aBtn('show-replies show-replies-btn', `data-comment-id="${comment.id}"`, SVG.chevron, `Show ${comment.reply_count} ${comment.reply_count === 1 ? 'Reply' : 'Replies'}`) : ''}
                 </div>
-                <form action="/posts/${postId}/comment" method="POST" class="comment-reply-form" data-post-id="${postId}" data-parent-id="${comment.id}" style="display: none;">
-                    <input type="hidden" name="_token" value="${token}"><input type="hidden" name="parent_id" value="${comment.id}">
-                    <textarea name="content" placeholder="Write a reply..." maxlength="500"></textarea>
-                    <div class="comment-reply-btns">
-                        <button type="submit" class="btn-reply">Reply</button>
-                        <button type="button" class="btn-cancel cancel-reply" data-comment-id="${comment.id}">Cancel</button>
-                    </div>
-                </form>
-                <div class="comment-replies" id="replies-${comment.id}" style="display: none;"></div>
             </div>`;
         return el;
     };
 
-    const restoreReplyDrafts = (scope = main) => {
-        scope.querySelectorAll('.reply-form, .comment-reply-form').forEach(form => {
-            const key = `replyDraft_${form.dataset.postId}_${form.dataset.parentId}`;
-            const draft = localStorage.getItem(key);
-            if (draft) { form.querySelector('textarea').value = draft; form.style.display = 'block'; }
-            form.querySelector('textarea').addEventListener('input', () => localStorage.setItem(key, form.querySelector('textarea').value));
-        });
-    };
+    const restoreReplyDrafts = (scope = main) => {};
 
-    const setupReplyButtons = (scope = main) => rebind(scope, '.reply-btn', 'click', toggleReplyForm);
-    const toggleReplyForm = e => {
-        const btn = e.target.closest('.reply-btn'), { commentId, postId } = btn.dataset;
-        const form = document.querySelector(`.reply-form[data-parent-id="${commentId}"], .comment-reply-form[data-parent-id="${commentId}"]`);
-        if (!form) return;
-        const isVisible = form.style.display === 'block';
-        document.querySelectorAll(`.reply-form[data-post-id="${postId}"], .comment-reply-form[data-post-id="${postId}"]`).forEach(f => f.style.display = 'none');
-        form.style.display = isVisible ? 'none' : 'block';
-        if (!isVisible) form.querySelector('textarea').focus();
-    };
+    const setupReplyButtons = (scope = main) => {};
+    const toggleReplyForm = e => {};
 
     const initializeReplies = (scope = main) => {
         scope.querySelectorAll('.comment, .comment-item').forEach(comment => {
@@ -488,7 +489,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const submitDeleteForm = async e => {
         e.preventDefault();
         const form = e.target, comment = form.closest('.comment, .comment-item');
-        const postId = comment.closest('.post-card')?.dataset.postId;
+        const postId = comment.closest('.post')?.dataset.postId;
         if (!confirm('Are you sure you want to delete this comment?')) return;
         try {
             const data = await apiFetch(form.action, new FormData(form));
@@ -577,7 +578,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    const setupShareButtons = (scope = main) => rebind(scope, '.post-action.share', 'click', handleShare);
+    const setupShareButtons = (scope = main) => rebind(scope, '.action-btn.share', 'click', handleShare);
     const handleShare = async e => {
         const url = `${window.location.origin}/posts#post-${e.currentTarget.dataset.postId}`;
         try { await navigator.clipboard.writeText(url); showAlert(t('link_copied', 'Link copied to clipboard!'), 'success'); }
@@ -589,5 +590,5 @@ document.addEventListener("DOMContentLoaded", () => {
     setupViewCounter(); setupRealTimePolling();
     attachCommentFormListeners(); attachCommentEventListeners();
     setupReplyButtons(); setupShowRepliesButtons(); restoreReplyDrafts(); initializeReplies();
-    main.querySelectorAll('.post-card').forEach(attachPostEventListeners);
+    main.querySelectorAll('.post').forEach(attachPostEventListeners);
 });

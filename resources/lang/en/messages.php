@@ -113,4 +113,9 @@ return [
     'poll_closed' => 'Poll closed',
 
     'mention' => 'Mention',
+
+    'mark_all_read' => 'Mark all as read',
+    'notif_liked_post' => 'liked your post',
+    'notif_commented_post' => 'commented on your post',
+    'notif_mentioned_you' => 'mentioned you in a comment',
 ];

@@ -42,4 +42,9 @@ return [
     'delete' => 'Dzēst',
     'edited' => 'rediģēts',
     'delete_message_confirm' => 'Vai dzēst šo ziņojumu?',
+
+    'mark_all_read' => 'Atzīmēt visu kā lasītu',
+    'notif_liked_post' => 'novērtēja jūsu ierakstu',
+    'notif_commented_post' => 'komentēja jūsu ierakstu',
+    'notif_mentioned_you' => 'pieminēja jūs komentārā',
 ];

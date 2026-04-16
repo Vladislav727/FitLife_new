@@ -37,7 +37,6 @@ return [
     'meals' => 'Питание',
     'water' => 'Вода',
     'sleep' => 'Сон',
-    'leaderboard' => 'Рейтинг',
     'messages' => 'Сообщения',
     'chats' => 'Чаты',
     'groups' => 'Группы',

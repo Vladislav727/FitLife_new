@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use App\Models\Like;
+use App\Models\Notification;
 use App\Models\Post;
 use App\Models\PostView;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
@@ -23,7 +25,7 @@ class PostController extends Controller
 
             $posts = Cache::remember($cacheKey, 60, function () use ($perPage, $sort) {
                 $query = Post::with(['user', 'comments' => function ($q) {
-                    $q->whereNull('parent_id')->with(['replies.user', 'user', 'replies.replies.user', 'parent.user']);
+                    $q->whereNull('parent_id')->with(['replies.user', 'replies.replyTo.user', 'replies.parent.user', 'user', 'parent.user']);
                 }, 'likes'])
                     ->withCount([
                         'likes as like_count' => fn ($q) => $q->where('type', 'like'),
@@ -59,7 +61,20 @@ class PostController extends Controller
                 ]);
             }
 
-            return view('posts.index', compact('posts'));
+            $trendingPosts = Post::withCount(['likes as like_count' => fn ($q) => $q->where('type', 'post')->where('is_like', true)])
+                ->where('created_at', '>=', now()->subDays(7))
+                ->orderByDesc('like_count')
+                ->limit(5)
+                ->with('user')
+                ->get();
+
+            $activeUsers = User::where('id', '!=', Auth::id())
+                ->where('last_seen_at', '>=', now()->subMinutes(5))
+                ->select('id', 'name', 'username', 'avatar', 'last_seen_at')
+                ->limit(10)
+                ->get();
+
+            return view('posts.index', compact('posts', 'trendingPosts', 'activeUsers'));
         } catch (\Exception $e) {
             \Log::error('Failed to load posts: '.$e->getMessage());
 
@@ -256,6 +271,17 @@ class PostController extends Controller
                     ['post_id' => $post->id, 'user_id' => $userId, 'type' => 'post'],
                     ['is_like' => $isLike]
                 );
+
+                // Notify post owner about like (not self)
+                if ($isLike && $post->user_id !== $userId) {
+                    Notification::firstOrCreate([
+                        'user_id' => $post->user_id,
+                        'sender_id' => $userId,
+                        'type' => 'like',
+                        'notifiable_type' => Post::class,
+                        'notifiable_id' => $post->id,
+                    ]);
+                }
             }
 
             Cache::forget("post_{$post->id}_like_count");
@@ -283,13 +309,23 @@ class PostController extends Controller
             $request->validate([
                 'content' => 'required|string|max:500',
                 'parent_id' => 'nullable|exists:comments,id',
+                'reply_to_id' => 'nullable|exists:comments,id',
             ]);
+
+            // TikTok-style: flatten to root comment (max 1 level of nesting)
+            $parentId = $request->input('parent_id');
+            if ($parentId) {
+                $parentComment = Comment::find($parentId);
+                if ($parentComment && $parentComment->parent_id) {
+                    $parentId = $parentComment->parent_id;
+                }
+            }
 
             $existingComment = Comment::where([
                 'post_id' => $post->id,
                 'user_id' => Auth::id(),
                 'content' => $request->input('content'),
-                'parent_id' => $request->input('parent_id'),
+                'parent_id' => $parentId,
             ])->first();
 
             if ($existingComment) {
@@ -306,11 +342,37 @@ class PostController extends Controller
             $comment = Comment::create([
                 'post_id' => $post->id,
                 'user_id' => Auth::id(),
-                'parent_id' => $request->input('parent_id'),
+                'parent_id' => $parentId,
+                'reply_to_id' => $request->input('reply_to_id'),
                 'content' => $request->input('content'),
             ]);
 
-            $comment->load('parent.user');
+            $comment->load('parent.user', 'replyTo.user');
+
+            // Notify post owner about comment (not self)
+            if ($post->user_id !== Auth::id()) {
+                Notification::create([
+                    'user_id' => $post->user_id,
+                    'sender_id' => Auth::id(),
+                    'type' => 'comment',
+                    'notifiable_type' => Post::class,
+                    'notifiable_id' => $post->id,
+                ]);
+            }
+
+            // Notify @mentioned users
+            if (preg_match('/^@(\S+)/', $request->input('content'), $matches)) {
+                $mentionedUser = User::where('username', $matches[1])->first();
+                if ($mentionedUser && $mentionedUser->id !== Auth::id()) {
+                    Notification::create([
+                        'user_id' => $mentionedUser->id,
+                        'sender_id' => Auth::id(),
+                        'type' => 'mention',
+                        'notifiable_type' => Comment::class,
+                        'notifiable_id' => $comment->id,
+                    ]);
+                }
+            }
 
             Cache::forget('posts_page_1');
 
@@ -519,7 +581,10 @@ class PostController extends Controller
 
     private function formatCommentForJson($comment)
     {
-        $comment->load('parent.user');
+        $comment->load('parent.user', 'replyTo.user');
+
+        // Use replyTo (actual comment replied to) for quote, fall back to parent
+        $quoted = $comment->replyTo ?: $comment->parent;
 
         return [
             'id' => $comment->id,
@@ -533,8 +598,11 @@ class PostController extends Controller
             ],
             'created_at_diff' => $comment->created_at->diffForHumans(),
             'parent_id' => $comment->parent_id,
-            'parent_username' => $comment->parent ? $comment->parent->user->username : null,
-            'parent_profile_url' => $comment->parent ? route('profile.show', $comment->parent->user->id) : null,
+            'reply_to_id' => $comment->reply_to_id,
+            'quoted_name' => $quoted ? $quoted->user->name : null,
+            'quoted_username' => $quoted ? $quoted->user->username : null,
+            'quoted_content' => $quoted ? $quoted->content : null,
+            'quoted_comment_id' => $quoted ? $quoted->id : null,
             'reply_count' => $comment->replies()->count(),
             'like_count' => $comment->likes()->where('type', 'like')->count(),
             'dislike_count' => $comment->likes()->where('type', 'dislike')->count(),
@@ -554,5 +622,34 @@ class PostController extends Controller
         }
 
         Cache::forget("posts_page_{$page}");
+    }
+
+    public function searchUsers(Request $request)
+    {
+        $q = $request->input('q', '');
+        if (strlen($q) < 2) {
+            return response()->json([]);
+        }
+
+        $users = User::where('id', '!=', Auth::id())
+            ->where(function ($query) use ($q) {
+                $query->where('name', 'LIKE', "%{$q}%")
+                      ->orWhere('username', 'LIKE', "%{$q}%");
+            })
+            ->select('id', 'name', 'username', 'avatar', 'last_seen_at')
+            ->limit(10)
+            ->get()
+            ->map(function ($user) {
+                return [
+                    'id' => $user->id,
+                    'name' => $user->name,
+                    'username' => $user->username,
+                    'avatar' => $user->avatar ? asset('storage/' . $user->avatar) : asset('storage/logo/defaultPhoto.jpg'),
+                    'online' => $user->isOnline(),
+                    'url' => route('profile.show', $user->id),
+                ];
+            });
+
+        return response()->json($users);
     }
 }
