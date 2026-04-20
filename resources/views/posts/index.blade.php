@@ -68,7 +68,7 @@
             <article class="post" id="post-{{ $post->id }}" data-post-id="{{ $post->id }}">
                 <div class="post-header">
                     <a href="{{ route('profile.show', $post->user->username) }}" class="post-author">
-                        <img src="{{ $post->user->avatar ? asset('storage/' . $post->user->avatar) : asset('storage/logo/defaultPhoto.jpg') }}" alt="" class="post-avatar">
+                        <img src="{{ $post->user->avatar ? asset('storage/' . $post->user->avatar) : asset('storage/logo/default-avatar.avif') }}" alt="" class="post-avatar">
                         <div class="post-author-info">
                             <span class="post-author-name">{{ $post->user->name }}</span>
                             <span class="post-meta">{{ '@' . $post->user->username }} · {{ $post->created_at->diffForHumans() }}</span>
@@ -256,7 +256,7 @@
             <input type="hidden" name="reply_to_id" id="composer-reply-to-id" value="">
             <input type="hidden" id="composer-post-id" value="">
             <input type="hidden" id="composer-mode" value="post">
-            <img src="{{ Auth::user()->avatar ? asset('storage/' . Auth::user()->avatar) : asset('storage/logo/defaultPhoto.jpg') }}" alt="" class="composer-avatar">
+            <img src="{{ Auth::user()->avatar ? asset('storage/' . Auth::user()->avatar) : asset('storage/logo/default-avatar.avif') }}" alt="" class="composer-avatar">
             <div class="composer-body">
                 <textarea name="content" id="composer-text" placeholder="{{ __('posts.whats_on_your_mind') }}" rows="1" maxlength="1000"></textarea>
                 <div class="composer-media" id="composer-preview" style="display: none;">
@@ -1824,7 +1824,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         d.textContent = s;
                         return d.innerHTML;
                     };
-                    const avatarSrc = c.user_avatar ? '/storage/' + esc(c.user_avatar) : '/storage/logo/defaultPhoto.jpg';
+                    const avatarSrc = c.user_avatar ? '/storage/' + esc(c.user_avatar) : '/storage/logo/default-avatar.avif';
                     const rootId = c.parent_id || c.id;
                     // Highlight leading @mention in content
                     let displayContent = esc(c.content);

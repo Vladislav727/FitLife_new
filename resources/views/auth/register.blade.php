@@ -20,6 +20,9 @@
             --border: #27272a;
             --error: #ef4444;
             --gradient-1: linear-gradient(135deg, #22c55e 0%, #06b6d4 100%);
+            --glass-surface: rgba(255, 255, 255, 0.08);
+            --glass-edge: rgba(255, 255, 255, 0.2);
+            --glass-shadow: rgba(0, 0, 0, 0.35);
         }
 
         * {
@@ -35,9 +38,15 @@
         body {
             font-family: 'Space Grotesk', sans-serif;
             background: var(--bg-dark);
+            background-image:
+                radial-gradient(circle at 18% 16%, rgba(34, 197, 94, 0.16), transparent 24%),
+                radial-gradient(circle at 84% 22%, rgba(255, 255, 255, 0.08), transparent 16%),
+                radial-gradient(circle at 72% 78%, rgba(6, 182, 212, 0.18), transparent 24%),
+                linear-gradient(160deg, #07110d 0%, #090909 45%, #03171b 100%);
             color: var(--text);
             line-height: 1.6;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
         ::-webkit-scrollbar { width: 8px; }
@@ -152,22 +161,68 @@
                 radial-gradient(circle at 30% 30%, var(--primary-glow) 0%, transparent 50%),
                 radial-gradient(circle at 70% 70%, rgba(6, 182, 212, 0.2) 0%, transparent 50%);
             pointer-events: none;
+            filter: blur(12px);
+        }
+
+        .auth-container::after {
+            content: '';
+            position: absolute;
+            width: 460px;
+            height: 460px;
+            top: 12%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.14) 0%, rgba(255, 255, 255, 0.02) 48%, transparent 72%);
+            filter: blur(28px);
+            opacity: 0.85;
+            pointer-events: none;
         }
 
         .auth-card {
             width: 100%;
             max-width: 420px;
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
+            background:
+                linear-gradient(145deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04)),
+                linear-gradient(180deg, rgba(8, 12, 12, 0.88), rgba(10, 14, 16, 0.72));
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 28px;
             padding: 2.5rem;
             position: relative;
             z-index: 1;
+            overflow: hidden;
+            backdrop-filter: blur(24px) saturate(160%);
+            -webkit-backdrop-filter: blur(24px) saturate(160%);
+            box-shadow:
+                0 30px 80px var(--glass-shadow),
+                inset 0 1px 0 rgba(255, 255, 255, 0.18),
+                inset 0 -1px 0 rgba(255, 255, 255, 0.06);
+        }
+
+        .auth-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at top left, rgba(255, 255, 255, 0.26), transparent 34%),
+                radial-gradient(circle at 82% 14%, rgba(34, 197, 94, 0.2), transparent 24%),
+                linear-gradient(135deg, rgba(255, 255, 255, 0.12), transparent 36%);
+            pointer-events: none;
+        }
+
+        .auth-card::after {
+            content: '';
+            position: absolute;
+            inset: 1px;
+            border-radius: 27px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            pointer-events: none;
         }
 
         .auth-header {
             text-align: center;
             margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
         }
 
         .auth-icon {
@@ -204,9 +259,13 @@
         /* Alerts */
         .alert {
             padding: 1rem;
-            border-radius: 8px;
+            border-radius: 16px;
             margin-bottom: 1.5rem;
             font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
         }
 
         .alert-error {
@@ -227,6 +286,8 @@
         /* Form */
         .form-group {
             margin-bottom: 1.25rem;
+            position: relative;
+            z-index: 1;
         }
 
         .form-label {
@@ -255,19 +316,27 @@
         .form-input {
             width: 100%;
             padding: 0.875rem 1rem 0.875rem 2.75rem;
-            background: var(--bg-elevated);
-            border: 1px solid var(--border);
-            border-radius: 8px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.04));
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 16px;
             color: var(--text);
             font-size: 0.95rem;
             font-family: inherit;
             transition: all 0.3s;
+            box-shadow:
+                inset 0 1px 0 rgba(255, 255, 255, 0.08),
+                0 10px 24px rgba(0, 0, 0, 0.16);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
         }
 
         .form-input:focus {
             outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px var(--primary-glow);
+            border-color: rgba(125, 255, 184, 0.6);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.06));
+            box-shadow:
+                0 0 0 3px rgba(34, 197, 94, 0.18),
+                0 18px 36px rgba(6, 182, 212, 0.12);
         }
 
         .form-input::placeholder {
@@ -336,9 +405,11 @@
         .submit-btn {
             width: 100%;
             padding: 1rem;
-            background: var(--gradient-1);
-            border: none;
-            border-radius: 8px;
+            background:
+                linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.04)),
+                var(--gradient-1);
+            border: 1px solid rgba(255, 255, 255, 0.24);
+            border-radius: 16px;
             color: var(--bg-dark);
             font-size: 1rem;
             font-weight: 600;
@@ -346,6 +417,7 @@
             cursor: pointer;
             transition: all 0.3s;
             margin-top: 0.5rem;
+            box-shadow: 0 18px 40px rgba(34, 197, 94, 0.26);
         }
 
         .submit-btn:hover {
@@ -361,6 +433,8 @@
             border-top: 1px solid var(--border);
             font-size: 0.9rem;
             color: var(--text-muted);
+            position: relative;
+            z-index: 1;
         }
 
         .auth-footer a {

@@ -19,7 +19,7 @@ return [
     'goals_completed' => 'Целей достигнуто',
     'active_goals' => 'Активные цели',
     'total_posts' => 'Всего публикаций',
-    'friends_count' => 'Друзей',
+    'subscriptions_count' => 'Подписок',
     'goals' => 'Цели',
 
     'calories_today' => 'Калории',
@@ -54,9 +54,9 @@ return [
     'kg' => 'кг',
     'edit_profile' => 'Редактировать профиль',
 
-    'friends' => 'Друзья',
+    'subscriptions' => 'Подписки',
     'find' => 'Найти',
-    'no_friends' => 'Пока нет друзей',
-    'find_friends' => 'Найти друзей',
-    'view_all_friends' => 'Показать всех :count друзей',
+    'no_subscriptions' => 'Пока нет подписок',
+    'find_subscriptions' => 'Найти подписки',
+    'view_all_subscriptions' => 'Показать все :count подписок',
 ];

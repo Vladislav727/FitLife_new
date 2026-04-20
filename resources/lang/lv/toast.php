@@ -71,10 +71,10 @@ return [
     'event_updated' => 'Notikums atjaunināts',
     'event_deleted' => 'Notikums dzēsts',
 
-    'friend_request_sent' => 'Draugu pieprasījums nosūtīts',
-    'friend_request_accepted' => 'Draugu pieprasījums pieņemts',
-    'friend_request_declined' => 'Draugu pieprasījums noraidīts',
-    'friend_removed' => 'Draugs noņemts',
+    'subscription_request_sent' => 'Abonementa pieprasījums nosūtīts',
+    'subscription_request_accepted' => 'Abonementa pieprasījums pieņemts',
+    'subscription_request_declined' => 'Abonementa pieprasījums noraidīts',
+    'subscription_removed' => 'Abonements noņemts',
 
     'biography_updated' => 'Biogrāfija atjaunināta',
 

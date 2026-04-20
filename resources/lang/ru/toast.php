@@ -71,10 +71,10 @@ return [
     'event_updated' => 'Событие обновлено',
     'event_deleted' => 'Событие удалено',
 
-    'friend_request_sent' => 'Запрос в друзья отправлен',
-    'friend_request_accepted' => 'Запрос в друзья принят',
-    'friend_request_declined' => 'Запрос в друзья отклонён',
-    'friend_removed' => 'Друг удалён',
+    'subscription_request_sent' => 'Запрос на подписку отправлен',
+    'subscription_request_accepted' => 'Запрос на подписку принят',
+    'subscription_request_declined' => 'Запрос на подписку отклонён',
+    'subscription_removed' => 'Подписка удалена',
 
     'biography_updated' => 'Биография обновлена',
 

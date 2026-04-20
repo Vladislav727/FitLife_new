@@ -8,6 +8,10 @@ class CreateCommentLikesTable extends Migration
 {
     public function up()
     {
+        if (Schema::hasTable('comment_likes')) {
+            return;
+        }
+
         Schema::create('comment_likes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('comment_id')->constrained()->onDelete('cascade');

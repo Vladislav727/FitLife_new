@@ -50,7 +50,7 @@ return [
     'not_set' => 'Not set',
     'never' => 'Never',
     'no_posts' => 'No posts.',
-    'no_friends' => 'No friends.',
+    'no_subscriptions' => 'No subscriptions.',
 
     'biography' => 'Biography',
     'full_name' => 'Full Name',
@@ -72,7 +72,7 @@ return [
     'email' => 'Email',
     'role' => 'Role',
     'posts' => 'Posts',
-    'friends' => 'Friends',
+    'subscriptions' => 'Subscriptions',
     'username' => 'Username',
     'last_login' => 'Last Login',
 

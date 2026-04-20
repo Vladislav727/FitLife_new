@@ -615,13 +615,13 @@
     box-shadow: 0 10px 40px rgba(34, 197, 94, 0.4);
 }
 
-.friends-list {
+.subscriptions-list {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
 
-.friend-item {
+.subscription-item {
     display: flex;
     align-items: center;
     gap: 0.875rem;
@@ -632,12 +632,12 @@
     border: 1px solid transparent;
 }
 
-.friend-item:hover {
+.subscription-item:hover {
     background: rgba(34, 197, 94, 0.05);
     border-color: var(--border-default);
 }
 
-.friend-avatar {
+.subscription-avatar {
     width: 40px;
     height: 40px;
     border-radius: var(--radius-sm);
@@ -645,19 +645,19 @@
     border: 1px solid var(--border-default);
 }
 
-.friend-info {
+.subscription-info {
     flex: 1;
     min-width: 0;
 }
 
-.friend-name {
+.subscription-name {
     font-size: 0.875rem;
     font-weight: 600;
     color: var(--text-primary);
     display: block;
 }
 
-.friend-username {
+.subscription-username {
     font-size: 0.8125rem;
     color: var(--text-secondary);
 }

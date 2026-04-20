@@ -102,7 +102,7 @@
         </a>
         <a href="{{ route('profile.show', $otherUser) }}" class="chat-user">
             <div class="chat-user__avatar-wrap">
-                <img src="{{ $otherUser->avatar ? asset('storage/' . $otherUser->avatar) : asset('storage/logo/defaultPhoto.jpg') }}" alt="{{ $otherUser->name }}" class="chat-user__avatar">
+                <img src="{{ $otherUser->avatar ? asset('storage/' . $otherUser->avatar) : asset('storage/logo/default-avatar.avif') }}" alt="{{ $otherUser->name }}" class="chat-user__avatar">
                 <span class="chat-user__status {{ $otherUser->isOnline() ? 'chat-user__status--online' : '' }}"></span>
             </div>
             <div>
@@ -171,7 +171,7 @@
             @endphp
             <div class="chat-msg {{ $isMine ? 'chat-msg--mine' : 'chat-msg--theirs' }}{{ $message->pinned_at ? ' chat-msg--pinned' : '' }}" data-msg-id="{{ $message->id }}" data-user-id="{{ $message->user_id }}">
                 @if(!$isMine)
-                    <img src="{{ $message->user->avatar ? asset('storage/' . $message->user->avatar) : asset('storage/logo/defaultPhoto.jpg') }}" alt="" class="chat-msg__avatar">
+                    <img src="{{ $message->user->avatar ? asset('storage/' . $message->user->avatar) : asset('storage/logo/default-avatar.avif') }}" alt="" class="chat-msg__avatar">
                 @endif
                 <div class="chat-msg__wrap">
                     @if($message->forwarded_from_id)

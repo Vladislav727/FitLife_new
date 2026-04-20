@@ -6,7 +6,7 @@ return [
     'posts' => 'Публикации',
     'calendar' => 'Календарь',
     'progress' => 'Прогресс',
-    'friends' => 'Друзья',
+    'subscriptions' => 'Подписки',
     'settings' => 'Настройки',
     'profile_settings' => 'Настройки профиля',
     'logout' => 'Выход',

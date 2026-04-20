@@ -122,7 +122,7 @@
 
                 <div class="pe-sidebar__user">
                     <img class="pe-sidebar__avatar"
-                         src="{{ $user->avatar ? asset('storage/' . $user->avatar) . '?t=' . time() : asset('storage/logo/defaultPhoto.jpg') }}"
+                         src="{{ $user->avatar ? asset('storage/' . $user->avatar) . '?t=' . time() : asset('storage/logo/default-avatar.avif') }}"
                          alt="{{ $user->name }}">
                     <div class="pe-sidebar__info">
                         <span class="pe-sidebar__name">{{ $user->name }}</span>
@@ -188,7 +188,7 @@
                         <div class="pe-banner-preview__overlay"></div>
                         <div class="pe-banner-preview__avatar-wrap">
                             <img class="pe-banner-preview__avatar"
-                                 src="{{ $user->avatar ? asset("storage/{$user->avatar}") . "?t=" . time() : asset('storage/logo/defaultPhoto.jpg') }}"
+                                 src="{{ $user->avatar ? asset("storage/{$user->avatar}") . "?t=" . time() : asset('storage/logo/default-avatar.avif') }}"
                                  alt="{{ __('profile.avatar') }}">
                             <label for="avatar" class="pe-banner-preview__avatar-btn" title="{{ __('profile.change_avatar') }}">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

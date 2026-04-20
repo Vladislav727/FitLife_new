@@ -5,27 +5,27 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Friend extends Model
+class Subscription extends Model
 {
     use HasFactory;
 
-    protected $table = 'friends';
+    protected $table = 'subscriptions';
 
     protected $fillable = [
         'user_id',
-        'friend_id',
+        'subscribed_user_id',
         'status',
     ];
 
     public $timestamps = true;
 
-    public function user()
+    public function subscriber()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function friend()
+    public function subscribedUser()
     {
-        return $this->belongsTo(User::class, 'friend_id');
+        return $this->belongsTo(User::class, 'subscribed_user_id');
     }
 }

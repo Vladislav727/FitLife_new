@@ -19,7 +19,7 @@ return [
     'goals_completed' => 'Sasniegti mērķi',
     'active_goals' => 'Aktīvie mērķi',
     'total_posts' => 'Kopā ierakstu',
-    'friends_count' => 'Draugi',
+    'subscriptions_count' => 'Abonementi',
     'goals' => 'Mērķi',
 
     'calories_today' => 'Kalorijas',
@@ -54,9 +54,9 @@ return [
     'kg' => 'kg',
     'edit_profile' => 'Rediģēt profilu',
 
-    'friends' => 'Draugi',
+    'subscriptions' => 'Abonementi',
     'find' => 'Meklēt',
-    'no_friends' => 'Vēl nav draugu',
-    'find_friends' => 'Atrast draugus',
-    'view_all_friends' => 'Skatīt visus :count draugus',
+    'no_subscriptions' => 'Vēl nav abonementu',
+    'find_subscriptions' => 'Atrast abonementus',
+    'view_all_subscriptions' => 'Skatīt visus :count abonementus',
 ];

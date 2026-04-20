@@ -1,5 +1,5 @@
 <div class="comment-item {{ $comment->parent_id ? 'is-reply' : '' }}" id="comment-{{ $comment->id }}" data-comment-id="{{ $comment->id }}" data-root-id="{{ $comment->parent_id ?: $comment->id }}">
-    <img src="{{ $comment->user->avatar ? asset('storage/' . $comment->user->avatar) : asset('storage/logo/defaultPhoto.jpg') }}"
+    <img src="{{ $comment->user->avatar ? asset('storage/' . $comment->user->avatar) : asset('storage/logo/default-avatar.avif') }}"
          alt="{{ $comment->user->name }}" class="comment-avatar">
 
     <div class="comment-content">

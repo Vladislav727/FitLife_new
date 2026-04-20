@@ -119,7 +119,7 @@
                     <button class="user-menu-trigger" id="userMenuTrigger">
                         <div class="user-menu-avatar-wrap">
                             <img
-                                src="{{ Auth::user()->avatar ? asset('storage/' . Auth::user()->avatar) : asset('storage/logo/defaultPhoto.jpg') }}"
+                                src="{{ Auth::user()->avatar ? asset('storage/' . Auth::user()->avatar) : asset('storage/logo/default-avatar.avif') }}"
                                 alt="{{ Auth::user()->name }}"
                                 class="user-menu-avatar"
                             >
@@ -136,7 +136,7 @@
                     <div class="user-dropdown" id="userDropdown">
                         <div class="user-dropdown-header">
                             <img
-                                src="{{ Auth::user()->avatar ? asset('storage/' . Auth::user()->avatar) : asset('storage/logo/defaultPhoto.jpg') }}"
+                                src="{{ Auth::user()->avatar ? asset('storage/' . Auth::user()->avatar) : asset('storage/logo/default-avatar.avif') }}"
                                 alt="{{ Auth::user()->name }}"
                                 class="user-dropdown-avatar"
                             >
@@ -268,7 +268,7 @@
         <div class="mobile-menu-footer">
             <a href="{{ route('profile.edit') }}" class="mobile-user-card">
                 <img
-                    src="{{ Auth::user()->avatar ? asset('storage/' . Auth::user()->avatar) : asset('storage/logo/defaultPhoto.jpg') }}"
+                    src="{{ Auth::user()->avatar ? asset('storage/' . Auth::user()->avatar) : asset('storage/logo/default-avatar.avif') }}"
                     alt="{{ Auth::user()->name }}"
                     class="mobile-user-avatar"
                 >

@@ -2,10 +2,10 @@
 
 use App\Models\Biography;
 use App\Models\Calendar;
-use App\Models\Friend;
 use App\Models\Goal;
 use App\Models\Post;
 use App\Models\Sleep;
+use App\Models\Subscription;
 use App\Models\User;
 
 test('user has name attribute', function () {
@@ -93,49 +93,49 @@ test('user has calendars relationship', function () {
     expect($user->calendars)->toHaveCount(1);
 });
 
-test('user can check friendship status', function () {
+test('user can check subscription status', function () {
     $user1 = User::factory()->create();
     $user2 = User::factory()->create();
 
-    expect($user1->isFriendWith($user2))->toBeFalse();
+    expect($user1->hasSubscriptionWith($user2))->toBeFalse();
 
-    Friend::create([
+    Subscription::create([
         'user_id' => $user1->id,
-        'friend_id' => $user2->id,
+        'subscribed_user_id' => $user2->id,
         'status' => 'accepted',
     ]);
 
-    expect($user1->isFriendWith($user2))->toBeTrue();
+    expect($user1->hasSubscriptionWith($user2))->toBeTrue();
 });
 
-test('user can check pending request to another user', function () {
+test('user can check pending subscription to another user', function () {
     $user1 = User::factory()->create();
     $user2 = User::factory()->create();
 
-    expect($user1->hasPendingRequestTo($user2))->toBeFalse();
+    expect($user1->hasPendingSubscriptionTo($user2))->toBeFalse();
 
-    Friend::create([
+    Subscription::create([
         'user_id' => $user1->id,
-        'friend_id' => $user2->id,
+        'subscribed_user_id' => $user2->id,
         'status' => 'pending',
     ]);
 
-    expect($user1->hasPendingRequestTo($user2))->toBeTrue();
+    expect($user1->hasPendingSubscriptionTo($user2))->toBeTrue();
 });
 
-test('user can check pending request from another user', function () {
+test('user can check pending subscription from another user', function () {
     $user1 = User::factory()->create();
     $user2 = User::factory()->create();
 
-    expect($user2->hasPendingRequestFrom($user1))->toBeFalse();
+    expect($user2->hasPendingSubscriptionFrom($user1))->toBeFalse();
 
-    Friend::create([
+    Subscription::create([
         'user_id' => $user1->id,
-        'friend_id' => $user2->id,
+        'subscribed_user_id' => $user2->id,
         'status' => 'pending',
     ]);
 
-    expect($user2->hasPendingRequestFrom($user1))->toBeTrue();
+    expect($user2->hasPendingSubscriptionFrom($user1))->toBeTrue();
 });
 
 test('user can check role', function () {
@@ -145,23 +145,23 @@ test('user can check role', function () {
     expect($user->hasRole('user'))->toBeFalse();
 });
 
-test('user friends relationship returns only accepted friends', function () {
+test('user subscriptions relationship returns only accepted subscriptions', function () {
     $user1 = User::factory()->create();
     $user2 = User::factory()->create();
     $user3 = User::factory()->create();
 
-    Friend::create([
+    Subscription::create([
         'user_id' => $user1->id,
-        'friend_id' => $user2->id,
+        'subscribed_user_id' => $user2->id,
         'status' => 'pending',
     ]);
 
-    Friend::create([
+    Subscription::create([
         'user_id' => $user1->id,
-        'friend_id' => $user3->id,
+        'subscribed_user_id' => $user3->id,
         'status' => 'accepted',
     ]);
 
-    expect($user1->friends)->toHaveCount(1);
-    expect($user1->friends->first()->id)->toBe($user3->id);
+    expect($user1->subscriptions)->toHaveCount(1);
+    expect($user1->subscriptions->first()->id)->toBe($user3->id);
 });

@@ -256,7 +256,7 @@ document.addEventListener("DOMContentLoaded", () => {
         sortButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.sort === sortAlias));
     };
 
-    const defaultAvatar = '/storage/logo/defaultPhoto.jpg';
+    const defaultAvatar = '/storage/logo/default-avatar.avif';
     const mediaHtml = (path, type) => !path ? '' : type === 'image'
         ? `<img src="/storage/${path}" alt="Post image" class="post-img" loading="lazy" />`
         : `<video src="/storage/${path}" controls class="post-video" style="max-height: 200px; border-radius: var(--radius);"></video>`;

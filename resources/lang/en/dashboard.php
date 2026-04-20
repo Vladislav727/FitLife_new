@@ -19,7 +19,7 @@ return [
     'goals_completed' => 'Goals Completed',
     'active_goals' => 'Active Goals',
     'total_posts' => 'Total Posts',
-    'friends_count' => 'Friends',
+    'subscriptions_count' => 'Subscriptions',
     'goals' => 'Goals',
 
     'calories_today' => 'Calories',
@@ -54,9 +54,9 @@ return [
     'kg' => 'kg',
     'edit_profile' => 'Edit Profile',
 
-    'friends' => 'Friends',
+    'subscriptions' => 'Subscriptions',
     'find' => 'Find',
-    'no_friends' => 'No friends yet',
-    'find_friends' => 'Find Friends',
-    'view_all_friends' => 'View all :count friends',
+    'no_subscriptions' => 'No subscriptions yet',
+    'find_subscriptions' => 'Find subscriptions',
+    'view_all_subscriptions' => 'View all :count subscriptions',
 ];

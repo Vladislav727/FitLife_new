@@ -6,7 +6,7 @@ return [
     'posts' => 'Posts',
     'calendar' => 'Calendar',
     'progress' => 'Progress',
-    'friends' => 'Friends',
+    'subscriptions' => 'Subscriptions',
     'settings' => 'Settings',
     'profile_settings' => 'Profile Settings',
     'logout' => 'Logout',

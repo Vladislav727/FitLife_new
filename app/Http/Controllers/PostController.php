@@ -644,7 +644,7 @@ class PostController extends Controller
                     'id' => $user->id,
                     'name' => $user->name,
                     'username' => $user->username,
-                    'avatar' => $user->avatar ? asset('storage/' . $user->avatar) : asset('storage/logo/defaultPhoto.jpg'),
+                    'avatar' => $user->avatar ? asset('storage/' . $user->avatar) : asset('storage/logo/default-avatar.avif'),
                     'online' => $user->isOnline(),
                     'url' => route('profile.show', $user->username),
                 ];

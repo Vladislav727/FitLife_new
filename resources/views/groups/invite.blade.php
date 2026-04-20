@@ -24,7 +24,7 @@
     <div class="msg-list">
         @forelse($mutualFollowers as $user)
             <div class="msg-item msg-item--static">
-                <img src="{{ $user->avatar ? asset('storage/' . $user->avatar) : asset('storage/logo/defaultPhoto.jpg') }}" alt="{{ $user->name }}" class="msg-item__avatar">
+                <img src="{{ $user->avatar ? asset('storage/' . $user->avatar) : asset('storage/logo/default-avatar.avif') }}" alt="{{ $user->name }}" class="msg-item__avatar">
                 <div class="msg-item__content">
                     <span class="msg-item__name">{{ $user->name }}</span>
                     <span class="msg-item__meta">{{ '@' . $user->username }}</span>

@@ -77,22 +77,22 @@ class User extends Authenticatable
         return $this->hasManyThrough(GoalLog::class, Goal::class);
     }
 
-    public function friends()
+    public function subscriptions()
     {
-        return $this->belongsToMany(User::class, 'friends', 'user_id', 'friend_id')
+        return $this->belongsToMany(User::class, 'subscriptions', 'user_id', 'subscribed_user_id')
             ->wherePivot('status', 'accepted')
             ->withPivot('status')
             ->distinct();
     }
 
-    public function sentFriendRequests()
+    public function sentSubscriptionRequests()
     {
-        return $this->hasMany(Friend::class, 'user_id');
+        return $this->hasMany(Subscription::class, 'user_id');
     }
 
-    public function receivedFriendRequests()
+    public function receivedSubscriptionRequests()
     {
-        return $this->hasMany(Friend::class, 'friend_id');
+        return $this->hasMany(Subscription::class, 'subscribed_user_id');
     }
 
     public function likes()
@@ -135,22 +135,22 @@ class User extends Authenticatable
         return $this->hasMany(WaterLog::class);
     }
 
-    public function isFriendWith(User $user): bool
+    public function hasSubscriptionWith(User $user): bool
     {
-        return $this->friends()->where('friend_id', $user->id)->exists();
+        return $this->subscriptions()->where('subscribed_user_id', $user->id)->exists();
     }
 
-    public function hasPendingRequestTo(User $user): bool
+    public function hasPendingSubscriptionTo(User $user): bool
     {
-        return $this->sentFriendRequests()
-            ->where('friend_id', $user->id)
+        return $this->sentSubscriptionRequests()
+            ->where('subscribed_user_id', $user->id)
             ->where('status', 'pending')
             ->exists();
     }
 
-    public function hasPendingRequestFrom(User $user): bool
+    public function hasPendingSubscriptionFrom(User $user): bool
     {
-        return $this->receivedFriendRequests()
+        return $this->receivedSubscriptionRequests()
             ->where('user_id', $user->id)
             ->where('status', 'pending')
             ->exists();

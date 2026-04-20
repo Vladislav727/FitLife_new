@@ -6,7 +6,7 @@ return [
     'posts' => 'Ieraksti',
     'calendar' => 'Kalendārs',
     'progress' => 'Progress',
-    'friends' => 'Draugi',
+    'subscriptions' => 'Abonementi',
     'settings' => 'Iestatījumi',
     'profile_settings' => 'Profila iestatījumi',
     'logout' => 'Iziet',

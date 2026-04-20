@@ -68,7 +68,7 @@
         </div>
 
         <div class="users-section">
-            <h2 class="users-section-title">{{ __('admin.friends') }} ({{ $user->friends->count() }})</h2>
+            <h2 class="users-section-title">{{ __('admin.subscriptions') }} ({{ $user->subscriptions->count() }})</h2>
             <div class="users-table">
                 <table>
                     <thead>
@@ -78,14 +78,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($user->friends as $friend)
+                        @forelse($user->subscriptions as $subscription)
                             <tr>
-                                <td>{{ $friend->name }}</td>
-                                <td>{{ $friend->email }}</td>
+                                <td>{{ $subscription->name }}</td>
+                                <td>{{ $subscription->email }}</td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="2">{{ __('admin.no_friends') }}</td>
+                                <td colspan="2">{{ __('admin.no_subscriptions') }}</td>
                             </tr>
                         @endforelse
                     </tbody>

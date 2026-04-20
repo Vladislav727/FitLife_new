@@ -6,13 +6,13 @@ use App\Http\Controllers\CalorieCalculatorController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FoodController;
-use App\Http\Controllers\FriendController;
 use App\Http\Controllers\GoalController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProgressPhotoController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SleepController;
+use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\WaterController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\ConversationController;
@@ -47,10 +47,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.avatar.update');
     });
 
-    Route::prefix('friends')->group(function () {
-        Route::post('/{user:username}', [FriendController::class, 'store'])->name('friends.store');
-        Route::post('/{user:username}/accept', [FriendController::class, 'accept'])->name('friends.accept');
-        Route::delete('/{user:username}', [FriendController::class, 'remove'])->name('friends.remove');
+    Route::prefix('subscriptions')->group(function () {
+        Route::post('/{user:username}', [SubscriptionController::class, 'store'])->name('subscriptions.store');
+        Route::post('/{user:username}/accept', [SubscriptionController::class, 'accept'])->name('subscriptions.accept');
+        Route::delete('/{user:username}', [SubscriptionController::class, 'remove'])->name('subscriptions.remove');
     });
 
     Route::post('/follow/{user:username}', [FollowController::class, 'toggle'])->name('follow.toggle');

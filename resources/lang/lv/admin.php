@@ -50,7 +50,7 @@ return [
     'not_set' => 'Nav norādīts',
     'never' => 'Nekad',
     'no_posts' => 'Nav ierakstu.',
-    'no_friends' => 'Nav draugu.',
+    'no_subscriptions' => 'Nav abonementu.',
 
     'biography' => 'Biogrāfija',
     'full_name' => 'Pilns vārds',
@@ -72,7 +72,7 @@ return [
     'email' => 'E-pasts',
     'role' => 'Loma',
     'posts' => 'Ieraksti',
-    'friends' => 'Draugi',
+    'subscriptions' => 'Abonementi',
     'username' => 'Lietotājvārds',
     'last_login' => 'Pēdējā pieteikšanās',
 

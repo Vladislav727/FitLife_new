@@ -210,7 +210,7 @@
         <div class="dashboard-sidebar">
 
             <div class="profile-card">
-                <img src="{{ Auth::user()->avatar ? asset('storage/' . Auth::user()->avatar) : asset('storage/logo/defaultPhoto.jpg') }}"
+                <img src="{{ Auth::user()->avatar ? asset('storage/' . Auth::user()->avatar) : asset('storage/logo/default-avatar.avif') }}"
                      alt="{{ Auth::user()->name }}"
                      class="profile-card-avatar">
                 <div class="profile-card-name">{{ Auth::user()->name }}</div>

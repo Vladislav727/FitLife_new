@@ -50,7 +50,7 @@ return [
     'not_set' => 'Не указано',
     'never' => 'Никогда',
     'no_posts' => 'Нет постов.',
-    'no_friends' => 'Нет друзей.',
+    'no_subscriptions' => 'Нет подписок.',
 
     'biography' => 'Биография',
     'full_name' => 'Полное имя',
@@ -72,7 +72,7 @@ return [
     'email' => 'Email',
     'role' => 'Роль',
     'posts' => 'Посты',
-    'friends' => 'Друзья',
+    'subscriptions' => 'Подписки',
     'username' => 'Имя пользователя',
     'last_login' => 'Последний вход',
 

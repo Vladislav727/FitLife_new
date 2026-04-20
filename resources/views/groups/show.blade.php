@@ -204,7 +204,7 @@
                 @endphp
                 <div class="chat-msg {{ $isMine ? 'chat-msg--mine' : 'chat-msg--theirs' }}{{ $message->pinned_at ? ' chat-msg--pinned' : '' }}" data-msg-id="{{ $message->id }}" data-user-id="{{ $message->user_id }}">
                     @if(!$isMine)
-                        <img src="{{ $message->user->avatar ? asset('storage/' . $message->user->avatar) : asset('storage/logo/defaultPhoto.jpg') }}" alt="" class="chat-msg__avatar">
+                        <img src="{{ $message->user->avatar ? asset('storage/' . $message->user->avatar) : asset('storage/logo/default-avatar.avif') }}" alt="" class="chat-msg__avatar">
                     @endif
                     <div class="chat-msg__wrap">
                         @if($message->forwarded_from_id)
@@ -398,7 +398,7 @@
                 <div class="chat-sidebar__members">
                     @foreach($members as $m)
                         <div class="chat-member" data-user-id="{{ $m->id }}">
-                            <img src="{{ $m->avatar ? asset('storage/' . $m->avatar) : asset('storage/logo/defaultPhoto.jpg') }}" alt="" class="chat-member__avatar">
+                            <img src="{{ $m->avatar ? asset('storage/' . $m->avatar) : asset('storage/logo/default-avatar.avif') }}" alt="" class="chat-member__avatar">
                             <div class="chat-member__info">
                                 <span class="chat-member__name">{{ $m->name }}</span>
                                 <span class="chat-member__role chat-member__role--{{ $m->pivot->role }}">{{ __('messages.' . $m->pivot->role) }}</span>
