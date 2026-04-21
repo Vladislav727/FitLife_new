@@ -11,7 +11,7 @@
         @forelse($conversations as $conversation)
             @php $other = $conversation->otherUser(Auth::user()); @endphp
             <a href="{{ route('profile.show', $other) }}" class="msg-item">
-                <img src="{{ $other->avatar ? asset('storage/' . $other->avatar) : asset('storage/logo/default-avatar.avif') }}" alt="{{ $other->name }}" class="msg-item__avatar">
+                <img src="{{ $other->avatar ? asset('storage/' . $other->avatar) : asset('storage/default-avatar/default-avatar.avif') }}" alt="{{ $other->name }}" class="msg-item__avatar">
                 <div class="msg-item__content">
                     <div class="msg-item__top">
                         <span class="msg-item__name">{{ $other->name }}</span>

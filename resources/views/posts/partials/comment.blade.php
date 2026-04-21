@@ -1,5 +1,5 @@
-<div class="comment-item {{ $comment->parent_id ? 'is-reply' : '' }}" id="comment-{{ $comment->id }}" data-comment-id="{{ $comment->id }}" data-root-id="{{ $comment->parent_id ?: $comment->id }}">
-    <img src="{{ $comment->user->avatar ? asset('storage/' . $comment->user->avatar) : asset('storage/logo/default-avatar.avif') }}"
+<div class="comment-item {{ $comment->parent_id ? 'is-reply' : '' }} {{ ($hidden ?? false) ? 'reply-extra' : '' }}" id="comment-{{ $comment->id }}" data-comment-id="{{ $comment->id }}" data-root-id="{{ $comment->parent_id ?: $comment->id }}"@if($hidden ?? false) style="display:none"@endif>
+    <img src="{{ $comment->user->avatar ? asset('storage/' . $comment->user->avatar) : asset('storage/default-avatar/default-avatar.avif') }}"
          alt="{{ $comment->user->name }}" class="comment-avatar">
 
     <div class="comment-content">
@@ -7,6 +7,11 @@
             <a href="{{ route('profile.show', $comment->user->username) }}" class="comment-author">{{ $comment->user->name }}</a>
             <span class="comment-username">{{ '@' . $comment->user->username }}</span>
             <span class="comment-time">{{ $comment->created_at->diffForHumans() }}</span>
+            @if($comment->updated_at->gt($comment->created_at))
+                <span class="comment-edited" id="comment-edited-{{ $comment->id }}">· {{ __('posts.edited') }}</span>
+            @else
+                <span class="comment-edited" id="comment-edited-{{ $comment->id }}" style="display:none">· {{ __('posts.edited') }}</span>
+            @endif
         </div>
 
         <div class="comment-text" id="comment-text-{{ $comment->id }}">
@@ -14,7 +19,7 @@
                 $quoted = $comment->replyTo ?: $comment->parent;
             @endphp
             @if($comment->parent_id && $quoted)
-                <div class="comment-quote" onclick="document.getElementById('comment-{{ $quoted->id }}')?.scrollIntoView({behavior:'smooth', block:'center'})">
+                <div class="comment-quote" data-quoted-id="{{ $quoted->id }}" onclick="document.getElementById('comment-{{ $quoted->id }}')?.scrollIntoView({behavior:'smooth', block:'center'})">
                     <span class="comment-quote-author">{{ $quoted->user->name }} <span class="comment-quote-username">{{ '@' . $quoted->user->username }}</span></span>
                     <span class="comment-quote-text">{{ Str::limit($quoted->content, 100) }}</span>
                 </div>

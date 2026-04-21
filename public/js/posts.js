@@ -256,7 +256,7 @@ document.addEventListener("DOMContentLoaded", () => {
         sortButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.sort === sortAlias));
     };
 
-    const defaultAvatar = '/storage/logo/default-avatar.avif';
+    const defaultAvatar = '/storage/default-avatar/default-avatar.avif';
     const mediaHtml = (path, type) => !path ? '' : type === 'image'
         ? `<img src="/storage/${path}" alt="Post image" class="post-img" loading="lazy" />`
         : `<video src="/storage/${path}" controls class="post-video" style="max-height: 200px; border-radius: var(--radius);"></video>`;
@@ -478,11 +478,24 @@ document.addEventListener("DOMContentLoaded", () => {
     const submitEditForm = async e => {
         e.preventDefault();
         const form = e.target, commentId = form.id.replace('edit-comment-form-', '');
-        const body = document.querySelector(`#comment-${commentId}`)?.querySelector('.comment-body, .comment-text');
+        const textEl = document.getElementById('comment-text-' + commentId);
         try {
             const data = await apiFetch(form.action, new FormData(form));
-            if (data.success) { showAlert(t('comment_updated', 'Comment updated'), 'success'); body.innerHTML = `<p>${data.comment.content}</p>`; body.style.display = 'block'; form.style.display = 'none'; }
-            else showAlert(data.message || t('comment_update_error', 'Failed to update comment'), 'error');
+            if (data.success) {
+                showAlert(t('comment_updated', 'Comment updated'), 'success');
+                if (textEl) {
+                    const p = textEl.querySelector('p');
+                    if (p) p.textContent = data.comment.content;
+                    textEl.style.display = 'block';
+                }
+                const editedBadge = document.getElementById('comment-edited-' + commentId);
+                if (editedBadge) editedBadge.style.removeProperty('display');
+                document.querySelectorAll('.comment-quote[data-quoted-id="' + commentId + '"]').forEach(qEl => {
+                    const qText = qEl.querySelector('.comment-quote-text');
+                    if (qText) qText.textContent = data.comment.content.substring(0, 100);
+                });
+                form.style.display = 'none';
+            } else showAlert(data.message || t('comment_update_error', 'Failed to update comment'), 'error');
         } catch { showAlert(t('comment_update_error', 'Failed to update comment'), 'error'); }
     };
 
@@ -490,7 +503,7 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
         const form = e.target, comment = form.closest('.comment, .comment-item');
         const postId = comment.closest('.post')?.dataset.postId;
-        if (!confirm('Are you sure you want to delete this comment?')) return;
+        if (!await window.confirmAsync((window.postsConfirmMessages?.deleteComment) || 'Are you sure you want to delete this comment?')) return;
         try {
             const data = await apiFetch(form.action, new FormData(form));
             if (!data.success) { showAlert(data.message || t('comment_delete_error', 'Failed to delete comment'), 'error'); return; }
@@ -552,30 +565,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 editForm.appendChild(inp);
             });
         }
-        if (editForm) {
-            editForm.addEventListener('submit', async e => {
-                e.preventDefault();
-                try {
-                    const data = await apiFetch(editForm.action, new FormData(editForm));
-                    if (data.success) {
-                        showAlert(t('post_updated', 'Post updated'), 'success');
-                        postBody.innerHTML = `<p>${data.post.content}</p>${mediaHtml(data.post.media_path, data.post.media_type)}`;
-                        postBody.style.display = 'block'; editForm.style.display = 'none';
-                    } else showAlert(data.message || t('post_update_error', 'Failed to update post'), 'error');
-                } catch { showAlert(t('post_update_error', 'Failed to update post'), 'error'); }
-            });
-        }
-        if (deleteForm) {
-            deleteForm.addEventListener('submit', async e => {
-                e.preventDefault();
-                if (!confirm('Are you sure you want to delete this post?')) return;
-                try {
-                    const data = await apiFetch(deleteForm.action, new FormData(deleteForm));
-                    if (data.success) { showAlert(t('post_deleted', 'Post deleted'), 'success'); post.remove(); }
-                    else showAlert(data.message || t('post_delete_error', 'Failed to delete post'), 'error');
-                } catch { showAlert(t('post_delete_error', 'Failed to delete post'), 'error'); }
-            });
-        }
+        // NOTE: editForm submit and deleteForm submit are handled by the delegated listener in posts/index.blade.php
     };
 
     const setupShareButtons = (scope = main) => rebind(scope, '.action-btn.share', 'click', handleShare);

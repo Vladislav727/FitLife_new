@@ -35,7 +35,7 @@
                 @php $other = $conversation->otherUser(Auth::user()); @endphp
                 <a href="{{ route('conversations.show', $conversation) }}" class="msg-item{{ isset($activeConversationId) && $activeConversationId === $conversation->id ? ' msg-item--active' : '' }}">
                     <div class="msg-item__avatar-wrap">
-                        <img src="{{ $other->avatar ? asset('storage/' . $other->avatar) : asset('storage/logo/default-avatar.avif') }}" alt="{{ $other->name }}" class="msg-item__avatar">
+                        <img src="{{ $other->avatar ? asset('storage/' . $other->avatar) : asset('storage/default-avatar/default-avatar.avif') }}" alt="{{ $other->name }}" class="msg-item__avatar">
                         @if($other->isOnline())
                             <span class="msg-item__online-dot"></span>
                         @endif

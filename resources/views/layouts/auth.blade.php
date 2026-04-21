@@ -8,29 +8,34 @@
     <link rel="icon" href="{{ asset('favicon.PNG') }}" type="image/png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800" rel="stylesheet">
     @vite(['resources/css/app.css'])
     <style>
+        html, body {
+            background-color: #040506;
+            overscroll-behavior-y: none;
+            overscroll-behavior-x: auto;
+        }
+
         :root {
-            --auth-shell-bg: #0a0a0a;
-            --auth-shell-card: #111111;
-            --auth-shell-elevated: #1a1a1a;
-            --auth-shell-primary: #22c55e;
-            --auth-shell-primary-glow: rgba(34, 197, 94, 0.4);
-            --auth-shell-text: #ffffff;
-            --auth-shell-text-muted: #a1a1aa;
-            --auth-shell-border: #27272a;
+            --auth-shell-bg: #040506;
+            --auth-shell-card: rgba(14, 16, 20, 0.82);
+            --auth-shell-elevated: rgba(255, 255, 255, 0.04);
+            --auth-shell-primary: #d9ff61;
+            --auth-shell-primary-glow: rgba(217, 255, 97, 0.18);
+            --auth-shell-text: #f4f7fb;
+            --auth-shell-text-muted: rgba(244, 247, 251, 0.52);
+            --auth-shell-border: rgba(255, 255, 255, 0.07);
             --auth-shell-error: #ef4444;
-            --auth-shell-gradient: linear-gradient(135deg, #22c55e 0%, #06b6d4 100%);
+            --auth-shell-gradient: linear-gradient(135deg, #e8ff80 0%, #d9ff61 45%, #aaed3f 100%);
         }
 
         .auth-shell-page {
-            font-family: 'Space Grotesk', sans-serif;
-            background: var(--auth-shell-bg);
-            background-image:
-                radial-gradient(circle at top left, rgba(34, 197, 94, 0.14), transparent 28%),
-                radial-gradient(circle at 80% 15%, rgba(6, 182, 212, 0.12), transparent 22%),
-                linear-gradient(180deg, #0a0a0a 0%, #090d0c 100%);
+            font-family: 'Inter', sans-serif;
+            background:
+                radial-gradient(circle at top left, rgba(34, 197, 94, 0.14), transparent 32%),
+                radial-gradient(circle at top right, rgba(249, 115, 22, 0.16), transparent 28%),
+                linear-gradient(180deg, #040506 0%, #090b0f 42%, #050607 100%);
             color: var(--auth-shell-text);
             line-height: 1.6;
             min-height: 100vh;
@@ -43,14 +48,21 @@
             left: 0;
             right: 0;
             z-index: 1000;
-            padding: 1rem 2rem;
+            padding: 0 2.5rem;
+            height: 64px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(10, 10, 10, 0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--auth-shell-border);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+            background: rgba(6, 8, 11, 0.72);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .auth-shell-logo-img {
+            height: 32px;
+            width: auto;
+            display: block;
         }
 
         .auth-shell-logo {
@@ -61,23 +73,29 @@
         }
 
         .auth-shell-logo-icon {
-            width: 40px;
-            height: 40px;
+            width: 38px;
+            height: 38px;
             background: var(--auth-shell-gradient);
             border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
-            font-size: 1.2rem;
-            color: #08110d;
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: #07080a;
             flex-shrink: 0;
+            font-family: 'Inter', sans-serif;
         }
 
         .auth-shell-logo-text {
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: var(--auth-shell-gradient);
+            font-family: 'Inter', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #f4f7fb;
+            -webkit-text-fill-color: unset;
+            background: none;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -92,13 +110,13 @@
         }
 
         .auth-shell-nav-button {
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
+            padding: 0.6rem 1.25rem;
+            border-radius: 999px;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             text-decoration: none;
-            transition: all 0.3s;
-            border: none;
+            transition: all 0.2s;
+            border: 1px solid transparent;
             display: inline-flex;
             align-items: center;
             justify-content: center;
@@ -107,13 +125,14 @@
 
         .auth-shell-nav-button--primary {
             background: var(--auth-shell-gradient);
-            color: #08110d;
+            color: #07080a;
+            border-color: transparent;
         }
 
         .auth-shell-nav-button--ghost {
             background: transparent;
             color: var(--auth-shell-text);
-            border: 1px solid var(--auth-shell-border);
+            border-color: rgba(255, 255, 255, 0.1);
         }
 
         .auth-shell-container {
@@ -127,13 +146,7 @@
         }
 
         .auth-shell-container::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(circle at 30% 30%, var(--auth-shell-primary-glow) 0%, transparent 50%),
-                radial-gradient(circle at 70% 70%, rgba(6, 182, 212, 0.2) 0%, transparent 50%);
-            pointer-events: none;
+            display: none;
         }
 
         .auth-shell {
@@ -150,13 +163,15 @@
 
         .auth-shell-card {
             width: 100%;
-            background: var(--auth-shell-card);
-            border: 1px solid var(--auth-shell-border);
-            border-radius: 24px;
+            background: rgba(14, 16, 20, 0.72);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 28px;
             padding: 2.5rem;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255,255,255,0.04);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
             box-sizing: border-box;
         }
 
@@ -164,8 +179,8 @@
             content: '';
             position: absolute;
             inset: 0 0 auto 0;
-            height: 120px;
-            background: linear-gradient(180deg, rgba(34, 197, 94, 0.12), transparent);
+            height: 100px;
+            background: linear-gradient(180deg, rgba(217, 255, 97, 0.06), transparent);
             pointer-events: none;
         }
 
@@ -186,31 +201,40 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 0.35rem 0.75rem;
+            padding: 0.3rem 0.8rem;
             margin: 0 auto 1rem;
             border-radius: 999px;
-            border: 1px solid rgba(34, 197, 94, 0.24);
-            background: rgba(34, 197, 94, 0.08);
+            border: 1px solid rgba(217, 255, 97, 0.2);
+            background: rgba(217, 255, 97, 0.06);
             color: var(--auth-shell-primary);
-            font-size: 0.78rem;
-            letter-spacing: 0.08em;
+            font-size: 0.72rem;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
             font-weight: 700;
         }
 
         .auth-shell-icon {
-            width: 60px;
-            height: 60px;
+            width: 58px;
+            height: 58px;
             background: var(--auth-shell-gradient);
             border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 1.5rem;
-            color: #08110d;
-            font-weight: 700;
-            font-size: 1.35rem;
+            color: #07080a;
+            font-weight: 800;
+            font-size: 1.5rem;
+            font-family: 'Inter', sans-serif;
             flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .auth-shell-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 6px;
         }
 
         .auth-shell-icon svg,
@@ -229,16 +253,19 @@
         }
 
         .auth-shell-title {
-            font-size: 1.75rem;
-            font-weight: 700;
+            font-family: 'Inter', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            line-height: 1;
             margin-bottom: 0.5rem;
         }
 
         .auth-shell-title-gradient {
-            background: var(--auth-shell-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--auth-shell-primary);
+            -webkit-text-fill-color: var(--auth-shell-primary);
+            background: none;
         }
 
         .auth-shell-subtitle {
@@ -323,20 +350,20 @@
         .auth-shell-input {
             width: 100%;
             padding: 0.875rem 1rem 0.875rem 2.75rem;
-            background: var(--auth-shell-elevated);
-            border: 1px solid var(--auth-shell-border);
-            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
             color: var(--auth-shell-text);
             font-size: 0.95rem;
             font-family: inherit;
-            transition: all 0.3s;
+            transition: all 0.2s;
             box-sizing: border-box;
         }
 
         .auth-shell-input:focus {
             outline: none;
-            border-color: var(--auth-shell-primary);
-            box-shadow: 0 0 0 3px var(--auth-shell-primary-glow);
+            border-color: rgba(217, 255, 97, 0.5);
+            box-shadow: 0 0 0 3px rgba(217, 255, 97, 0.1);
         }
 
         .auth-shell-input.is-error {
@@ -375,22 +402,29 @@
             padding: 1rem;
             background: var(--auth-shell-gradient);
             border: none;
-            border-radius: 12px;
-            color: #08110d;
+            border-radius: 999px;
+            color: #07080a;
             font-size: 1rem;
             font-weight: 700;
-            font-family: inherit;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
             cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 18px 34px rgba(34, 197, 94, 0.18);
+            transition: all 0.2s;
+            box-shadow: 0 16px 40px rgba(217, 255, 97, 0.2);
             box-sizing: border-box;
+        }
+
+        .auth-shell-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 48px rgba(217, 255, 97, 0.28);
         }
 
         .auth-shell-footer {
             text-align: center;
             margin-top: 2rem;
             padding-top: 1.5rem;
-            border-top: 1px solid var(--auth-shell-border);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
             font-size: 0.9rem;
             color: var(--auth-shell-text-muted);
         }
@@ -398,9 +432,9 @@
         .auth-shell-reset-link {
             width: 100%;
             padding: 0.875rem 1rem;
-            border: 1px solid rgba(34, 197, 94, 0.25);
+            border: 1px solid rgba(217, 255, 97, 0.15);
             border-radius: 14px;
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(217, 255, 97, 0.03);
             overflow: auto;
             word-break: break-all;
             color: var(--auth-shell-text-muted);
@@ -423,7 +457,7 @@
 
         @media (max-width: 640px) {
             .auth-shell-nav {
-                padding: 1rem;
+                padding: 0 1rem;
             }
 
             .auth-shell-nav-text {
@@ -435,8 +469,8 @@
             }
 
             .auth-shell-card {
-                padding: 1.5rem;
-                border-radius: 18px;
+                padding: 1.75rem;
+                border-radius: 22px;
             }
 
             .auth-shell-form-grid {
@@ -444,7 +478,7 @@
             }
 
             .auth-shell-title {
-                font-size: 1.5rem;
+                font-size: 1.8rem;
             }
         }
     </style>
@@ -453,8 +487,7 @@
 <body class="auth-shell-page @yield('auth-body-class')">
     <nav class="auth-shell-nav" id="authShellNav">
         <a href="{{ url('/') }}" class="auth-shell-logo">
-            <div class="auth-shell-logo-icon">F</div>
-            <span class="auth-shell-logo-text">FitLife</span>
+            <img src="{{ asset('storage/logo/fitlife-logo.png') }}" alt="FitLife" class="auth-shell-logo-img">
         </a>
 
         <div class="auth-shell-nav-actions">

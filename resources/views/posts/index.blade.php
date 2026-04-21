@@ -69,10 +69,10 @@
             <article class="post" id="post-{{ $post->id }}" data-post-id="{{ $post->id }}">
                 <div class="post-header">
                     <a href="{{ route('profile.show', $post->user->username) }}" class="post-author">
-                        <img src="{{ $post->user->avatar ? asset('storage/' . $post->user->avatar) : asset('storage/logo/default-avatar.avif') }}" alt="" class="post-avatar">
+                        <img src="{{ $post->user->avatar ? asset('storage/' . $post->user->avatar) : asset('storage/default-avatar/default-avatar.avif') }}" alt="" class="post-avatar">
                         <div class="post-author-info">
                             <span class="post-author-name">{{ $post->user->name }}</span>
-                            <span class="post-meta">{{ '@' . $post->user->username }} · {{ $post->created_at->diffForHumans() }}</span>
+                            <span class="post-meta">{{ '@' . $post->user->username }} · {{ $post->created_at->diffForHumans() }}@if($post->updated_at->gt($post->created_at)) <span class="post-edited-badge" id="post-edited-{{ $post->id }}">· {{ __('posts.edited') }}</span>@else<span class="post-edited-badge" id="post-edited-{{ $post->id }}" style="display:none"> · {{ __('posts.edited') }}</span>@endif</span>
                         </div>
                     </a>
                     @can('update', $post)
@@ -174,10 +174,19 @@
                                         <span class="replies-toggle-text">{{ __('posts.view_replies', ['count' => $comment->replies->count()]) }}</span>
                                     </button>
                                 </div>
-                                <div class="comment-replies" id="replies-{{ $comment->id }}" style="display: none;">
+                                <div class="comment-replies" id="replies-{{ $comment->id }}" style="display: none;" data-total="{{ $comment->replies->count() }}">
                                     @foreach($comment->replies as $reply)
-                                        @include('posts.partials.comment', ['comment' => $reply, 'post' => $post])
+                                        @include('posts.partials.comment', ['comment' => $reply, 'post' => $post, 'hidden' => $loop->index >= 5])
                                     @endforeach
+                                    @if($comment->replies->count() > 5)
+                                        <button class="replies-load-more" data-comment-id="{{ $comment->id }}" data-remaining="{{ $comment->replies->count() - 5 }}">
+                                            {{ __('posts.load_more_replies', ['count' => $comment->replies->count() - 5]) }}
+                                        </button>
+                                    @endif
+                                    <button class="replies-collapse-btn" data-comment-id="{{ $comment->id }}">
+                                        <svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>
+                                        {{ __('posts.collapse_replies') }}
+                                    </button>
                                 </div>
                             @endif
                         @empty
@@ -247,7 +256,7 @@
 
     {{-- Floating Composer Island --}}
     <div class="composer-island" id="composer-island">
-        <div class="composer-context" id="composer-context" style="display: none;">
+        <div class="composer-context" id="composer-context">
             <span class="composer-context-text" id="composer-context-text"></span>
             <button type="button" class="composer-context-close" id="composer-context-close">&times;</button>
         </div>
@@ -257,7 +266,7 @@
             <input type="hidden" name="reply_to_id" id="composer-reply-to-id" value="">
             <input type="hidden" id="composer-post-id" value="">
             <input type="hidden" id="composer-mode" value="post">
-            <img src="{{ Auth::user()->avatar ? asset('storage/' . Auth::user()->avatar) : asset('storage/logo/default-avatar.avif') }}" alt="" class="composer-avatar">
+            <img src="{{ Auth::user()->avatar ? asset('storage/' . Auth::user()->avatar) : asset('storage/default-avatar/default-avatar.avif') }}" alt="" class="composer-avatar">
             <div class="composer-body">
                 <textarea name="content" id="composer-text" placeholder="{{ __('posts.whats_on_your_mind') }}" rows="1" maxlength="1000"></textarea>
                 <div class="composer-media" id="composer-preview" style="display: none;">
@@ -296,7 +305,6 @@
 .feed-page {
     min-height: 100vh;
     padding-bottom: 120px;
-    background: var(--bg-base);
 }
 
 .feed-grid {
@@ -685,6 +693,12 @@
     color: var(--text-muted);
 }
 
+.post-edited-badge {
+    font-size: 0.75rem;
+    font-style: italic;
+    opacity: 0.7;
+}
+
 /* Post Menu */
 .post-menu { position: relative; }
 
@@ -1053,6 +1067,13 @@
     color: var(--text-muted);
 }
 
+.comment-edited {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-style: italic;
+    opacity: 0.7;
+}
+
 .comment-text {
     margin-bottom: 6px;
 }
@@ -1183,6 +1204,31 @@
     content: '{{ __("posts.hide") }} ';
 }
 
+/* Load more / Collapse replies buttons */
+.replies-load-more,
+.replies-collapse-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px 0 5px 38px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-family: inherit;
+    transition: opacity 0.15s;
+}
+.replies-load-more {
+    color: var(--primary);
+}
+.replies-load-more:hover { opacity: 0.75; }
+.replies-collapse-btn {
+    color: var(--text-muted);
+    margin-top: 2px;
+}
+.replies-collapse-btn:hover { color: var(--primary); }
+
 .inline-delete { display: inline; }
 
 /* Empty State */
@@ -1233,19 +1279,35 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 6px 16px;
+    padding: 0 16px;
     background: var(--primary);
     border-radius: 16px 16px 0 0;
-    color: #fff;
+    color: #07080a;
     font-size: 0.8125rem;
     font-weight: 500;
-    margin-bottom: -1px;
+    /* hidden by default via max-height */
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: max-height 0.25s cubic-bezier(0.4,0,0.2,1),
+                opacity 0.22s ease,
+                transform 0.22s ease,
+                padding 0.22s ease;
+    will-change: max-height, opacity, transform;
+}
+
+.composer-context.is-active {
+    max-height: 48px;
+    opacity: 1;
+    transform: translateY(0);
+    padding: 6px 16px;
 }
 
 .composer-context-close {
     background: transparent;
     border: none;
-    color: #fff;
+    color: #07080a;
     font-size: 1.125rem;
     cursor: pointer;
     padding: 0 0 0 8px;
@@ -1262,7 +1324,7 @@
 
 .composer-island.mode-comment form,
 .composer-island.mode-reply form {
-    border-radius: 0 0 24px 24px;
+    border-radius: 0 0 18px 18px !important;
 }
 
 .composer-island.mode-comment .composer-tools,
@@ -1563,6 +1625,12 @@
 @endsection
 
 @section('scripts')
+<script>
+window.postsConfirmMessages = {
+    deleteComment: @json(__('posts.confirm_delete_comment')),
+    deletePost: @json(__('posts.confirm_delete_post')),
+};
+</script>
 <script src="{{ asset('js/posts.js') }}?v={{ time() }}"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -1618,7 +1686,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (mode === 'comment' || mode === 'reply') {
             composerIsland.classList.remove('mode-post', 'mode-comment', 'mode-reply');
             composerIsland.classList.add('mode-' + mode);
-            composerContext.style.display = 'flex';
+            composerContext.classList.add('is-active');
             composerContextText.textContent = contextLabel;
             composerForm.action = '/posts/' + postId + '/comment';
             composerText.placeholder = mode === 'reply' ? '{{ __("posts.write_reply") }}' : '{{ __("posts.write_comment") }}';
@@ -1626,7 +1694,7 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             composerIsland.classList.remove('mode-comment', 'mode-reply');
             composerIsland.classList.add('mode-post');
-            composerContext.style.display = 'none';
+            composerContext.classList.remove('is-active');
             composerForm.action = originalAction;
             composerText.placeholder = originalPlaceholder;
             composerText.setAttribute('maxlength', '1000');
@@ -1687,6 +1755,33 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
+        // Click "Load more replies"
+        const loadMoreBtn = e.target.closest('.replies-load-more');
+        if (loadMoreBtn) {
+            const cid = loadMoreBtn.dataset.commentId;
+            const container = document.getElementById('replies-' + cid);
+            if (!container) return;
+            const hidden = [...container.querySelectorAll('.reply-extra')].filter(el => el.style.display === 'none');
+            hidden.slice(0, 5).forEach(el => { el.style.display = ''; });
+            const stillHidden = hidden.length - Math.min(5, hidden.length);
+            if (stillHidden === 0) {
+                loadMoreBtn.style.display = 'none';
+            } else {
+                loadMoreBtn.dataset.remaining = stillHidden;
+                loadMoreBtn.textContent = @json(__('posts.load_more_replies')).replace(':count', stillHidden);
+            }
+        }
+
+        // Click "Collapse replies"
+        const collapseBtn = e.target.closest('.replies-collapse-btn');
+        if (collapseBtn) {
+            const cid = collapseBtn.dataset.commentId;
+            const container = document.getElementById('replies-' + cid);
+            if (container) container.style.display = 'none';
+            const toggleBtn = document.querySelector(`.replies-toggle[data-comment-id="${cid}"]`);
+            if (toggleBtn) toggleBtn.classList.remove('expanded');
+        }
+
         // Click "share" button on a post
         const shareBtn = e.target.closest('.action-btn.share');
         if (shareBtn) {
@@ -1724,8 +1819,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Delegated: edit comment form submit
+    // Delegated: edit comment form submit + post edit/delete + comment delete fallback
     document.addEventListener('submit', async function(e) {
+
+        // --- Comment edit ---
         const editForm = e.target.closest('.comment-edit-form');
         if (editForm) {
             e.preventDefault();
@@ -1740,44 +1837,132 @@ document.addEventListener('DOMContentLoaded', function() {
                 if (data.success) {
                     window.toast?.success('{{ __("toast.comment_updated") }}');
                     const textEl = document.getElementById('comment-text-' + cid);
-                    if (textEl) textEl.innerHTML = '<p>' + data.comment.content + '</p>';
-                    if (textEl) textEl.style.display = 'block';
+                    if (textEl) {
+                        // Preserve quote block, only update the <p> text
+                        const pEl = textEl.querySelector('p');
+                        if (pEl) {
+                            pEl.textContent = data.comment.content;
+                        } else {
+                            const newP = document.createElement('p');
+                            newP.textContent = data.comment.content;
+                            textEl.appendChild(newP);
+                        }
+                        textEl.style.display = 'block';
+                    }
+                    // Show "edited" badge
+                    const editedBadge = document.getElementById('comment-edited-' + cid);
+                    if (editedBadge) editedBadge.style.removeProperty('display');
+                    // Update any quote blocks from other comments that cite this comment
+                    document.querySelectorAll('.comment-quote[data-quoted-id="' + cid + '"]').forEach(qEl => {
+                        const qText = qEl.querySelector('.comment-quote-text');
+                        if (qText) qText.textContent = data.comment.content.substring(0, 100);
+                    });
                     editForm.style.display = 'none';
                 } else {
                     window.toast?.error(data.message || 'Error');
                 }
-            } catch { window.toast?.error('Failed to update'); }
+            } catch { window.toast?.error('{{ __("toast.comment_update_error") }}'); }
+            return;
         }
 
-        // Delegated: delete comment form submit
-        const deleteForm = e.target.closest('.inline-delete');
-        if (deleteForm && deleteForm.closest('.comment-item')) {
+        // --- Post edit ---
+        const editPostForm = e.target.closest('.edit-form[id^="edit-post-form-"]');
+        if (editPostForm) {
             e.preventDefault();
-            if (!confirm('{{ __("posts.confirm_delete_comment") }}')) return;
-            const commentEl = deleteForm.closest('.comment-item');
-            const postEl = commentEl.closest('.post');
-            const postId = postEl?.dataset?.postId;
+            const postId = editPostForm.id.replace('edit-post-form-', '');
+            const postBodyEl = document.getElementById('post-body-' + postId);
+            const submitBtn = editPostForm.querySelector('button[type="submit"]');
+            if (submitBtn) submitBtn.disabled = true;
             try {
-                const res = await fetch(deleteForm.action, {
+                const res = await fetch(editPostForm.action, {
                     method: 'POST',
-                    headers: { 'X-Requested-With': 'XMLHttpRequest' },
-                    body: new FormData(deleteForm)
+                    headers: { 'X-CSRF-TOKEN': csrfToken, 'Accept': 'application/json' },
+                    body: new FormData(editPostForm)
+                });
+                const data = await res.json();
+                if (data.success) {
+                    window.toast?.success('{{ __("toast.post_updated") }}');
+                    if (postBodyEl) {
+                        const p = postBodyEl.querySelector('p');
+                        if (p) p.textContent = data.post.content;
+                        postBodyEl.style.display = 'block';
+                    }
+                    editPostForm.style.display = 'none';
+                    const editedBadge = document.getElementById('post-edited-' + postId);
+                    if (editedBadge) editedBadge.style.removeProperty('display');
+                } else {
+                    window.toast?.error(data.message || '{{ __("toast.post_update_error") }}');
+                }
+            } catch (err) {
+                window.toast?.error('{{ __("toast.post_update_error") }}');
+            } finally {
+                if (submitBtn) submitBtn.disabled = false;
+            }
+            return;
+        }
+
+        // --- Post delete ---
+        const deletePostForm = e.target.closest('.delete-post-form');
+        if (deletePostForm) {
+            e.preventDefault();
+            const confirmed = await window.confirmAsync(
+                (window.postsConfirmMessages?.deletePost) || '{{ __("posts.confirm_delete_post") }}'
+            );
+            if (!confirmed) return;
+            const postEl = deletePostForm.closest('.post');
+            try {
+                const res = await fetch(deletePostForm.action, {
+                    method: 'POST',
+                    headers: { 'X-CSRF-TOKEN': csrfToken, 'Accept': 'application/json' },
+                    body: new FormData(deletePostForm)
+                });
+                const data = await res.json();
+                if (data.success) {
+                    window.toast?.success('{{ __("toast.post_deleted") }}');
+                    postEl?.remove();
+                } else {
+                    window.toast?.error(data.message || '{{ __("toast.post_delete_error") }}');
+                }
+            } catch (err) {
+                window.toast?.error('{{ __("toast.post_delete_error") }}');
+            }
+            return;
+        }
+
+        // --- Comment / reply delete (posts.js handles these; blade catches any missed by posts.js) ---
+        const inlineDeleteForm = e.target.closest('.inline-delete');
+        if (inlineDeleteForm && !e.defaultPrevented) {
+            e.preventDefault();
+            const confirmed = await window.confirmAsync(
+                (window.postsConfirmMessages?.deleteComment) || '{{ __("posts.confirm_delete_comment") }}'
+            );
+            if (!confirmed) return;
+            const commentEl = inlineDeleteForm.closest('.comment-item, .comment');
+            const postId = commentEl?.closest('.post')?.dataset.postId;
+            try {
+                const res = await fetch(inlineDeleteForm.action, {
+                    method: 'POST',
+                    headers: { 'X-CSRF-TOKEN': csrfToken, 'Accept': 'application/json' },
+                    body: new FormData(inlineDeleteForm)
                 });
                 const data = await res.json();
                 if (data.success) {
                     window.toast?.success('{{ __("toast.comment_deleted") }}');
-                    commentEl.remove();
+                    commentEl?.remove();
                     if (postId) {
                         const toggle = document.querySelector(`.comment-toggle[data-post-id="${postId}"]`);
                         if (toggle) {
-                            const countSpan = toggle.querySelector('span');
-                            if (countSpan) countSpan.textContent = Math.max(0, parseInt(countSpan.textContent || '0') - 1);
+                            const span = toggle.querySelector('span');
+                            if (span) span.textContent = Math.max(0, parseInt(span.textContent || '0') - 1);
                         }
                     }
                 } else {
-                    window.toast?.error(data.message || 'Error');
+                    window.toast?.error(data.message || '{{ __("toast.comment_delete_error") }}');
                 }
-            } catch { window.toast?.error('Failed to delete'); }
+            } catch (err) {
+                window.toast?.error('{{ __("toast.comment_delete_error") }}');
+            }
+            return;
         }
     });
 
@@ -1825,7 +2010,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         d.textContent = s;
                         return d.innerHTML;
                     };
-                    const avatarSrc = c.user_avatar ? '/storage/' + esc(c.user_avatar) : '/storage/logo/default-avatar.avif';
+                    const avatarSrc = c.user_avatar ? '/storage/' + esc(c.user_avatar) : '/storage/default-avatar/default-avatar.avif';
                     const rootId = c.parent_id || c.id;
                     // Highlight leading @mention in content
                     let displayContent = esc(c.content);
@@ -1836,7 +2021,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     let quoteHtml = '';
                     if (c.parent_id && c.quoted_name) {
                         const parentText = esc(c.quoted_content || '').substring(0, 100);
-                        quoteHtml = `<div class="comment-quote" onclick="document.getElementById('comment-${c.quoted_comment_id}')?.scrollIntoView({behavior:'smooth', block:'center'})">
+                        quoteHtml = `<div class="comment-quote" data-quoted-id="${c.quoted_comment_id}" onclick="document.getElementById('comment-${c.quoted_comment_id}')?.scrollIntoView({behavior:'smooth', block:'center'})">
                             <span class="comment-quote-author">${esc(c.quoted_name)} <span class="comment-quote-username">@${esc(c.quoted_username)}</span></span>
                             <span class="comment-quote-text">${parentText}</span>
                         </div>`;
@@ -1849,6 +2034,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                     <a href="${esc(c.user.profile_url)}" class="comment-author">${esc(c.user_name)}</a>
                                     <span class="comment-username">@${esc(c.user.username)}</span>
                                     <span class="comment-time">${esc(c.created_at_diff)}</span>
+                                    <span class="comment-edited" id="comment-edited-${c.id}" style="display:none">· {{ __('posts.edited') }}</span>
                                 </div>
                                 <div class="comment-text" id="comment-text-${c.id}">${quoteHtml}<p>${displayContent}</p></div>
                                 <form id="edit-comment-form-${c.id}" class="comment-edit-form" action="/comments/${c.id}" method="POST" style="display: none;">

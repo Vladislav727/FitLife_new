@@ -56,7 +56,7 @@
           </div>
         </form>
 
-        <form action="{{ route('goals.destroy', $goal) }}" method="POST" style="margin-top: 20px;" onsubmit="return confirm('{{ __('goals.delete_confirm') }}');">
+        <form action="{{ route('goals.destroy', $goal) }}" method="POST" style="margin-top: 20px;" data-confirm="{{ __('goals.delete_confirm') }}">
           @csrf
           @method('DELETE')
           <button type="submit" class="calculate-btn" style="background: #dc3545; width: 100%;">{{ __('goals.delete') }}</button>

@@ -552,7 +552,7 @@ class GroupController extends Controller
             'file_size' => $m->file_size,
             'user_id' => $m->user_id,
             'user_name' => $m->user->name,
-            'user_avatar' => $m->user->avatar ? asset('storage/' . $m->user->avatar) : asset('storage/logo/default-avatar.avif'),
+            'user_avatar' => $m->user->avatar ? asset('storage/' . $m->user->avatar) : asset('storage/default-avatar/default-avatar.avif'),
             'time' => $m->created_at->format('H:i'),
             'date' => $m->created_at->format('d.m.Y'),
             'is_mine' => $m->user_id === $authId,
@@ -662,7 +662,7 @@ class GroupController extends Controller
                 'name' => $c->otherUser($user)->name,
                 'avatar' => $c->otherUser($user)->avatar
                     ? asset('storage/' . $c->otherUser($user)->avatar)
-                    : asset('storage/logo/default-avatar.avif'),
+                    : asset('storage/default-avatar/default-avatar.avif'),
             ]);
 
         $groups = $user->groups->map(fn ($g) => [
@@ -850,7 +850,7 @@ class GroupController extends Controller
         return response()->json(['members' => $members->map(fn ($m) => [
             'id' => $m->id,
             'name' => $m->name,
-            'avatar' => $m->avatar ? asset('storage/' . $m->avatar) : asset('storage/logo/default-avatar.avif'),
+            'avatar' => $m->avatar ? asset('storage/' . $m->avatar) : asset('storage/default-avatar/default-avatar.avif'),
         ])]);
     }
 }

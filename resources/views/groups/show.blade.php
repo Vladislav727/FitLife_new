@@ -148,14 +148,14 @@
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
                 </a>
                 @if($group->owner_id !== Auth::id())
-                    <form action="{{ route('groups.leave', $group) }}" method="POST" onsubmit="return confirm('{{ __('messages.leave_confirm') }}')">
+                    <form action="{{ route('groups.leave', $group) }}" method="POST" data-confirm="{{ __('messages.leave_confirm') }}">
                         @csrf
                         <button type="submit" class="chat-header__btn chat-header__btn--danger" title="{{ __('messages.leave_group') }}">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
                         </button>
                     </form>
                 @else
-                    <form action="{{ route('groups.destroy', $group) }}" method="POST" onsubmit="return confirm('{{ __('messages.delete_group_confirm') }}')">
+                    <form action="{{ route('groups.destroy', $group) }}" method="POST" data-confirm="{{ __('messages.delete_group_confirm') }}">
                         @csrf @method('DELETE')
                         <button type="submit" class="chat-header__btn chat-header__btn--danger" title="{{ __('messages.delete_group') }}">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
@@ -205,7 +205,7 @@
                 @endphp
                 <div class="chat-msg {{ $isMine ? 'chat-msg--mine' : 'chat-msg--theirs' }}{{ $message->pinned_at ? ' chat-msg--pinned' : '' }}" data-msg-id="{{ $message->id }}" data-user-id="{{ $message->user_id }}">
                     @if(!$isMine)
-                        <img src="{{ $message->user->avatar ? asset('storage/' . $message->user->avatar) : asset('storage/logo/default-avatar.avif') }}" alt="" class="chat-msg__avatar">
+                        <img src="{{ $message->user->avatar ? asset('storage/' . $message->user->avatar) : asset('storage/default-avatar/default-avatar.avif') }}" alt="" class="chat-msg__avatar">
                     @endif
                     <div class="chat-msg__wrap">
                         @if($message->forwarded_from_id)
@@ -399,7 +399,7 @@
                 <div class="chat-sidebar__members">
                     @foreach($members as $m)
                         <div class="chat-member" data-user-id="{{ $m->id }}">
-                            <img src="{{ $m->avatar ? asset('storage/' . $m->avatar) : asset('storage/logo/default-avatar.avif') }}" alt="" class="chat-member__avatar">
+                            <img src="{{ $m->avatar ? asset('storage/' . $m->avatar) : asset('storage/default-avatar/default-avatar.avif') }}" alt="" class="chat-member__avatar">
                             <div class="chat-member__info">
                                 <span class="chat-member__name">{{ $m->name }}</span>
                                 <span class="chat-member__role chat-member__role--{{ $m->pivot->role }}">{{ __('messages.' . $m->pivot->role) }}</span>
@@ -566,14 +566,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 body: JSON.stringify({ role: 'member' }),
             }).then(() => location.reload());
         } else if (action === 'remove-member') {
-            if (!confirm(labels.removeMemberConfirm)) return;
+            window.confirmAsync(labels.removeMemberConfirm).then(ok => { if (!ok) return;
             fetch(groupUrl + '/members/' + uid, {
                 method: 'DELETE',
                 headers: { 'X-CSRF-TOKEN': csrfToken, 'X-Requested-With': 'XMLHttpRequest' },
             }).then(() => {
                 const memberEl = btn.closest('.chat-member');
                 if (memberEl) memberEl.remove();
-            });
+            }); }); // confirmAsync
         }
     });
 
@@ -1049,7 +1049,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function deleteMessage(msgEl, msgId) {
-        if (!confirm(labels.deleteConfirm)) return;
+        window.confirmAsync(labels.deleteConfirm).then(ok => { if (!ok) return;
         fetch(baseUrl + '/' + msgId, {
             method: 'DELETE',
             headers: { 'X-CSRF-TOKEN': csrfToken, 'X-Requested-With': 'XMLHttpRequest' },
@@ -1057,7 +1057,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(r => r.json())
         .then(data => {
             if (data.success) msgEl.remove();
-        });
+        }); }); // confirmAsync
     }
 
     function buildMessageElement(msg) {

@@ -18,6 +18,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
+    html { overscroll-behavior-y: none; overscroll-behavior-x: auto; background: #040506; }
     @media (max-width: 900px) {
         input[type="text"],
         input[type="email"],
@@ -91,10 +92,7 @@
         <div class="header-container">
 
             <a href="{{ route('dashboard') }}" class="header-logo">
-                <div class="header-logo-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2"/><path d="M7 21l1.5-6.5M16 21l-1-5"/><path d="M9.5 14.5L8 10l4-2 4 2-1.5 4.5"/><path d="M12 8v4"/><path d="M8 10c-1.5 1-3 3.5-1.5 5"/><path d="M16 10c1.5 1 3 3.5 1.5 5"/></svg>
-                </div>
-                <span class="header-logo-text">FitLife</span>
+                <img src="{{ asset('storage/logo/fitlife-logo.png') }}" alt="FitLife" class="header-logo-img">
             </a>
 
             <nav class="header-nav">
@@ -131,7 +129,7 @@
                     <button class="user-menu-trigger" id="userMenuTrigger">
                         <div class="user-menu-avatar-wrap">
                             <img
-                                src="{{ Auth::user()->avatar ? asset('storage/' . Auth::user()->avatar) : asset('storage/logo/default-avatar.avif') }}"
+                                src="{{ Auth::user()->avatar ? asset('storage/' . Auth::user()->avatar) : asset('storage/default-avatar/default-avatar.avif') }}"
                                 alt="{{ Auth::user()->name }}"
                                 class="user-menu-avatar"
                             >
@@ -148,7 +146,7 @@
                     <div class="user-dropdown" id="userDropdown">
                         <div class="user-dropdown-header">
                             <img
-                                src="{{ Auth::user()->avatar ? asset('storage/' . Auth::user()->avatar) : asset('storage/logo/default-avatar.avif') }}"
+                                src="{{ Auth::user()->avatar ? asset('storage/' . Auth::user()->avatar) : asset('storage/default-avatar/default-avatar.avif') }}"
                                 alt="{{ Auth::user()->name }}"
                                 class="user-dropdown-avatar"
                             >
@@ -240,7 +238,7 @@
         <div class="mobile-menu-footer">
             <a href="{{ route('profile.edit') }}" class="mobile-user-card">
                 <img
-                    src="{{ Auth::user()->avatar ? asset('storage/' . Auth::user()->avatar) : asset('storage/logo/default-avatar.avif') }}"
+                    src="{{ Auth::user()->avatar ? asset('storage/' . Auth::user()->avatar) : asset('storage/default-avatar/default-avatar.avif') }}"
                     alt="{{ Auth::user()->name }}"
                     class="mobile-user-avatar"
                 >
@@ -409,5 +407,130 @@
     </script>
 
     @yield('scripts')
+
+    <!-- Confirm Modal -->
+    <div class="fitconfirm-backdrop" id="fitConfirmBackdrop" aria-hidden="true">
+        <div class="fitconfirm-modal" role="dialog" aria-modal="true">
+            <div class="fitconfirm-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+                    <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+            </div>
+            <p class="fitconfirm-message" id="fitConfirmMessage"></p>
+            <div class="fitconfirm-actions">
+                <button class="fitconfirm-no" id="fitConfirmNo">{{ __('common.cancel') }}</button>
+                <button class="fitconfirm-yes" id="fitConfirmYes">{{ __('common.delete') }}</button>
+            </div>
+        </div>
+    </div>
+    <style>
+    .fitconfirm-backdrop {
+        position: fixed; inset: 0; z-index: 99999;
+        background: rgba(0,0,0,0.65);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        display: flex; align-items: center; justify-content: center;
+        opacity: 0; pointer-events: none;
+        transition: opacity 0.2s ease;
+    }
+    .fitconfirm-backdrop.open {
+        opacity: 1; pointer-events: all;
+    }
+    .fitconfirm-modal {
+        background: #141618;
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 20px;
+        padding: 2rem 1.75rem 1.5rem;
+        width: 340px; max-width: calc(100vw - 2rem);
+        box-shadow: 0 24px 64px rgba(0,0,0,0.7);
+        text-align: center;
+        transform: scale(0.9) translateY(8px);
+        transition: transform 0.2s ease;
+    }
+    .fitconfirm-backdrop.open .fitconfirm-modal {
+        transform: scale(1) translateY(0);
+    }
+    .fitconfirm-icon {
+        width: 52px; height: 52px; border-radius: 14px;
+        background: rgba(239,68,68,0.12);
+        border: 1px solid rgba(239,68,68,0.2);
+        display: flex; align-items: center; justify-content: center;
+        margin: 0 auto 1rem;
+        color: #ef4444;
+    }
+    .fitconfirm-message {
+        font-size: 0.9375rem; color: rgba(255,255,255,0.72);
+        margin: 0 0 1.75rem; line-height: 1.5;
+    }
+    .fitconfirm-actions {
+        display: flex; gap: 0.75rem; justify-content: center;
+    }
+    .fitconfirm-no {
+        flex: 1; padding: 0.625rem 1rem;
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 999px;
+        color: rgba(255,255,255,0.6);
+        font-size: 0.875rem; font-weight: 500;
+        cursor: pointer; font-family: inherit;
+        transition: all 0.15s;
+    }
+    .fitconfirm-no:hover { background: rgba(255,255,255,0.09); color: rgba(255,255,255,0.85); }
+    .fitconfirm-yes {
+        flex: 1; padding: 0.625rem 1rem;
+        background: #ef4444; border: none;
+        border-radius: 999px;
+        color: #fff; font-size: 0.875rem; font-weight: 600;
+        cursor: pointer; font-family: inherit;
+        transition: all 0.15s;
+    }
+    .fitconfirm-yes:hover { background: #dc2626; }
+    </style>
+    <script>
+    (function() {
+        let _resolve = null;
+        const backdrop = document.getElementById('fitConfirmBackdrop');
+        const msgEl    = document.getElementById('fitConfirmMessage');
+        const yesBtn   = document.getElementById('fitConfirmYes');
+        const noBtn    = document.getElementById('fitConfirmNo');
+
+        function open(message) {
+            msgEl.textContent = message;
+            backdrop.classList.add('open');
+            backdrop.setAttribute('aria-hidden', 'false');
+            yesBtn.focus();
+            return new Promise(resolve => { _resolve = resolve; });
+        }
+
+        function close(result) {
+            backdrop.classList.remove('open');
+            backdrop.setAttribute('aria-hidden', 'true');
+            if (_resolve) { _resolve(result); _resolve = null; }
+        }
+
+        yesBtn.addEventListener('click', () => close(true));
+        noBtn.addEventListener('click',  () => close(false));
+        backdrop.addEventListener('click', e => { if (e.target === backdrop) close(false); });
+        document.addEventListener('keydown', e => { if (e.key === 'Escape' && backdrop.classList.contains('open')) close(false); });
+
+        window.confirmAsync = open;
+
+        // Handle forms with data-confirm attribute
+        document.addEventListener('submit', function(e) {
+            const form = e.target;
+            const msg = form.dataset.confirm || e.submitter?.dataset?.confirm;
+            if (!msg || form._fitconfirmed) return;
+            e.preventDefault();
+            open(msg).then(ok => {
+                if (ok) {
+                    form._fitconfirmed = true;
+                    form.requestSubmit ? form.requestSubmit(e.submitter) : form.submit();
+                    setTimeout(() => { form._fitconfirmed = false; }, 500);
+                }
+            });
+        }, true);
+    })();
+    </script>
 </body>
 </html>

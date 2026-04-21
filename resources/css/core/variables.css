@@ -1,24 +1,24 @@
 
 :root {
 
-    --primary: #007AFF;
-    --primary-light: #4DA7FF;
-    --primary-dark: #0066E6;
-    --primary-50: rgba(0, 122, 255, 0.05);
-    --primary-100: rgba(0, 122, 255, 0.1);
-    --primary-200: rgba(0, 122, 255, 0.2);
+    --primary: #d9ff61;
+    --primary-light: #e8ff80;
+    --primary-dark: #aaed3f;
+    --primary-50: rgba(217, 255, 97, 0.05);
+    --primary-100: rgba(217, 255, 97, 0.1);
+    --primary-200: rgba(217, 255, 97, 0.2);
 
-    --secondary: #FF5A20;
-    --secondary-light: #FF885C;
-    --secondary-dark: #E64E1B;
+    --secondary: #f97316;
+    --secondary-light: #fb923c;
+    --secondary-dark: #ea6a0a;
 
-    --accent: #7C3AED;
-    --accent-light: #A78BFA;
-    --accent-dark: #6D28D9;
+    --accent: #79f279;
+    --accent-light: #a3f5a3;
+    --accent-dark: #4de64d;
 
-    --success: #16A34A;
-    --success-light: #66D69A;
-    --success-bg: rgba(22, 163, 74, 0.1);
+    --success: #79f279;
+    --success-light: #a3f5a3;
+    --success-bg: rgba(121, 242, 121, 0.1);
 
     --warning: #F59E0B;
     --warning-light: #FFD37A;
@@ -28,41 +28,41 @@
     --danger-light: #FF8A8A;
     --danger-bg: rgba(220, 38, 38, 0.1);
 
-    --info: #007AFF;
-    --info-light: #4DA7FF;
-    --info-bg: rgba(0, 122, 255, 0.1);
+    --info: #d9ff61;
+    --info-light: #e8ff80;
+    --info-bg: rgba(217, 255, 97, 0.1);
 
-    --purple: #7C3AED;
-    --purple-light: #A78BFA;
-    --purple-bg: rgba(124, 58, 237, 0.1);
+    --purple: #A78BFA;
+    --purple-light: #C4B5FD;
+    --purple-bg: rgba(167, 139, 250, 0.1);
 
-    --bg-base: #000000;
-    --bg-surface: #0a0a0a;
-    --bg-elevated: #111111;
-    --bg-hover: #1a1a1a;
-    --bg-glass: #0a0a0a;
-    --bg-glass-light: #111111;
-    --bg-glass-dark: #050505;
+    --bg-base: #040506;
+    --bg-surface: #090b0f;
+    --bg-elevated: #0e1014;
+    --bg-hover: #13161c;
+    --bg-glass: #090b0f;
+    --bg-glass-light: #0e1014;
+    --bg-glass-dark: #06080b;
 
-    --text-primary: #E6EEF4;
-    --text-secondary: #AAB6C0;
-    --text-muted: #7F8A94;
-    --text-disabled: #3A4448;
+    --text-primary: #f4f7fb;
+    --text-secondary: rgba(244, 247, 251, 0.72);
+    --text-muted: rgba(244, 247, 251, 0.45);
+    --text-disabled: rgba(244, 247, 251, 0.2);
 
-    --border-subtle: rgba(230, 238, 244, 0.06);
-    --border-default: rgba(230, 238, 244, 0.10);
-    --border-strong: rgba(230, 238, 244, 0.16);
-    --border-focus: rgba(0, 122, 255, 0.5);
+    --border-subtle: rgba(255, 255, 255, 0.04);
+    --border-default: rgba(255, 255, 255, 0.07);
+    --border-strong: rgba(255, 255, 255, 0.12);
+    --border-focus: rgba(217, 255, 97, 0.4);
 
-    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.16);
-    --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.2);
-    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.24);
-    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.3);
-    --shadow-xl: 0 16px 40px rgba(0, 0, 0, 0.36);
-    --shadow-glow: none;
-    --shadow-glow-strong: none;
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.55);
+    --shadow-xl: 0 16px 40px rgba(0, 0, 0, 0.6);
+    --shadow-glow: 0 0 24px rgba(217, 255, 97, 0.15);
+    --shadow-glow-strong: 0 0 40px rgba(217, 255, 97, 0.25);
 
-    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-mono: 'SF Mono', 'Fira Code', monospace;
 
     --text-xs: 0.75rem;

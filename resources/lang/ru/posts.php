@@ -29,6 +29,7 @@ return [
     'comment_added' => 'Комментарий добавлен',
     'comment_deleted' => 'Комментарий удалён',
     'confirm_delete_comment' => 'Вы уверены, что хотите удалить этот комментарий?',
+    'confirm_delete_post' => 'Вы уверены, что хотите удалить этот пост?',
     'whats_on_your_mind' => 'О чём вы думаете?',
     'attach_photo' => 'Прикрепить фото',
     'attach_video' => 'Прикрепить видео',
@@ -63,4 +64,7 @@ return [
     'replying_to' => 'Ответ для',
     'no_comments_yet' => 'Комментариев пока нет',
     'link_copied' => 'Ссылка скопирована!',
+    'load_more_replies' => 'Загрузить ещё :count',
+    'collapse_replies' => 'Свернуть ответы',
+    'edited' => 'изменено',
 ];

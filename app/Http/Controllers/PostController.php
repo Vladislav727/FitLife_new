@@ -183,6 +183,7 @@ class PostController extends Controller
                         'content' => $post->content,
                         'media_path' => $post->media_path,
                         'media_type' => $post->media_type,
+                        'is_edited' => true,
                     ],
                 ], 200);
             }
@@ -644,7 +645,7 @@ class PostController extends Controller
                     'id' => $user->id,
                     'name' => $user->name,
                     'username' => $user->username,
-                    'avatar' => $user->avatar ? asset('storage/' . $user->avatar) : asset('storage/logo/default-avatar.avif'),
+                    'avatar' => $user->avatar ? asset('storage/' . $user->avatar) : asset('storage/default-avatar/default-avatar.avif'),
                     'online' => $user->isOnline(),
                     'url' => route('profile.show', $user->username),
                 ];

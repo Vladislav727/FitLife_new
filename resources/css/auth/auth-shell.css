@@ -13,7 +13,7 @@
 }
 
 .auth-shell-page {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Inter', sans-serif;
     background: var(--auth-shell-bg);
     background-image:
         radial-gradient(circle at top left, rgba(34, 197, 94, 0.14), transparent 28%),

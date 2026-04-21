@@ -29,7 +29,11 @@ class CommentController extends Controller
             if ($request->expectsJson()) {
                 return response()->json([
                     'success' => true,
-                    'comment' => ['id' => $comment->id, 'content' => $comment->content],
+                    'comment' => [
+                        'id' => $comment->id,
+                        'content' => $comment->content,
+                        'is_edited' => $comment->updated_at->gt($comment->created_at),
+                    ],
                 ], 200);
             }
 

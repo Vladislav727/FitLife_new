@@ -42,7 +42,7 @@
                                     <form action="{{ route('admin.events.delete', $event) }}" method="POST" style="display:inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="events-btn events-btn-danger" onclick="return confirm('{{ __('admin.confirm_delete_event') }}')">{{ __('admin.delete') }}</button>
+                                        <button type="submit" class="events-btn events-btn-danger" data-confirm="{{ __('admin.confirm_delete_event') }}">{{ __('admin.delete') }}</button>
                                     </form>
                                 </td>
                             </tr>

@@ -20,7 +20,7 @@
         @forelse($users as $person)
             <div class="fl-item">
                 <a href="{{ route('profile.show', $person) }}" class="fl-item__left">
-                    <img src="{{ $person->avatar ? asset('storage/' . $person->avatar) : asset('storage/logo/default-avatar.avif') }}"
+                    <img src="{{ $person->avatar ? asset('storage/' . $person->avatar) : asset('storage/default-avatar/default-avatar.avif') }}"
                          alt="{{ $person->name }}" class="fl-item__avatar">
                     <div>
                         <span class="fl-item__name">{{ $person->name }}</span>

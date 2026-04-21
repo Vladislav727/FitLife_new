@@ -17,7 +17,7 @@
 
         <div class="sp-header-body">
             <div class="sp-avatar">
-                <img src="{{ $user->avatar ? asset('storage/' . $user->avatar) : asset('storage/logo/default-avatar.avif') }}"
+                <img src="{{ $user->avatar ? asset('storage/' . $user->avatar) : asset('storage/default-avatar/default-avatar.avif') }}"
                      alt="{{ $user->name }}">
             </div>
 
@@ -84,7 +84,7 @@
             <article class="post-card" id="post-{{ $post->id }}">
                 <div class="post-content">
                     <div class="post-meta">
-                        <img src="{{ $user->avatar ? asset('storage/' . $user->avatar) : asset('storage/logo/default-avatar.avif') }}"
+                        <img src="{{ $user->avatar ? asset('storage/' . $user->avatar) : asset('storage/default-avatar/default-avatar.avif') }}"
                              alt="{{ $user->name }}" class="post-author-avatar">
                         <a href="{{ route('profile.show', $user) }}" class="post-author">{{ $user->name }}</a>
                         <span class="post-dot">&middot;</span>

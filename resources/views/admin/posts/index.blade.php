@@ -36,7 +36,7 @@
                                     <form action="{{ route('admin.posts.delete', $post) }}" method="POST" style="display:inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="posts-btn posts-btn-danger" onclick="return confirm('{{ __('admin.confirm_delete_post') }}')">{{ __('admin.delete') }}</button>
+                                        <button type="submit" class="posts-btn posts-btn-danger" data-confirm="{{ __('admin.confirm_delete_post') }}">{{ __('admin.delete') }}</button>
                                     </form>
                                 </td>
                             </tr>

@@ -27,6 +27,7 @@ return [
     'comment_added' => 'Komentārs pievienots',
     'comment_deleted' => 'Komentārs dzēsts',
     'confirm_delete_comment' => 'Vai tiešām vēlaties dzēst šo komentāru?',
+    'confirm_delete_post' => 'Vai tiešām vēlaties dzēst šo ierakstu?',
     'whats_on_your_mind' => 'Par ko jūs domājat?',
     'attach_photo' => 'Pievienot foto',
     'attach_video' => 'Pievienot video',
@@ -61,4 +62,7 @@ return [
     'replying_to' => 'Atbilde priekš',
     'no_comments_yet' => 'Pagaidām nav komentāru',
     'link_copied' => 'Saite nokopēta!',
+    'load_more_replies' => 'Ielādēt vēl :count',
+    'collapse_replies' => 'Sakļaut atbildes',
+    'edited' => 'rediģēts',
 ];

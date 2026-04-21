@@ -51,7 +51,7 @@
                                     <form action="{{ route('admin.users.delete', $user) }}" method="POST" style="display:inline;">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="users-btn users-btn-danger" onclick="return confirm('{{ __('admin.confirm_delete_user') }}')">{{ __('admin.delete') }}</button>
+                                        <button type="submit" class="users-btn users-btn-danger" data-confirm="{{ __('admin.confirm_delete_user') }}">{{ __('admin.delete') }}</button>
                                     </form>
                                     @endif
                                 </td>
