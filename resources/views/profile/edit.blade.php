@@ -2,9 +2,10 @@
 
 @section('title', __('profile.edit_profile') . ' - FitLife')
 
+@section('hide-mobile-nav', '1')
+
 @section('styles')
 <style>
-.mobile-bottom-nav { display: none !important; }
 @media (max-width: 768px) {
     /* Контейнеры */
     .main-content { padding: 80px 12px 16px 12px !important; }

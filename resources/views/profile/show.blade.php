@@ -2,9 +2,7 @@
 
 @section('title', $user->name . ' — FitLife')
 
-@section('styles')
-<style>.mobile-bottom-nav { display: none !important; }</style>
-@endsection
+@section('hide-mobile-nav', '1')
 
 @section('content')
 <div class="sp-page">
@@ -155,7 +153,7 @@
                         <span class="sp-mini-stat__label">{{ __('profile.photos') }}</span>
                     </div>
                     <div class="sp-mini-stat">
-                        <span class="sp-mini-stat__value">{{ $user->subscriptions->count() }}</span>
+                        <span class="sp-mini-stat__value">{{ $subscriptionsCount }}</span>
                         <span class="sp-mini-stat__label">{{ __('profile.subscriptions_count') }}</span>
                     </div>
                 </div>

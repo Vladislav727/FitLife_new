@@ -1,14 +1,8 @@
 @extends('layouts.app')
 @section('title', __('messages.chats'))
 
-@section('styles')
-<style>
-    @media (max-width: 768px) {
-        .mobile-bottom-nav { display: none !important; }
-        .main-content { padding-bottom: 0 !important; }
-    }
-</style>
-@endsection
+@section('hide-mobile-nav', '1')
+@section('flush-mobile-content', '1')
 
 @section('content')
 <div class="messenger">

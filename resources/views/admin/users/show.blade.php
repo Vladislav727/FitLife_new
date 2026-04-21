@@ -68,7 +68,7 @@
         </div>
 
         <div class="users-section">
-            <h2 class="users-section-title">{{ __('admin.subscriptions') }} ({{ $user->subscriptions->count() }})</h2>
+            <h2 class="users-section-title">{{ __('admin.subscriptions') }} ({{ $subscriptionsCount }})</h2>
             <div class="users-table">
                 <table>
                     <thead>
@@ -78,7 +78,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($user->subscriptions as $subscription)
+                        @forelse($subscriptions as $subscription)
                             <tr>
                                 <td>{{ $subscription->name }}</td>
                                 <td>{{ $subscription->email }}</td>

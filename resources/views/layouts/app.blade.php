@@ -34,7 +34,47 @@
     </style>
     @yield('styles')
 </head>
-<body>
+@php
+    $hideMobileNav = trim($__env->yieldContent('hide-mobile-nav')) === '1';
+    $flushMobileContent = trim($__env->yieldContent('flush-mobile-content')) === '1';
+    $navItems = [
+        ['route' => 'dashboard', 'label' => __('nav.dashboard'), 'icon' => '<path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1m-2 0h2"/>', 'active' => request()->routeIs('dashboard')],
+        ['route' => 'posts.index', 'label' => __('nav.community'), 'icon' => '<path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>', 'active' => request()->routeIs('posts.*')],
+        ['route' => 'activity-calendar', 'label' => __('nav.calendar'), 'icon' => '<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/>', 'active' => request()->routeIs('activity-calendar')],
+        ['route' => 'foods.index', 'label' => __('nav.meals'), 'icon' => '<path d="M3 2l1 14c0 2.21 3.58 4 8 4s8-1.79 8-4l1-14"/><path d="M3 6c0 2.21 3.58 4 8 4s8-1.79 8-4"/><path d="M12 12v4"/>', 'active' => request()->routeIs('foods.*')],
+        ['route' => 'water.index', 'label' => __('nav.water'), 'icon' => '<path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/><path d="M8 14a4.001 4.001 0 004 4"/>', 'active' => request()->routeIs('water.*')],
+        ['route' => 'sleep.index', 'label' => __('nav.sleep'), 'icon' => '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/><path d="M14.5 2.5l2 2-2 2"/><path d="M17 5.5l3 3-3 3"/>', 'active' => request()->routeIs('sleep.*')],
+        ['route' => 'goals.index', 'label' => __('nav.goals'), 'icon' => '<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/><path d="M22 2L12 12"/><path d="M16 2h6v6"/>', 'active' => request()->routeIs('goals.*')],
+        ['route' => 'progress.index', 'label' => __('nav.progress'), 'icon' => '<polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>', 'active' => request()->routeIs('progress.*')],
+        ['route' => 'chats.index', 'label' => __('nav.chats'), 'icon' => '<path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/><path d="M8 10h.01M12 10h.01M16 10h.01"/>', 'active' => request()->routeIs('chats.*') || request()->routeIs('conversations.*') || request()->routeIs('groups.*')],
+    ];
+    $mobileMenuSections = [
+        ['title' => __('nav.main'), 'items' => [
+            ['route' => 'dashboard', 'label' => __('nav.dashboard'), 'icon' => $navItems[0]['icon'], 'active' => $navItems[0]['active']],
+            ['route' => 'posts.index', 'label' => __('nav.community'), 'icon' => $navItems[1]['icon'], 'active' => $navItems[1]['active']],
+        ]],
+        ['title' => __('nav.trackers'), 'items' => [
+            ['route' => 'activity-calendar', 'label' => __('nav.calendar'), 'icon' => $navItems[2]['icon'], 'active' => $navItems[2]['active']],
+            ['route' => 'foods.index', 'label' => __('nav.meal_tracker'), 'icon' => $navItems[3]['icon'], 'active' => $navItems[3]['active']],
+            ['route' => 'sleep.index', 'label' => __('nav.sleep_tracker'), 'icon' => $navItems[5]['icon'], 'active' => $navItems[5]['active']],
+            ['route' => 'water.index', 'label' => __('nav.water_tracker'), 'icon' => $navItems[4]['icon'], 'active' => $navItems[4]['active']],
+        ]],
+        ['title' => __('nav.progress'), 'items' => [
+            ['route' => 'progress.index', 'label' => __('nav.progress_photos'), 'icon' => $navItems[7]['icon'], 'active' => $navItems[7]['active']],
+            ['route' => 'goals.index', 'label' => __('nav.goals'), 'icon' => $navItems[6]['icon'], 'active' => $navItems[6]['active']],
+            ['route' => 'chats.index', 'label' => __('nav.chats'), 'icon' => $navItems[8]['icon'], 'active' => $navItems[8]['active']],
+            ['route' => 'calories.index', 'label' => __('nav.calculator'), 'icon' => $navItems[8]['icon'], 'active' => request()->routeIs('calories.*')],
+        ]],
+    ];
+    $mobileBottomNavItems = [
+        ['route' => 'dashboard', 'label' => __('nav.home'), 'icon' => $navItems[0]['icon'], 'active' => $navItems[0]['active']],
+        ['route' => 'posts.index', 'label' => __('nav.social'), 'icon' => $navItems[1]['icon'], 'active' => $navItems[1]['active']],
+        ['route' => 'foods.index', 'label' => __('nav.food'), 'icon' => $navItems[3]['icon'], 'active' => $navItems[3]['active']],
+        ['route' => 'goals.index', 'label' => __('nav.goals'), 'icon' => $navItems[6]['icon'], 'active' => $navItems[6]['active']],
+        ['route' => 'profile.edit', 'label' => __('nav.profile'), 'icon' => '<path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4z"/><path d="M4 20c0-2.66 5.33-4 8-4s8 1.34 8 4"/>', 'active' => request()->routeIs('profile.*')],
+    ];
+@endphp
+<body class="{{ $hideMobileNav ? 'layout-mobile-nav-hidden' : '' }} {{ $flushMobileContent ? 'layout-mobile-content-flush' : '' }}">
     @auth
 
     <header class="main-header" id="mainHeader">
@@ -48,50 +88,12 @@
             </a>
 
             <nav class="header-nav">
-                <a href="{{ route('dashboard') }}" class="nav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1m-2 0h2"/></svg>
-                    <span>{{ __('nav.dashboard') }}</span>
+                @foreach($navItems as $item)
+                <a href="{{ route($item['route']) }}" class="nav-item {{ $item['active'] ? 'active' : '' }}">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">{!! $item['icon'] !!}</svg>
+                    <span>{{ $item['label'] }}</span>
                 </a>
-
-                <a href="{{ route('posts.index') }}" class="nav-item {{ request()->routeIs('posts.*') ? 'active' : '' }}">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-                    <span>{{ __('nav.community') }}</span>
-                </a>
-
-                <a href="{{ route('activity-calendar') }}" class="nav-item {{ request()->routeIs('activity-calendar') ? 'active' : '' }}">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/></svg>
-                    <span>{{ __('nav.calendar') }}</span>
-                </a>
-
-                <a href="{{ route('foods.index') }}" class="nav-item {{ request()->routeIs('foods.*') ? 'active' : '' }}">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2l1 14c0 2.21 3.58 4 8 4s8-1.79 8-4l1-14"/><path d="M3 6c0 2.21 3.58 4 8 4s8-1.79 8-4"/><path d="M12 12v4"/></svg>
-                    <span>{{ __('nav.meals') }}</span>
-                </a>
-
-                <a href="{{ route('water.index') }}" class="nav-item {{ request()->routeIs('water.*') ? 'active' : '' }}">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/><path d="M8 14a4.001 4.001 0 004 4"/></svg>
-                    <span>{{ __('nav.water') }}</span>
-                </a>
-
-                <a href="{{ route('sleep.index') }}" class="nav-item {{ request()->routeIs('sleep.*') ? 'active' : '' }}">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/><path d="M14.5 2.5l2 2-2 2"/><path d="M17 5.5l3 3-3 3"/></svg>
-                    <span>{{ __('nav.sleep') }}</span>
-                </a>
-
-                <a href="{{ route('goals.index') }}" class="nav-item {{ request()->routeIs('goals.*') ? 'active' : '' }}">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/><path d="M22 2L12 12"/><path d="M16 2h6v6"/></svg>
-                    <span>{{ __('nav.goals') }}</span>
-                </a>
-
-                <a href="{{ route('progress.index') }}" class="nav-item {{ request()->routeIs('progress.*') ? 'active' : '' }}">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-                    <span>{{ __('nav.progress') }}</span>
-                </a>
-
-                <a href="{{ route('chats.index') }}" class="nav-item {{ request()->routeIs('chats.*') || request()->routeIs('conversations.*') || request()->routeIs('groups.*') ? 'active' : '' }}">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/><path d="M8 10h.01M12 10h.01M16 10h.01"/></svg>
-                    <span>{{ __('nav.chats') }}</span>
-                </a>
+                @endforeach
 
                 @if(Auth::user()->isAdmin())
                 <a href="{{ route('admin.dashboard') }}" class="nav-item {{ request()->routeIs('admin.*') ? 'active' : '' }}">
@@ -202,57 +204,17 @@
         </div>
 
         <div class="mobile-menu-body">
+            @foreach($mobileMenuSections as $section)
             <div class="mobile-menu-section">
-                <div class="mobile-menu-section-title">{{ __('nav.main') }}</div>
-                <a href="{{ route('dashboard') }}" class="mobile-menu-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1m-2 0h2"/></svg>
-                    <span>{{ __('nav.dashboard') }}</span>
+                <div class="mobile-menu-section-title">{{ $section['title'] }}</div>
+                @foreach($section['items'] as $item)
+                <a href="{{ route($item['route']) }}" class="mobile-menu-link {{ $item['active'] ? 'active' : '' }}">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">{!! $item['icon'] !!}</svg>
+                    <span>{{ $item['label'] }}</span>
                 </a>
-                <a href="{{ route('posts.index') }}" class="mobile-menu-link {{ request()->routeIs('posts.*') ? 'active' : '' }}">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-                    <span>{{ __('nav.community') }}</span>
-                </a>
+                @endforeach
             </div>
-
-            <div class="mobile-menu-section">
-                <div class="mobile-menu-section-title">{{ __('nav.trackers') }}</div>
-                <a href="{{ route('activity-calendar') }}" class="mobile-menu-link {{ request()->routeIs('activity-calendar*') ? 'active' : '' }}">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01"/></svg>
-                    <span>{{ __('nav.calendar') }}</span>
-                </a>
-                <a href="{{ route('foods.index') }}" class="mobile-menu-link {{ request()->routeIs('foods.*') ? 'active' : '' }}">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2l1 14c0 2.21 3.58 4 8 4s8-1.79 8-4l1-14"/><path d="M3 6c0 2.21 3.58 4 8 4s8-1.79 8-4"/><path d="M12 12v4"/></svg>
-                    <span>{{ __('nav.meal_tracker') }}</span>
-                </a>
-                <a href="{{ route('sleep.index') }}" class="mobile-menu-link {{ request()->routeIs('sleep.*') ? 'active' : '' }}">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/><path d="M14.5 2.5l2 2-2 2"/><path d="M17 5.5l3 3-3 3"/></svg>
-                    <span>{{ __('nav.sleep_tracker') }}</span>
-                </a>
-                <a href="{{ route('water.index') }}" class="mobile-menu-link {{ request()->routeIs('water.*') ? 'active' : '' }}">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/><path d="M8 14a4.001 4.001 0 004 4"/></svg>
-                    <span>{{ __('nav.water_tracker') }}</span>
-                </a>
-            </div>
-
-            <div class="mobile-menu-section">
-                <div class="mobile-menu-section-title">{{ __('nav.progress') }}</div>
-                <a href="{{ route('progress.index') }}" class="mobile-menu-link {{ request()->routeIs('progress.*') ? 'active' : '' }}">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-                    <span>{{ __('nav.progress_photos') }}</span>
-                </a>
-                <a href="{{ route('goals.index') }}" class="mobile-menu-link {{ request()->routeIs('goals.*') ? 'active' : '' }}">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/><path d="M22 2L12 12"/><path d="M16 2h6v6"/></svg>
-                    <span>{{ __('nav.goals') }}</span>
-                </a>
-                <a href="{{ route('chats.index') }}" class="mobile-menu-link {{ request()->routeIs('chats.*') || request()->routeIs('conversations.*') || request()->routeIs('groups.*') ? 'active' : '' }}">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/><path d="M8 10h.01M12 10h.01M16 10h.01"/></svg>
-                    <span>{{ __('nav.chats') }}</span>
-                </a>
-                <a href="{{ route('calories.index') }}" class="mobile-menu-link {{ request()->routeIs('calories.*') ? 'active' : '' }}">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/><path d="M8 10h.01M12 10h.01M16 10h.01"/></svg>
-                    <span>{{ __('nav.calculator') }}</span>
-                </a>
-            </div>
+            @endforeach
 
             @if(Auth::user()->isAdmin())
             <div class="mobile-menu-section">
@@ -282,30 +244,16 @@
 
     <nav class="mobile-bottom-nav">
         <div class="mobile-nav-items">
-            <a href="{{ route('dashboard') }}" class="mobile-nav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1m-2 0h2"/></svg>
-                <span>{{ __('nav.home') }}</span>
+            @foreach($mobileBottomNavItems as $item)
+            <a href="{{ route($item['route']) }}" class="mobile-nav-item {{ $item['active'] ? 'active' : '' }}">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">{!! $item['icon'] !!}</svg>
+                <span>{{ $item['label'] }}</span>
             </a>
-            <a href="{{ route('posts.index') }}" class="mobile-nav-item {{ request()->routeIs('posts.*') ? 'active' : '' }}">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-                <span>{{ __('nav.social') }}</span>
-            </a>
-            <a href="{{ route('foods.index') }}" class="mobile-nav-item {{ request()->routeIs('foods.*') ? 'active' : '' }}">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2l1 14c0 2.21 3.58 4 8 4s8-1.79 8-4l1-14"/><path d="M3 6c0 2.21 3.58 4 8 4s8-1.79 8-4"/><path d="M12 12v4"/></svg>
-                <span>{{ __('nav.food') }}</span>
-            </a>
-            <a href="{{ route('goals.index') }}" class="mobile-nav-item {{ request()->routeIs('goals.*') ? 'active' : '' }}">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/><path d="M22 2L12 12"/><path d="M16 2h6v6"/></svg>
-                <span>{{ __('nav.goals') }}</span>
-            </a>
-            <a href="{{ route('profile.edit') }}" class="mobile-nav-item {{ request()->routeIs('profile.*') ? 'active' : '' }}">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4z"/><path d="M4 20c0-2.66 5.33-4 8-4s8 1.34 8 4"/></svg>
-                <span>{{ __('nav.profile') }}</span>
-            </a>
+            @endforeach
         </div>
     </nav>
 
-    <main class="main-content">
+    <main class="main-content {{ $flushMobileContent ? 'main-content--mobile-flush' : '' }}">
         <div class="content-wrapper">
             @yield('content')
         </div>

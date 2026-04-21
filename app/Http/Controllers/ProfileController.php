@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
@@ -20,7 +21,13 @@ class ProfileController extends Controller
     {
         $user->loadCount(['followers', 'followings', 'posts']);
 
-        return view('profile.show', compact('user'));
+        $subscriptionsCount = $user->followings_count;
+
+        if (Schema::hasTable('subscriptions')) {
+            $subscriptionsCount = $user->subscriptions()->count();
+        }
+
+        return view('profile.show', compact('user', 'subscriptionsCount'));
     }
 
     public function update(Request $request)

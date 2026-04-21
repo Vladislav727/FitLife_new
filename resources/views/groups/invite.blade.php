@@ -1,9 +1,7 @@
 @extends('layouts.app')
 @section('title', __('messages.invite_to_group'))
 
-@section('styles')
-<style>.mobile-bottom-nav { display: none !important; }</style>
-@endsection
+@section('hide-mobile-nav', '1')
 
 @section('content')
 <div class="msg-page">

@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
+@section('hide-mobile-nav', '1')
+
 @section('styles')
 <style>
-.mobile-bottom-nav { display: none !important; }
 @media (max-width: 768px) {
     .main-content { padding: 80px 12px 16px 12px !important; }
     .content-wrapper { padding: 0 !important; max-width: 100% !important; overflow-x: hidden !important; box-sizing: border-box !important; }

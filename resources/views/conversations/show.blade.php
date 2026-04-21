@@ -1,9 +1,10 @@
 @extends('layouts.app')
 @section('title', $otherUser->name)
 
+@section('hide-mobile-nav', '1')
+
 @section('styles')
 <style>
-.mobile-bottom-nav { display: none !important; }
 @media (max-width: 900px) {
     .chat-input__field,
     .chat-search-bar__input,

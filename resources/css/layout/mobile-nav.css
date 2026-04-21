@@ -12,6 +12,14 @@
     padding-bottom: calc(0.5rem + env(safe-area-inset-bottom));
 }
 
+.layout-mobile-nav-hidden .mobile-bottom-nav {
+    display: none !important;
+}
+
+.layout-mobile-nav-hidden .main-content.main-content--mobile-flush {
+    padding-bottom: 0 !important;
+}
+
 @media (max-width: 768px) {
     .mobile-bottom-nav {
         display: block;

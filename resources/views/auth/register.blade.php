@@ -1,42 +1,26 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ __('auth.register') }} - FitLife</title>
-    <link rel="icon" href="{{ asset('favicon.PNG') }}" type="image/png">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-dark: #0a0a0a;
-            --bg-card: #111111;
-            --bg-elevated: #1a1a1a;
-            --primary: #22c55e;
-            --primary-glow: rgba(34, 197, 94, 0.4);
-            --secondary: #06b6d4;
-            --text: #ffffff;
-            --text-muted: #a1a1aa;
-            --border: #27272a;
-            --error: #ef4444;
-            --gradient-1: linear-gradient(135deg, #22c55e 0%, #06b6d4 100%);
-        }
+@extends('layouts.auth')
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+@section('title', __('auth.register') . ' - FitLife')
 
-        html {
-            scroll-behavior: smooth;
-        }
+@section('auth-body-class', 'auth-shell-page--scrollable')
 
-        body {
-            font-family: 'Space Grotesk', sans-serif;
-            background: var(--bg-dark);
-            background-image:
-                radial-gradient(circle at top left, rgba(34, 197, 94, 0.14), transparent 28%),
+@section('auth-shell-class', 'auth-shell--wide')
+
+@section('nav-text', __('auth.have_account'))
+
+@section('nav-action')
+    <a href="{{ route('login') }}" class="auth-shell-nav-button auth-shell-nav-button--ghost">{{ __('auth.login') }}</a>
+@endsection
+
+@section('content')
+            <div class="auth-shell-header">
+                <div class="auth-shell-badge">FitLife</div>
+                <div class="auth-shell-icon">F</div>
+                <h1 class="auth-shell-title"><span class="auth-shell-title-gradient">{{ __('auth.create_account') }}</span></h1>
+                <p class="auth-shell-subtitle">{{ __('auth.register_subtitle') }}</p>
+            </div>
                 radial-gradient(circle at 80% 15%, rgba(6, 182, 212, 0.12), transparent 22%),
                 linear-gradient(180deg, #0a0a0a 0%, #090d0c 100%);
             color: var(--text);
@@ -557,7 +541,7 @@
             </div>
 
             @if ($errors->any())
-                <div class="alert alert-error">
+                <div class="auth-shell-alert auth-shell-alert--error">
                     <ul>
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
@@ -566,13 +550,13 @@
                 </div>
             @endif
 
-            <form method="POST" action="{{ route('register') }}">
+            <form method="POST" action="{{ route('register') }}" class="auth-shell-form">
                 @csrf
 
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="name" class="form-label">{{ __('auth.name') }}</label>
-                        <div class="input-wrapper">
+                <div class="auth-shell-form-grid">
+                    <div class="auth-shell-form-group">
+                        <label for="name" class="auth-shell-label">{{ __('auth.name') }}</label>
+                        <div class="auth-shell-input-wrap">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
                                 <circle cx="12" cy="7" r="4"/>
@@ -582,7 +566,7 @@
                                 id="name"
                                 name="name"
                                 value="{{ old('name') }}"
-                                class="form-input @error('name') is-error @enderror"
+                                class="auth-shell-input @error('name') is-error @enderror"
                                 placeholder="{{ __('auth.name') }}"
                                 required
                                 autofocus
@@ -590,9 +574,9 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="username" class="form-label">{{ __('auth.username') }}</label>
-                        <div class="input-wrapper">
+                    <div class="auth-shell-form-group">
+                        <label for="username" class="auth-shell-label">{{ __('auth.username') }}</label>
+                        <div class="auth-shell-input-wrap">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <circle cx="12" cy="12" r="4"/>
                                 <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"/>
@@ -602,7 +586,7 @@
                                 id="username"
                                 name="username"
                                 value="{{ old('username') }}"
-                                class="form-input @error('username') is-error @enderror"
+                                class="auth-shell-input @error('username') is-error @enderror"
                                 placeholder="{{ __('auth.username') }}"
                                 required
                             >
@@ -610,9 +594,9 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="email" class="form-label">{{ __('auth.email') }}</label>
-                    <div class="input-wrapper">
+                <div class="auth-shell-form-group">
+                    <label for="email" class="auth-shell-label">{{ __('auth.email') }}</label>
+                    <div class="auth-shell-input-wrap">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                             <polyline points="22,6 12,13 2,6"/>
@@ -622,18 +606,18 @@
                             id="email"
                             name="email"
                             value="{{ old('email') }}"
-                            class="form-input @error('email') is-error @enderror"
+                            class="auth-shell-input @error('email') is-error @enderror"
                             placeholder="{{ __('auth.email') }}"
                             required
                         >
                     </div>
                 </div>
 
-                <div class="form-grid">
-                    <div class="form-group">
-                        <label for="password" class="form-label">{{ __('auth.password') }}</label>
-                        <div class="input-wrapper">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <div class="auth-shell-form-grid">
+                    <div class="auth-shell-form-group">
+                        <label for="password" class="auth-shell-label">{{ __('auth.password') }}</label>
+                        <div class="auth-shell-input-wrap">
+                            <svg class="auth-shell-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
                                 <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
                             </svg>
@@ -641,11 +625,11 @@
                                 type="password"
                                 id="password"
                                 name="password"
-                                class="form-input @error('password') is-error @enderror"
+                                class="auth-shell-input @error('password') is-error @enderror"
                                 placeholder="{{ __('auth.password') }}"
                                 required
                             >
-                            <button type="button" class="password-toggle" onclick="togglePassword('password')">
+                            <button type="button" class="auth-shell-password-toggle" onclick="togglePassword('password')">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
                                     <circle cx="12" cy="12" r="3"/>
@@ -654,10 +638,10 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="password_confirmation" class="form-label">{{ __('auth.confirm_password') }}</label>
-                        <div class="input-wrapper">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <div class="auth-shell-form-group">
+                        <label for="password_confirmation" class="auth-shell-label">{{ __('auth.confirm_password') }}</label>
+                        <div class="auth-shell-input-wrap">
+                            <svg class="auth-shell-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
                                 <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
                             </svg>
@@ -665,11 +649,11 @@
                                 type="password"
                                 id="password_confirmation"
                                 name="password_confirmation"
-                                class="form-input"
+                                class="auth-shell-input"
                                 placeholder="{{ __('auth.confirm_password') }}"
                                 required
                             >
-                            <button type="button" class="password-toggle" onclick="togglePassword('password_confirmation')">
+                            <button type="button" class="auth-shell-password-toggle" onclick="togglePassword('password_confirmation')">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
                                     <circle cx="12" cy="12" r="3"/>
@@ -679,53 +663,20 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="terms" class="checkbox-input" required>
+                <div class="auth-shell-form-group">
+                    <label class="auth-shell-checkbox">
+                        <input type="checkbox" name="terms" required>
                         <span>{{ __('auth.agree_terms_prefix') }} <a href="{{ route('terms-of-service') }}">{{ __('auth.terms') }}</a> {{ __('auth.and') }} <a href="{{ route('privacy-policy') }}">{{ __('auth.privacy') }}</a></span>
                     </label>
                 </div>
 
-                <button type="submit" class="submit-btn">
+                <button type="submit" class="auth-shell-submit">
                     {{ __('auth.register') }}
                 </button>
             </form>
 
-            <div class="auth-footer">
+            <div class="auth-shell-footer">
                 <span>{{ __('auth.have_account') }}</span>
                 <a href="{{ route('login') }}">{{ __('auth.login') }}</a>
             </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function togglePassword(inputId) {
-            const input = document.getElementById(inputId);
-            const btn = input.nextElementSibling;
-            if (input.type === 'password') {
-                input.type = 'text';
-                btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/>
-                    <line x1="1" y1="1" x2="23" y2="23"/>
-                </svg>`;
-            } else {
-                input.type = 'password';
-                btn.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                    <circle cx="12" cy="12" r="3"/>
-                </svg>`;
-            }
-        }
-
-        window.addEventListener('scroll', function() {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 50) {
-                nav.style.background = 'rgba(10, 10, 10, 0.95)';
-            } else {
-                nav.style.background = 'rgba(10, 10, 10, 0.8)';
-            }
-        });
-    </script>
-</body>
-</html>
+@endsection

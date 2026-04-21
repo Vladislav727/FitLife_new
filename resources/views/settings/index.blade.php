@@ -2,11 +2,7 @@
 
 @section('title', __('settings.title') . ' - FitLife')
 
-@section('styles')
-<style>
-.mobile-bottom-nav { display: none !important; }
-</style>
-@endsection
+@section('hide-mobile-nav', '1')
 
 @section('content')
 <div class="settings-page">

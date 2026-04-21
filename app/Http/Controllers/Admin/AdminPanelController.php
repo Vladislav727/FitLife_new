@@ -7,6 +7,7 @@ use App\Models\Calendar;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
 
 class AdminPanelController extends Controller
 {
@@ -38,7 +39,15 @@ class AdminPanelController extends Controller
 
     public function usersShow(User $user)
     {
-        return view('admin.users.show', compact('user'));
+        $subscriptions = collect();
+        $subscriptionsCount = 0;
+
+        if (Schema::hasTable('subscriptions')) {
+            $subscriptions = $user->subscriptions()->get();
+            $subscriptionsCount = $subscriptions->count();
+        }
+
+        return view('admin.users.show', compact('user', 'subscriptions', 'subscriptionsCount'));
     }
 
     public function usersEdit(User $user)

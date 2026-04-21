@@ -16,65 +16,46 @@
             --primary-glow: rgba(34, 197, 94, 0.4);
             --secondary: #06b6d4;
             --text: #ffffff;
-            --text-muted: #a1a1aa;
-            --border: #27272a;
-            --error: #ef4444;
-            --gradient-1: linear-gradient(135deg, #22c55e 0%, #06b6d4 100%);
-        }
+            @extends('layouts.auth')
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+            @section('title', __('auth.forgot_password') . ' - FitLife')
 
-        body {
-            font-family: 'Space Grotesk', sans-serif;
-            background: var(--bg-dark);
-            background-image:
-                radial-gradient(circle at top left, rgba(34, 197, 94, 0.14), transparent 28%),
-                radial-gradient(circle at 80% 15%, rgba(6, 182, 212, 0.12), transparent 22%),
-                linear-gradient(180deg, #0a0a0a 0%, #090d0c 100%);
-            color: var(--text);
-            line-height: 1.6;
-            min-height: 100vh;
-        }
+            @section('nav-action')
+                <a href="{{ route('login') }}" class="auth-shell-nav-button auth-shell-nav-button--ghost">{{ __('auth.back_to_login') }}</a>
+            @endsection
 
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            padding: 1rem 2rem;
+            @section('content')
+                            <div class="auth-shell-header">
+                                <div class="auth-shell-badge">Recovery</div>
+                                <div class="auth-shell-icon">
             display: flex;
             justify-content: space-between;
             align-items: center;
             background: rgba(10, 10, 10, 0.8);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
-        }
-
+                                <h1 class="auth-shell-title"><span class="auth-shell-title-gradient">{{ __('auth.forgot_password') }}</span></h1>
+                                <p class="auth-shell-subtitle">{{ __('auth.forgot_password_text') }}</p>
+                            </div>
         .logo {
             display: flex;
-            align-items: center;
+                                <div class="auth-shell-alert auth-shell-alert--success">
             gap: 0.75rem;
             text-decoration: none;
         }
 
         .logo-icon {
-            width: 40px;
-            height: 40px;
+                                <div class="auth-shell-alert auth-shell-alert--success auth-shell-stack">
+                                    <a href="{{ session('reset_link') }}" class="auth-shell-submit" style="text-align:center;text-decoration:none;">
             background: var(--gradient-1);
             border-radius: 10px;
-            display: flex;
-            align-items: center;
+                                    <div class="auth-shell-reset-link">{{ session('reset_link') }}</div>
+                                    <p class="auth-shell-note">{{ __('auth.reset_link_local_hint') }}</p>
             justify-content: center;
             font-weight: 700;
             font-size: 1.2rem;
             color: #08110d;
-        }
+                                <div class="auth-shell-alert auth-shell-alert--error">
 
         .logo-text {
             font-size: 1.5rem;
@@ -422,29 +403,25 @@
                     </div>
                 @endif
 
-                <form method="POST" action="{{ route('password.email') }}" class="auth-form">
+                <form method="POST" action="{{ route('password.email') }}" class="auth-shell-form">
                     @csrf
 
-                    <div class="form-group">
-                        <label for="email" class="form-label">{{ __('auth.email') }}</label>
-                        <div class="auth-input-wrapper">
-                            <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <div class="auth-shell-form-group">
+                        <label for="email" class="auth-shell-label">{{ __('auth.email') }}</label>
+                        <div class="auth-shell-input-wrap">
+                            <svg class="auth-shell-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                                 <polyline points="22,6 12,13 2,6"/>
                             </svg>
-                            <input type="email" id="email" name="email" value="{{ old('email') }}" class="form-input @error('email') is-error @enderror" placeholder="{{ __('auth.email') }}" required autofocus>
+                            <input type="email" id="email" name="email" value="{{ old('email') }}" class="auth-shell-input @error('email') is-error @enderror" placeholder="{{ __('auth.email') }}" required autofocus>
                         </div>
                     </div>
 
-                    <button type="submit" class="auth-submit">{{ __('auth.generate_reset_link') }}</button>
+                    <button type="submit" class="auth-shell-submit">{{ __('auth.generate_reset_link') }}</button>
                 </form>
 
-                <div class="auth-footer">
+                <div class="auth-shell-footer">
                     <span>{{ __('auth.remember_password') }}</span>
                     <a href="{{ route('login') }}">{{ __('auth.login') }}</a>
                 </div>
-            </div>
-        </div>
-    </div>
-</body>
-</html>
+@endsection

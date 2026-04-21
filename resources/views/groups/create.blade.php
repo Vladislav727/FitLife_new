@@ -1,9 +1,10 @@
 @extends('layouts.app')
 @section('title', __('messages.create_group'))
 
+@section('hide-mobile-nav', '1')
+
 @section('styles')
 <style>
-.mobile-bottom-nav { display: none !important; }
 @media (max-width: 900px) {
     .msg-form__input,
     input[type="text"],

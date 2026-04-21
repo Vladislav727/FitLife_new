@@ -12,6 +12,7 @@
 @import 'components/toasts.css';
 
 @import 'auth/auth.css';
+@import 'auth/auth-shell.css';
 @import 'welcome/welcome.css';
 @import 'dashboard/dashboard.css';
 @import 'profile/profile.css';
