@@ -72,30 +72,5 @@
 @endsection
 
 @section('scripts')
-    <script>
-        document.getElementById('user-search').addEventListener('input', function() {
-            let search = this.value.toLowerCase();
-            document.querySelectorAll('.users-table tr').forEach(row => {
-                let name = row.querySelector('td:nth-child(2)')?.textContent.toLowerCase();
-                let email = row.querySelector('td:nth-child(3)')?.textContent.toLowerCase();
-                if (name && email && (name.includes(search) || email.includes(search))) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-        });
-
-        document.getElementById('role-filter').addEventListener('change', function() {
-            let role = this.value;
-            document.querySelectorAll('.users-table tr').forEach(row => {
-                let roleCell = row.querySelector('td:nth-child(4) .role-badge')?.textContent.toLowerCase();
-                if (!role || (roleCell && roleCell === role)) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-        });
-    </script>
+    <script src="{{ asset('js/admin-users-index.js') }}"></script>
 @endsection

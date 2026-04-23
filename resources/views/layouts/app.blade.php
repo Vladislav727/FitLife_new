@@ -7,47 +7,41 @@
     <meta name="user-id" content="{{ Auth::id() ?? 'guest' }}">
     <title>@yield('title', 'FitLife')</title>
     <link rel="icon" href="{{ asset('favicon.PNG') }}" type="image/png">
-    <script>
-        (function() {
-            var t = localStorage.getItem('fitlife-theme') || 'dark';
-            document.documentElement.setAttribute('data-theme', t);
-        })();
-    </script>
+    <script src="{{ asset('js/theme-init.js') }}"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <style>
-    html { overscroll-behavior-y: none; overscroll-behavior-x: auto; background: #040506; }
-    @media (max-width: 900px) {
-        input[type="text"],
-        input[type="email"],
-        input[type="password"],
-        input[type="search"],
-        input[type="number"],
-        input[type="tel"],
-        input[type="url"],
-        textarea,
-        select {
-            font-size: 16px !important;
-        }
-    }
-
-    /* Keep navbar icons outlined even if production serves a stale CSS bundle. */
-    .header-logo-icon svg,
-    .nav-item svg,
-    .mobile-nav-item svg,
-    .mobile-menu-logo-icon svg,
-    .mobile-menu-link svg {
-        fill: none !important;
-        stroke: currentColor !important;
-    }
-    </style>
     @yield('styles')
 </head>
 @php
     $hideMobileNav = trim($__env->yieldContent('hide-mobile-nav')) === '1';
     $flushMobileContent = trim($__env->yieldContent('flush-mobile-content')) === '1';
+    $toastMessages = [
+        'post_created' => __('toast.post_created'),
+        'post_updated' => __('toast.post_updated'),
+        'post_deleted' => __('toast.post_deleted'),
+        'post_create_error' => __('toast.post_create_error'),
+        'post_update_error' => __('toast.post_update_error'),
+        'post_delete_error' => __('toast.post_delete_error'),
+        'comment_added' => __('toast.comment_added'),
+        'comment_updated' => __('toast.comment_updated'),
+        'comment_deleted' => __('toast.comment_deleted'),
+        'comment_add_error' => __('toast.comment_add_error'),
+        'comment_update_error' => __('toast.comment_update_error'),
+        'comment_delete_error' => __('toast.comment_delete_error'),
+        'comment_empty' => __('toast.comment_empty'),
+        'reaction_toggled' => __('toast.reaction_toggled'),
+        'reaction_error' => __('toast.reaction_error'),
+        'link_copied' => __('toast.link_copied'),
+        'link_copy_error' => __('toast.link_copy_error'),
+        'saved' => __('toast.saved'),
+        'deleted' => __('toast.deleted'),
+        'updated' => __('toast.updated'),
+        'created' => __('toast.created'),
+        'error' => __('toast.error'),
+        'unauthorized' => __('toast.unauthorized'),
+    ];
     $navItems = [
         ['route' => 'dashboard', 'label' => __('nav.dashboard'), 'icon' => '<path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1m-2 0h2"/>', 'active' => request()->routeIs('dashboard')],
         ['route' => 'posts.index', 'label' => __('nav.community'), 'icon' => '<path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>', 'active' => request()->routeIs('posts.*')],
@@ -55,6 +49,7 @@
         ['route' => 'foods.index', 'label' => __('nav.meals'), 'icon' => '<path d="M3 2l1 14c0 2.21 3.58 4 8 4s8-1.79 8-4l1-14"/><path d="M3 6c0 2.21 3.58 4 8 4s8-1.79 8-4"/><path d="M12 12v4"/>', 'active' => request()->routeIs('foods.*')],
         ['route' => 'water.index', 'label' => __('nav.water'), 'icon' => '<path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/><path d="M8 14a4.001 4.001 0 004 4"/>', 'active' => request()->routeIs('water.*')],
         ['route' => 'sleep.index', 'label' => __('nav.sleep'), 'icon' => '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/><path d="M14.5 2.5l2 2-2 2"/><path d="M17 5.5l3 3-3 3"/>', 'active' => request()->routeIs('sleep.*')],
+        ['route' => 'calories.index', 'label' => __('nav.calories'), 'icon' => '<path d="M12 2c1.5 2 4 4.56 4 8a4 4 0 1 1-8 0c0-2.11 1.25-4.28 4-8z"/><path d="M12 13c1.1 1.04 2 2.14 2 3.5a2 2 0 1 1-4 0c0-1.36.9-2.46 2-3.5z"/>', 'active' => request()->routeIs('calories.*')],
         ['route' => 'goals.index', 'label' => __('nav.goals'), 'icon' => '<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/><path d="M22 2L12 12"/><path d="M16 2h6v6"/>', 'active' => request()->routeIs('goals.*')],
         ['route' => 'progress.index', 'label' => __('nav.progress'), 'icon' => '<polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/>', 'active' => request()->routeIs('progress.*')],
         ['route' => 'chats.index', 'label' => __('nav.chats'), 'icon' => '<path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/><path d="M8 10h.01M12 10h.01M16 10h.01"/>', 'active' => request()->routeIs('chats.*') || request()->routeIs('conversations.*') || request()->routeIs('groups.*')],
@@ -68,24 +63,24 @@
             ['route' => 'activity-calendar', 'label' => __('nav.calendar'), 'icon' => $navItems[2]['icon'], 'active' => $navItems[2]['active']],
             ['route' => 'foods.index', 'label' => __('nav.meal_tracker'), 'icon' => $navItems[3]['icon'], 'active' => $navItems[3]['active']],
             ['route' => 'sleep.index', 'label' => __('nav.sleep_tracker'), 'icon' => $navItems[5]['icon'], 'active' => $navItems[5]['active']],
+            ['route' => 'calories.index', 'label' => __('nav.calories'), 'icon' => $navItems[6]['icon'], 'active' => $navItems[6]['active']],
             ['route' => 'water.index', 'label' => __('nav.water_tracker'), 'icon' => $navItems[4]['icon'], 'active' => $navItems[4]['active']],
         ]],
         ['title' => __('nav.progress'), 'items' => [
-            ['route' => 'progress.index', 'label' => __('nav.progress_photos'), 'icon' => $navItems[7]['icon'], 'active' => $navItems[7]['active']],
-            ['route' => 'goals.index', 'label' => __('nav.goals'), 'icon' => $navItems[6]['icon'], 'active' => $navItems[6]['active']],
-            ['route' => 'chats.index', 'label' => __('nav.chats'), 'icon' => $navItems[8]['icon'], 'active' => $navItems[8]['active']],
-            ['route' => 'calories.index', 'label' => __('nav.calculator'), 'icon' => $navItems[8]['icon'], 'active' => request()->routeIs('calories.*')],
+            ['route' => 'progress.index', 'label' => __('nav.progress_photos'), 'icon' => $navItems[8]['icon'], 'active' => $navItems[8]['active']],
+            ['route' => 'goals.index', 'label' => __('nav.goals'), 'icon' => $navItems[7]['icon'], 'active' => $navItems[7]['active']],
+            ['route' => 'chats.index', 'label' => __('nav.chats'), 'icon' => $navItems[9]['icon'], 'active' => $navItems[9]['active']],
         ]],
     ];
     $mobileBottomNavItems = [
         ['route' => 'dashboard', 'label' => __('nav.home'), 'icon' => $navItems[0]['icon'], 'active' => $navItems[0]['active']],
         ['route' => 'posts.index', 'label' => __('nav.social'), 'icon' => $navItems[1]['icon'], 'active' => $navItems[1]['active']],
         ['route' => 'foods.index', 'label' => __('nav.food'), 'icon' => $navItems[3]['icon'], 'active' => $navItems[3]['active']],
-        ['route' => 'goals.index', 'label' => __('nav.goals'), 'icon' => $navItems[6]['icon'], 'active' => $navItems[6]['active']],
+        ['route' => 'goals.index', 'label' => __('nav.goals'), 'icon' => $navItems[7]['icon'], 'active' => $navItems[7]['active']],
         ['route' => 'profile.edit', 'label' => __('nav.profile'), 'icon' => '<path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4z"/><path d="M4 20c0-2.66 5.33-4 8-4s8 1.34 8 4"/>', 'active' => request()->routeIs('profile.*')],
     ];
 @endphp
-<body class="{{ $hideMobileNav ? 'layout-mobile-nav-hidden' : '' }} {{ $flushMobileContent ? 'layout-mobile-content-flush' : '' }}">
+<body class="{{ $hideMobileNav ? 'layout-mobile-nav-hidden' : '' }} {{ $flushMobileContent ? 'layout-mobile-content-flush' : '' }}" data-toast-messages='@json($toastMessages)'>
     @auth
 
     <header class="main-header" id="mainHeader">
@@ -270,138 +265,6 @@
     </main>
     @endauth
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Header scroll effect
-            const header = document.getElementById('mainHeader');
-            if (header) {
-                window.addEventListener('scroll', () => {
-                    header.classList.toggle('scrolled', window.scrollY > 20);
-                });
-            }
-
-            // User menu toggle
-            const userMenu = document.getElementById('userMenu');
-            const userMenuTrigger = document.getElementById('userMenuTrigger');
-
-            if (userMenu && userMenuTrigger) {
-                userMenuTrigger.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    userMenu.classList.toggle('open');
-                });
-
-                document.addEventListener('click', (e) => {
-                    if (!userMenu.contains(e.target)) {
-                        userMenu.classList.remove('open');
-                    }
-                });
-            }
-
-            // Mobile menu
-            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-            const mobileMenuPanel = document.getElementById('mobileMenuPanel');
-            const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
-            const mobileMenuClose = document.getElementById('mobileMenuClose');
-
-            function openMobileMenu() {
-                mobileMenuPanel?.classList.add('open');
-                mobileMenuOverlay?.classList.add('open');
-                document.body.style.overflow = 'hidden';
-            }
-
-            function closeMobileMenu() {
-                mobileMenuPanel?.classList.remove('open');
-                mobileMenuOverlay?.classList.remove('open');
-                document.body.style.overflow = '';
-            }
-
-            mobileMenuBtn?.addEventListener('click', openMobileMenu);
-            mobileMenuClose?.addEventListener('click', closeMobileMenu);
-            mobileMenuOverlay?.addEventListener('click', closeMobileMenu);
-
-            // Toast notification system
-            window.toast = {
-                container: null,
-                init() {
-                    if (!this.container) {
-                        this.container = document.createElement('div');
-                        this.container.className = 'toast-container';
-                        document.body.appendChild(this.container);
-                    }
-                },
-                show(message, type = 'info', duration = 3000) {
-                    this.init();
-                    const toast = document.createElement('div');
-                    toast.className = `toast toast-${type}`;
-
-                    const icons = {
-                        success: '<svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>',
-                        error: '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/></svg>',
-                        warning: '<svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-8h2v8z"/></svg>',
-                        info: '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>'
-                    };
-
-                    toast.innerHTML = `
-                        <div class="toast-icon">${icons[type] || icons.info}</div>
-                        <div class="toast-message">${message}</div>
-                        <button class="toast-close" onclick="this.parentElement.remove()">
-                            <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-                        </button>
-                    `;
-
-                    this.container.appendChild(toast);
-
-                    // Trigger animation
-                    requestAnimationFrame(() => {
-                        toast.classList.add('show');
-                    });
-
-                    // Auto remove
-                    setTimeout(() => {
-                        toast.classList.remove('show');
-                        setTimeout(() => toast.remove(), 300);
-                    }, duration);
-                },
-                success(message, duration) { this.show(message, 'success', duration); },
-                error(message, duration) { this.show(message, 'error', duration); },
-                warning(message, duration) { this.show(message, 'warning', duration); },
-                info(message, duration) { this.show(message, 'info', duration); }
-            };
-
-            // Toast translations
-            window.toastMessages = {
-                // Posts
-                post_created: @json(__('toast.post_created')),
-                post_updated: @json(__('toast.post_updated')),
-                post_deleted: @json(__('toast.post_deleted')),
-                post_create_error: @json(__('toast.post_create_error')),
-                post_update_error: @json(__('toast.post_update_error')),
-                post_delete_error: @json(__('toast.post_delete_error')),
-                // Comments
-                comment_added: @json(__('toast.comment_added')),
-                comment_updated: @json(__('toast.comment_updated')),
-                comment_deleted: @json(__('toast.comment_deleted')),
-                comment_add_error: @json(__('toast.comment_add_error')),
-                comment_update_error: @json(__('toast.comment_update_error')),
-                comment_delete_error: @json(__('toast.comment_delete_error')),
-                comment_empty: @json(__('toast.comment_empty')),
-                // Reactions
-                reaction_toggled: @json(__('toast.reaction_toggled')),
-                reaction_error: @json(__('toast.reaction_error')),
-                // Share
-                link_copied: @json(__('toast.link_copied')),
-                link_copy_error: @json(__('toast.link_copy_error')),
-                // General
-                saved: @json(__('toast.saved')),
-                deleted: @json(__('toast.deleted')),
-                updated: @json(__('toast.updated')),
-                created: @json(__('toast.created')),
-                error: @json(__('toast.error')),
-                unauthorized: @json(__('toast.unauthorized')),
-            };
-        });
-    </script>
-
     @yield('scripts')
 
     <!-- Confirm Modal -->
@@ -420,113 +283,5 @@
             </div>
         </div>
     </div>
-    <style>
-    .fitconfirm-backdrop {
-        position: fixed; inset: 0; z-index: 99999;
-        background: rgba(0,0,0,0.65);
-        backdrop-filter: blur(6px);
-        -webkit-backdrop-filter: blur(6px);
-        display: flex; align-items: center; justify-content: center;
-        opacity: 0; pointer-events: none;
-        transition: opacity 0.2s ease;
-    }
-    .fitconfirm-backdrop.open {
-        opacity: 1; pointer-events: all;
-    }
-    .fitconfirm-modal {
-        background: #141618;
-        border: 1px solid rgba(255,255,255,0.1);
-        border-radius: 20px;
-        padding: 2rem 1.75rem 1.5rem;
-        width: 340px; max-width: calc(100vw - 2rem);
-        box-shadow: 0 24px 64px rgba(0,0,0,0.7);
-        text-align: center;
-        transform: scale(0.9) translateY(8px);
-        transition: transform 0.2s ease;
-    }
-    .fitconfirm-backdrop.open .fitconfirm-modal {
-        transform: scale(1) translateY(0);
-    }
-    .fitconfirm-icon {
-        width: 52px; height: 52px; border-radius: 14px;
-        background: rgba(239,68,68,0.12);
-        border: 1px solid rgba(239,68,68,0.2);
-        display: flex; align-items: center; justify-content: center;
-        margin: 0 auto 1rem;
-        color: #ef4444;
-    }
-    .fitconfirm-message {
-        font-size: 0.9375rem; color: rgba(255,255,255,0.72);
-        margin: 0 0 1.75rem; line-height: 1.5;
-    }
-    .fitconfirm-actions {
-        display: flex; gap: 0.75rem; justify-content: center;
-    }
-    .fitconfirm-no {
-        flex: 1; padding: 0.625rem 1rem;
-        background: rgba(255,255,255,0.05);
-        border: 1px solid rgba(255,255,255,0.1);
-        border-radius: 999px;
-        color: rgba(255,255,255,0.6);
-        font-size: 0.875rem; font-weight: 500;
-        cursor: pointer; font-family: inherit;
-        transition: all 0.15s;
-    }
-    .fitconfirm-no:hover { background: rgba(255,255,255,0.09); color: rgba(255,255,255,0.85); }
-    .fitconfirm-yes {
-        flex: 1; padding: 0.625rem 1rem;
-        background: #ef4444; border: none;
-        border-radius: 999px;
-        color: #fff; font-size: 0.875rem; font-weight: 600;
-        cursor: pointer; font-family: inherit;
-        transition: all 0.15s;
-    }
-    .fitconfirm-yes:hover { background: #dc2626; }
-    </style>
-    <script>
-    (function() {
-        let _resolve = null;
-        const backdrop = document.getElementById('fitConfirmBackdrop');
-        const msgEl    = document.getElementById('fitConfirmMessage');
-        const yesBtn   = document.getElementById('fitConfirmYes');
-        const noBtn    = document.getElementById('fitConfirmNo');
-
-        function open(message) {
-            msgEl.textContent = message;
-            backdrop.classList.add('open');
-            backdrop.setAttribute('aria-hidden', 'false');
-            yesBtn.focus();
-            return new Promise(resolve => { _resolve = resolve; });
-        }
-
-        function close(result) {
-            backdrop.classList.remove('open');
-            backdrop.setAttribute('aria-hidden', 'true');
-            if (_resolve) { _resolve(result); _resolve = null; }
-        }
-
-        yesBtn.addEventListener('click', () => close(true));
-        noBtn.addEventListener('click',  () => close(false));
-        backdrop.addEventListener('click', e => { if (e.target === backdrop) close(false); });
-        document.addEventListener('keydown', e => { if (e.key === 'Escape' && backdrop.classList.contains('open')) close(false); });
-
-        window.confirmAsync = open;
-
-        // Handle forms with data-confirm attribute
-        document.addEventListener('submit', function(e) {
-            const form = e.target;
-            const msg = form.dataset.confirm || e.submitter?.dataset?.confirm;
-            if (!msg || form._fitconfirmed) return;
-            e.preventDefault();
-            open(msg).then(ok => {
-                if (ok) {
-                    form._fitconfirmed = true;
-                    form.requestSubmit ? form.requestSubmit(e.submitter) : form.submit();
-                    setTimeout(() => { form._fitconfirmed = false; }, 500);
-                }
-            });
-        }, true);
-    })();
-    </script>
 </body>
 </html>

@@ -3,19 +3,6 @@
 
 @section('hide-mobile-nav', '1')
 
-@section('styles')
-<style>
-@media (max-width: 900px) {
-    .msg-form__input,
-    input[type="text"],
-    textarea {
-        font-size: 16px !important;
-        -webkit-text-size-adjust: 100% !important;
-    }
-}
-</style>
-@endsection
-
 @section('content')
 <div class="msg-page">
     <div class="msg-header">
@@ -33,8 +20,8 @@
                 <div class="msg-form__avatar-preview" id="avatarPreview">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
                 </div>
-                <input type="file" name="avatar" id="avatarInput" accept="image/jpeg,image/png,image/gif,image/webp" style="display:none" onchange="previewAvatar(this)">
-                <button type="button" class="msg-btn-invite" onclick="document.getElementById('avatarInput').click()">{{ __('messages.choose_photo') }}</button>
+                <input type="file" name="avatar" id="avatarInput" accept="image/jpeg,image/png,image/gif,image/webp" style="display:none">
+                <button type="button" class="msg-btn-invite" id="avatarTrigger">{{ __('messages.choose_photo') }}</button>
             </div>
             @error('avatar') <span class="msg-form__error">{{ $message }}</span> @enderror
         </div>
@@ -54,17 +41,8 @@
         <button type="submit" class="msg-form__submit">{{ __('messages.create_group') }}</button>
     </form>
 </div>
+@endsection
 
-<script>
-function previewAvatar(input) {
-    if (input.files && input.files[0]) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const preview = document.getElementById('avatarPreview');
-            preview.innerHTML = '<img src="' + e.target.result + '" style="width:100%;height:100%;object-fit:cover;border-radius:50%">';
-        };
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-</script>
+@section('scripts')
+    <script src="{{ asset('js/groups-create.js') }}"></script>
 @endsection

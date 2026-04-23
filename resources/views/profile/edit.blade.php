@@ -4,73 +4,6 @@
 
 @section('hide-mobile-nav', '1')
 
-@section('styles')
-<style>
-@media (max-width: 768px) {
-    /* Контейнеры */
-    .main-content { padding: 80px 12px 16px 12px !important; }
-    .content-wrapper { padding: 0 !important; max-width: 100% !important; overflow-x: hidden !important; }
-    .profile-edit-page { max-width: 100% !important; width: 100% !important; overflow: hidden !important; padding: 0 !important; }
-
-    /* Шапка страницы */
-    .pe-back-link { display: inline-flex !important; font-size: 13px !important; margin-bottom: 12px !important; }
-    .pe-header { margin-bottom: 16px !important; gap: 12px !important; }
-    .pe-header__icon { display: none !important; }
-    .pe-header__text h1 { font-size: 1.25rem !important; }
-    .pe-header__text p { font-size: 0.8125rem !important; }
-
-    /* Сайдбар-табы */
-    .pe-layout { display: flex !important; flex-direction: column !important; gap: 16px !important; min-width: 0 !important; }
-    .pe-sidebar { order: -1 !important; width: 100% !important; }
-    .pe-sidebar__card { position: static !important; padding: 8px !important; border-radius: 12px !important; }
-    .pe-sidebar__user { display: none !important; }
-    .pe-sidebar__divider { display: none !important; }
-    .pe-sidebar__nav { display: flex !important; flex-direction: row !important; overflow-x: auto !important; gap: 8px !important; scrollbar-width: none !important; -webkit-overflow-scrolling: touch !important; }
-    .pe-sidebar__nav::-webkit-scrollbar { display: none !important; }
-    .pe-sidebar__link { white-space: nowrap !important; padding: 6px 12px !important; font-size: 0.75rem !important; border-radius: 999px !important; flex-shrink: 0 !important; }
-    .pe-sidebar__link::before { display: none !important; }
-    .pe-sidebar__link svg { width: 16px !important; height: 16px !important; }
-
-    /* Контент */
-    .pe-content { min-width: 0 !important; overflow: hidden !important; gap: 16px !important; width: 100% !important; }
-
-    /* Карточки */
-    .pe-card { padding: 16px !important; border-radius: 12px !important; overflow: hidden !important; width: 100% !important; box-sizing: border-box !important; }
-    .pe-card__header { gap: 12px !important; margin-bottom: 16px !important; padding-bottom: 12px !important; }
-    .pe-card__header-icon { width: 36px !important; height: 36px !important; }
-    .pe-card__header-icon svg { width: 18px !important; height: 18px !important; }
-    .pe-card__header h2 { font-size: 0.9375rem !important; }
-    .pe-card__header p { font-size: 0.75rem !important; }
-    .pe-card__hint { font-size: 0.6875rem !important; padding: 8px 12px !important; word-break: break-word !important; overflow-wrap: break-word !important; white-space: normal !important; }
-
-    /* Баннер */
-    .pe-banner-preview__bg { height: 140px !important; max-width: 100% !important; border-radius: 8px !important; }
-    .pe-banner-preview__avatar { width: 64px !important; height: 64px !important; border-width: 3px !important; }
-    .pe-banner-preview__avatar-wrap { left: 12px !important; bottom: 10px !important; }
-    .pe-banner-preview__avatar-btn { width: 26px !important; height: 26px !important; }
-    .pe-banner-preview__change-btn { font-size: 0.75rem !important; padding: 4px 10px !important; bottom: 10px !important; right: 10px !important; }
-
-    /* Форма */
-    .pe-form__grid { display: flex !important; flex-direction: column !important; gap: 12px !important; }
-    .pe-form__label { font-size: 0.75rem !important; }
-    .pe-form__input-wrap { min-width: 0 !important; }
-    .pe-form__input { min-width: 0 !important; width: 100% !important; box-sizing: border-box !important; font-size: 16px !important; }
-    .pe-form__input--prefixed { padding-left: 28px !important; }
-    .pe-form__textarea { width: 100% !important; box-sizing: border-box !important; font-size: 16px !important; min-height: 80px !important; }
-    .pe-form__actions { flex-direction: column-reverse !important; gap: 8px !important; margin-top: 16px !important; padding-top: 16px !important; }
-    .pe-btn { width: 100% !important; justify-content: center !important; padding: 10px 16px !important; box-sizing: border-box !important; }
-
-    /* Danger */
-    .pe-danger-box { flex-direction: column !important; align-items: stretch !important; gap: 12px !important; padding: 14px !important; }
-    .pe-danger-box__info h3 { font-size: 0.8125rem !important; }
-    .pe-danger-box__info p { font-size: 0.75rem !important; }
-
-    /* Alert */
-    .pe-alert { padding: 10px !important; font-size: 0.75rem !important; }
-}
-</style>
-@endsection
-
 @section('content')
 <div class="profile-edit-page" role="application" aria-label="FitLife Profile Settings">
 
@@ -532,40 +465,5 @@
 @endsection
 
 @section('scripts')
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Sidebar navigation smooth scroll + active state
-    const sidebarLinks = document.querySelectorAll('.pe-sidebar__link');
-    const sections = document.querySelectorAll('.pe-card[id]');
-
-    sidebarLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const targetId = this.getAttribute('data-section');
-            const target = document.getElementById(targetId);
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                sidebarLinks.forEach(l => l.classList.remove('active'));
-                this.classList.add('active');
-            }
-        });
-    });
-
-    // Intersection Observer for active sidebar highlight
-    if (sections.length && sidebarLinks.length) {
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    sidebarLinks.forEach(l => l.classList.remove('active'));
-                    const activeLink = document.querySelector(`.pe-sidebar__link[data-section="${entry.target.id}"]`);
-                    if (activeLink) activeLink.classList.add('active');
-                }
-            });
-        }, { threshold: 0.3 });
-
-        sections.forEach(section => observer.observe(section));
-    }
-});
-</script>
 <script src="{{ asset('js/profile.js') }}"></script>
 @endsection

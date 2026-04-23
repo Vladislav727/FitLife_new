@@ -9,9 +9,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800" rel="stylesheet">
     @vite(['resources/css/welcome-entry.css'])
-    <style>html, body { overscroll-behavior-y: none; overscroll-behavior-x: auto; }
-    .welcome-btn--primary { background: linear-gradient(135deg, #e8ff80 0%, #d9ff61 45%, #aaed3f 100%); color: #07080a; box-shadow: 0 16px 40px rgba(217,255,97,0.25); }
-    .welcome-brand-img { height: 90px; width: auto; display: block; }</style>
 </head>
 <body class="welcome-page">
 @php
@@ -399,54 +396,6 @@
     </div>
 </footer>
 
-<script>
-    const welcomeHeader = document.getElementById('welcomeHeader');
-    const welcomeNav = document.getElementById('welcomeNav');
-    const welcomeMenuToggle = document.getElementById('welcomeMenuToggle');
-    const welcomeSectionLinks = document.querySelectorAll('a[href^="#"]');
-
-    const stripWelcomeHash = () => {
-        if (!window.location.hash) return;
-        const cleanUrl = `${window.location.pathname}${window.location.search}`;
-        window.history.replaceState(null, '', cleanUrl);
-    };
-
-    welcomeMenuToggle?.addEventListener('click', () => {
-        welcomeNav.classList.toggle('is-open');
-        welcomeMenuToggle.classList.toggle('is-open');
-    });
-
-    welcomeSectionLinks.forEach((link) => {
-        link.addEventListener('click', (event) => {
-            const targetId = link.getAttribute('href');
-            if (!targetId || targetId === '#') return;
-
-            const target = document.querySelector(targetId);
-            if (!target) return;
-
-            event.preventDefault();
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-            if (welcomeNav.classList.contains('is-open')) {
-                welcomeNav.classList.remove('is-open');
-                welcomeMenuToggle?.classList.remove('is-open');
-            }
-
-            window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}`);
-        });
-    });
-
-    window.addEventListener('load', () => {
-        if (!window.location.hash) return;
-
-        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
-        stripWelcomeHash();
-    });
-
-    window.addEventListener('scroll', () => {
-        if (!welcomeHeader) return;
-        welcomeHeader.classList.toggle('is-scrolled', window.scrollY > 24);
-    });
-</script>
+<script src="{{ asset('js/welcome.js') }}"></script>
 </body>
 </html>

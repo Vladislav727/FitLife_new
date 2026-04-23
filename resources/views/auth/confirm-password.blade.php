@@ -82,11 +82,6 @@
         </div>
     </div>
 
-    <script>
-        function togglePassword(inputId) {
-            const input = document.getElementById(inputId);
-            input.type = input.type === 'password' ? 'text' : 'password';
-        }
-    </script>
+    <script src="{{ asset('js/auth-confirm-password.js') }}"></script>
 </body>
 </html>

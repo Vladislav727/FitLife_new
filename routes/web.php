@@ -92,7 +92,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::delete('/{goal}', [GoalController::class, 'destroy'])->name('goals.destroy');
     });
 
-    Route::prefix('calories')->group(function () {
+    Route::get('/calories', function () {
+        return redirect()->route('calories.index', [], 301);
+    });
+
+    Route::prefix('calorie-calculator')->group(function () {
         Route::get('/', [CalorieCalculatorController::class, 'index'])->name('calories.index');
         Route::post('/', [CalorieCalculatorController::class, 'calculate'])->name('calories.calculate');
     });

@@ -3,6 +3,7 @@
 @import 'core/reset.css';
 
 @import 'layout/header.css';
+@import 'layout/guest.css';
 @import 'layout/sidebar.css';
 @import 'layout/mobile-nav.css';
 
@@ -10,14 +11,17 @@
 @import 'components/buttons.css';
 @import 'components/forms.css';
 @import 'components/toasts.css';
+@import 'components/confirmation-modal.css';
 
 @import 'auth/auth.css';
 @import 'auth/auth-shell.css';
 @import 'welcome/welcome.css';
 @import 'dashboard/dashboard.css';
 @import 'profile/profile.css';
+@import 'settings/settings.css';
 @import 'foods/foods.css';
 @import 'foods/calories.css';
+@import 'notifications/notifications.css';
 @import 'water/water.css';
 @import 'sleep/sleep.css';
 @import 'progress/progress.css';

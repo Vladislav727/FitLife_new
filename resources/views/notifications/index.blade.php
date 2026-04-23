@@ -100,36 +100,4 @@
     </div>
 </div>
 
-<style>
-.notif-btn--read-all {
-    background: transparent;
-    border: 1px solid var(--border-color, #e5e7eb);
-    color: var(--text-secondary, #6b7280);
-    padding: 6px 14px;
-    border-radius: 8px;
-    font-size: 0.8125rem;
-    cursor: pointer;
-    transition: all 0.15s;
-}
-.notif-btn--read-all:hover { background: var(--bg-elevated, #f3f4f6); color: var(--text-primary, #111); }
-
-.notif-item { text-decoration: none; color: inherit; display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px; border-bottom: 1px solid var(--border-color, #e5e7eb); transition: background 0.15s; }
-.notif-item:hover { background: var(--bg-elevated, #f9fafb); }
-.notif-item--unread { background: rgba(99, 102, 241, 0.04); }
-.notif-item--unread:hover { background: rgba(99, 102, 241, 0.08); }
-
-.notif-item__avatar { position: relative; flex-shrink: 0; width: 44px; height: 44px; }
-.notif-avatar-img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
-.notif-type-icon { position: absolute; bottom: -2px; right: -4px; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 2px solid var(--bg-primary, #fff); }
-.notif-type-icon--like { background: #fee2e2; color: #ef4444; }
-.notif-type-icon--comment { background: #dbeafe; color: #3b82f6; }
-.notif-type-icon--mention { background: #ede9fe; color: #8b5cf6; }
-.notif-type-icon svg { width: 12px; height: 12px; }
-
-.notif-item__text { margin: 0; font-size: 0.875rem; color: var(--text-primary, #111); line-height: 1.4; }
-.notif-item__preview { margin: 4px 0 0; font-size: 0.8125rem; color: var(--text-secondary, #6b7280); line-height: 1.3; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; max-width: 400px; }
-.notif-item__dot { flex-shrink: 0; width: 8px; height: 8px; border-radius: 50%; background: #6366f1; margin-top: 6px; }
-
-.msg-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-</style>
 @endsection

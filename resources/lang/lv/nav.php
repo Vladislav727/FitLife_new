@@ -34,6 +34,7 @@ return [
     'profile' => 'Profils',
     'my_profile' => 'Mans profils',
     'food' => 'Ēdiens',
+    'calories' => 'Kalorijas',
     'meals' => 'Maltītes',
     'water' => 'Ūdens',
     'sleep' => 'Miegs',

@@ -34,6 +34,7 @@ return [
     'profile' => 'Profile',
     'my_profile' => 'My Profile',
     'food' => 'Food',
+    'calories' => 'Calories',
     'meals' => 'Meals',
     'water' => 'Water',
     'sleep' => 'Sleep',

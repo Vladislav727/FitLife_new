@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const config = window.mealTrackerConfig || {};
+    const trackerPage = document.querySelector('.mt-page');
+    const config = trackerPage?.dataset.mealTracker ? JSON.parse(trackerPage.dataset.mealTracker) : {};
     const t = config.translations || {};
     const csrfToken = config.csrfToken;
     let currentMeal = 'Breakfast';

@@ -409,6 +409,35 @@
     padding: var(--space-8);
 }
 
+html {
+    overscroll-behavior-y: none;
+    overscroll-behavior-x: auto;
+    background: #040506;
+}
+
+@media (max-width: 900px) {
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="search"],
+    input[type="number"],
+    input[type="tel"],
+    input[type="url"],
+    textarea,
+    select {
+        font-size: 16px !important;
+    }
+}
+
+.header-logo-icon svg,
+.nav-item svg,
+.mobile-nav-item svg,
+.mobile-menu-logo-icon svg,
+.mobile-menu-link svg {
+    fill: none !important;
+    stroke: currentColor !important;
+}
+
 .fl-badge {
     display: inline-flex;
     align-items: center;

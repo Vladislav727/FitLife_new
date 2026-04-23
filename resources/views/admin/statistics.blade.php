@@ -10,68 +10,19 @@
     <div class="admin-section">
         <h2 class="admin-section-title">{{ __('admin.user_registrations') }}</h2>
         <div class="admin-chart">
-            <canvas id="userChart"></canvas>
+            <canvas id="userChart" data-user-stats='@json($userStats)'></canvas>
         </div>
     </div>
 
     <div class="admin-section">
         <h2 class="admin-section-title">{{ __('admin.post_creations') }}</h2>
         <div class="admin-chart">
-            <canvas id="postChart"></canvas>
+            <canvas id="postChart" data-post-stats='@json($postStats)'></canvas>
         </div>
     </div>
 </div>
 
 @section('scripts')
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        const userStats = @json($userStats);
-        const postStats = @json($postStats);
-
-        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
-        const userChart = new Chart(document.getElementById('userChart'), {
-            type: 'bar',
-            data: {
-                labels: months,
-                datasets: [{
-                    label: 'New Users',
-                    data: userStats.map(stat => stat.count),
-                    backgroundColor: 'rgba(0, 255, 0, 0.5)',
-                    borderColor: 'rgba(0, 255, 0, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: { stepSize: 1 }
-                    }
-                }
-            }
-        });
-
-        const postChart = new Chart(document.getElementById('postChart'), {
-            type: 'bar',
-            data: {
-                labels: months,
-                datasets: [{
-                    label: 'New Posts',
-                    data: postStats.map(stat => stat.count),
-                    backgroundColor: 'rgba(0, 255, 0, 0.5)',
-                    borderColor: 'rgba(0, 255, 0, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        ticks: { stepSize: 1 }
-                    }
-                }
-            }
-        });
-    </script>
+    <script src="{{ asset('js/admin-statistics.js') }}"></script>
 @endsection

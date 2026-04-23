@@ -1,5 +1,6 @@
 
 document.addEventListener('DOMContentLoaded', () => {
+    const calendarPage = document.querySelector('.calendar-page');
 
     const elements = {
 
@@ -51,7 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let allEvents = [];
     let csrfToken = document.querySelector('meta[name="csrf-token"]')?.content;
 
-    const translations = window.calendarTranslations || {
+    const translations = calendarPage?.dataset.calendarTranslations
+        ? JSON.parse(calendarPage.dataset.calendarTranslations)
+        : {
         noEventsToday: 'No events for this day',
         addFirstEvent: 'Add your first event',
         noUpcoming: 'No upcoming events',

@@ -14,13 +14,6 @@
   $logProjectedDisplay = floor($logProjectedValue) == $logProjectedValue ? number_format($logProjectedValue, 0) : number_format($logProjectedValue, 2);
 @endphp
 
-@section('styles')
-<style>
-    @media (max-width: 768px) {
-    }
-</style>
-@endsection
-
 @section('content')
 <div id="fitlife-container" class="goals-page" role="application" aria-label="{{ __('goals.fitlife_goals') }}">
   <main>

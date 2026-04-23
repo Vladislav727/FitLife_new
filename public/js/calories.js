@@ -3,9 +3,13 @@ document.addEventListener("DOMContentLoaded", function () {
   const mobileToggle = document.getElementById('mobile-toggle');
   const sidebar = document.getElementById('sidebar');
 
+  if (!mobileToggle || !sidebar) {
+    return;
+  }
+
   mobileToggle.addEventListener('click', () => {
     const isOpen = sidebar.classList.toggle('active');
-    mobileToggle.setAttribute('aria-expanded', isOpen);
+    mobileToggle.setAttribute('aria-expanded', String(isOpen));
   });
 
   document.addEventListener('click', e => {

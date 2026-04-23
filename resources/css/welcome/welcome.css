@@ -4,6 +4,18 @@ body {
     overscroll-behavior: none;
 }
 
+.welcome-btn--primary {
+    background: linear-gradient(135deg, #e8ff80 0%, #d9ff61 45%, #aaed3f 100%);
+    color: #07080a;
+    box-shadow: 0 16px 40px rgba(217, 255, 97, 0.25);
+}
+
+.welcome-brand-img {
+    height: 90px;
+    width: auto;
+    display: block;
+}
+
 .welcome-page {
     background:
         radial-gradient(circle at top left, rgba(34, 197, 94, 0.12), transparent 28%),

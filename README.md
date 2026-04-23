@@ -551,7 +551,7 @@ MAIL_PASSWORD=your-app-password
 | `/goals` | Goals management with progress logging |
 | `/goals/{id}/log` | Log progress for a specific goal |
 | `/progress-photos` | Progress photos gallery |
-| `/calories` | BMR & macro calculator |
+| `/calorie-calculator` | BMR & macro calculator |
 | `/biography` | Health profile (age, height, weight) |
 
 </details>

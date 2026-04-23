@@ -1,353 +1,373 @@
 
-#mobile-toggle {
+.calorie-page #mobile-toggle {
     display: none;
 }
 
-#fitlife-container main > header {
-    margin-bottom: var(--space-6);
+.calorie-page main {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
 }
 
-#fitlife-container main > header h1 {
-    font-size: var(--text-2xl);
-    font-weight: var(--font-bold);
-    color: var(--text-primary);
-    margin-bottom: var(--space-2);
-}
-
-#fitlife-container main > header h1 span {
-    color: var(--warning);
-}
-
-#fitlife-container main > header p.muted {
-    color: var(--text-muted);
-    font-size: var(--text-base);
-}
-
-#fitlife-container section h3 {
-    font-size: var(--text-lg);
-    font-weight: var(--font-semibold);
-    color: var(--text-primary);
-    margin-bottom: var(--space-4);
-}
-
-.biography-card {
+.calorie-page .calorie-hero,
+.calorie-page .calorie-card,
+.calorie-page .calorie-results {
     background: var(--bg-surface);
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-xl);
-    padding: var(--space-8);
-    max-width: 700px;
+    box-shadow: var(--shadow-sm);
 }
 
-.biography-card h3 {
-    font-size: var(--text-xl);
-    font-weight: var(--font-bold);
-    color: var(--warning);
-    margin-bottom: var(--space-6);
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-}
-
-.biography-card h3::before {
-    content: '🔥';
-    font-size: var(--text-2xl);
-}
-
-.form-logging {
+.calorie-page .calorie-hero {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.95fr);
+    gap: var(--space-6);
+    padding: var(--space-6);
+}
+
+.calorie-page .calorie-hero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 0.75rem;
+    margin-bottom: var(--space-3);
+    border-radius: var(--radius-full);
+    background: rgba(34, 197, 94, 0.12);
+    color: var(--primary);
+    font-size: var(--text-xs);
+    font-weight: var(--font-semibold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.calorie-page .calorie-hero h1 {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: var(--text-3xl);
+    font-weight: var(--font-bold);
+    line-height: 1.1;
+}
+
+.calorie-page .calorie-hero p {
+    margin: var(--space-3) 0 0;
+    color: var(--text-muted);
+    font-size: var(--text-base);
+    line-height: 1.7;
+    max-width: 38rem;
+}
+
+.calorie-page .calorie-hero__panel {
+    display: grid;
+    gap: var(--space-4);
+}
+
+.calorie-page .calorie-hero__metric,
+.calorie-page .calorie-snapshot-card,
+.calorie-page .calorie-metric-card,
+.calorie-page .calorie-status-card {
+    background: var(--bg-elevated);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+}
+
+.calorie-page .calorie-hero__metric {
+    padding: var(--space-4);
+}
+
+.calorie-page .calorie-hero__metric span,
+.calorie-page .calorie-metric-card span,
+.calorie-page .calorie-snapshot-card span,
+.calorie-page .calorie-status-card span {
+    display: block;
+    margin-bottom: var(--space-2);
+    color: var(--text-muted);
+    font-size: var(--text-xs);
+    font-weight: var(--font-semibold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.calorie-page .calorie-hero__metric strong {
+    display: block;
+    color: var(--text-primary);
+    font-size: var(--text-2xl);
+    font-weight: var(--font-bold);
+    line-height: 1.2;
+}
+
+.calorie-page .calorie-hero__metric--accent {
+    border-color: rgba(245, 158, 11, 0.35);
+}
+
+.calorie-page .calorie-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.45fr) minmax(290px, 0.95fr);
     gap: var(--space-5);
 }
 
-.form-logging .form-group {
+.calorie-page .calorie-card,
+.calorie-page .calorie-results {
+    padding: var(--space-6);
+}
+
+.calorie-page .calorie-card__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-4);
+    margin-bottom: var(--space-5);
+}
+
+.calorie-page .calorie-card__header--stacked {
+    margin-bottom: var(--space-4);
+}
+
+.calorie-page .calorie-card__header h2,
+.calorie-page .calorie-results__header h2 {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: var(--text-xl);
+    font-weight: var(--font-bold);
+}
+
+.calorie-page .calorie-card__header p,
+.calorie-page .calorie-results__header p {
+    margin: var(--space-2) 0 0;
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+    line-height: 1.6;
+}
+
+.calorie-page .calorie-card__badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.45rem 0.85rem;
+    border-radius: var(--radius-full);
+    background: rgba(14, 165, 233, 0.12);
+    color: var(--accent);
+    font-size: var(--text-xs);
+    font-weight: var(--font-semibold);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.calorie-page .calorie-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+}
+
+.calorie-page .calorie-form__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4);
+}
+
+.calorie-page .calorie-field {
     display: flex;
     flex-direction: column;
     gap: var(--space-2);
 }
 
-.form-logging .form-group label {
-    font-size: var(--text-sm);
-    font-weight: var(--font-medium);
-    color: var(--text-secondary);
+.calorie-page .calorie-field--full {
+    grid-column: 1 / -1;
 }
 
-.form-logging .form-group input[type="text"],
-.form-logging .form-group input[type="number"],
-.form-logging .form-group select {
+.calorie-page .calorie-field label {
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+}
+
+.calorie-page .calorie-field input,
+.calorie-page .calorie-field select {
+    width: 100%;
+    height: 44px;
     padding: var(--space-3) var(--space-4);
     background: var(--bg-elevated);
     border: 1px solid var(--border-default);
     border-radius: var(--radius-md);
     color: var(--text-primary);
-    font-size: var(--text-base);
+    font-size: var(--text-sm);
     font-family: inherit;
-    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
-    height: 48px;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background var(--transition-fast);
 }
 
-.form-logging .form-group input:focus,
-.form-logging .form-group select:focus {
+.calorie-page .calorie-field input:hover,
+.calorie-page .calorie-field select:hover {
+    border-color: var(--border-strong);
+}
+
+.calorie-page .calorie-field input:focus,
+.calorie-page .calorie-field select:focus {
     outline: none;
-    border-color: var(--warning);
-    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-200);
 }
 
-.form-logging .form-group input::placeholder {
-    color: var(--text-muted);
-}
-
-.form-logging .form-group select {
+.calorie-page .calorie-field select {
     appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23a3a3a3' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2394a3b8' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 12px center;
+    background-size: 20px;
     padding-right: 40px;
-    cursor: pointer;
 }
 
-.form-logging .form-group select option {
-    background: var(--bg-elevated);
-    color: var(--text-primary);
-}
-
-.calculate-btn {
-    grid-column: 1 / -1;
+.calorie-page .calorie-submit-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: var(--space-2);
-    padding: var(--space-4) var(--space-6);
-    background: var(--warning);
-    color: var(--bg-base);
-    font-weight: var(--font-bold);
-    font-size: var(--text-base);
+    min-height: 44px;
+    padding: var(--space-3) var(--space-6);
+    background: var(--primary);
     border: none;
     border-radius: var(--radius-md);
+    color: var(--bg-base);
+    font-size: var(--text-sm);
+    font-weight: var(--font-semibold);
     cursor: pointer;
-    transition: all var(--transition-fast);
-    min-height: 52px;
-    margin-top: var(--space-2);
+    transition: background var(--transition-fast), transform var(--transition-fast);
 }
 
-.calculate-btn:hover {
-    background: var(--warning);
+.calorie-page .calorie-submit-btn:hover {
+    background: var(--primary-light);
     transform: translateY(-1px);
 }
 
-.calculate-btn:active {
-    transform: translateY(0);
-}
-
-.calculate-btn svg {
-    width: 22px;
-    height: 22px;
-    fill: var(--bg-base);
-}
-
-.kpi-container {
+.calorie-page .calorie-snapshot-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-3);
+}
+
+.calorie-page .calorie-snapshot-card,
+.calorie-page .calorie-metric-card,
+.calorie-page .calorie-status-card {
+    padding: var(--space-4);
+}
+
+.calorie-page .calorie-snapshot-card strong {
+    display: block;
+    color: var(--text-primary);
+    font-size: var(--text-base);
+    font-weight: var(--font-semibold);
+    line-height: 1.5;
+}
+
+.calorie-page .calorie-results {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+}
+
+.calorie-page .calorie-results__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: var(--space-4);
-    margin-top: var(--space-6);
 }
 
-.kpi-card {
-    background: var(--bg-surface);
-    border: 1px solid var(--border-subtle);
-    border-radius: var(--radius-xl);
-    padding: var(--space-5);
-    text-align: center;
-    transition: all var(--transition-fast);
-}
-
-.kpi-card:hover {
-    border-color: var(--warning);
-    transform: translateY(-2px);
-}
-
-.kpi-card h4 {
-    font-size: var(--text-sm);
-    font-weight: var(--font-medium);
-    color: var(--text-muted);
-    margin-bottom: var(--space-3);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.kpi-card p {
+.calorie-page .calorie-metric-card strong {
+    display: block;
+    color: var(--text-primary);
     font-size: var(--text-2xl);
     font-weight: var(--font-bold);
-    color: var(--warning);
+    line-height: 1.15;
 }
 
-.kpi-card p.status-text {
-    font-size: var(--text-base);
-    font-weight: var(--font-normal);
+.calorie-page .calorie-metric-card small {
+    display: inline-block;
+    margin-top: var(--space-2);
+    color: var(--text-muted);
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+}
+
+.calorie-page .calorie-metric-card--primary {
+    border-color: rgba(245, 158, 11, 0.35);
+}
+
+.calorie-page .calorie-metric-card--protein {
+    border-color: rgba(14, 165, 233, 0.35);
+}
+
+.calorie-page .calorie-metric-card--fats {
+    border-color: rgba(249, 115, 22, 0.35);
+}
+
+.calorie-page .calorie-metric-card--carbs {
+    border-color: rgba(34, 197, 94, 0.35);
+}
+
+.calorie-page .calorie-status-card p {
+    margin: 0;
     color: var(--text-secondary);
-    line-height: 1.6;
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    line-height: 1.7;
 }
 
-.kpi-card:nth-child(1) p { color: var(--warning); }
-.kpi-card:nth-child(2) p { color: var(--primary); }
-.kpi-card:nth-child(3) p { color: var(--secondary); }
-.kpi-card:nth-child(4) p { color: var(--accent); }
-.kpi-card:nth-child(5) p { color: var(--text-primary); }
-.kpi-card:nth-child(6) {
-    grid-column: 1 / -1;
-    background: var(--bg-elevated);
+.calorie-page .calorie-status-card--under {
+    border-color: rgba(34, 197, 94, 0.3);
+}
+
+.calorie-page .calorie-status-card--over {
+    border-color: rgba(239, 68, 68, 0.3);
+}
+
+.calorie-page .calorie-status-card--balanced {
+    border-color: rgba(245, 158, 11, 0.3);
+}
+
+@media (max-width: 1100px) {
+    .calorie-page .calorie-layout,
+    .calorie-page .calorie-hero {
+        grid-template-columns: 1fr;
+    }
+
+    .calorie-page .calorie-results__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
 @media (max-width: 768px) {
-    #fitlife-container main > header {
-        margin-bottom: var(--space-4);
+    .calorie-page main {
+        gap: var(--space-4);
     }
 
-    #fitlife-container main > header h1 {
-        font-size: var(--text-xl);
-    }
-
-    #fitlife-container main > header p.muted {
-        font-size: var(--text-sm);
-    }
-
-    .biography-card {
+    .calorie-page .calorie-hero,
+    .calorie-page .calorie-card,
+    .calorie-page .calorie-results {
         padding: var(--space-5);
-        border-radius: var(--radius-lg);
     }
 
-    .biography-card h3 {
-        font-size: var(--text-lg);
-        margin-bottom: var(--space-4);
-        gap: var(--space-2);
+    .calorie-page .calorie-card__header {
+        flex-direction: column;
     }
 
-    .biography-card h3::before {
-        font-size: var(--text-xl);
-    }
-
-    .form-logging {
+    .calorie-page .calorie-form__grid,
+    .calorie-page .calorie-snapshot-grid,
+    .calorie-page .calorie-results__grid {
         grid-template-columns: 1fr;
-        gap: var(--space-3);
-    }
-
-    .form-logging .form-group input[type="text"],
-    .form-logging .form-group input[type="number"],
-    .form-logging .form-group select {
-        height: 44px;
-        padding: var(--space-2) var(--space-3);
-        font-size: var(--text-sm);
-    }
-
-    .calculate-btn {
-        padding: var(--space-3) var(--space-5);
-        font-size: var(--text-sm);
-        min-height: 46px;
-    }
-
-    .calculate-btn svg {
-        width: 20px;
-        height: 20px;
-    }
-
-    #fitlife-container section h3 {
-        font-size: var(--text-base);
-        margin-bottom: var(--space-3);
-    }
-
-    .kpi-container {
-        grid-template-columns: repeat(2, 1fr);
-        gap: var(--space-3);
-        margin-top: var(--space-4);
-    }
-
-    .kpi-card {
-        padding: var(--space-4);
-        border-radius: var(--radius-lg);
-    }
-
-    .kpi-card h4 {
-        font-size: var(--text-xs);
-        margin-bottom: var(--space-2);
-    }
-
-    .kpi-card p {
-        font-size: var(--text-xl);
-    }
-
-    .kpi-card p.status-text {
-        font-size: var(--text-sm);
     }
 }
 
 @media (max-width: 480px) {
-    #fitlife-container main > header {
-        margin-bottom: var(--space-3);
+    .calorie-page .calorie-hero h1 {
+        font-size: var(--text-2xl);
     }
 
-    #fitlife-container main > header h1 {
-        font-size: var(--text-lg);
+    .calorie-page .calorie-hero,
+    .calorie-page .calorie-card,
+    .calorie-page .calorie-results {
+        padding: var(--space-4);
+        border-radius: var(--radius-lg);
     }
 
-    #fitlife-container main > header p.muted {
+    .calorie-page .calorie-hero p,
+    .calorie-page .calorie-card__header p,
+    .calorie-page .calorie-results__header p,
+    .calorie-page .calorie-status-card p {
         font-size: var(--text-xs);
-    }
-
-    .biography-card {
-        padding: var(--space-3);
-        border-radius: var(--radius-md);
-    }
-
-    .biography-card h3 {
-        font-size: var(--text-base);
-        margin-bottom: var(--space-3);
-    }
-
-    .form-logging {
-        gap: var(--space-2);
-    }
-
-    .form-logging .form-group label {
-        font-size: var(--text-xs);
-    }
-
-    .form-logging .form-group input[type="text"],
-    .form-logging .form-group input[type="number"],
-    .form-logging .form-group select {
-        height: 40px;
-        padding: var(--space-2);
-        font-size: var(--text-xs);
-    }
-
-    .calculate-btn {
-        padding: var(--space-3) var(--space-4);
-        font-size: var(--text-xs);
-        min-height: 42px;
-    }
-
-    .kpi-container {
-        grid-template-columns: 1fr;
-        gap: var(--space-2);
-        margin-top: var(--space-3);
-    }
-
-    .kpi-card {
-        padding: var(--space-3);
-    }
-
-    .kpi-card h4 {
-        font-size: 0.625rem;
-        margin-bottom: var(--space-1);
-    }
-
-    .kpi-card p {
-        font-size: var(--text-lg);
-    }
-
-    .kpi-card p.status-text {
-        font-size: var(--text-xs);
-    }
-
-    .kpi-card:nth-child(6) {
-        grid-column: 1;
     }
 }

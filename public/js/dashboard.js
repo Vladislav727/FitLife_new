@@ -116,6 +116,63 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    const goalsSearch = document.getElementById('goals-search');
+    const galleryMonth = document.getElementById('gallery-month');
+
+    const applyGoalFilter = (query) => {
+        const list = document.getElementById('goals-list');
+        const empty = document.getElementById('goals-empty-search');
+
+        if (!list || !empty) {
+            return;
+        }
+
+        const value = query.trim().toLowerCase();
+        let visible = 0;
+
+        list.querySelectorAll('.goal-item').forEach((item) => {
+            const type = item.dataset.type || '';
+            const match = !value || type.includes(value);
+
+            item.style.display = match ? '' : 'none';
+            if (match) {
+                visible += 1;
+            }
+        });
+
+        empty.style.display = visible === 0 ? 'flex' : 'none';
+    };
+
+    const applyGalleryFilter = (month) => {
+        const grid = document.getElementById('photos-grid');
+        const empty = document.getElementById('gallery-empty-search');
+
+        if (!grid || !empty) {
+            return;
+        }
+
+        let visible = 0;
+
+        grid.querySelectorAll('.photo-item').forEach((item) => {
+            const match = !month || item.dataset.fulldate === month;
+
+            item.style.display = match ? '' : 'none';
+            if (match) {
+                visible += 1;
+            }
+        });
+
+        empty.style.display = visible === 0 ? 'flex' : 'none';
+    };
+
+    goalsSearch?.addEventListener('input', (event) => {
+        applyGoalFilter(event.target.value);
+    });
+
+    galleryMonth?.addEventListener('input', (event) => {
+        applyGalleryFilter(event.target.value);
+    });
+
     function showAlert(message, type) {
         if (!alertContainer) {
             console.warn('Alert container not found');

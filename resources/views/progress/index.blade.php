@@ -3,13 +3,6 @@
 @section('hide-mobile-nav', '1')
 @section('flush-mobile-content', '1')
 
-@section('styles')
-<style>
-    @media (max-width: 768px) {
-    }
-</style>
-@endsection
-
 @section('content')
 <div id="fitlife-container" class="progress-page" role="application" aria-label="{{ __('progress.title') }}">
     <main>
@@ -140,10 +133,4 @@
 
 @section('scripts')
     <script src="{{ asset('js/progress.js') }}"></script>
-    <script>
-        document.getElementById('photo')?.addEventListener('change', function() {
-            const display = document.getElementById('file-name-display');
-            if (this.files.length > 0) display.textContent = this.files[0].name;
-        });
-    </script>
 @endsection

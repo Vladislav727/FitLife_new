@@ -62,30 +62,5 @@
 @endsection
 
 @section('scripts')
-    <script>
-        document.getElementById('event-search').addEventListener('input', function() {
-            let search = this.value.toLowerCase();
-            document.querySelectorAll('.events-table tr').forEach(row => {
-                let user = row.querySelector('td:nth-child(2)')?.textContent.toLowerCase();
-                let description = row.querySelector('td:nth-child(5)')?.textContent.toLowerCase();
-                if (user && description && (user.includes(search) || description.includes(search))) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-        });
-
-        document.getElementById('type-filter').addEventListener('change', function() {
-            let type = this.value;
-            document.querySelectorAll('.events-table tr').forEach(row => {
-                let typeCell = row.querySelector('td:nth-child(3)')?.textContent.toLowerCase();
-                if (!type || (typeCell && typeCell === type)) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-        });
-    </script>
+    <script src="{{ asset('js/admin-events-index.js') }}"></script>
 @endsection

@@ -1,4 +1,4 @@
-<div class="chat-sidebar-list" id="chatSidebarList">
+<div class="chat-sidebar-list" id="chatSidebarList" data-default-tab="{{ isset($activeGroupId) ? 'groups' : 'messages' }}">
     <div class="chat-sidebar-list__header">
         <h2 class="chat-sidebar-list__title">{{ __('messages.chats') }}</h2>
         <a href="{{ route('groups.create') }}" class="chat-sidebar-list__new" title="{{ __('messages.create_group') }}">
@@ -106,18 +106,4 @@
     </div>
 </div>
 
-<script>
-(function() {
-    document.querySelectorAll('.chats-tab').forEach(function(tab) {
-        tab.addEventListener('click', function() {
-            document.querySelectorAll('.chats-tab').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.chats-panel').forEach(p => p.classList.remove('active'));
-            this.classList.add('active');
-            document.getElementById('panel-' + this.dataset.tab).classList.add('active');
-        });
-    });
-    @if(isset($activeGroupId))
-        document.querySelector('[data-tab="groups"]')?.click();
-    @endif
-})();
-</script>
+<script src="{{ asset('js/chats-sidebar.js') }}"></script>

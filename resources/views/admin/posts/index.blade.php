@@ -56,18 +56,5 @@
 @endsection
 
 @section('scripts')
-    <script>
-        document.getElementById('post-search').addEventListener('input', function() {
-            let search = this.value.toLowerCase();
-            document.querySelectorAll('.posts-table tr').forEach(row => {
-                let user = row.querySelector('td:nth-child(2)')?.textContent.toLowerCase();
-                let content = row.querySelector('td:nth-child(3)')?.textContent.toLowerCase();
-                if (user && content && (user.includes(search) || content.includes(search))) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-        });
-    </script>
+    <script src="{{ asset('js/admin-posts-index.js') }}"></script>
 @endsection

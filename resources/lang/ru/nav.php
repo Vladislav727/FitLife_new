@@ -34,6 +34,7 @@ return [
     'profile' => 'Профиль',
     'my_profile' => 'Мой профиль',
     'food' => 'Еда',
+    'calories' => 'Калории',
     'meals' => 'Питание',
     'water' => 'Вода',
     'sleep' => 'Сон',

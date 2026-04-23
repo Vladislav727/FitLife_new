@@ -3,40 +3,32 @@
 @section('hide-mobile-nav', '1')
 @section('flush-mobile-content', '1')
 
-@section('styles')
-<style>
-    @media (max-width: 768px) {
-    }
-</style>
-@endsection
-
 @section('content')
-<div class="calendar-page">
+<div
+    class="calendar-page"
+    data-calendar-translations='{!! json_encode([
+        "noEventsToday" => __("calendar.no_events_today"),
+        "addFirstEvent" => __("calendar.add_first_event"),
+        "noUpcoming" => __("calendar.no_upcoming"),
+        "months" => [
+            __("calendar.january"),
+            __("calendar.february"),
+            __("calendar.march"),
+            __("calendar.april"),
+            __("calendar.may"),
+            __("calendar.june"),
+            __("calendar.july"),
+            __("calendar.august"),
+            __("calendar.september"),
+            __("calendar.october"),
+            __("calendar.november"),
+            __("calendar.december"),
+        ],
+        "today" => __("calendar.today"),
+        "noDescription" => __("calendar.event_description"),
+    ]) !!}'
+>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <script>
-        window.calendarTranslations = {
-            noEventsToday: "{{ __('calendar.no_events_today') }}",
-            addFirstEvent: "{{ __('calendar.add_first_event') }}",
-            noUpcoming: "{{ __('calendar.no_upcoming') }}",
-            months: [
-                "{{ __('calendar.january') }}",
-                "{{ __('calendar.february') }}",
-                "{{ __('calendar.march') }}",
-                "{{ __('calendar.april') }}",
-                "{{ __('calendar.may') }}",
-                "{{ __('calendar.june') }}",
-                "{{ __('calendar.july') }}",
-                "{{ __('calendar.august') }}",
-                "{{ __('calendar.september') }}",
-                "{{ __('calendar.october') }}",
-                "{{ __('calendar.november') }}",
-                "{{ __('calendar.december') }}"
-            ],
-            today: "{{ __('calendar.today') }}",
-            noDescription: "{{ __('calendar.event_description') }}"
-        };
-    </script>
 
     <header class="calendar-header">
         <div class="header-content">

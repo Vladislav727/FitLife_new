@@ -3,13 +3,6 @@
 @section('hide-mobile-nav', '1')
 @section('flush-mobile-content', '1')
 
-@section('styles')
-<style>
-    @media (max-width: 768px) {
-    }
-</style>
-@endsection
-
 @section('content')
 <div id="fitlife-container" class="sleep-page" role="application" aria-label="{{ __('sleep.title') }}">
     <main>

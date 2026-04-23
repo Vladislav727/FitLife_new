@@ -1,7 +1,15 @@
 document.addEventListener("DOMContentLoaded", function () {
+    const photoInput = document.getElementById('photo');
+    const fileNameDisplay = document.getElementById('file-name-display');
 
     const mobileToggle = document.getElementById('mobile-toggle');
     const sidebar = document.getElementById('sidebar');
+
+    photoInput?.addEventListener('change', function () {
+        if (this.files.length > 0 && fileNameDisplay) {
+            fileNameDisplay.textContent = this.files[0].name;
+        }
+    });
 
     mobileToggle.addEventListener('click', () => {
         const isOpen = sidebar.classList.toggle('active');

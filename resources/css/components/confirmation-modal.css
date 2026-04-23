@@ -1,0 +1,96 @@
+.fitconfirm-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    transition: opacity 0.2s ease;
+}
+
+.fitconfirm-backdrop.open {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.fitconfirm-modal {
+    width: 340px;
+    max-width: calc(100vw - 2rem);
+    padding: 2rem 1.75rem 1.5rem;
+    background: #141618;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.7);
+    text-align: center;
+    transform: scale(0.9) translateY(8px);
+    transition: transform 0.2s ease;
+}
+
+.fitconfirm-backdrop.open .fitconfirm-modal {
+    transform: scale(1) translateY(0);
+}
+
+.fitconfirm-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    margin: 0 auto 1rem;
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: 14px;
+    color: #ef4444;
+}
+
+.fitconfirm-message {
+    margin: 0 0 1.75rem;
+    color: rgba(255, 255, 255, 0.72);
+    font-size: 0.9375rem;
+    line-height: 1.5;
+}
+
+.fitconfirm-actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+}
+
+.fitconfirm-no,
+.fitconfirm-yes {
+    flex: 1;
+    padding: 0.625rem 1rem;
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.fitconfirm-no {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 500;
+}
+
+.fitconfirm-no:hover {
+    background: rgba(255, 255, 255, 0.09);
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.fitconfirm-yes {
+    background: #ef4444;
+    border: none;
+    color: #fff;
+    font-weight: 600;
+}
+
+.fitconfirm-yes:hover {
+    background: #dc2626;
+}
