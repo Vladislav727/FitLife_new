@@ -58,7 +58,7 @@ return [
     'update_progress_for' => 'Обновите ваш прогресс для цели :type',
     'log_progress_for' => 'Записать прогресс для :type',
     'todays_value' => 'Добавляемое значение',
-    'enter_todays_value' => 'Введите значение для добавления',
+    'enter_todays_value' => 'Введите значение',
     'new_total' => 'Новое значение',
     'log_progress_hint' => 'Это значение будет добавлено к вашему текущему прогрессу.',
     'submit' => 'Отправить',
