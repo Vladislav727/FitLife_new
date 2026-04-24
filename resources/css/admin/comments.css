@@ -1,0 +1,63 @@
+.admin-layout--comments .admin-comment__excerpt {
+    display: -webkit-box;
+    overflow: hidden;
+    color: var(--admin-text);
+    font-size: 0.94rem;
+    line-height: 1.6;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+}
+
+.admin-layout--comments .admin-comment__context {
+    display: grid;
+    gap: 0.2rem;
+}
+
+.admin-layout--comments .admin-comment__context a {
+    color: var(--admin-primary-strong);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.admin-layout--comments .admin-comment__context a:hover {
+    text-decoration: underline;
+}
+
+.admin-layout--comments .admin-comment__author {
+    color: var(--admin-muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.admin-layout--comments .admin-comment__meta {
+    display: grid;
+    gap: 0.15rem;
+}
+
+.admin-layout--comments .admin-comment__meta span {
+    color: var(--admin-muted);
+    font-size: 0.88rem;
+    line-height: 1.45;
+}
+
+.admin-layout--comments .admin-comment__meta strong {
+    color: var(--admin-text);
+    font-size: 0.95rem;
+}
+
+.admin-layout--comments .admin-comment__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: flex-end;
+}
+
+.admin-layout--comments .admin-comment__actions .admin-button {
+    min-width: 6rem;
+}
+
+@media (max-width: 640px) {
+    .admin-layout--comments .admin-comment__actions .admin-button {
+        width: 100%;
+    }
+}

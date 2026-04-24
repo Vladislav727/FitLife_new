@@ -1,0 +1,50 @@
+.admin-layout--administrators .admin-hero {
+    border-color: rgba(168, 85, 247, 0.16);
+}
+
+.admin-layout--administrators .admin-hero__eyebrow {
+    background: rgba(168, 85, 247, 0.12);
+    color: #7c3aed;
+}
+
+.admin-layout--administrators .admin-admin-card__lock {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.admin-layout--administrators .admin-admin-card__lock-note {
+    color: var(--admin-muted);
+    font-size: 0.88rem;
+    line-height: 1.45;
+}
+
+.admin-layout--administrators .admin-admin-card__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: flex-end;
+}
+
+.admin-layout--administrators .admin-admin-card__actions .admin-button {
+    min-width: 6rem;
+}
+
+.admin-layout--administrators .admin-admin-card__role {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.admin-layout--administrators .admin-admin-card__status {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+@media (max-width: 640px) {
+    .admin-layout--administrators .admin-admin-card__actions .admin-button {
+        width: 100%;
+    }
+}

@@ -3,13 +3,16 @@
 use App\Http\Controllers\Admin\AdminPanelController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
+Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/dashboard', [AdminPanelController::class, 'index'])->name('admin.dashboard');
     Route::get('/users', [AdminPanelController::class, 'users'])->name('admin.users');
     Route::get('/users/{user:username}', [AdminPanelController::class, 'usersShow'])->name('admin.users.show');
     Route::get('/users/{user:username}/edit', [AdminPanelController::class, 'usersEdit'])->name('admin.users.edit');
     Route::patch('/users/{user:username}', [AdminPanelController::class, 'usersUpdate'])->name('admin.users.update');
     Route::delete('/users/{user:username}', [AdminPanelController::class, 'usersDelete'])->name('admin.users.delete');
+
+    Route::get('/comments', [AdminPanelController::class, 'comments'])->name('admin.comments');
+    Route::delete('/comments/{comment}', [AdminPanelController::class, 'commentsDelete'])->name('admin.comments.delete');
 
     Route::get('/posts', [AdminPanelController::class, 'posts'])->name('admin.posts');
     Route::delete('/posts/{post}', [AdminPanelController::class, 'postsDelete'])->name('admin.posts.delete');
@@ -18,4 +21,8 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::delete('/events/{event}', [AdminPanelController::class, 'eventsDelete'])->name('admin.events.delete');
 
     Route::get('/statistics', [AdminPanelController::class, 'statistics'])->name('admin.statistics');
+
+    Route::middleware('super_admin')->group(function () {
+        Route::get('/administrators', [AdminPanelController::class, 'administrators'])->name('admin.administrators');
+    });
 });

@@ -1,22 +1,27 @@
 document.addEventListener('DOMContentLoaded', () => {
     const eventSearch = document.getElementById('event-search');
     const typeFilter = document.getElementById('type-filter');
+    const rows = Array.from(document.querySelectorAll('[data-event-row]'));
+
+    if (!eventSearch || !typeFilter || rows.length === 0) {
+        return;
+    }
 
     const applyFilters = () => {
-        const search = eventSearch?.value.toLowerCase() || '';
-        const type = typeFilter?.value || '';
+        const search = eventSearch.value.trim().toLowerCase();
+        const type = typeFilter.value;
 
-        document.querySelectorAll('.events-table tr').forEach((row) => {
-            const user = row.querySelector('td:nth-child(2)')?.textContent.toLowerCase();
-            const typeCell = row.querySelector('td:nth-child(3)')?.textContent.toLowerCase();
-            const description = row.querySelector('td:nth-child(5)')?.textContent.toLowerCase();
-            const matchesSearch = !search || (user && description && (user.includes(search) || description.includes(search)));
-            const matchesType = !type || (typeCell && typeCell === type);
+        rows.forEach((row) => {
+            const searchText = (row.dataset.searchText || row.textContent || '').toLowerCase();
+            const rowType = row.dataset.type || '';
+            const matchesSearch = search === '' || searchText.includes(search);
+            const matchesType = type === 'all' || type === '' || rowType === type;
 
-            row.style.display = matchesSearch && matchesType ? '' : 'none';
+            row.hidden = !(matchesSearch && matchesType);
         });
     };
 
-    eventSearch?.addEventListener('input', applyFilters);
-    typeFilter?.addEventListener('change', applyFilters);
+    eventSearch.addEventListener('input', applyFilters);
+    typeFilter.addEventListener('change', applyFilters);
+    applyFilters();
 });

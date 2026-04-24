@@ -1,18 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
     const postSearch = document.getElementById('post-search');
+    const rows = Array.from(document.querySelectorAll('[data-post-row]'));
 
-    if (!postSearch) {
+    if (!postSearch || rows.length === 0) {
         return;
     }
 
-    postSearch.addEventListener('input', function () {
-        const search = this.value.toLowerCase();
+    const applyFilters = () => {
+        const search = postSearch.value.trim().toLowerCase();
 
-        document.querySelectorAll('.posts-table tr').forEach((row) => {
-            const user = row.querySelector('td:nth-child(2)')?.textContent.toLowerCase();
-            const content = row.querySelector('td:nth-child(3)')?.textContent.toLowerCase();
-
-            row.style.display = user && content && (user.includes(search) || content.includes(search)) ? '' : 'none';
+        rows.forEach((row) => {
+            const searchText = (row.dataset.searchText || row.textContent || '').toLowerCase();
+            row.hidden = search !== '' && !searchText.includes(search);
         });
-    });
+    };
+
+    postSearch.addEventListener('input', applyFilters);
+    applyFilters();
 });

@@ -1,22 +1,27 @@
 document.addEventListener('DOMContentLoaded', () => {
     const userSearch = document.getElementById('user-search');
     const roleFilter = document.getElementById('role-filter');
+    const rows = Array.from(document.querySelectorAll('[data-role]'));
+
+    if (!userSearch || !roleFilter || rows.length === 0) {
+        return;
+    }
 
     const applyFilters = () => {
-        const search = userSearch?.value.toLowerCase() || '';
-        const role = roleFilter?.value || '';
+        const search = userSearch.value.trim().toLowerCase();
+        const role = roleFilter.value;
 
-        document.querySelectorAll('.users-table tr').forEach((row) => {
-            const name = row.querySelector('td:nth-child(2)')?.textContent.toLowerCase();
-            const email = row.querySelector('td:nth-child(3)')?.textContent.toLowerCase();
-            const roleCell = row.querySelector('td:nth-child(4) .role-badge')?.textContent.toLowerCase();
-            const matchesSearch = !search || (name && email && (name.includes(search) || email.includes(search)));
-            const matchesRole = !role || (roleCell && roleCell === role);
+        rows.forEach((row) => {
+            const searchText = (row.dataset.searchText || row.textContent || '').toLowerCase();
+            const rowRole = row.dataset.role || '';
+            const matchesSearch = search === '' || searchText.includes(search);
+            const matchesRole = role === 'all' || role === '' || rowRole === role;
 
-            row.style.display = matchesSearch && matchesRole ? '' : 'none';
+            row.hidden = !(matchesSearch && matchesRole);
         });
     };
 
-    userSearch?.addEventListener('input', applyFilters);
-    roleFilter?.addEventListener('change', applyFilters);
+    userSearch.addEventListener('input', applyFilters);
+    roleFilter.addEventListener('change', applyFilters);
+    applyFilters();
 });

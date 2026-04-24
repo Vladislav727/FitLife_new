@@ -4,30 +4,60 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Calendar;
+use App\Models\Comment;
 use App\Models\Post;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\View\View;
 
 class AdminPanelController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         $totalUsers = User::count();
         $totalPosts = Post::count();
         $totalEvents = Calendar::count();
+        $totalComments = Comment::count();
+        $totalAdmins = User::where('role', 'admin')->count();
+        $totalSuperAdmins = User::where('role', 'super_admin')->count();
         $activeUsers = User::where('updated_at', '>=', now()->subDays(30))->count();
-        $recentPosts = Post::with('user')->latest()->take(10)->get();
-        $recentEvents = Calendar::with('user')->latest()->take(10)->get();
+        $recentPosts = Post::with('user')->latest()->paginate(3, ['*'], 'posts_page');
+        $recentComments = Comment::with(['user', 'post'])->latest()->paginate(4, ['*'], 'comments_page');
 
         return view('admin.dashboard', compact(
             'totalUsers',
             'totalPosts',
             'totalEvents',
+            'totalComments',
+            'totalAdmins',
+            'totalSuperAdmins',
             'activeUsers',
             'recentPosts',
-            'recentEvents'
+            'recentComments'
         ));
+    }
+
+    public function comments(): View
+    {
+        $comments = Comment::with(['user', 'post'])->latest()->paginate(10);
+
+        return view('admin.comments.index', compact('comments'));
+    }
+
+    public function commentsDelete(Comment $comment): RedirectResponse
+    {
+        $comment->delete();
+
+        return redirect()->route('admin.comments')->with('success', 'Comment deleted successfully');
+    }
+
+    public function administrators(): View
+    {
+        $administrators = User::whereIn('role', ['admin', 'super_admin'])->latest()->paginate(10);
+
+        return view('admin.administrators.index', compact('administrators'));
     }
 
     public function users()
@@ -123,11 +153,42 @@ class AdminPanelController extends Controller
         return redirect()->route('admin.events')->with('success', 'Event deleted successfully');
     }
 
-    public function statistics()
+    public function statistics(): View
     {
         $totalUsers = User::count();
         $activeUsers = User::where('updated_at', '>=', now()->subDays(30))->count();
+        $userStats = $this->buildMonthlyStats(User::class);
+        $postStats = $this->buildMonthlyStats(Post::class);
 
-        return view('admin.statistics', compact('totalUsers', 'activeUsers'));
+        return view('admin.statistics', compact(
+            'totalUsers',
+            'activeUsers',
+            'userStats',
+            'postStats'
+        ));
+    }
+
+    /**
+     * Build monthly statistics for chart.js.
+     *
+     * @param  class-string  $modelClass
+     * @return array<int, array{month:int, count:int}>
+     */
+    private function buildMonthlyStats(string $modelClass): array
+    {
+        $year = now()->year;
+
+        $counts = $modelClass::query()
+            ->whereYear('created_at', $year)
+            ->selectRaw('MONTH(created_at) as month, COUNT(*) as count')
+            ->groupBy('month')
+            ->pluck('count', 'month');
+
+        return collect(range(1, 12))
+            ->map(static fn (int $month): array => [
+                'month' => $month,
+                'count' => (int) ($counts[$month] ?? 0),
+            ])
+            ->all();
     }
 }
