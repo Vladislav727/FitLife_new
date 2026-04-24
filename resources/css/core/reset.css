@@ -7,7 +7,10 @@
 
 html {
     font-size: 16px;
+    height: 100%;
     scroll-behavior: smooth;
+    overflow-x: hidden;
+    overflow-y: auto;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
@@ -21,8 +24,10 @@ body {
         var(--bg-base);
     color: var(--text-primary);
     line-height: var(--leading-normal);
-    min-height: 100vh;
+    height: 100%;
+    min-height: 100%;
     overflow-x: hidden;
+    overflow-y: auto;
 }
 
 body::before {

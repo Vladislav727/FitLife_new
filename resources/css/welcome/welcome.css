@@ -1,7 +1,8 @@
 html,
 body {
     background-color: #040506;
-    overscroll-behavior: none;
+    overscroll-behavior-x: auto;
+    overscroll-behavior-y: none;
 }
 
 .welcome-btn--primary {

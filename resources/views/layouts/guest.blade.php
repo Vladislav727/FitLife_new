@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>{{ config('app.name', 'FitLife') }}</title>
+        <style>html,body{overscroll-behavior-y:none;overscroll-behavior-x:auto}</style>
 
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>

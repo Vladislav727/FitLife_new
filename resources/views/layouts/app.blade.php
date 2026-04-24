@@ -7,6 +7,7 @@
     <meta name="user-id" content="{{ Auth::id() ?? 'guest' }}">
     <title>@yield('title', 'FitLife')</title>
     <link rel="icon" href="{{ asset('favicon.PNG') }}" type="image/png">
+    <style>html,body{overscroll-behavior-y:none;overscroll-behavior-x:auto}</style>
     <script src="{{ asset('js/theme-init.js') }}"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
