@@ -16,18 +16,20 @@
 <body class="auth-shell-page @yield('auth-body-class')">
     <nav class="auth-shell-nav" id="authShellNav">
         <a href="{{ url('/') }}" class="auth-shell-logo">
-            <img src="{{ asset('storage/logo/fitlife-logo.png') }}" alt="FitLife" class="auth-shell-logo-img">
+<img src="{{ asset('storage/logo/fitlife-logo.png') }}" alt="FitLife" class="auth-shell-logo-img" style="height: 72px;">
         </a>
 
-        <div class="auth-shell-nav-actions">
-            @hasSection('nav-text')
-                <span class="auth-shell-nav-text">@yield('nav-text')</span>
-            @endif
+        @if (!empty(trim($__env->yieldContent('nav-text'))) || !empty(trim($__env->yieldContent('nav-action'))))
+            <div class="auth-shell-nav-actions">
+                @hasSection('nav-text')
+                    <span class="auth-shell-nav-text">@yield('nav-text')</span>
+                @endif
 
-            @hasSection('nav-action')
-                @yield('nav-action')
-            @endif
-        </div>
+                @hasSection('nav-action')
+                    @yield('nav-action')
+                @endif
+            </div>
+        @endif
     </nav>
 
     <div class="auth-shell-container">

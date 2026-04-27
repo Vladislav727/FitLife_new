@@ -6,12 +6,6 @@
 
 @section('auth-shell-class', 'auth-shell--wide')
 
-@section('nav-text', __('auth.have_account'))
-
-@section('nav-action')
-    <a href="{{ route('login') }}" class="auth-shell-nav-button auth-shell-nav-button--ghost">{{ __('auth.login') }}</a>
-@endsection
-
 @section('content')
     <div class="auth-shell-header">
         <div class="auth-shell-badge">FitLife</div>

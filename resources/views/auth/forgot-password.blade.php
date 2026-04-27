@@ -2,10 +2,6 @@
 
 @section('title', __('auth.forgot_password') . ' - FitLife')
 
-@section('nav-action')
-    <a href="{{ route('login') }}" class="auth-shell-nav-button auth-shell-nav-button--ghost">{{ __('auth.back_to_login') }}</a>
-@endsection
-
 @section('content')
     <div class="auth-shell-header">
         <div class="auth-shell-badge">Recovery</div>

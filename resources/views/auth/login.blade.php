@@ -2,12 +2,6 @@
 
 @section('title', __('auth.login') . ' - FitLife')
 
-@section('nav-text', __('auth.no_account'))
-
-@section('nav-action')
-    <a href="{{ route('register') }}" class="auth-shell-nav-button auth-shell-nav-button--primary">{{ __('auth.register') }}</a>
-@endsection
-
 @section('content')
     <div class="auth-shell-header">
         <div class="auth-shell-badge">FitLife</div>

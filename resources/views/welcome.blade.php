@@ -19,8 +19,8 @@
 @endphp
 
 <header class="welcome-header" id="welcomeHeader">
-    <a href="{{ route('welcome') }}" class="welcome-brand">
-        <img src="{{ asset('storage/logo/fitlife-logo.png') }}" alt="FitLife" class="welcome-brand-img">
+<a href="{{ route('welcome') }}" class="welcome-brand">
+        <img src="{{ asset('storage/logo/fitlife-logo.png') }}" alt="FitLife" class="welcome-brand-img" style="height: 72px;">
     </a>
 
     <nav class="welcome-nav" id="welcomeNav">
@@ -376,8 +376,8 @@
 <footer class="welcome-footer">
     <div class="welcome-footer-top">
         <div>
-            <a href="{{ route('welcome') }}" class="welcome-brand welcome-brand--footer">
-                <img src="{{ asset('storage/logo/fitlife-logo.png') }}" alt="FitLife" class="welcome-brand-img">
+<a href="{{ route('welcome') }}" class="welcome-brand welcome-brand--footer">
+                <img src="{{ asset('storage/logo/fitlife-logo.png') }}" alt="FitLife" class="welcome-brand-img" style="height: 72px;">
             </a>
             <p class="welcome-footer-copy">Track hard, recover properly, and make progress visible.</p>
         </div>
